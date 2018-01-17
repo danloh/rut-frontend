@@ -1,0 +1,15 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>cover</title>
+  <rect fill="none" id="canvas_background" height="512" width="512" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <path fill="#aad4ff" id="svg_2" d="m464,64l0,416l-384,0c-17.672,0 -32,-14.312 -32,-32s14.328,-32 32,-32l352,0l0,-416l-352,0c-35.344,0 -64,28.656 -64,64l0,384c0,35.344 28.656,64 64,64l416,0l0,-448l-32,0zm-384,64l0,-32l0,-64l320,0l0,352l-320,0l0,-256zm256,-32l-192,0l0,-32l192,0l0,32zm-64,64l-128,0l0,-32l128,0l0,32zm-64,64l-64,0l0,-32l64,0l0,32z"/>
+   <line stroke="null" stroke-linecap="null" stroke-linejoin="null" id="svg_19" y2="425" x2="431.999997" y1="430" x1="99" fill-opacity="null" stroke-opacity="null" stroke-width="null" fill="#ffffaa"/>
+   <line stroke-linecap="null" stroke-linejoin="null" id="svg_20" y2="427" x2="406" y1="430" x1="95" stroke-opacity="null" stroke-width="null" stroke="null" fill="#ffffaa"/>
+   <line stroke-linecap="null" stroke-linejoin="null" id="svg_21" y2="275" x2="304" y1="276" x1="137" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="null" fill="#ffffaa"/>
+  </g>
+ </g>
+</svg>
