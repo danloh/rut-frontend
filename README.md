@@ -1,6 +1,9 @@
-# frontend
+## RUT:  www.readup.tips
+A Service for sharing reading list to read up on sth, welcome to join 
 
-> rut frontend powered by vue
+> rut frontend powered by vue + vue-route + vuex 
+
+*Any suggestion is appreciated*
 
 ## Build Setup
 

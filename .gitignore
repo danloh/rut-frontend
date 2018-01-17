@@ -7,6 +7,10 @@ yarn-error.log*
 test
 selenium-debug.log
 
+.gitattributes
+.eslintignore
+.gitignore
+.vscode
 # Editor directories and files
 .idea
 *.suo
