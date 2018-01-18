@@ -1,6 +1,6 @@
 <template>
   <div class="demand-list">
-    <b>REQUESTS {{demandCount}}</b>
+    <b>REQUESTS {{ demandCount }}</b>
     <demand v-for="demand in demands" :key="demand.id" :demand="demand"></demand>
     <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" @click="loadmoreDemand" :disabled="!hasMore">More</el-button>

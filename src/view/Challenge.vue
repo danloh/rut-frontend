@@ -54,13 +54,11 @@
 </template>
 
 <script>
-import ClipList from '@/components/Challenge/ClipList.vue'
 import { fetchChallengeItems, fetchChallengeRut, setDeadline } from '@/api/api'
 
 export default {
   name: 'challenge',
   title: 'Readup.Tips - Challenge To Reading Anything',
-  components: { ClipList },
   data () {
     return {
       clipForm: {

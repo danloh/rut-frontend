@@ -1,7 +1,7 @@
 <template>
   <div class="profile-page">
     <div class="profile-head">
-      <b style="font-size:1.6em">{{user.name}}</b>
+      <router-link :to="'/profile/' + userid"><b style="font-size:1.6em">{{ user.name }}</b></router-link>
       <p class="aboutme">{{user.about || '...'}}</p>
       <div class="fobar">
         <span>Following 
@@ -34,6 +34,8 @@
         <router-link :to="'/profile/' + userid + '/reviews/'"><b style="color:teal">></b> Notes / Reviews</router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/demands/'"><b style="color:teal">></b> Requests</router-link>
+        <br>
+        <router-link :to="'/profile/' + userid + '/clips/'"><b style="color:teal">></b> Clips</router-link>
         <br><br>
         <router-link :to="'/setting/' + userid" v-if="showSetting">
           <small style="outline: dotted 1px; background-color: #d5d5be">~Setting~</small>

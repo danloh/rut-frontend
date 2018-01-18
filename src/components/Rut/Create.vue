@@ -1,6 +1,6 @@
 <template>
   <div class="create-page">
-    <h3 class="title">Create New Readup Tips</h3>
+    <h3 class="title">Create New Read List</h3>
     <p v-if="demandid"> As Answer To The 
       <router-link :to="'/demand/' + demandid" target="_blank" rel="nofollow noopener noreferrer">
       {{ 'Request:  ' + demandBody || 'Request' }}

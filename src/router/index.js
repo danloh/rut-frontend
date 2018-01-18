@@ -39,6 +39,7 @@ const createProfileRuts = param => () => import('@/components/Profile/CreateProf
 const createProfileItems = param => () => import('@/components/Profile/CreateProfileItems').then(m => m.default(param))
 const ProfileReviews = () => import('@/components/Profile/ProfileReviews')
 const ProfileDemands = () => import('@/components/Profile/ProfileDemands')
+const ProfileClips = () => import('@/components/Profile/ProfileClips')
 const ProfileActivity = () => import('@/components/Profile/ProfileActivity')
 const Setting = () => import('@/components/Profile/Setting')
 const EditProfile = () => import('@/components/Profile/EditProfile')
@@ -153,6 +154,7 @@ const router = new Router({
         { path: 'havedone', name: 'DoneItems', component: createProfileItems('done') },
         { path: 'reviews', name: 'Reviews', component: ProfileReviews },
         { path: 'demands', name: 'Demands', component: ProfileDemands },
+        { path: 'clips', name: 'Clips', component: ProfileClips },
         { path: 'followeds', name: 'Followeds', component: FollowedList }
       ]
     },
