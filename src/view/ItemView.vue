@@ -1,5 +1,5 @@
 <template>
-  <div class="item-page">
+  <div class="item-page" v-if="currentItem.id">
     <div class="item-main">
       <item-sum :item="currentItem" :key="currentItem.id"></item-sum> <!--key to re-render-->
       <div>
@@ -43,7 +43,6 @@ import ClipList from '@/components/Challenge/ClipList.vue'
 import { fetchInRuts, checkItemLocked, lockItem } from '@/api/api'
 import marked from '@/util/marked'
 import { checkAuth } from '@/util/auth'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'item-view',
@@ -55,14 +54,12 @@ export default {
     return {
       cliplistParam: {},
       reviewsParam: {},
-      currentPage: 1
+      currentPage: 1,
+      currentItem: {},
+      inRuts: []
     }
   },
   computed: {
-    ...mapGetters([
-      'currentItem',
-      'inRuts'
-    ]),
     itemDetail () {
       return marked(this.currentItem.details)
     },
@@ -71,12 +68,22 @@ export default {
     }
   },
   methods: {
+    loadItemData () {
+      let itemid = this.$route.params.id
+      this.cliplistParam = {'itemid': itemid}
+      this.reviewsParam = {'itemid': itemid, 'ref': 'hot'}
+      this.$store.dispatch('getItem', itemid)
+      .then(resp => {
+        this.currentItem = resp.data
+        this.inRuts = resp.data.inruts
+      })
+    },
     loadmoreRuts () {
       let itemid = this.$route.params.id
       let params = {'page': this.currentPage}
       fetchInRuts(itemid, params)
       .then(resp => {
-        this.$store.commit('MORE_INRUTS', resp.data)
+        this.inRuts.push(...resp.data)
         this.currentPage += 1
       })
     },
@@ -102,10 +109,7 @@ export default {
     }
   },
   created () {
-    let itemid = this.$route.params.id
-    this.cliplistParam = {'itemid': itemid}
-    this.reviewsParam = {'itemid': itemid, 'ref': 'hot'}
-    this.$store.dispatch('getItem', itemid)
+    this.loadItemData()
   }
 }
 </script>

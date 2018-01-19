@@ -145,7 +145,8 @@ const router = new Router({
     { path: '/profile/:id',
       component: Profile,
       children: [
-        { path: '', name: 'defaultProfile', component: ProfileActivity },
+        { path: '', name: 'defaultProfile', redirect: 'activity' },
+        { path: 'activity', name: 'Activity', component: ProfileActivity },
         { path: 'created', name: 'CreatedRuts', component: createProfileRuts('created') },
         { path: 'star', name: 'StarRuts', component: createProfileRuts('star') },
         { path: 'challenge', name: 'ChallengeRuts', component: createProfileRuts('challenge') },

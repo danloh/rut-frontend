@@ -53,7 +53,6 @@ import Reply from '@/components/Comment/Reply.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import { fetchProfileRuts, rutAsAnswer, fetchDemandComments, fetchDemandAnswers } from '@/api/api'
 import { checkAuth } from '@/util/auth'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'demand-view',
@@ -64,6 +63,7 @@ export default {
   data () {
     return {
       refer: { re: 'demand', id: this.$route.params.id },
+      demandDetail: {},
       answers: [],
       answerCount: 0,
       currentaPage: 1,
@@ -78,9 +78,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'demandDetail'
-    ]),
     hasMoreComment () {
       return this.comments.length < this.commentCount
     },
@@ -94,6 +91,7 @@ export default {
       this.$store.dispatch('getDemand', demandid)
       .then(resp => {
         let data = resp.data
+        this.demandDetail = data
         this.answers = data.answers
         this.answerCount = data.answercount
         this.comments = data.comments

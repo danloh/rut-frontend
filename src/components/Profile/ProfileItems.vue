@@ -2,14 +2,16 @@
   <div>
     <b>{{flag.toUpperCase()}} {{totalItems}}</b>
     <div class="item-list">
-      <item-list :items="currentItems" @loadmore="loadmoreItems"></item-list>
+      <item-sum v-for="item in currentItems" :key="item.id" :item="item"></item-sum>
+      <div v-if="hasMore">
+        <el-button class="blockbtn" size="mini" @click="loadmoreItems" :disabled="!hasMore">Show More</el-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import ItemList from '@/components/Item/ItemList.vue'
-import { mapGetters } from 'vuex'
+import ItemSum from '@/components/Item/ItemSum.vue'
 import { fetchProfileItems } from '@/api/api'
 
 export default {
@@ -17,30 +19,42 @@ export default {
   props: {
     flag: String // tobe: doing, todo, done
   },
-  components: { ItemList },
+  data () {
+    return {
+      totalItems: 0,
+      currentItems: [],
+      currentPage: 1
+    }
+  },
+  components: { ItemSum },
   computed: {
-    ...mapGetters([
-      'totalItems',
-      'currentItems',
-      'currentR'
-    ])
+    hasMore () {
+      return this.currentItems.length < this.totalItems
+    }
   },
   methods: {
+    loadItems () {
+      let flag = this.flag
+      let userid = this.$route.params.id
+      fetchProfileItems(flag, userid)
+      .then(resp => {
+        this.totalItems = resp.data.total
+        this.currentItems = resp.data.items
+      })
+    },
     loadmoreItems () {
       let flag = this.flag
       let userid = this.$route.params.id
-      let param = {'page': this.currentR}
+      let param = {'page': this.currentPage}
       fetchProfileItems(flag, userid, param)
       .then(resp => {
-        this.$store.commit('MORE_ITEMS', resp.data.items)
+        this.currentItems.push(...resp.data.items)
+        this.currentPage += 1
       })
     }
   },
   created () {
-    let flag = this.flag
-    let userid = this.$route.params.id
-    let params = {'flag': flag, 'userid': userid}
-    this.$store.dispatch('getItems', params)
+    this.loadItems()
   }
 }
 </script>

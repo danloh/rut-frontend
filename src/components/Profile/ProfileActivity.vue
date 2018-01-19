@@ -15,7 +15,6 @@ import { fetchMyActivity } from '@/api/api'
 
 export default {
   name: 'profile-activity',
-  props: ['userid'],
   data () {
     return {
       activity: []
@@ -23,7 +22,7 @@ export default {
   },
   methods: {
     loadActivity () {
-      let userid = this.userid || this.$route.params.id
+      let userid = this.$route.params.id
       fetchMyActivity(userid).then(resp => {
         this.activity = resp.data
       })
