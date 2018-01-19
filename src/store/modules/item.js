@@ -12,7 +12,6 @@ const state = {
   currentItem: {},
   currentR: 0,
   maxR: 0,
-  perR: perPage,
   inRuts: [],
   reviewDetail: {}
 }

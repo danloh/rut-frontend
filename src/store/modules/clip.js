@@ -11,8 +11,7 @@ const state = {
   totalClips: 0,
   currentP: 0,
   currentClips: [],
-  maxP: 0,
-  perP: perPage
+  maxP: 0
 }
 
 // actions

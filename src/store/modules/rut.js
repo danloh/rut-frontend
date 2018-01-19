@@ -14,7 +14,6 @@ const state = {
   currentPage: 0,
   currentRuts: [],
   maxPage: 0,
-  perPage: perPage,
   showTags: [],
   tagDetail: {},
   rutDetail: {}

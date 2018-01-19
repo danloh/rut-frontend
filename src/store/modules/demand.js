@@ -10,10 +10,9 @@ const perPage = 20
 const state = {
   totalDemands: 0,
   currentD: 0,
-  currentDemands: [],
-  demandDetail: {},
   maxD: 0,
-  perD: perPage
+  currentDemands: [],
+  demandDetail: {}
 }
 
 // actions
