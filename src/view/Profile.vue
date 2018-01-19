@@ -59,15 +59,14 @@ export default {
       user: {},
       userid: this.$route.params.id,
       showSetting: false,
-      action: this.checkFollow(),
+      action: 'Follow',
       followedCount: 0 // this user following other
     }
   },
   methods: {
     loadUser () {
       let userid = this.$route.params.id
-      return fetchUser(userid)
-      .then(resp => {
+      return fetchUser(userid).then(resp => {
         let data = resp.data
         this.user = data
         this.userid = data.id
@@ -77,6 +76,8 @@ export default {
         if (Number(userid) === Number(currentUserID)) {
           this.$store.commit('SET_INFO', resp.data)
           this.showSetting = true
+        } else {
+          this.showSetting = false
         }
       })
     },
@@ -121,7 +122,7 @@ export default {
     this.loadUser()
   },
   watch: {
-    '$route': 'loadUser'
+    '$route.params.id': 'loadUser'
   }
 }
 </script>

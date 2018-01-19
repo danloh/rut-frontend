@@ -16,7 +16,7 @@
     <div class="rut-list">
       <rut-list :rutlist="currentRuts" @loadmore="loadmoreRuts"></rut-list>
     </div>
-    <div class="demand-list">
+    <div class="demand-list" v-if="tagName"> <!--render child component when computed -->
       <div class="demand-list-title">
         <b style="font-size:1.2em">Related Requests</b> &nbsp;&nbsp; &nbsp;&nbsp;
         <router-link to="/demands">Send a Request</router-link>
@@ -61,7 +61,7 @@ export default {
   components: { RutList, DemandList },
   data () {
     return {
-      action: this.checkFavor(), // || 'Follow',
+      action: 'Follow',
       favCount: 0,
       openDialog: false,
       tagForm: {

@@ -24,8 +24,7 @@ export default {
   methods: {
     loadActivity () {
       let userid = this.userid || this.$route.params.id
-      fetchMyActivity(userid)
-      .then(resp => {
+      fetchMyActivity(userid).then(resp => {
         this.activity = resp.data
       })
     }
