@@ -10,7 +10,7 @@
         <el-button size="mini" @click="followUser" :disabled="showSetting">{{ action }}</el-button>
       </div>
     </div>
-    <div class="profile-view" :key="userid">
+    <div class="profile-view">
       <router-view></router-view>
     </div>
     <div class="profile-side">
