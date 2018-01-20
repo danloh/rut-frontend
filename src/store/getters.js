@@ -12,7 +12,6 @@ const getters = {
   currentRuts: state => state.rut.currentRuts,
   showTags: state => state.rut.showTags,
   rutDetail: state => state.rut.rutDetail,
-  tagDetail: state => state.rut.tagDetail,
   // Clip
   totalClips: state => state.clip.totalClips,
   currentP: state => state.clip.currentP,

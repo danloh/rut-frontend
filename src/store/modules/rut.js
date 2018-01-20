@@ -2,8 +2,7 @@
 import {
   fetchIndexRuts,
   fetchProfileRuts,
-  fetchRut,
-  fetchTag
+  fetchRut
 } from '@/api/api'
 
 // initial state
@@ -15,7 +14,6 @@ const state = {
   currentRuts: [],
   maxPage: 0,
   showTags: [],
-  tagDetail: {},
   rutDetail: {}
 }
 
@@ -48,18 +46,6 @@ const actions = {
         reject(error)
       })
     })
-  },
-  getTag: ({commit, state}, tagid) => {
-    return new Promise((resolve, reject) => {
-      fetchTag(tagid)
-      .then(resp => {
-        commit('SET_RUTS', resp.data)
-        commit('SET_TAG', resp.data)
-        resolve(resp)
-      }).catch(error => {
-        reject(error)
-      })
-    })
   }
 }
 
@@ -87,9 +73,6 @@ const mutations = {
   },
   SET_RUT (state, data) {
     state.rutDetail = data
-  },
-  SET_TAG (state, data) {
-    state.tagDetail = data
   },
   // update tags after edit rut's tags
   NEW_TAGS (state, data) {

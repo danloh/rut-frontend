@@ -49,7 +49,7 @@
 import RutList from '@/components/Rut/RutList.vue'
 import DemandList from '@/components/Demand/DemandList.vue'
 import { mapGetters } from 'vuex'
-import { editTag, checkFav, favTag, fetchTagRuts, checkTagLocked, lockTag, unlockTag } from '@/api/api'
+import { editTag, checkFav, favTag, fetchTag, fetchTagRuts, checkTagLocked, lockTag, unlockTag } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
 
@@ -64,6 +64,7 @@ export default {
       action: 'Follow',
       favCount: 0,
       openDialog: false,
+      tagDetail: {},
       tagForm: {
         name: '',
         parent: '',
@@ -88,8 +89,7 @@ export default {
     ...mapGetters([
       'currentPage',
       'currentRuts',
-      'showTags',
-      'tagDetail'
+      'showTags'
     ]),
     tagid () {
       return this.tagDetail.id
@@ -107,11 +107,13 @@ export default {
     },
     loadData () {
       let tagid = this.$route.params.id
-      this.$store.dispatch('getTag', tagid)
-      .then(resp => {
-        this.tagForm.name = resp.data.tagname
-        this.tagForm.description = resp.data.descript
-        this.favCount = resp.data.favcount
+      fetchTag(tagid).then(resp => {
+        let data = resp.data
+        this.$store.commit('SET_RUTS', data)
+        this.tagDetail = data
+        this.tagForm.name = data.tagname
+        this.tagForm.description = data.descript
+        this.favCount = data.favcount
         this.action = this.checkFavor() // || 'Follow'
       })
     },
