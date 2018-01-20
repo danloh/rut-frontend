@@ -10,9 +10,12 @@
       <span><b>Byline:</b> {{ item.byline }} </span><br>
       <span><b>Published:</b> {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</span><br>
       <span><b>UID/ISBN:</b> {{ item.uid }} <a :href="item.resurl" v-if="item.resurl" target="_blank"> &nbsp;:::</a> </span><br>
-      <span><b>Listed:</b> {{ item.rutcount }} </span>
+      <span><b>Listed:</b> {{ item.rutcount }} </span><br>
+      <span v-if="flagNote || flagTime"><b>Note: </b>
+        <span class="flag-note" v-if="flagNote"><b>"</b>{{ flagNote }}<b>"</b></span>&nbsp;
+        <span class="flag-note" v-if="flagTime">on {{ flagTime | toMDY }}</span>
+      </span>
     </div>
-    <div class="flag-note" v-if="flagNote"><b>"</b>{{ flagNote }}<b>"</b></div>
     <div class="operate">
       <el-dropdown>
         <el-button type="primary" size="mini" plain>{{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
@@ -65,6 +68,7 @@ export default {
     return {
       flagAction: 'Flag It',
       flagNote: '',
+      flagTime: '',
       showDialog: false,
       intoForm: {
         selectRutID: null
@@ -95,6 +99,7 @@ export default {
         .then(resp => {
           this.flagAction = resp.data.label
           this.flagNote = resp.data.note
+          this.flagTime = resp.data.time
           this.noteForm.note = resp.data.note
         })
       } else {
@@ -254,14 +259,13 @@ export default {
       a
         &:hover
           color red
+    .flag-note
+      font-size 0.8em
+      color grey
   .operate
     position absolute
     top 10px
     right 2px
-  .flag-note
-    font-size 0.75em
-    color grey
-    text-align right
 .el-select
   width 100%
 </style>

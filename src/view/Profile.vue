@@ -19,11 +19,11 @@
         <p class="user-info">From: {{user.location || '...'}}</p>
       </div>
       <div class="right-nav">
-        <router-link :to="'/profile/' + userid + '/created/'"><b style="color:royalblue">&</b> Created</router-link>
+        <router-link :to="'/profile/' + userid + '/created/'"><b style="color:royalblue">*</b> Created</router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/challenge/'"><b style="color:royalblue">&</b> Challenge</router-link>
+        <router-link :to="'/profile/' + userid + '/challenge/'"><b style="color:royalblue">*</b> Challenge</router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/star/'"><b style="color:royalblue">&</b> Starred</router-link>
+        <router-link :to="'/profile/' + userid + '/star/'"><b style="color:royalblue">*</b> Starred</router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/working/'"><b style="color:coral">#</b> Working On</router-link>
         <br>
