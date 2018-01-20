@@ -82,7 +82,6 @@
 
 <script>
 import ItemSum from '@/components/Item/ItemSum.vue'
-import Comment from '@/components/Comment/Comment.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 // sc: star and challenge
 import { scRut, checkSC, editTags, fetchRutDemands, fetchRutTips, checkRutLocked, lockRut, unlockRut } from '@/api/api'
@@ -92,7 +91,7 @@ import marked from '@/util/marked'
 
 export default {
   name: 'rut-view',
-  components: { ItemSum, Comment, ShareBar },
+  components: { ItemSum, ShareBar },
   data () {
     return {
       starAction: 'Star',
