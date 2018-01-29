@@ -3,7 +3,7 @@
     <a title="Twitter" 
         rel="nofollow noopener"
         class="share-link twitter"
-        @click.prevent="shareWindow(`http://twitter.com/share?text=${title()}&url=${url}`)">
+        @click.prevent="shareWindow(`https://twitter.com/share?text=${title()}&url=${url}`)">
       <img alt="TW" src="/static/pic/twitter.svg" class="icon">
     </a>
     <a title="Facebook" 
@@ -15,7 +15,7 @@
     <a title="Linkedin" 
         rel="nofollow noopener"
         class="share-link linkedin"
-        @click.prevent="shareWindow(`http://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title()}`)">
+        @click.prevent="shareWindow(`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title()}`)">
       <img alt="Linkedin" src="/static/pic/linkedin.svg" class="icon">
     </a>
     <a title="Google+" 

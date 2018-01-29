@@ -55,8 +55,8 @@ export default {
       &:hover
         color #ff6600
   .intro
-    padding auto
+    color #828282
   .meta
     font-size .85em
-    color #828282
+    color #337ab7
 </style>

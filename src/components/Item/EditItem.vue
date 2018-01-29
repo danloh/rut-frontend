@@ -8,8 +8,12 @@
         <el-radio-group v-model="itemForm.cate">
           <el-radio-button label="Book"></el-radio-button>
           <el-radio-button label="Video"></el-radio-button>
+          <el-radio-button label="Course"></el-radio-button>
           <el-radio-button label="Online"></el-radio-button>
+          <el-radio-button label="Paper"></el-radio-button>
+          <el-radio-button label="Atlas"></el-radio-button>
           <el-radio-button label="Album"></el-radio-button>
+          <el-radio-button label="Place"></el-radio-button>
           <el-radio-button label="Other"></el-radio-button>
         </el-radio-group>
       </el-form-item>
