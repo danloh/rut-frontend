@@ -18,7 +18,7 @@
     </div>
     <div class="demand-list" v-if="tagName"> <!--render child component when computed -->
       <div class="demand-list-title">
-        <b style="font-size:1.2em">Related Requests</b> &nbsp;&nbsp; &nbsp;&nbsp;
+        <b style="font-size:1.2em">Related Requests on This Topic</b> &nbsp;&nbsp; &nbsp;&nbsp;
         <router-link to="/demands">Send a Request</router-link>
       </div>
       <demand-list :type="'popular'" :tag="tagName" :key="tagid"></demand-list>
@@ -255,6 +255,6 @@ export default {
   .rut-list
     padding auto
   .demand-list-title
-    border-bottom 4px solid #eee
-    margin-bottom 10px
+    border-top 4px solid #eee
+    padding 10px 0
 </style>

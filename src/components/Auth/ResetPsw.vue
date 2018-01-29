@@ -2,6 +2,9 @@
 <div class="reset-page">
   <h3 class="title">Reset Password</h3>
   <el-form class="reset-form" :model="resetpswForm" :rules="rules" ref="resetpswForm" size="mini">
+    <el-form-item label="Username" prop="username">
+      <el-input v-model="resetpswForm.username"></el-input>
+    </el-form-item>
     <el-form-item label="New Password" prop="password">
       <el-input :type="pwdType" v-model="resetpswForm.password"></el-input>
     </el-form-item>
@@ -9,7 +12,7 @@
       <el-input :type="pwdType" v-model="resetpswForm.repassword"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button class="blockbtn" type="primary" @click="onReset('resetpswForm', resetpswForm)">Reset</el-button>
+      <el-button class="blockbtn" type="primary" @click="onReset('resetpswForm', resetpswForm)" :disabled="Expired">Reset</el-button>
       <br>
       <!-- <el-button @click="resetForm('resetpswForm')">Reset</el-button> -->
     </el-form-item>
@@ -18,7 +21,7 @@
 </template>
 
 <script>
-import { reset } from '@/api/api'
+import { reset, checkExpired } from '@/api/api'
 
 export default {
   name: 'resetpsw',
@@ -45,10 +48,14 @@ export default {
     }
     return {
       resetpswForm: {
+        username: '',
         password: '',
         repassword: ''
       },
       rules: {
+        username: [
+          { required: true, message: 'Required', trigger: 'blur' }
+        ],
         password: [
           { required: true, validator: validatePass, trigger: 'blur' }
         ],
@@ -56,7 +63,8 @@ export default {
           { required: true, validator: validaterePass, trigger: 'blur' }
         ]
       },
-      pwdType: 'password'
+      pwdType: 'password',
+      Expired: true
     }
   },
   methods: {
@@ -64,7 +72,7 @@ export default {
       this.$store.commit('DEL_TOKEN')
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let data = {newpsw: form.password}
+          let data = {newpsw: form.password, username: form.username}
           let token = this.$route.params.token
           reset(token, data).then(resp => {
             this.$message({
@@ -84,7 +92,23 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    checkExpire () {
+      let token = this.$route.params.token
+      checkExpired(token).then(resp => {
+        this.Expired = !resp.data
+        if (!resp.data) {
+          this.$message({
+            showClose: true,
+            duration: 0,
+            message: 'The Link is expired or invalid, Please get a new reset link'
+          })
+        }
+      })
     }
+  },
+  mounted () {
+    this.checkExpire()
   }
 }
 </script>

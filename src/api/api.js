@@ -38,6 +38,10 @@ const reqReset = (data) => {
 const reset = (token, data) => {
   return request(`${base}/reset/${token}`, data, 'post')
 }
+// check token if expired
+const checkExpired = (token, params) => {
+  return request(`${base}/checkifexpired/${token}`, params)
+}
 // login
 const login = params => {
   return request(`${base}/login`, params)
@@ -349,6 +353,7 @@ export {
   change,
   reqReset,
   reset,
+  checkExpired,
   login,
   reConfirmEmail,
   fetchCurrentUser,

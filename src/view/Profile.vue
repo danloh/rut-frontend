@@ -2,6 +2,7 @@
   <div class="profile-page">
     <div class="profile-head">
       <router-link :to="'/profile/' + userid"><b style="font-size:1.6em">{{ user.name }}</b></router-link>
+      <b style="font-size:0.75em" v-if="showSetting">&nbsp;@{{ user.username }}</b>
       <p class="aboutme">{{user.about || '...'}}</p>
       <div class="fobar">
         <span>Following 

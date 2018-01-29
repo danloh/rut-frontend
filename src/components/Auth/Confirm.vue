@@ -15,6 +15,7 @@ export default {
     confirm(token).then(resp => {
       this.$message({
         showClose: true,
+        duration: 0,
         message: resp.data
       })
       this.$router.push('/')
