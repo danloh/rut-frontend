@@ -2,7 +2,7 @@
   <div>
     <b>What's Happening</b>
     <div class="activity-list" v-for="(act, index) in activity" :key="index" v-if="act.event.type">
-      <b>{{act.action}} {{ act.event.type }}</b>
+      <span>{{act.action}} {{ act.event.type }}</span>
       <router-link :to="'/' + act.event.type + '/' + act.event.id">{{ act.event.content }}</router-link>
       <br><span class="act-time">{{ act.timestamp | timeAgo }}</span>
     </div>

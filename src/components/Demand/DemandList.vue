@@ -2,7 +2,7 @@
   <div class="demand-list">
     <demand v-for="demand in currentDemands" :key="demand.id" :demand="demand"></demand>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreDemand" :disabled="!hasMore">More</el-button>
+      <el-button class="blockbtn" size="mini" @click="loadmoreDemand" :disabled="!hasMore">Show More</el-button>
     </div>
   </div>
 </template>

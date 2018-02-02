@@ -38,11 +38,9 @@ export default {
       },
       rules: {
         demand: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'blur' }
         ]
-      },
-      items: null,
-      dueDate: ''
+      }
     }
   },
   methods: {

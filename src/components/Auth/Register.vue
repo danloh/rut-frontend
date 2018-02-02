@@ -1,27 +1,26 @@
 <template>
 <div class="sign-page">
-  <h3 class="title">Welcome to Join in</h3>
-  <el-form class="sign-form" :model="regForm" :rules="rules" ref="regForm" size="mini">
-    <el-form-item label="Username" prop="username">
-      <el-input v-model="regForm.username"></el-input>
+  <h3 class="title">Welcome to Join</h3>
+  <el-form class="sign-form" :model="regForm" :rules="rules" ref="regForm">
+    <el-form-item prop="username">
+      <el-input v-model="regForm.username" placeholder="Username"></el-input>
     </el-form-item>
-    <el-form-item label="Email" prop="email">
-      <el-input v-model="regForm.email"></el-input>
+    <el-form-item prop="email">
+      <el-input v-model="regForm.email" placeholder="Email"></el-input>
     </el-form-item>
-    <el-form-item label="Password" prop="password">
-      <el-input :type="pwdType" v-model="regForm.password"></el-input>
+    <el-form-item prop="password">
+      <el-input :type="pwdType" v-model="regForm.password" placeholder="Password, at least 6 characters"></el-input>
     </el-form-item>
-    <el-form-item label="Confirm Password" prop="repassword">
-      <el-input :type="pwdType" v-model="regForm.repassword"></el-input>
+    <el-form-item prop="repassword">
+      <el-input :type="pwdType" v-model="regForm.repassword" placeholder="Confirm Password"></el-input>
     </el-form-item>
     <p style="font-size:0.75em">Notice: Will Use Cookies to keep you logged in for a limited period, 
       Never collect any Private Information. The service may not function properly if disable cookies.</p>
     <el-form-item>
       <el-button class="blockbtn" type="primary" @click="onReg('regForm', regForm)">Sign Up</el-button>
-      <br>
-      <el-button @click="resetForm('regForm')">Reset</el-button>
+      <!-- <el-button @click="resetForm('regForm')">Reset</el-button> -->
     </el-form-item>
-    <router-link :to="'/login'">Have an Account? Login</router-link>
+    <router-link :to="'/login'">Have an Account?  Login</router-link>
   </el-form>
 </div>
 </template>
@@ -94,10 +93,12 @@ export default {
           { required: true, validator: validateEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, validator: validatePass, trigger: 'blur' }
+          { required: true, validator: validatePass, trigger: 'blur' },
+          { min: 6, message: 'At Least 6 characters', trigger: 'blur' }
         ],
         repassword: [
-          { required: true, validator: validaterePass, trigger: 'blur' }
+          { required: true, validator: validaterePass, trigger: 'blur' },
+          { min: 6, message: 'At Least 6 characters', trigger: 'blur' }
         ]
       },
       pwdType: 'password'

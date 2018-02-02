@@ -25,7 +25,12 @@ const getters = {
   demandDetail: state => state.demand.demandDetail,
   // item & reviews
   currentItem: state => state.item.currentItem,
-  reviewDetail: state => state.item.reviewDetail
+  reviewDetail: state => state.item.reviewDetail,
+  // headline
+  totalHeadlines: state => state.headline.totalHeadlines,
+  currentH: state => state.headline.currentH,
+  maxH: state => state.headline.maxH,
+  currentHeadlines: state => state.headline.currentHeadlines
 }
 
 export default getters

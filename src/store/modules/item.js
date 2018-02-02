@@ -10,7 +10,7 @@ const state = {
 }
 // actions
 const actions = {
-  getItem: ({state, commit}, itemid) => {
+  getItem: ({commit}, itemid) => {
     return new Promise((resolve, reject) => {
       fetchItem(itemid).then(resp => {
         commit('SET_ITEM', resp.data)
@@ -20,7 +20,7 @@ const actions = {
       })
     })
   },
-  getReview: ({state, commit}, reviewid) => {
+  getReview: ({commit}, reviewid) => {
     return new Promise((resolve, reject) => {
       fetchReview(reviewid).then(resp => {
         commit('SET_REVIEW', resp.data)

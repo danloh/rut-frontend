@@ -28,7 +28,7 @@ export default {
       },
       rules: {
         comment: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'blur' }
         ]
       }
     }
@@ -45,7 +45,7 @@ export default {
             this.$emit('newreply', resp.data)
           })
           this.resetForm(formName)
-          this.$emit('update:show', false)
+          this.$emit('update:show', false) // with .sync, to hide input once submit
         } else if (!checkAuth()) {
           this.$message({
             showClose: true,

@@ -7,7 +7,7 @@
           <img class="avatar" :src="act.actor.avatar" style="width:30px; border-radius:50%" alt="Avatar">
           <b>{{ act.actor.name }}</b>
         </router-link>
-        <b>{{act.action}} {{act.event.type}}</b>
+        <span class="act-line">{{act.action}}&nbsp;{{act.event.type}}</span>
         <router-link :to="'/' + act.event.type + '/' + act.event.id">{{act.event.content}}</router-link>
         <br><span class="act-time">{{act.timestamp | timeAgo}}</span>
       </div>

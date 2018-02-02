@@ -3,7 +3,7 @@
     <div class="title"> <b>Edit Item:</b>&nbsp;
       {{ itemTitle }}<el-button type="text" @click="cancelnBack"> ...Cancel Edit</el-button>
     </div>
-    <el-form class="edit-form" :model="itemForm" :rules="rules" ref="itemForm" label-width="120px" size="mini">
+    <el-form class="edit-form" :model="itemForm" :rules="rules" ref="itemForm" label-width="130px" size="mini">
       <el-form-item label="Type" prop="cate">
         <el-radio-group v-model="itemForm.cate">
           <el-radio-button label="Book"></el-radio-button>
@@ -21,16 +21,16 @@
         <el-input v-model="itemForm.title"></el-input>
       </el-form-item>
       <el-form-item label="UID" prop="uid">
-        <el-input v-model="itemForm.uid"></el-input>
+        <el-input v-model="itemForm.uid" placeholder="either UID. e.g. ISBN, etc. "></el-input>
       </el-form-item>
       <el-form-item label="Resource URL" prop="resurl">
-        <el-input v-model="itemForm.resUrl"></el-input>
+        <el-input v-model="itemForm.resUrl" placeholder="or URL. e.g. a online course link, etc. "></el-input>
       </el-form-item>
       <el-form-item label="Byline" prop="byline">
-        <el-input v-model="itemForm.byline"></el-input>
+        <el-input v-model="itemForm.byline" placeholder="Auther or Instructor, etc."></el-input>
       </el-form-item>
       <el-form-item label="Cover" prop="cover">
-        <el-input v-model="itemForm.cover"></el-input>
+        <el-input v-model="itemForm.cover" placeholder="Image link"></el-input>
       </el-form-item>
       <el-form-item label="Language" prop="language">
         <el-input v-model="itemForm.language"></el-input>
@@ -39,15 +39,15 @@
         <el-input v-model="itemForm.publisher"></el-input>
       </el-form-item>
       <el-form-item label="Publish Date" prop="publishDate">
-        <el-input v-model="itemForm.publishDate"></el-input>
+        <el-input v-model="itemForm.publishDate" placeholder="Book Publish date or Start date of a Course"></el-input>
       </el-form-item>
-      <el-form-item label="Page" prop="page">
-        <el-input v-model="itemForm.page"></el-input>
+      <el-form-item label="Page / Duration" prop="page">
+        <el-input v-model="itemForm.page" placeholder="Pages of Book or Duration of video / course"></el-input>
       </el-form-item>
       <el-form-item label="Level" prop="level">
         <el-input v-model="itemForm.level"></el-input>
       </el-form-item>
-      <el-form-item label="Binding" prop="binding">
+      <el-form-item label="Binding / Format" prop="binding">
         <el-input v-model="itemForm.binding"></el-input>
       </el-form-item>
       <el-form-item label="Price" prop="price">

@@ -78,6 +78,10 @@ Object.keys(filters).forEach(key => {
 })
 
 // Axios config
+// const token = getToken()
+// if (token) {
+//   axios.defaults.headers.common['Authorization'] = token
+// }
 // Request interceptor
 // axios.interceptors.request.use(
 //   config => {

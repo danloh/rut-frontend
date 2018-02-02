@@ -338,6 +338,26 @@ const fetchRutCircles = (rutid, params) => {
 const postCircle = (rutid, params) => {
   return request(`${base}/newcircle/rut/${rutid}`, params, 'post')
 }
+// get headline list
+const fetchHeadlines = (params) => {
+  return request(`${base}/headlines`, params)
+}
+// get headline
+const fetchHeadline = (headlineid, params) => {
+  return request(`${base}/headline/${headlineid}`, params)
+}
+// get comments of a headline
+const fetchHlComments = (headlineid, params) => {
+  return request(`${base}/headline/${headlineid}/comments`, params)
+}
+// post new headline
+const newHeadline = params => {
+  return request(`${base}/newheadline`, params, 'post')
+}
+// upvote headline
+const upvoteHeadline = (headlineid, params) => {
+  return request(`${base}/upvoteheadline/${headlineid}`, params)
+}
 // just for error test
 const testError = (params) => {
   return request(`${base}/testerror`, params)
@@ -428,5 +448,10 @@ export {
   upvoteDemand,
   rutAsAnswer,
   newComment,
-  postCircle
+  postCircle,
+  fetchHeadlines,
+  fetchHeadline,
+  fetchHlComments,
+  newHeadline,
+  upvoteHeadline
 }

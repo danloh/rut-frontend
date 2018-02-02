@@ -8,8 +8,8 @@
         {{item.cate}} <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
       </span><br>
       <span><b>Byline:</b> {{ item.byline }} </span><br>
-      <span><b>Published:</b> {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</span><br>
-      <span><b>UID/ISBN:</b> {{ item.uid }} <a :href="item.resurl" v-if="item.resurl" target="_blank"> &nbsp;:::</a> </span><br>
+      <span><b>Publish:</b> {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</span><br>
+      <span><b>UID:</b> {{ item.uid }} - {{ item.binding }} - {{ item.page }} <a :href="item.resurl" v-if="item.resurl" target="_blank"> &nbsp;:::</a></span><br>
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
       <span v-if="flagNote || flagTime"><b>Note: </b>
         <span class="flag-note" v-if="flagNote"><b>"</b>{{ flagNote }}<b>"</b></span>&nbsp;

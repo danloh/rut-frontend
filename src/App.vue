@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <header class="header">
-      <nav class="inner">
+      <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-size:1.6em;letter-spacing:0.0005em">Readup.Tips</b>
+            <b style="color:darkorange;font-size:1.2em;letter-spacing:0.0005em">Readup.Tips</b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
           <b>Feed</b>
@@ -14,10 +14,13 @@
         <router-link to="/demands">
           <b>Request</b>
         </router-link>
+        <router-link to="/headlines">
+          <b>Headline</b>
+        </router-link>
         <router-link to="/create">
           <b>Create Now</b>
         </router-link>
-        <div class="rightmenu">
+        <div class="right-menu">
           <el-dropdown v-if="authed">
             <el-button type="success" size="small">
               <i class="el-icon-menu"></i>
@@ -56,8 +59,6 @@
 </template>
 
 <script>
-// import store from './store'
-// import { getToken } from '@/util/auth'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -125,13 +126,13 @@ blockquote
   top 0
   left 0
   right 0
-  .inner
+  .nav-menu
     max-width 960px
     min-width 800px
     box-sizing border-box
     margin 0px auto
     padding 8px 0px
-    .rightmenu
+    .right-menu
       float right
       .login
         color green
@@ -146,7 +147,7 @@ blockquote
     letter-spacing .075em
     margin-right 0.85em
     &:hover
-      color darkgreen
+      color orange
     &.router-link-active
       color green
       font-weight 800

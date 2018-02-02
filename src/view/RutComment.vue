@@ -1,7 +1,7 @@
 <template>
   <div class="rut-comment">
     <div class="comment-main">
-      <b style="font-size: 1.5em">Discuss: &nbsp;&nbsp;</b><router-link :to="'/readuplist/' + rut.id">{{ rut.title }}</router-link>
+      <b style="font-size:1.2em">Discuss List: &nbsp;&nbsp;</b><router-link :to="'/readuplist/' + rut.id">{{ rut.title }}</router-link>
     </div>
     <b>{{ commentCount | pluralise('comment') }}</b>
     <div v-for="comment in comments" :key="comment.id">
@@ -160,6 +160,7 @@ export default {
     },
     updateNew (data) {
       this.comments.unshift(data)
+      this.commentCount += 1
     },
     newCircle (formName, form) {
       this.$refs[formName].validate((valid) => {
@@ -201,7 +202,7 @@ export default {
   padding 5px 315px 10px 0px
   position relative
   .comment-main
-    padding 5px
+    padding auto
   .circle-side
     position absolute
     top 10px

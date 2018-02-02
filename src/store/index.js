@@ -6,6 +6,7 @@ import rut from './modules/rut'
 import item from './modules/item'
 import clip from './modules/clip'
 import demand from './modules/demand'
+import headline from './modules/headline'
 
 Vue.use(Vuex)
 
@@ -94,7 +95,8 @@ const store = new Vuex.Store({
     rut,
     item,
     clip,
-    demand
+    demand,
+    headline
   }
 })
 

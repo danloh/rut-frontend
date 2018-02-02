@@ -10,6 +10,8 @@ const Feeds = () => import('@/view/Feeds')
 const Challenge = () => import('@/view/Challenge')
 const Demands = () => import('@/view/Demands')
 const DemandView = () => import('@/view/DemandView')
+const Headlines = () => import('@/view/Headlines')
+const HeadlineView = () => import('@/view/HeadlineView')
 const Profile = () => import('@/view/Profile')
 const RutView = () => import('@/view/RutView')
 const RutComment = () => import('@/view/RutComment')
@@ -35,6 +37,7 @@ const MyItemRC = () => import('@/components/Item/MyItemRC')
 // import createDemandList from '@/components/Demand/CreateDemandList'
 const createClipList = params => () => import('@/components/Challenge/CreateClipList').then(m => m.default(params))
 const createDemandList = param => () => import('@/components/Demand/CreateDemandList').then(m => m.default(param))
+const createHList = param => () => import('@/components/Headline/CreateHList').then(m => m.default(param))
 const createProfileRuts = param => () => import('@/components/Profile/CreateProfileRuts').then(m => m.default(param))
 const createProfileItems = param => () => import('@/components/Profile/CreateProfileItems').then(m => m.default(param))
 const ProfileReviews = () => import('@/components/Profile/ProfileReviews')
@@ -140,6 +143,15 @@ const router = new Router({
         { path: 'myclip', name: 'Myclip', component: createClipList(), meta: {auth: true} },
         { path: 'hotclip', name: 'Hotclip', component: createClipList({ref: 'Hot'}), meta: {auth: true} },
         { path: 'allclip', name: 'Allclip', component: createClipList({ref: 'All'}), meta: {auth: true} }
+      ]
+    },
+    { path: '/headline/:id', name: 'Headline', component: HeadlineView },
+    { path: '/headlines',
+      component: Headlines,
+      children: [
+        { path: '', name: 'defaultheadline', redirect: 'top' },
+        { path: 'top', name: 'TopHeadline', component: createHList('top') },
+        { path: 'new', name: 'NewHeadline', component: createHList('new') }
       ]
     },
     { path: '/profile/:id',

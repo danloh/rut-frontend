@@ -1,7 +1,7 @@
 <template>
   <div class="demand-main" v-if="requestor"> <!--render after requestor get data-->
     <div class="demand-body">
-      <router-link :to="'/demand/' + demand.id"><span style="color:#00838f">{{ demand.body }}</span></router-link>
+      <router-link :to="'/demand/' + demand.id"><span>{{ demand.body }}</span></router-link>
     </div>
     <div class="demand-bar">
       Requseted by <router-link :to="'/profile/' + requestor.id">{{ requestor.name }}</router-link>
@@ -48,11 +48,15 @@ export default {
 .demand-main
   padding 5px
   background-color lighten(#f1f3f5, 50%)
-  border-bottom 1px dotted #689f38
+  border-bottom 1px solid #eee
   .demand-body
     background-color #f1f3f5
-    padding 10px
+    padding 5px
     font-size 1.15em
+    a
+      color #00838f
+      &:hover
+        color #409eff
   .demand-bar
     text-align right
     font-size 0.8em

@@ -19,7 +19,7 @@ const state = {
 
 // actions
 const actions = {
-  getRuts: ({commit, state}, param) => {
+  getRuts: ({commit}, param) => {
     return new Promise((resolve, reject) => {
       fetchIndexRuts(param)
       .then(resp => {
@@ -30,13 +30,13 @@ const actions = {
       })
     })
   },
-  getProfileRuts: ({commit, state}, params) => { // action: up to 2 args
+  getProfileRuts: ({commit}, params) => { // action: up to 2 args
     return fetchProfileRuts(params['action'], params['userid'])
     .then(resp => {
       commit('SET_RUTS', resp.data)
     })
   },
-  getRut: ({commit, state}, rutid) => {
+  getRut: ({commit}, rutid) => {
     return new Promise((resolve, reject) => {
       fetchRut(rutid)
       .then(resp => {

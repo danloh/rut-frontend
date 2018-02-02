@@ -26,7 +26,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'home',
-  title: 'Readup.Tips - Share Read List',
+  title: 'Readup.Tips - Share Read List or Learning Roadmaps',
   components: { RutList, Spinner, Banner },
   data: () => ({
     loading: true
