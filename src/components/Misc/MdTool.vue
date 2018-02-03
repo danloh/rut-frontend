@@ -2,19 +2,19 @@
   <div class="md-editor">
     <div class="md-tools">
       <a href="" title="Bold" @click.stop.prevent="insertContent('bold')">
-        <b>B </b>
+        <b class="icon">B &nbsp;</b>
       </a>
-      <a href="" title="image" @click.stop.prevent="insertContent('image')">
-        <i class="el-icon-picture"></i>
-      </a>
-      <a href="" title="link" @click.stop.prevent="insertContent('link')">
-        <i class="el-icon-plus"></i>
-      </a>
-      <a href="" title="code" @click.stop.prevent="insertContent('code')">
-        <i class="el-icon-tickets"></i>
-      </a>
-      <a href="" title="preview" @click.stop.prevent="togglePreviewMode">
-        <i class="el-icon-view"></i>
+      <a href="" title="Image" @click.stop.prevent="insertContent('image')">
+        <i class="el-icon-picture icon"></i>
+      </a>&nbsp;
+      <a href="" title="Link" @click.stop.prevent="insertContent('link')">
+        <i class="el-icon-plus icon"></i>
+      </a>&nbsp;
+      <a href="" title="Code" @click.stop.prevent="insertContent('code')">
+        <i class="el-icon-tickets icon"></i>
+      </a>&nbsp;&nbsp;
+      <a href="" title="Preview" @click.stop.prevent="togglePreviewMode">
+        <i class="el-icon-view icon"></i>
       </a>
     </div>
     <div v-show="previewMode" v-html="previewContent"></div>
@@ -54,3 +54,8 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+.icon
+  color grey
+</style>

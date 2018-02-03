@@ -7,6 +7,8 @@ yarn-error.log*
 test
 selenium-debug.log
 
+package-lock.json
+
 .gitattributes
 .eslintignore
 .gitignore
@@ -17,3 +19,5 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+src/components/Item/NewItem1.vue
+src/components/Item/NewItem.vue

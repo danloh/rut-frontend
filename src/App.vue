@@ -115,9 +115,11 @@ pre
   background-color #f0f0f0
   padding 5px
 blockquote
-  border-left: 4px solid #ccc
+  border-left: 4px solid lighten(orange, 42%)
   margin: 5px
   padding-left: 12px
+.el-input__inner, .el-textarea__inner
+  font-size 14px
 .header
   background-color #fafafa
   position fixed

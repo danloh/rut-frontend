@@ -55,6 +55,7 @@
       </el-form-item>
       <el-form-item label="More Details" prop="details">
         <el-input type="textarea" v-model="itemForm.details" :autosize="{minRows:3}"></el-input>
+        <md-tool :pretext="itemForm.details" @insertmd="updateI"></md-tool>
       </el-form-item>
       <el-form-item>
         <el-button type="success" size="medium" @click="onEditItem('itemForm', itemForm)">Done and Add</el-button>
@@ -68,10 +69,12 @@
 import { editItem, unlockItem } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
+import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'edit-item',
   title: 'Edit Item',
+  components: { MdTool },
   data () {
     return {
       itemForm: {
@@ -219,6 +222,9 @@ export default {
         unlockItem(itemid)
         this.$router.push(`/item/${itemid}`)
       }
+    },
+    updateI (data) {
+      this.itemForm.details += data
     }
   },
   created () {

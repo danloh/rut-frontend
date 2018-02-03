@@ -9,7 +9,10 @@
       </span><br>
       <span><b>Byline:</b> {{ item.byline }} </span><br>
       <span><b>Publish:</b> {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</span><br>
-      <span><b>UID:</b> {{ item.uid }} - {{ item.binding }} - {{ item.page }} <a :href="item.resurl" v-if="item.resurl" target="_blank"> &nbsp;:::</a></span><br>
+      <span><b>UID:</b> 
+        {{ item.uid }} - {{ item.binding }} - {{ item.page }} 
+        <a :href="item.resurl" v-if="item.resurl" target="_blank"> &nbsp;:::</a>
+      </span><br>
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
       <span v-if="flagNote || flagTime"><b>Note: </b>
         <span class="flag-note" v-if="flagNote"><b>"</b>{{ flagNote }}<b>"</b></span>&nbsp;
@@ -18,7 +21,9 @@
     </div>
     <div class="operate">
       <el-dropdown>
-        <el-button type="primary" size="mini" plain>{{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+        <el-button type="primary" size="mini" plain>
+          {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item><span @click="openToFlag('schedule')">Schedule</span></el-dropdown-item>
           <el-dropdown-item><span @click="openToFlag('working')">Working On</span></el-dropdown-item>
@@ -29,11 +34,22 @@
     </div>
     <!-- addtolist dialog -->
     <el-dialog title="Add Item to Created List" :visible.sync="showDialog" width="45%">
-      <el-form :model="intoForm" ref="intoForm">
+      <el-form :model="intoForm" ref="intoForm" size="medium">
         <el-form-item prop="rut">
-          <el-select v-model="intoForm.selectRutID">
+          <el-select v-model="intoForm.selectRutID" placeholder="Select a List">
             <el-option v-for="r in createdRuts" :key="r.id" :label="r.title" :value="r.id"></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item prop="tips">
+          <el-input type="textarea" v-model="intoForm.tips" 
+                    :autosize="{minRows:3}" placeholder="Tips"></el-input>
+          <md-tool :pretext="intoForm.tips" @insertmd="updateT"></md-tool>
+        </el-form-item>
+        <el-form-item prop="spoiler" size="mini">
+          <el-radio-group v-model="intoForm.spoiler">
+            <el-radio-button label="No Spoiler"></el-radio-button>
+            <el-radio-button label="Spoiler Ahead"></el-radio-button>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -42,6 +58,13 @@
       </div>
     </el-dialog>
     <!-- addtolist dialog end -->
+    <!-- redirect dialog -->
+    <el-dialog :visible.sync="showRedirect" width="30%">
+      <router-link :to="'/readuplist/' + intoForm.selectRutID">
+        <b>Go To The List Page You Just Add Item To?</b>
+      </router-link>
+    </el-dialog>
+    <!-- redirect dialog end-->
     <!-- addnote dialog -->
     <el-dialog title="Add Note and Flag It" :visible.sync="showNoteDialog" width="35%">
       <el-form :model="noteForm" :rules="noteRules" ref="noteForm">
@@ -60,17 +83,22 @@
 <script>
 import { flagItem, checkFlag, fetchProfileRuts, itemToRut } from '@/api/api'
 import { checkAuth } from '@/util/auth'
+import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'item-sum',
   props: ['item'],
+  components: { MdTool },
   data () {
     return {
       flagAction: 'Flag It',
       flagNote: '',
       flagTime: '',
       showDialog: false,
+      showRedirect: false,
       intoForm: {
+        tips: '',
+        spoiler: 'No Spoiler',
         selectRutID: null
       },
       showNoteDialog: false,
@@ -200,7 +228,7 @@ export default {
       if (!form.selectRutID) {
         this.$message({
           showClose: true,
-          message: 'Please Select One'
+          message: 'Please Select a List'
         })
         return false
       }
@@ -208,15 +236,10 @@ export default {
         if (valid && checkAuth()) {
           let rutid = form.selectRutID
           let itemid = this.item.id
-          return itemToRut(itemid, rutid)
-          .then(() => {
+          let data = {'tips': form.tips, 'spoiler': form.spoiler}
+          itemToRut(itemid, rutid, data).then(() => {
             this.showDialog = false
-            this.$message({
-              showClose: true,
-              message: 'Done, and Now You can add Tips',
-              type: 'success'
-            })
-            this.$router.push(`/readuplist/${rutid}`) // why not work from rut page: re-sued component issue
+            this.showRedirect = true
           })
         } else if (!checkAuth()) {
           this.showDialog = false
@@ -230,6 +253,9 @@ export default {
           })
         }
       })
+    },
+    updateT (data) {
+      this.intoForm.tips += data
     }
   },
   created () {

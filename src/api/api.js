@@ -156,7 +156,7 @@ const addItem = (rutid, params) => {
 }
 // add existing item to rut
 const itemToRut = (itemid, rutid, params) => {
-  return request(`${base}/item/${itemid}/torut/${rutid}`, params)
+  return request(`${base}/item/${itemid}/torut/${rutid}`, params, 'post')
 }
 // check item to add
 const checkItem = (rutid, params) => {
@@ -217,6 +217,10 @@ const fetchItemReviews = (itemid, params) => {
 // fetch inruts of the item
 const fetchInRuts = (itemid, params) => {
   return request(`${base}/item/${itemid}/inruts`, params)
+}
+// search items
+const searchItems = (label, params) => {
+  return request(`${base}/search/${label}/items`, params)
 }
 // lock tag
 const lockItem = (itemid, params) => {
@@ -423,6 +427,7 @@ export {
   fetchInRuts,
   checkFlag,
   flagItem,
+  searchItems,
   lockItem,
   unlockItem,
   checkItemLocked,
