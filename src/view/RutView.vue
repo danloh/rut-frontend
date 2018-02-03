@@ -42,10 +42,7 @@
         <item-sum class="itemsum" :item="tip.item" :key="tip.itemid"></item-sum>
         <b class="indicator">&nbsp;&nbsp;#{{tip.order}}&nbsp;&nbsp;</b> 
         <router-link class="editlink" :to="'/edit/readuptips/' + tip.cid" v-if="canEdit">...Edit</router-link>
-        <div class="tip">
-          <div v-html="md(tip.tip)" v-show="!tip.spoiler || !short"></div>
-          <el-button type="text" size="mini" @click="short = !short" v-if="tip.spoiler && short">... Spoilers Ahead! Continue?</el-button>
-        </div>
+        <tip-sum class="tip" :tip="tip" :key="tip.cid"></tip-sum>
       </div>
       <div v-if="hasMoreTips">
         <el-button class="blockbtn" size="mini" @click="loadmoreTips" :disabled="!hasMoreTips">Show More Items</el-button>
@@ -83,6 +80,7 @@
 <script>
 import ItemSum from '@/components/Item/ItemSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
+import TipSum from '@/components/Rut/TipSum.vue'
 // sc: star and challenge
 import { scRut, checkSC, editTags, fetchRutDemands, fetchRutTips, checkRutLocked, lockRut, unlockRut } from '@/api/api'
 import { checkAuth } from '@/util/auth'
@@ -91,7 +89,7 @@ import marked from '@/util/marked'
 
 export default {
   name: 'rut-view',
-  components: { ItemSum, ShareBar },
+  components: { ItemSum, TipSum, ShareBar },
   data () {
     return {
       starAction: 'Star',
@@ -112,8 +110,7 @@ export default {
       newTag: '',
       newTags: [],
       canEdit: false,
-      canTag: true,
-      short: true
+      canTag: true
     }
   },
   computed: {
@@ -263,7 +260,7 @@ export default {
     },
     toEditTag () {
       let currentUserID = this.$store.getters.currentUserID
-      if (!currentUserID || !checkAuth()) { // utilize short-circle to set default auth
+      if (!currentUserID || !checkAuth()) { // utilize short-circuit to set default auth
         this.showDialog = false
         this.$message('Please Log in to Continue')
       } else {
@@ -354,7 +351,6 @@ $bgcolor = lighten(#f6f6f1, 50%)
     .itemtip
       background-color $bgcolor
       .itemsum
-        top 5px
         margin 5px
       .tip
         padding 5px 10px
