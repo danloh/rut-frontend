@@ -6,7 +6,8 @@ import {
 // initial state
 const state = {
   currentItem: {},
-  reviewDetail: {}
+  reviewDetail: {},
+  searchItems: []
 }
 // actions
 const actions = {
@@ -38,6 +39,9 @@ const mutations = {
   },
   SET_REVIEW: (state, data) => {
     state.reviewDetail = data
+  },
+  SET_SEARCH_ITEMS: (state, data) => {
+    state.searchItems = data
   }
 }
 

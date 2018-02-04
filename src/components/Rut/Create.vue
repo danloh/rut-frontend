@@ -2,7 +2,7 @@
   <div class="create-page">
     <h3 class="title">Create New Read List</h3>
     <p v-if="demandid"> As Answer To The 
-      <router-link :to="'/demand/' + demandid" target="_blank" rel="nofollow noopener noreferrer">
+      <router-link :to="'/demand/' + demandid" target="_blank" rel="noopener noreferrer">
       {{ 'Request:  ' + demandBody || 'Request' }}
       </router-link>
     </p>

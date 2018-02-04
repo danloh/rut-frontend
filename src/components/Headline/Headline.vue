@@ -6,7 +6,7 @@
     <div class="headline-main">
       <div class="headline-title">
         <template v-if="headline.url">
-          <a :href="headline.url" target="_blank" rel="noopener"><b>{{ headline.title }}</b></a>
+          <a :href="headline.url" target="_blank" rel="nofollow noopener noreferrer"><b>{{ headline.title }}</b></a>
           <span class="host"> ({{ headline.url | host }})</span>
         </template>
         <template v-else>

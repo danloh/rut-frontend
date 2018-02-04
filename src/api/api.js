@@ -234,11 +234,15 @@ const unlockItem = (itemid, params) => {
 const checkItemLocked = (userid, itemid, params) => {
   return request(`${base}/checkifitem/${itemid}/lockedto/${userid}`, params)
 }
+// add new item directly, not to list
+const newItem = (params) => {
+  return request(`${base}/newitem`, params, 'post')
+}
 // edit item
 const editItem = (itemid, params) => {
   return request(`${base}/edititem/${itemid}`, params, 'post')
 }
-
+// fetch to-dos, doings, dones
 const fetchProfileItems = (flag, userid, params) => {
   return request(`${base}/${userid}/${flag}/items`, params)
 }
@@ -431,6 +435,7 @@ export {
   lockItem,
   unlockItem,
   checkItemLocked,
+  newItem,
   editItem,
   fetchProfileItems,
   fetchClips,

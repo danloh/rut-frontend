@@ -50,8 +50,9 @@
       <!-- | <router-link to="/about">About</router-link>
       | <router-link to="/terms">Terms</router-link>
       | <router-link to="/help">Help</router-link> | -->
+      | <router-link to="/newitem">Submit New Item</router-link>
       <!--google site search -->
-      <div style="width:160px">
+      <div style="width:265px">
         <el-input size="mini" v-model="searchWord" @keyup.enter.native="siteSearch" placeholder="Search Readup.Tips"></el-input>
       </div>
     </footer>
@@ -115,7 +116,7 @@ pre
   background-color #f0f0f0
   padding 5px
 blockquote
-  border-left: 4px solid lighten(orange, 42%)
+  border-left: 3px solid lighten(orange, 80%)
   margin: 5px
   padding-left: 12px
 .el-input__inner, .el-textarea__inner

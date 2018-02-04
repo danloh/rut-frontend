@@ -18,6 +18,7 @@ const RutComment = () => import('@/view/RutComment')
 const ItemView = () => import('@/view/ItemView')
 const ReviewView = () => import('@/view/ReviewView')
 const TagView = () => import('@/view/TagView')
+const SearchResult = () => import('@/view/SearchResult')
 const NotFound = () => import('@/view/NotFound')
 const Register = () => import('@/components/Auth/Register')
 const Confirm = () => import('@/components/Auth/Confirm')
@@ -29,6 +30,7 @@ const Create = () => import('@/components/Rut/Create')
 const EditRut = () => import('@/components/Rut/EditRut')
 const AddItem = () => import('@/components/Rut/AddItem')
 const EditTips = () => import('@/components/Rut/EditTips')
+const NewItem = () => import('@/components/Item/NewItem')
 const EditItem = () => import('@/components/Item/EditItem')
 const NewReview = () => import('@/components/Item/NewReview')
 const EditReview = () => import('@/components/Item/EditReview')
@@ -179,6 +181,8 @@ const router = new Router({
         { path: 'change', name: 'Change', component: ChangePsw, beforeEnter: beforeEnterSet, meta: {auth: true} }
       ]
     },
+    { path: '/newitem', component: NewItem, name: 'NewItem', meta: {auth: true} },
+    { path: '/searchresult/:type', component: SearchResult, name: 'SearchResult', props: true },
     { path: '/404', component: NotFound, name: 'NotFound', hidden: true },
     { path: '*', hidden: true, redirect: { path: '/404' } }
   ]

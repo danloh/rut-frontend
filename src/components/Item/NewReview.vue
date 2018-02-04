@@ -1,7 +1,7 @@
 <template>
   <div class="review-page">
     <h3 class="title"> Post New Review:</h3>
-    <router-link :to="'/item/' + itemId" target="_blank" rel="nofollow noopener noreferrer">Item</router-link>
+    <router-link :to="'/item/' + itemId" target="_blank" rel="noopener noreferrer">Item</router-link>
     <el-form class="review-form" :model="reviewForm" :rules="rules" ref="reviewForm" size="mini">
       <el-form-item prop="title">
         <el-input v-model="reviewForm.title" placeholder="Title"></el-input>

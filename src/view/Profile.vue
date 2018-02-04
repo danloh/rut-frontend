@@ -42,12 +42,15 @@
           <small style="outline: dotted 1px; background-color: #d5d5be">~Setting~</small>
         </router-link>
       </div>
+      <div style="width:220px">
+        <el-input size="mini" v-model="itemKeyword" @keyup.enter.native="searchItem" placeholder="Search Item in Readup.Tips"></el-input>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchUser, checkFollowing, followOne } from '@/api/api'
+import { fetchUser, checkFollowing, followOne, searchItems } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 
 export default {
@@ -61,7 +64,8 @@ export default {
       userid: this.$route.params.id,
       showSetting: false,
       action: 'Follow',
-      followedCount: 0 // this user following other
+      followedCount: 0, // this user following other
+      itemKeyword: ''
     }
   },
   methods: {
@@ -117,6 +121,15 @@ export default {
           query: {redirect: this.$route.fullPath}
         })
       }
+    },
+    searchItem () {
+      if (checkAuth() && this.itemKeyword.trim()) {
+        let param = {'uid_or_title': this.itemKeyword.trim()}
+        searchItems(0, param).then(resp => {
+          this.$store.commit('SET_SEARCH_ITEMS', resp.data)
+          this.$router.push('/searchresult/item')
+        })
+      }
     }
   },
   created () {
@@ -146,6 +159,7 @@ export default {
       width 210px
   .profile-view
     padding auto
+    min-height 400px
   .profile-side
     position absolute
     top 10px

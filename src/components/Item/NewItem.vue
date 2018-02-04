@@ -1,9 +1,27 @@
 <template>
-  <div class="edit-page">
-    <div class="title"> <b>Edit Item:</b>&nbsp;
-      {{ itemTitle }}<el-button type="text" @click="cancelnBack"> ...Cancel Edit</el-button>
-    </div>
-    <el-form class="edit-form" :model="itemForm" :rules="rules" ref="itemForm" label-width="130px" size="mini">
+  <div class="new-page">
+    <div class="title"> <b>Submit New Item</b>&nbsp;</div>
+    <p style="color:green;font-size:0.8em">
+      An Item can be anything: Book, Course, Documentary, Paper, Atlas, Place to visit, Exppriment to perform, etc.
+    </p>
+    <spinner :show="loading"></spinner>
+    <el-button size="small" type="primary">
+      {{ show ? 'Add Item Info Manually' : 'Fetch Item Info via Spider' }}
+    </el-button>
+    <el-button size="mini" type="text" @click="show = !show">
+      or {{ show ? 'Fetch Item Info via Spider' : 'Add Item Info Manually' }}
+    </el-button>
+    <!-- check via url spider or UID -->
+    <el-form class="check-form" :model="checkForm" ref="checkForm" size="mini" v-show="!show">
+      <el-form-item label="URL, e.g. Amazon url, Coursera url Or UID, e.g. ISBN-13" prop="url">
+        <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="success" size="medium" @click="onCheck('checkForm', checkForm)">Fetch Via Spider</el-button>
+      </el-form-item>
+    </el-form>
+    <!-- add mannually -->
+    <el-form class="new-form" :model="itemForm" :rules="rules" ref="itemForm" label-width="130px" size="mini" v-show="show">
       <el-form-item label="Type" prop="cate">
         <el-radio-group v-model="itemForm.cate">
           <el-radio-button label="Book"></el-radio-button>
@@ -20,11 +38,11 @@
       <el-form-item label="Title" prop="title">
         <el-input type="textarea" autosize v-model="itemForm.title"></el-input>
       </el-form-item>
-      <el-form-item label="UID" prop="uid">
-        <el-input v-model="itemForm.uid" placeholder="UID. e.g. ISBN, etc. "></el-input>
+      <el-form-item label="UID*" prop="uid">
+        <el-input v-model="itemForm.uid" placeholder="either UID. e.g. ISBN, etc. "></el-input>
       </el-form-item>
-      <el-form-item label="Resource URL" prop="resurl">
-        <el-input type="textarea" autosize v-model="itemForm.resUrl" placeholder="URL. e.g. a online course link, etc. "></el-input>
+      <el-form-item label="Resource URL*" prop="resurl">
+        <el-input type="textarea" autosize v-model="itemForm.resUrl" placeholder="or URL. e.g. a online course link, etc. "></el-input>
       </el-form-item>
       <el-form-item label="Byline" prop="byline">
         <el-input v-model="itemForm.byline" placeholder="Auther or Instructor, etc."></el-input>
@@ -55,10 +73,10 @@
       </el-form-item>
       <el-form-item label="More Details" prop="details">
         <el-input type="textarea" v-model="itemForm.details" :autosize="{minRows:3}"></el-input>
-        <md-tool :pretext="itemForm.details" @insertmd="updateI"></md-tool>
+        <md-tool :pretext="itemForm.details" @insertmd="updateN"></md-tool>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onEditItem('itemForm', itemForm)">Done and Add</el-button>
+        <el-button type="success" size="medium" @click="onNewItem('itemForm', itemForm)">Done and Add</el-button>
         <!-- <el-button @click="resetForm('itemForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
@@ -66,17 +84,21 @@
 </template>
 
 <script>
-import { editItem, unlockItem } from '@/api/api'
+import { newItem } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
+import Spinner from '@/components/Misc/Spinner.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
-  name: 'edit-item',
-  title: 'Edit Item',
-  components: { MdTool },
+  name: 'new-item',
+  title: 'Add New Item',
+  components: { Spinner, MdTool },
   data () {
     return {
+      checkForm: {
+        url: ''  // actually  url or uid
+      },
       itemForm: {
         cate: 'Book',
         title: '',
@@ -99,7 +121,6 @@ export default {
           { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
         ],
         uid: [
-          { required: true, validator: trimValid, message: 'Need an uid', trigger: 'blur' },
           { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
         ],
         resUrl: [
@@ -133,12 +154,35 @@ export default {
           { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
         ]
       },
-      itemId: null,
-      itemTitle: null
+      show: false,
+      loading: false
     }
   },
   methods: {
-    onEditItem (formName, form) {
+    // via Spider
+    onCheck (formName, form) {
+      this.loading = true
+      this.$refs[formName].validate((valid) => {
+        if (valid && checkAuth()) {
+          if (!form.url.trim()) {
+            this.loading = false
+            this.$message('Please Input Url')
+            return false
+          }
+          let data = {
+            resUrl: form.url.trim(), // url or uid
+            how: 'spider'
+          }
+          newItem(data).then(resp => {
+            this.loading = false
+            let id = resp.data
+            this.$router.push(`/item/${id}`)
+          })
+        }
+      })
+    },
+    // manually
+    onNewItem (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid && checkAuth()) {
           let data = {
@@ -148,98 +192,55 @@ export default {
             resUrl: form.resUrl.trim(),
             byline: form.byline.trim(),
             cover: form.cover.trim(),
-            language: form.language.trim(),
-            publisher: form.publisher.trim(),
-            publishDate: form.publishDate.trim(),
-            level: form.level.trim(),
+            Language: form.language.trim(),
+            Publisher: form.publisher.trim(),
+            'Publication Date': form.publishDate.trim(),
+            Level: form.level.trim(),
             binding: form.binding.trim(),
             page: form.page.trim(),
             price: form.price.trim(),
             details: form.details.trim()
           }
-          editItem(this.itemId, data)
-          .then((resp) => {
-            let id = this.itemId
-            unlockItem(id)
+          newItem(data).then(resp => {
+            let id = resp.data
             this.$router.push(`/item/${id}`)
-            this.$message({
-              showClose: true,
-              message: resp.data,
-              type: 'success'
-            })
           })
-        } else if (!checkAuth()) {
-          this.$message({
-            showClose: true,
-            message: 'Should Log in to Continue'
-          })
-          this.$router.push({
-            path: '/login',
-            query: {redirect: this.$route.fullPath}
-          })
-        } else {
-          this.$message({
-            showClose: true,
-            message: 'error!! Please Check'
-          })
-          return false
         }
       })
     },
-    cancelnBack () {
-      let id = this.itemId
-      unlockItem(id)
-      this.$router.push(`/item/${id}`)
+    checkAuthed () {
+      if (!checkAuth()) {
+        this.$message({
+          showClose: true,
+          message: 'Should Log in to Continue'
+        })
+        this.$router.push({
+          path: '/login',
+          query: {redirect: this.$route.fullPath}
+        })
+      }
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
     },
-    setFormData (item) {
-      this.itemForm.cate = item.cate
-      this.itemForm.title = item.title
-      this.itemForm.uid = item.uid
-      this.itemForm.resUrl = item.resurl
-      this.itemForm.byline = item.byline
-      this.itemForm.cover = item.cover
-      this.itemForm.language = item.language
-      this.itemForm.publisher = item.publisher
-      this.itemForm.publishDate = item.pubdate
-      this.itemForm.level = item.level
-      this.itemForm.binding = item.binding
-      this.itemForm.price = item.price
-      this.itemForm.page = item.page
-      this.itemForm.details = item.details
-      this.itemId = item.id
-      this.itemTitle = item.title
-    },
-    loadItemData () {
-      let itemG = this.$store.getters.currentItem
-      let itemid = this.$route.params.id
-      if (itemG && itemG.id === Number(itemid)) {
-        let item = itemG
-        this.setFormData(item)
-      } else {
-        unlockItem(itemid)
-        this.$router.push(`/item/${itemid}`)
-      }
-    },
-    updateI (data) {
+    updateN (data) {
       this.itemForm.details += data
     }
   },
   created () {
-    this.loadItemData()
+    this.checkAuthed()
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.edit-page
+.new-page
   padding 10px 120px 10px 80px
   position relative
-  .edit-form
+  .new-form, .check-form
     padding 20px
     border 1px dotted #689f38
   .title
-    margin-bottom 20px
+    margin-bottom 10px
+    text-align center
 </style>

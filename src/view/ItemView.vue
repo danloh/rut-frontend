@@ -30,7 +30,9 @@
           <el-button class="blockbtn" size="mini" @click="loadmoreRuts" :disabled="!hasMoreRut">Show More</el-button>
         </div>
         <br>
-        <router-link :to="'/myrc/item/' + currentItem.id">My Reviews or Quotes</router-link>
+        <router-link :to="'/myrc/item/' + currentItem.id">
+          <b style="font-size:0.8em">&nbsp;My Reviews or Excerpts</b>
+        </router-link>
       </div>
     </div>
   </div>

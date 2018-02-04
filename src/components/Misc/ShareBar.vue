@@ -1,31 +1,31 @@
 <template>
   <div id="social-share-bar">
     <a title="Twitter" 
-        rel="nofollow noopener"
+        rel="nofollow noopener noreferrer"
         class="share-link twitter"
         @click.prevent="shareWindow(`https://twitter.com/share?text=${title()}&url=${url}`)">
       <img alt="TW" src="/static/pic/twitter.svg" class="icon">
     </a>
     <a title="Facebook" 
-        rel="nofollow noopener"
+        rel="nofollow noopener noreferrer"
         class="share-link facebook"
         @click.prevent="shareWindow(`https://www.facebook.com/sharer/sharer.php?u=${url}`)">
       <img alt="FB" src="/static/pic/facebook.svg" class="icon">
     </a>
     <a title="Linkedin" 
-        rel="nofollow noopener"
+        rel="nofollow noopener noreferrer"
         class="share-link linkedin"
         @click.prevent="shareWindow(`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title()}`)">
       <img alt="Linkedin" src="/static/pic/linkedin.svg" class="icon">
     </a>
     <a title="Google+" 
-        rel="nofollow noopener"
+        rel="nofollow noopener noreferrer"
         class="share-link google-plus"
         @click.prevent="shareWindow(`https://plus.google.com/share?url=${url}`)">
       <img alt="G+" src="/static/pic/gplus.svg" class="icon">
     </a>
     <a title="Evernote" 
-        rel="nofollow noopener"
+        rel="nofollow noopener noreferrer"
         class="share-link evernote"
         @click.prevent="shareWindow(`https://www.evernote.com/clip.action?url=${url}&title=${title()}`)">
       <img alt="Evernote" src="/static/pic/evernote.svg" class="icon">

@@ -53,7 +53,7 @@
       </el-button>
       <!-- check via url spider or UID -->
       <el-form class="check-form" :model="checkForm" ref="checkForm" size="mini" v-show="!show">
-        <el-form-item label="URL, e.g. Amazon url / Coursera link  or UID, e.g. ISBN-13" prop="url">
+        <el-form-item label="URL, e.g. Amazon url, Coursera url Or UID, e.g. ISBN-13" prop="url">
           <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
         </el-form-item>
         <el-form-item>
@@ -79,19 +79,19 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Title" prop="title">
-          <el-input v-model="addForm.title"></el-input>
+          <el-input type="textarea" autosize v-model="addForm.title"></el-input>
         </el-form-item>
         <el-form-item label="UID*" prop="uid">
           <el-input v-model="addForm.uid" placeholder="Either of UID and URL is requied"></el-input>
         </el-form-item>
         <el-form-item label="Resource URL*" prop="resUrl">
-          <el-input v-model="addForm.resUrl" placeholder="Either of UID and URL is requied"></el-input>
+          <el-input type="textarea" autosize v-model="addForm.resUrl" placeholder="Either of UID and URL is requied"></el-input>
         </el-form-item>
         <el-form-item label="Byline" prop="byline">
           <el-input v-model="addForm.byline"></el-input>
         </el-form-item>
-        <el-form-item label="Cover" prop="cover">
-          <el-input v-model="addForm.cover"></el-input>
+        <el-form-item label="Cover / Logo" prop="cover">
+          <el-input type="textarea" autosize v-model="addForm.cover" placeholder="Image URL"></el-input>
         </el-form-item>
         <el-form-item label="Tips" prop="tips">
           <el-input type="textarea" v-model="addForm.tips" :autosize="{minRows:6}"></el-input>

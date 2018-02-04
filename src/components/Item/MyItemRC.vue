@@ -1,6 +1,6 @@
 <template>
   <div class="view-main">
-    <b style="font-size: 1.2em">MY REVIEWS AND QUOTES ON THE ITEM:</b>
+    <b style="font-size: 1.2em">My Reviews And Excerpts On The Item:</b>
     <router-link :to="'/item/' + itemid">{{currentItem.title || '......'}}</router-link>
     <div class="submenu">
       <b>>></b>&nbsp;&nbsp;<b style="color: orange">Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

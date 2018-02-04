@@ -19,5 +19,3 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
-src/components/Item/NewItem1.vue
-src/components/Item/NewItem.vue

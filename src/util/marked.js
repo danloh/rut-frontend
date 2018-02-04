@@ -21,7 +21,8 @@ const linkParse = (href, title, text) => {
   return `<a href="${href}" 
              target="_blank" 
              title="${title || (textIsImage ? href : text)}" 
-             ${isSelf ? '' : 'rel="external nofollow noopenter"'}>${text}</a>`.replace(/\s+/g, ' ').replace('\n', '')
+             ${isSelf ? '' : 'rel="external nofollow noopener noreferrer"'}>${text}
+          </a>`.replace(/\s+/g, ' ').replace('\n', '')
 }
 
 const imageParse = (src, title, alt) => {

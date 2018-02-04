@@ -28,6 +28,9 @@ export default {
       })
     }
   },
+  watch: {
+    '$route.params.id': 'loadActivity'
+  },
   created () {
     this.loadActivity()
   }
