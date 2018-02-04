@@ -62,8 +62,7 @@ export default {
     upheadline () {
       if (checkAuth()) {
         let headlineid = this.headline.id
-        return upvoteHeadline(headlineid)
-        .then(resp => {
+        upvoteHeadline(headlineid).then(resp => {
           this.point = resp.data
         })
       }

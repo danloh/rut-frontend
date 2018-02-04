@@ -24,8 +24,7 @@ export default {
   methods: {
     loadUsers () {
       let userid = this.$route.params.id
-      return fetchFollows(userid, 'followed')
-      .then(resp => {
+      fetchFollows(userid, 'followed').then(resp => {
         let data = resp.data
         this.users = data
       })

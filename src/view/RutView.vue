@@ -234,8 +234,7 @@ export default {
     loadmoreDemand () {
       let rutid = this.$route.params.id
       let params = {'page': this.currentDP}
-      fetchRutDemands(rutid, params)
-      .then(resp => {
+      fetchRutDemands(rutid, params).then(resp => {
         this.demands.push(...resp.data)
         this.currentDP += 1
       })
@@ -243,8 +242,7 @@ export default {
     checkStar () {
       if (checkAuth()) {
         let rutid = this.$route.params.id // ?? liftcycle timing
-        return checkSC(rutid, 'star')
-        .then(resp => {
+        checkSC(rutid, 'star').then(resp => {
           this.starAction = resp.data
         })
       } else {
@@ -254,8 +252,7 @@ export default {
     checkChallenge () {
       if (checkAuth()) {
         let rutid = this.$route.params.id // ?? liftcycle timing
-        return checkSC(rutid, 'challenge')
-        .then(resp => {
+        checkSC(rutid, 'challenge').then(resp => {
           this.challengeAction = resp.data
         })
       } else {
@@ -265,14 +262,12 @@ export default {
     starRut () {
       if (checkAuth()) {
         if (this.starAction === 'Star') {
-          return scRut('star', this.rutid)
-          .then(() => {
+          scRut('star', this.rutid).then(() => {
             this.starAction = 'Unstar'
             this.starCount += 1
           })
         } else {
-          return scRut('unstar', this.rutid)
-          .then(() => {
+          scRut('unstar', this.rutid).then(() => {
             this.starAction = 'Star'
             this.starCount -= 1
           })
@@ -291,14 +286,12 @@ export default {
     challengeRut () {
       if (checkAuth()) {
         if (this.challengeAction === 'Challenge') {
-          return scRut('challenge', this.rutid)
-          .then(() => {
+          scRut('challenge', this.rutid).then(() => {
             this.challengeAction = 'Endchallenge'
             this.challengeCount += 1
           })
         } else {
-          return scRut('unchallenge', this.rutid)
-          .then(() => {
+          scRut('unchallenge', this.rutid).then(() => {
             this.challengeAction = 'Challenge'
             this.challengeCount -= 1
           })
@@ -355,8 +348,7 @@ export default {
         let oldTags = this.tags.map(t => t.tagname)
         let newTags = this.newTags
         let data = {'old': oldTags, 'new': newTags}
-        return editTags(this.rutid, data)
-        .then(resp => {
+        editTags(this.rutid, data).then(resp => {
           unlockRut(this.rutid)
           this.$store.commit('NEW_TAGS', resp.data)
           this.showDialog = false

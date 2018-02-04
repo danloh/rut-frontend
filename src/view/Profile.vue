@@ -100,7 +100,7 @@ export default {
   methods: {
     loadUser () {
       let userid = this.$route.params.id
-      return fetchUser(userid).then(resp => {
+      fetchUser(userid).then(resp => {
         let data = resp.data
         this.user = data
         this.userid = data.id
@@ -118,8 +118,7 @@ export default {
     checkFollow () {
       if (checkAuth()) {
         let userid = this.$route.params.id
-        return checkFollowing(userid)
-        .then(resp => {
+        checkFollowing(userid).then(resp => {
           this.action = resp.data
         })
       } else {
@@ -130,13 +129,11 @@ export default {
       if (checkAuth()) {
         let userid = this.$route.params.id
         if (this.action === 'Follow') {
-          return followOne('follow', userid)
-          .then(() => {
+          followOne('follow', userid).then(() => {
             this.action = 'UnFollow'
           })
         } else {
-          return followOne('unfollow', userid)
-          .then(() => {
+          followOne('unfollow', userid).then(() => {
             this.action = 'Follow'
           })
         }

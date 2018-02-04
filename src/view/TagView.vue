@@ -191,8 +191,7 @@ export default {
     checkFavor () {
       if (checkAuth()) {
         let tagid = this.$route.params.id
-        return checkFav(tagid)
-        .then(resp => {
+        checkFav(tagid).then(resp => {
           this.action = resp.data
         })
       } else {
@@ -203,14 +202,12 @@ export default {
       if (checkAuth()) {
         let tagid = this.$route.params.id
         if (this.action === 'Follow') {
-          return favTag('fav', tagid)
-          .then(() => {
+          favTag('fav', tagid).then(() => {
             this.action = 'UnFollow'
             this.favCount += 1
           })
         } else {
-          return favTag('unfav', tagid)
-          .then(() => {
+          favTag('unfav', tagid).then(() => {
             this.action = 'Follow'
             this.favCount -= 1
           })

@@ -124,23 +124,20 @@ export default {
       })
     },
     getChallengeRut () {
-      return fetchChallengeRut()
-      .then(resp => {
+      fetchChallengeRut().then(resp => {
         this.challengeRut = resp.data.rut
         this.items = resp.data.items
         this.dueDate = resp.data.deadline
       })
     },
     getChallengeItems () {
-      return fetchChallengeItems()
-      .then(resp => {
+      fetchChallengeItems().then(resp => {
         this.doingItems = resp.data
       })
     },
     setDue () {
       let params = {'date': this.pickDate}
-      return setDeadline(params)
-      .then((resp) => {
+      setDeadline(params).then((resp) => {
         this.showPicker = false
         this.dueDate = resp.data
       })

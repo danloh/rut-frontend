@@ -72,8 +72,7 @@ export default {
     upReview () {
       if (checkAuth()) {
         let reviewid = this.review.id
-        return upvoteReview(reviewid)
-        .then(resp => {
+        upvoteReview(reviewid).then(resp => {
           this.vote = resp.data
         })
       }

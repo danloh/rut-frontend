@@ -116,8 +116,7 @@ export default {
             editable: 'Creator' // form.editable
           }
           let demandid = this.$route.params.id || ''
-          return newRut(data, demandid)
-          .then((resp) => {
+          newRut(data, demandid).then(resp => {
             let id = resp.data.id
             this.$router.push(`/readuplist/${id}`)
             this.$message({

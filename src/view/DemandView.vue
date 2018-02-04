@@ -145,8 +145,7 @@ export default {
     loadCreatedThenAsAnswer () {
       if (checkAuth()) {
         let userid = this.$store.getters.currentUserID
-        return fetchProfileRuts('created', userid)
-        .then(resp => {
+        fetchProfileRuts('created', userid).then(resp => {
           this.createdRuts = resp.data.ruts
           this.showDialog = true
         })
@@ -174,8 +173,7 @@ export default {
         if (valid && checkAuth()) {
           let rutid = form.selectRutID
           let demandid = this.demandDetail.id
-          return rutAsAnswer(rutid, demandid)
-          .then((resp) => {
+          rutAsAnswer(rutid, demandid).then((resp) => {
             this.showDialog = false
             this.$message({
               showClose: true,

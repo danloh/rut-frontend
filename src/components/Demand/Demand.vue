@@ -45,8 +45,7 @@ export default {
     upDemand () {
       if (checkAuth()) {
         let demandid = this.demand.id
-        return upvoteDemand(demandid)
-        .then(resp => {
+        upvoteDemand(demandid).then(resp => {
           this.vote = resp.data
         })
       }

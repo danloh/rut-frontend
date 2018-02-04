@@ -47,8 +47,7 @@ export default {
     upClip () {
       if (checkAuth()) {
         let clipid = this.clip.id
-        return upvoteClip(clipid)
-        .then(resp => {
+        upvoteClip(clipid).then(resp => {
           this.vote = resp.data
         })
       }
