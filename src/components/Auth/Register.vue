@@ -9,15 +9,25 @@
       <el-input v-model="regForm.email" placeholder="Email"></el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input :type="pwdType" v-model="regForm.password" placeholder="Password, at least 6 characters"></el-input>
+      <el-input :type="pwdType" v-model="regForm.password" 
+                placeholder="Password, at least 6 characters">
+      </el-input>
     </el-form-item>
     <el-form-item prop="repassword">
-      <el-input :type="pwdType" v-model="regForm.repassword" placeholder="Confirm Password"></el-input>
+      <el-input :type="pwdType" v-model="regForm.repassword" 
+                placeholder="Confirm Password">
+      </el-input>
     </el-form-item>
-    <p style="font-size:0.75em">Notice: Will Use Cookies to keep you logged in for a limited period, 
-      Never collect any Private Information. The service may not function properly if disable cookies.</p>
+    <p style="font-size:0.75em">
+      Notice: Will Use Cookies to keep you logged in for a limited period, 
+      Never collect any Private Information. 
+      The service may not function properly if disable cookies.
+    </p>
     <el-form-item>
-      <el-button class="blockbtn" type="primary" @click="onReg('regForm', regForm)">Sign Up</el-button>
+      <el-button class="blockbtn" type="primary" 
+                 @click="onReg('regForm', regForm)">
+                 Sign Up
+      </el-button>
       <!-- <el-button @click="resetForm('regForm')">Reset</el-button> -->
     </el-form-item>
     <router-link :to="'/login'">Have an Account?  Login</router-link>

@@ -8,10 +8,18 @@
         <el-button type="text" @click="toEditTag" v-show="canTag">..Edit</el-button>
       </div>
       <!-- edit tag dialog -->
-      <el-dialog title="Edit Tag" :visible.sync="showDialog" :before-close="cancelOnClose" width="30%">
-        <el-input size="mini" v-model="newTag" @keyup.enter.native="addNewTag" placeholder="Input a Tag, Press Enter to Add"></el-input>
+      <el-dialog title="Edit Tag" 
+                 :visible.sync="showDialog" 
+                 :before-close="cancelOnClose" width="30%">
+        <el-input size="mini" v-model="newTag" 
+                  @keyup.enter.native="addNewTag" 
+                  placeholder="Input a Tag, Press Enter to Add">
+        </el-input>
         <div v-for="(tag, index) in newTags" :key="index">
-          <p><el-button type="text" size="mini" @click="newTags.splice(index, 1)">X</el-button>&nbsp;&nbsp; {{ tag }} </p>
+          <p><el-button type="text" size="mini" 
+                        @click="newTags.splice(index, 1)">&times;
+              </el-button>&nbsp;&nbsp; {{ tag }} 
+          </p>
         </div>
         <div slot="footer" class="dialog-footer">
           <el-button size="mini" @click="cancelEditTag">Cancel</el-button>
@@ -22,9 +30,16 @@
       <div class="title">
         <h2>{{ rutDetail.title }}</h2>
         <p class="meta">
-          <span v-if="!isEveryone">By <router-link :to="'/profile/' + creatorid">{{ creatorname }}</router-link> | </span> 
-          {{ rutDetail.createat | toMDY }} | include {{ rutDetail.itemcount | pluralise('item') }} 
-          | <router-link :to="'/commenton/rut/' + rutid">{{ rutDetail.commentcount | pluralise('comment') }}</router-link>
+          <span v-if="!isEveryone">By 
+            <router-link :to="'/profile/' + creatorid">
+              {{ creatorname }}
+            </router-link> | 
+          </span> 
+          {{ rutDetail.createat | toMDY }} 
+          | include {{ rutDetail.itemcount | pluralise('item') }} 
+          | <router-link :to="'/commenton/rut/' + rutid">
+              {{ rutDetail.commentcount | pluralise('comment') }}
+            </router-link>
         </p>
       </div>
       <div class="intro">
@@ -32,24 +47,49 @@
         <div v-html="md(rutDetail.intro)"></div>
       </div>
       <div class="toolbar">
-        <router-link class="editlink" :to="'/profile/' + whoEdit.editorid" v-if="whoEdit.editorid && rutid === whoEdit.rutid">In Editing</router-link>&nbsp;&nbsp;&nbsp;&nbsp;
-        <router-link class="editlink" :to="'/edit/readuplist/' + rutid" v-if="canEdit"> EDIT </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
-        <router-link class="editlink" :to="'/additemto/readuplist/' + rutid" v-if="canEdit"> ADD ITEM </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <el-button size="mini" plain @click="starRut"><b>{{ starAction }}&nbsp;{{ starCount }}</b></el-button>
-        <el-button size="mini" plain @click="challengeRut"><b>{{ challengeAction }}&nbsp;{{ challengeCount }}</b></el-button>
+        <router-link class="editlink" :to="'/profile/' + whoEdit.editorid" 
+                     v-if="whoEdit.editorid && rutid === whoEdit.rutid">
+                     In Editing
+        </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
+        <router-link class="editlink" 
+                     :to="'/edit/readuplist/' + rutid" v-if="canEdit">
+                      EDIT 
+        </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
+        <router-link class="editlink" 
+                     :to="'/additemto/readuplist/' + rutid" v-if="canEdit">
+                      ADD ITEM 
+        </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <el-button size="mini" plain @click="starRut">
+          <b>{{ starAction }}&nbsp;{{ starCount }}</b>
+        </el-button>
+        <el-button size="mini" plain @click="challengeRut">
+          <b>{{ challengeAction }}&nbsp;{{ challengeCount }}</b>
+        </el-button>
       </div>
       <div class="itemtip" v-for="tip in tips" :key="tip.cid">
         <item-sum class="itemsum" :item="tip.item" :key="tip.itemid"></item-sum>
         <b class="indicator">&nbsp;&nbsp;#{{tip.order}}&nbsp;&nbsp;</b> 
-        <router-link class="editlink" :to="'/edit/readuptips/' + tip.cid" v-if="canEdit">...Edit</router-link>
+        <router-link class="editlink" 
+                     :to="'/edit/readuptips/' + tip.cid" 
+                     v-if="canEdit">
+                     ...Edit
+        </router-link>
         <tip-sum class="tip" :tip="tip"></tip-sum>
       </div>
       <div v-if="hasMoreTips">
-        <el-button class="blockbtn" size="mini" @click="loadmoreTips" :disabled="!hasMoreTips">Show More Items</el-button>
+        <el-button class="blockbtn" size="mini" 
+                   @click="loadmoreTips" 
+                   :disabled="!hasMoreTips">
+                   Show More Items
+        </el-button>
       </div>
       <div class="epilog">
         <b class="indicator">Epilog:&nbsp;&nbsp;</b>
-        <router-link class="editlink" :to="'/edit/readuplist/' + rutid" v-if="canEdit">...Edit</router-link>
+        <router-link class="editlink" 
+                     :to="'/edit/readuplist/' + rutid" 
+                     v-if="canEdit">
+                     ...Edit
+        </router-link>
         <div v-html="md(rutDetail.epilog)"></div>
       </div>
       <div class="bottombar">
@@ -61,16 +101,28 @@
         <p class="credential-title"><b>Creator's Credential</b></p>
         <div class="credential-body">
           <div>{{ rutDetail.credential || aboutcreator || '...'}}</div>
-          <router-link class="editlink" :to="'/edit/readuplist/' + rutid" v-if="canEdit">...Edit</router-link> 
+          <router-link class="editlink" 
+                       :to="'/edit/readuplist/' + rutid" v-if="canEdit">
+                       ...Edit
+          </router-link> 
         </div>
       </div>
       <div class="demands" v-if="demandCount">
         <b>As Answer to Request:</b>
-        <p class="demand-title" v-for="(demand, index) in demands" :key="index" :demand="demand">
-          - <router-link :to="'/demand/' + demand.id"> {{ demand.demand.slice(0, 42) }}...</router-link>
+        <p class="demand-title" 
+           v-for="(demand, index) in demands" 
+           :key="index" 
+           :demand="demand">
+          - <router-link :to="'/demand/' + demand.id">
+               {{ demand.demand.slice(0, 42) }}...
+            </router-link>
         </p>
         <div v-if="hasMoreDemand">
-          <el-button size="mini" @click="loadmoreDemand" :disabled="!hasMoreDemand">Show More</el-button>
+          <el-button size="mini" 
+                     @click="loadmoreDemand" 
+                     :disabled="!hasMoreDemand">
+                     Show More
+          </el-button>
         </div>
       </div>
     </div>
@@ -82,7 +134,11 @@ import ItemSum from '@/components/Item/ItemSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import TipSum from '@/components/Rut/TipSum.vue'
 // sc: star and challenge
-import { scRut, checkSC, editTags, fetchRutDemands, fetchRutTips, checkRutLocked, lockRut, unlockRut } from '@/api/api'
+import {
+  scRut, checkSC, editTags,
+  fetchRutDemands, fetchRutTips,
+  checkRutLocked, lockRut, unlockRut
+} from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { mapGetters } from 'vuex'
 import marked from '@/util/marked'

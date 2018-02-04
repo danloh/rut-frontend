@@ -6,14 +6,24 @@
     <p class="meta">
       By <router-link :to="'/profile/' + creator.id">{{ creator.name }}</router-link>
       | {{ review.timestamp | toMDY }}
-      | on <router-link :to="'/item/' + review.item.id">{{ review.item.title.slice(0, 42) }}..</router-link>
+      | on 
+        <router-link :to="'/item/' + review.item.id">
+          {{ review.item.title.slice(0, 42) }}...
+        </router-link>
     </p>
     <div class="review-body">
       <div v-html="reviewContent"></div>
-      <el-button type="text" size="mini" @click="showFull" v-if="spoiler || short">{{ readMore }}</el-button>
+      <el-button type="text" size="mini" 
+                 @click="showFull" 
+                 v-if="spoiler || short">
+                 {{ readMore }}
+      </el-button>
     </div>
     <div class="bar">
-      <router-link :to="'/editreview/' + review.id" v-if="canEdit">...Edit |</router-link> <!--if not show edit in list, && !less-->
+      <router-link :to="'/editreview/' + review.id" 
+                   v-if="canEdit">
+                   ...Edit |
+      </router-link> <!--if not show edit in list, && !less-->
       <el-button type="text" @click="upReview">Helpful</el-button>&nbsp;{{ vote }}
     </div>
   </div>

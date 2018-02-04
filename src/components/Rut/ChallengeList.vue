@@ -5,7 +5,11 @@
       <user-sum v-for="user in challengers" :key="user.id" :user="user"></user-sum>
     </div>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreChallengers" :disabled="!hasMore">Show More</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreChallengers" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
     <br>
   </div>

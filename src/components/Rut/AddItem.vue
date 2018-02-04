@@ -1,12 +1,17 @@
 <template>
   <div class="add-page">
     <div class="title"> 
-      <b style="font-size:1.2em">Add Item To List:&nbsp;&nbsp;</b>{{ rutTitle }}&nbsp;&nbsp;
+      <b style="font-size:1.2em">Add Item To List:&nbsp;&nbsp;</b>
+      {{ rutTitle }}&nbsp;&nbsp;
       <el-button type="text" @click="cancelnReturn">...Cancel and Back</el-button>
     </div>
     <!-- add have-Dones -->
     <div>
-      <el-form class="done-form" :model="doneForm" :rules="doneRules" ref="doneForm" size="medium">
+      <el-form class="done-form" 
+               :model="doneForm" 
+               :rules="doneRules" 
+               ref="doneForm" 
+               size="medium">
         <el-form-item label="Pick one of Your Have-Dones by Searching" 
                       prop="doneItem" style="margin-bottom:8px">
           <el-select class="select-item" v-model="doneForm.doneItemID"
@@ -15,12 +20,18 @@
                      :loading="searching"
                      @keyup.enter.native="getDoneItems"
                      placeholder="input keyword: UID or Title, then Press Enter, will search from your have-dones">
-            <el-option v-for="i in doneItems" :key="i.id" :label="i.title" :value="i.id"></el-option>
+            <el-option v-for="i in doneItems" 
+                       :key="i.id" 
+                       :label="i.title" 
+                       :value="i.id">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="Compose Tips" prop="tips" style="margin-bottom:16px">
           <el-input type="textarea" v-model="doneForm.tips" 
-                    :autosize="{minRows:6}" placeholder="start to compose..."></el-input>
+                    :autosize="{minRows:6}" 
+                    placeholder="start to compose...">
+          </el-input>
           <md-tool :pretext="doneForm.tips" @insertmd="updateD"></md-tool>
         </el-form-item>
         <el-form-item prop="spoiler" size="mini">
@@ -36,7 +47,8 @@
         </el-form-item>
       </el-form>
       <div style="width:480px">
-        <el-input size="mini" v-model="itemKeyword" @keyup.enter.native="searchItem" 
+        <el-input size="mini" v-model="itemKeyword" 
+                  @keyup.enter.native="searchItem" 
                   placeholder="or Search item and track it as done: Input keyword then Enter">
         </el-input>
         <b style="font-size:0.8em">or You can 

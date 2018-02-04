@@ -5,22 +5,34 @@
         <b>News For Readers&nbsp;&nbsp;</b>
         <router-link to="/headlines/top">Top</router-link>
         <router-link to="/headlines/new">New</router-link>
-        <el-button type="text" @click="showForm=!showForm" style="float:right">Submit</el-button>
+        <el-button type="text" style="float:right" 
+                   @click="showForm=!showForm">
+                   Submit
+        </el-button>
       </div>
       <div v-show="showForm">
         <el-form :model="headlineForm" :rules="rules" ref="headlineForm">
           <el-form-item prop="title" style="margin-bottom:10px">
-            <el-input type="textarea" v-model="headlineForm.title" autosize placeholder="Title"></el-input>
+            <el-input type="textarea" v-model="headlineForm.title" autosize 
+                      placeholder="Title">
+            </el-input>
           </el-form-item>
           <el-form-item prop="url" style="margin-bottom:8px">
-            <el-input type="textarea" v-model="headlineForm.url" autosize placeholder="either URL"></el-input>
+            <el-input type="textarea" v-model="headlineForm.url" autosize 
+                      placeholder="either URL">
+            </el-input>
           </el-form-item>
           <el-form-item prop="content" style="margin-bottom:5px">
-            <el-input type="textarea" v-model="headlineForm.content" :autosize="{minRows:2}" placeholder="or Text Content"></el-input>
+            <el-input type="textarea" v-model="headlineForm.content" 
+                      :autosize="{minRows:2}" 
+                      placeholder="or Text Content">
+            </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" size="mini" @click="submitHeadline('headlineForm', headlineForm)" :disabled="!headlineForm.title.trim()">
-              Submit
+            <el-button type="primary" size="mini" 
+                       @click="submitHeadline('headlineForm', headlineForm)" 
+                       :disabled="!headlineForm.title.trim()">
+                       Submit
             </el-button>
           </el-form-item>
         </el-form>

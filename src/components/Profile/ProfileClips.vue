@@ -3,7 +3,11 @@
     <b>CLIPS {{ clipCount }}</b>
     <clip v-for="clip in clips" :key="clip.id" :clip="clip"></clip>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreClip" :disabled="!hasMore">More</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreClip" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
   </div>
 </template>

@@ -1,9 +1,17 @@
 <template>
   <div class="review-list">
     <b>NOTES / REVIEWS {{reviewCount}}</b>
-    <review-sum v-for="review in reviews" :key="review.id" :review="review" :less="true"></review-sum>
+    <review-sum v-for="review in reviews" 
+                :key="review.id" 
+                :review="review" 
+                :less="true">
+    </review-sum>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreReviews" :disabled="!hasMore">More</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreReviews" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
   </div>
 </template>

@@ -1,13 +1,24 @@
 <template>
   <div class="demand-main" v-if="requestor"> <!--render after requestor get data-->
     <div class="demand-body">
-      <router-link :to="'/demand/' + demand.id"><span>{{ demand.body }}</span></router-link>
+      <router-link :to="'/demand/' + demand.id">
+        <span>{{ demand.body }}</span>
+      </router-link>
     </div>
     <div class="demand-bar">
-      Requseted by <router-link :to="'/profile/' + requestor.id">{{ requestor.name }}</router-link>
+      Requseted by 
+      <router-link :to="'/profile/' + requestor.id">
+        {{ requestor.name }}
+      </router-link>
       | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">Upvote</el-button>
-      | {{ answercount }}&nbsp;<router-link :to="'/create/' + demand.id"><b>Answer</b></router-link>
-      | {{demand.commentcount}}&nbsp;<router-link :to="'/demand/' + demand.id">Discuss</router-link>
+      | {{ answercount }}&nbsp;
+        <router-link :to="'/create/' + demand.id">
+          <b>Answer</b>
+        </router-link>
+      | {{demand.commentcount}}&nbsp;
+        <router-link :to="'/demand/' + demand.id">
+          Discuss
+        </router-link>
     </div>
   </div>
 </template>

@@ -1,8 +1,15 @@
 <template>
   <div class="demand-list">
-    <demand v-for="demand in currentDemands" :key="demand.id" :demand="demand"></demand>
+    <demand v-for="demand in currentDemands" 
+            :key="demand.id" 
+            :demand="demand">
+    </demand>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreDemand" :disabled="!hasMore">Show More</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreDemand" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
   </div>
 </template>
@@ -31,10 +38,16 @@ export default {
   },
   methods: {
     initData () {
-      this.$store.dispatch('getDemands', {'type': this.type, 'userid': this.userid, 'tag': this.tag})
+      let params = {'type': this.type, 'userid': this.userid, 'tag': this.tag}
+      this.$store.dispatch('getDemands', params)
     },
     loadmoreDemand () {
-      let params = {'type': this.type, 'userid': this.userid, 'tag': this.tag, 'page': this.currentD}
+      let params = {
+        'type': this.type,
+        'userid': this.userid,
+        'tag': this.tag,
+        'page': this.currentD
+      }
       this.$store.dispatch('moreDemands', params)
     }
   },

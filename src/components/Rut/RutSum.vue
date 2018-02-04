@@ -10,7 +10,9 @@
       <div class="intro" v-html="intro"></div>
     </router-link>
     <span class="meta">
-      <span> ~| including {{ rut.itemcount | pluralise('item') }}  | <router-link :to="'/readuplist/' + rut.id">...See Detail</router-link></span>
+      <span> ~| including {{ rut.itemcount | pluralise('item') }}  
+              | <router-link :to="'/readuplist/' + rut.id">...See Detail</router-link>
+      </span>
     </span>
   </div>
 </template>

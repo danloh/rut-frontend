@@ -1,7 +1,12 @@
 <template>
   <div class="edit-page">
     <h3 class="title"> Edit My Profile</h3>
-    <el-form class="edit-form" :model="settingForm" :rules="rules" ref="settingForm" label-width="120px" size="mini">
+    <el-form class="edit-form" 
+             :model="settingForm" 
+             :rules="rules" 
+             ref="settingForm" 
+             label-width="120px" 
+             size="mini">
       <el-form-item label="Nickname" prop="nickname">
         <el-input v-model="settingForm.nickname"></el-input>
       </el-form-item>
@@ -12,13 +17,19 @@
         <el-input v-model="settingForm.avatarUrl"></el-input>
       </el-form-item>
       <el-form-item label="About Me" prop="about">
-        <el-input type="textarea" v-model="settingForm.about" :autosize="{minRows:3}"></el-input>
+        <el-input type="textarea" v-model="settingForm.about" 
+                  :autosize="{minRows:3}">
+        </el-input>
       </el-form-item>
       <el-form-item label="Url" prop="url">
         <el-input v-model="settingForm.url"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onSetting('settingForm', settingForm)" :disabled="!canSetting">Update</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onSetting('settingForm', settingForm)" 
+                   :disabled="!canSetting">
+                   Update
+        </el-button>
         <!-- <el-button @click="resetForm('settingForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>

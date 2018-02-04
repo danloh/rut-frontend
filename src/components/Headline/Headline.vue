@@ -6,20 +6,31 @@
     <div class="headline-main">
       <div class="headline-title">
         <template v-if="headline.url">
-          <a :href="headline.url" target="_blank" rel="nofollow noopener noreferrer"><b>{{ headline.title }}</b></a>
+          <a :href="headline.url" 
+             target="_blank" rel="nofollow noopener noreferrer">
+             <b>{{ headline.title }}</b>
+          </a>
           <span class="host"> ({{ headline.url | host }})</span>
         </template>
         <template v-else>
-          <router-link :to="'/headline/' + headline.id"><b>{{ headline.title }}</b></router-link>
+          <router-link :to="'/headline/' + headline.id">
+            <b>{{ headline.title }}</b>
+          </router-link>
         </template>
       </div>
       <div class="content" v-if="showCon" v-html="headlineContent"></div>
       <div class="headline-bar">
         {{ point | pluralise('Point') }}
-        | By <router-link :to="'/profile/' + submitor.id">{{ submitor.name }}</router-link>
+        | By&nbsp;
+          <router-link :to="'/profile/' + submitor.id">
+            {{ submitor.name }}
+          </router-link>
         | {{ headline.timestamp | timeAgo }}
         | <el-button type="text" @click="upheadline">vote</el-button>
-        | {{headline.commentcount}}&nbsp;<router-link :to="'/headline/' + headline.id">Comment</router-link>
+        | {{headline.commentcount}}&nbsp;
+          <router-link :to="'/headline/' + headline.id">
+            Comment
+          </router-link>
       </div>
     </div>
   </div>

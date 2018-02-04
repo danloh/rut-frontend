@@ -11,16 +11,22 @@
       <div class="right-nav">
         <router-link :to="'/setting/' + userid + '/setting'">Edit Profile</router-link>
         <br>
-        <router-link :to="'/setting/' + userid + '/change'">Change Password</router-link>
+        <router-link :to="'/setting/' + userid + '/change'">
+          Change Password
+        </router-link>
         <br>
-        <el-button type="text" @click="reconfirm" v-if="!confirmed">Confirm My Email</el-button>
+        <el-button type="text" @click="reconfirm" v-if="!confirmed">
+          Confirm My Email
+        </el-button>
         <br>
         <el-button type="text" @click="showDialog=true">Invite Friends</el-button>
         <!-- dialog -->
         <el-dialog title="Share Link To Invite Your Friends" :visible.sync="showDialog">
           <b>Send this Link to Invite Your Friend To Readup.Tips</b>
           <p style="color: green">{{invitelink}}</p>
-          <share-bar :passTitle="'Invite You To Readup.Tips'" :passUrl="invitelink"></share-bar>
+          <share-bar :passTitle="'Invite You To Readup.Tips'" 
+                     :passUrl="invitelink">
+          </share-bar>
         </el-dialog>
         <!-- dialog end -->
       </div>

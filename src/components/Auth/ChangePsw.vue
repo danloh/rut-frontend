@@ -1,7 +1,11 @@
 <template>
 <div class="change-page">
   <h3 class="title">Change Password</h3>
-  <el-form class="change-form" :model="changepswForm" :rules="rules" ref="changepswForm" size="mini">
+  <el-form class="change-form" 
+           :model="changepswForm" 
+           :rules="rules" 
+           ref="changepswForm" 
+           size="mini">
     <el-form-item label="Current Password" prop="password">
       <el-input :type="pwdType" v-model="changepswForm.password"></el-input>
     </el-form-item>
@@ -12,7 +16,11 @@
       <el-input :type="pwdType" v-model="changepswForm.repassword"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button class="blockbtn" type="primary" @click="onChange('changepswForm', changepswForm)" :disabled="!canChange">Change Password</el-button>
+      <el-button class="blockbtn" type="primary" 
+                 @click="onChange('changepswForm', changepswForm)" 
+                 :disabled="!canChange">
+                 Change Password
+      </el-button>
       <br>
       <!-- <el-button @click="resetForm('changepswForm')">Reset</el-button> -->
     </el-form-item>

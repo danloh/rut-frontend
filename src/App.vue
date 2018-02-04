@@ -3,7 +3,9 @@
     <header class="header">
       <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-size:1.2em;letter-spacing:0.0005em">Readup.Tips</b>
+            <b style="color:darkorange;font-size:1.2em;letter-spacing:0.0005em">
+              Readup.Tips
+            </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
           <b>Feed</b>
@@ -53,7 +55,10 @@
       | <router-link to="/newitem">Submit New Item</router-link>
       <!--google site search -->
       <div style="width:265px">
-        <el-input size="mini" v-model="searchWord" @keyup.enter.native="siteSearch" placeholder="Search Readup.Tips"></el-input>
+        <el-input size="mini" v-model="searchWord" 
+                  @keyup.enter.native="siteSearch" 
+                  placeholder="Search Readup.Tips">
+        </el-input>
       </div>
     </footer>
   </div>

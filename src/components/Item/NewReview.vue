@@ -1,13 +1,22 @@
 <template>
   <div class="review-page">
     <h3 class="title"> Post New Review:</h3>
-    <router-link :to="'/item/' + itemId" target="_blank" rel="noopener noreferrer">Item</router-link>
-    <el-form class="review-form" :model="reviewForm" :rules="rules" ref="reviewForm" size="mini">
+    <router-link :to="'/item/' + itemId" 
+                 target="_blank" rel="noopener noreferrer">
+                 Item
+    </router-link>
+    <el-form class="review-form" 
+             :model="reviewForm" 
+             :rules="rules" 
+             ref="reviewForm" 
+             size="mini">
       <el-form-item prop="title">
         <el-input v-model="reviewForm.title" placeholder="Title"></el-input>
       </el-form-item>
       <el-form-item prop="review">
-        <el-input type="textarea" v-model="reviewForm.review" :autosize="{minRows:12}"></el-input>
+        <el-input type="textarea" :autosize="{minRows:12}" 
+                  v-model="reviewForm.review">
+        </el-input>
         <md-tool :pretext="reviewForm.review" @insertmd="updateM"></md-tool>
       </el-form-item>
       <el-form-item prop="spoiler">
@@ -17,7 +26,10 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onSubmit('reviewForm', reviewForm)">Submit</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onSubmit('reviewForm', reviewForm)">
+                   Submit
+        </el-button>
         <!-- <el-button @click="resetForm('reviewForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>

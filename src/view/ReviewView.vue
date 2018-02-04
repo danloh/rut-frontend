@@ -10,7 +10,11 @@
       <comment :comment="comment"></comment>
     </div>
     <div v-if="hasMoreComment">
-      <el-button class="blockbtn" size="mini" @click="loadmoreComment" :disabled="!hasMoreComment">Show More Comments</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreComment" 
+                 :disabled="!hasMoreComment">
+                 Show More Comments
+      </el-button>
     </div>
     <div class="comment">
       <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>

@@ -2,14 +2,23 @@
   <div class="feed-page">
     <div>
       <b>The Feed shows events from people you follow</b>
-      <div class="activity-list" v-for="(act, index) in activity" :key="index" v-if="act.event.type">
+      <div class="activity-list" 
+           v-for="(act, index) in activity" 
+           :key="index" 
+           v-if="act.event.type">
         <router-link :to="'/profile/' + act.actor.id">
-          <img class="avatar" :src="act.actor.avatar" style="width:30px; border-radius:50%" alt="Avatar">
+          <img class="avatar" 
+               :src="act.actor.avatar" 
+               style="width:30px; border-radius:50%" 
+               alt="Avatar">
           <b>{{ act.actor.name }}</b>
         </router-link>
         <span class="act-line">{{act.action}}&nbsp;{{act.event.type}}</span>
-        <router-link :to="'/' + act.event.type + '/' + act.event.id">{{act.event.content}}</router-link>
-        <br><span class="act-time">{{act.timestamp | timeAgo}}</span>
+        <router-link :to="'/' + act.event.type + '/' + act.event.id">
+          {{act.event.content}}
+        </router-link>
+        <br>
+        <span class="act-time">{{act.timestamp | timeAgo}}</span>
       </div>
       <div v-if="activity.length === 0">Nothing Happened</div>
     </div>
@@ -19,7 +28,11 @@
         <router-link :to="'/tag/' + tag.id">{{tag.tagname}}</router-link>
       </div>
       <div v-if="hasMore">
-        <el-button class="blockbtn" type="text" size="mini" @click="loadMoreTags" :disabled="!hasMore">Show More</el-button>
+        <el-button class="blockbtn" type="text" size="mini" 
+                   @click="loadMoreTags" 
+                   :disabled="!hasMore">
+                   Show More
+        </el-button>
       </div>
     </div>
   </div>

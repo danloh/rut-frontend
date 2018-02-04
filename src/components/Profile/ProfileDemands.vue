@@ -3,7 +3,11 @@
     <b>REQUESTS {{ demandCount }}</b>
     <demand v-for="demand in demands" :key="demand.id" :demand="demand"></demand>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreDemand" :disabled="!hasMore">More</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreDemand" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
   </div>
 </template>

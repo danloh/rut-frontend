@@ -1,11 +1,16 @@
 <template>
   <div class="list-view">
     <div class="clip-list">
-      <!--Here if :key=index,will run into problem when render, reuse component, also in DemandList-->
+      <!--Here if :key=index,will run into problem when render, 
+      reuse component, also in DemandList-->
       <clip v-for="clip in currentClips" :key="clip.id" :clip="clip"></clip>
     </div>
     <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" @click="loadmoreClip" :disabled="!hasMore">Show More</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreClip" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
   </div>
 </template>

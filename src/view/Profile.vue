@@ -1,14 +1,22 @@
 <template>
   <div class="profile-page">
     <div class="profile-head">
-      <router-link :to="'/profile/' + userid"><b style="font-size:1.6em">{{ user.name }}</b></router-link>
+      <router-link :to="'/profile/' + userid">
+        <b style="font-size:1.6em">{{ user.name }}</b>
+      </router-link>
       <b style="font-size:0.75em" v-if="showSetting">&nbsp;@{{ user.username }}</b>
       <p class="aboutme">{{user.about || '...'}}</p>
       <div class="fobar">
         <span>Following 
-          <router-link :to="'/profile/' + userid + '/followeds'">{{ followedCount }} </router-link>
+          <router-link :to="'/profile/' + userid + '/followeds'">
+            {{ followedCount }} 
+          </router-link>
         </span> &nbsp;&nbsp;&nbsp;
-        <el-button size="mini" @click="followUser" :disabled="showSetting">{{ action }}</el-button>
+        <el-button size="mini" 
+                   @click="followUser" 
+                   :disabled="showSetting">
+                   {{ action }}
+        </el-button>
       </div>
     </div>
     <div class="profile-view">
@@ -20,30 +28,51 @@
         <p class="user-info">From: {{user.location || '...'}}</p>
       </div>
       <div class="right-nav">
-        <router-link :to="'/profile/' + userid + '/created/'"><b style="color:royalblue">*</b> Created</router-link>
+        <router-link :to="'/profile/' + userid + '/created/'">
+          <b style="color:royalblue">*</b> Created
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/challenge/'"><b style="color:royalblue">*</b> Challenge</router-link>
+        <router-link :to="'/profile/' + userid + '/challenge/'">
+          <b style="color:royalblue">*</b> Challenge
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/star/'"><b style="color:royalblue">*</b> Starred</router-link>
+        <router-link :to="'/profile/' + userid + '/star/'">
+          <b style="color:royalblue">*</b> Starred
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/working/'"><b style="color:coral">#</b> Working On</router-link>
+        <router-link :to="'/profile/' + userid + '/working/'">
+          <b style="color:coral">#</b> Working On
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/scheduled/'"><b style="color:coral">#</b> scheduled</router-link>
+        <router-link :to="'/profile/' + userid + '/scheduled/'">
+          <b style="color:coral">#</b> scheduled
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/havedone/'"><b style="color:coral">#</b> Have Done</router-link>
+        <router-link :to="'/profile/' + userid + '/havedone/'">
+          <b style="color:coral">#</b> Have Done
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/reviews/'"><b style="color:teal">></b> Notes / Reviews</router-link>
+        <router-link :to="'/profile/' + userid + '/reviews/'">
+          <b style="color:teal">></b> Notes / Reviews
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/demands/'"><b style="color:teal">></b> Requests</router-link>
+        <router-link :to="'/profile/' + userid + '/demands/'">
+          <b style="color:teal">></b> Requests
+        </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/clips/'"><b style="color:teal">></b> Clips</router-link>
+        <router-link :to="'/profile/' + userid + '/clips/'">
+          <b style="color:teal">></b> Clips
+        </router-link>
         <br><br>
         <router-link :to="'/setting/' + userid" v-if="showSetting">
-          <small style="outline: dotted 1px; background-color: #d5d5be">~Setting~</small>
+          <small class="small-setting">~Setting~</small>
         </router-link>
       </div>
       <div style="width:220px">
-        <el-input size="mini" v-model="itemKeyword" @keyup.enter.native="searchItem" placeholder="Search Item in Readup.Tips"></el-input>
+        <el-input size="mini" v-model="itemKeyword" 
+                  @keyup.enter.native="searchItem" 
+                  placeholder="Search Item in Readup.Tips">
+        </el-input>
       </div>
     </div>
   </div>
@@ -190,6 +219,9 @@ export default {
         &.router-link-active
           color green
           font-weight 800
+      .small-setting
+        outline dotted 1px
+        background-color #d5d5be
 .aboutme, .user-info, .fobar
   font-size 0.85em
 </style>

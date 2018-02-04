@@ -2,27 +2,43 @@
   <div class="create-page">
     <h3 class="title">Create New Read List</h3>
     <p v-if="demandid"> As Answer To The 
-      <router-link :to="'/demand/' + demandid" target="_blank" rel="noopener noreferrer">
-      {{ 'Request:  ' + demandBody || 'Request' }}
+      <router-link :to="'/demand/' + demandid" 
+                   target="_blank" rel="noopener noreferrer">
+        {{ 'Request:  ' + demandBody || 'Request' }}
       </router-link>
     </p>
-    <el-form class="create-form" :model="createForm" :rules="rules" ref="createForm" label-width="120px" size="mini">
+    <el-form class="create-form" 
+             :model="createForm" 
+             :rules="rules" 
+             ref="createForm" 
+             label-width="120px" 
+             size="mini">
       <el-form-item label="Title" prop="title">
         <el-input v-model="createForm.title" clearable></el-input>
       </el-form-item>
       <el-form-item label="Tags" prop="tag">
-        <el-input v-model="createForm.tag" clearable placeholder="Comma can be as Separator"></el-input>
+        <el-input v-model="createForm.tag" clearable 
+                  placeholder="Comma can be as Separator">
+        </el-input>
       </el-form-item>
       <el-form-item label="Preface" prop="intro">
-        <el-input type="textarea" v-model="createForm.intro" :autosize="{minRows:5}"></el-input>
+        <el-input type="textarea" v-model="createForm.intro" 
+                  :autosize="{minRows:5}">
+        </el-input>
         <md-tool :pretext="createForm.intro" @insertmd="updateM"></md-tool>
       </el-form-item>
       <el-form-item label="Credential" prop="credential">
-        <el-input v-model="createForm.credential" placeholder="Help readers understand your experience"></el-input>
+        <el-input v-model="createForm.credential" 
+                  placeholder="Help readers understand your experience">
+        </el-input>
       </el-form-item>
       <el-form-item label="Suitable for" prop="rating">
         <el-select v-model="createForm.rating">
-          <el-option v-for="r in ratings" :key="r.value" :label="r.label" :value="r.value"></el-option>
+          <el-option v-for="r in ratings" 
+                     :key="r.value" 
+                     :label="r.label" 
+                     :value="r.value">
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="Who Can Edit?" prop="editable">
@@ -33,7 +49,10 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onCreate('createForm', createForm)">Create New Then Add Items</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onCreate('createForm', createForm)">
+                   Create New Then Add Items
+        </el-button>
         <!-- <el-button @click="resetForm('createForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>

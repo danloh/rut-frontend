@@ -12,16 +12,28 @@
       or {{ show ? 'Fetch Item Info via Spider' : 'Add Item Info Manually' }}
     </el-button>
     <!-- check via url spider or UID -->
-    <el-form class="check-form" :model="checkForm" ref="checkForm" size="mini" v-show="!show">
-      <el-form-item label="URL, e.g. Amazon url, Coursera url Or UID, e.g. ISBN-13" prop="url">
+    <el-form class="check-form" 
+             :model="checkForm" 
+             ref="checkForm" 
+             size="mini" 
+             v-show="!show">
+      <el-form-item label="URL: e.g. Amazon/Coursera url Or UID: e.g. ISBN-13" prop="url">
         <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onCheck('checkForm', checkForm)">Fetch Via Spider</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onCheck('checkForm', checkForm)">
+                   Fetch Via Spider
+        </el-button>
       </el-form-item>
     </el-form>
     <!-- add mannually -->
-    <el-form class="new-form" :model="itemForm" :rules="rules" ref="itemForm" label-width="130px" size="mini" v-show="show">
+    <el-form class="new-form" 
+             :model="itemForm" 
+             :rules="rules" 
+             ref="itemForm" 
+             label-width="130px" size="mini" 
+             v-show="show">
       <el-form-item label="Type" prop="cate">
         <el-radio-group v-model="itemForm.cate">
           <el-radio-button label="Book"></el-radio-button>
@@ -39,16 +51,26 @@
         <el-input type="textarea" autosize v-model="itemForm.title"></el-input>
       </el-form-item>
       <el-form-item label="UID*" prop="uid">
-        <el-input v-model="itemForm.uid" placeholder="either UID. e.g. ISBN, etc. "></el-input>
+        <el-input v-model="itemForm.uid" 
+                  placeholder="either UID. e.g. ISBN, etc. ">
+        </el-input>
       </el-form-item>
       <el-form-item label="Resource URL*" prop="resurl">
-        <el-input type="textarea" autosize v-model="itemForm.resUrl" placeholder="or URL. e.g. a online course link, etc. "></el-input>
+        <el-input type="textarea" autosize 
+                  v-model="itemForm.resUrl" 
+                  placeholder="or URL. e.g. a online course link, etc. ">
+        </el-input>
       </el-form-item>
       <el-form-item label="Byline" prop="byline">
-        <el-input v-model="itemForm.byline" placeholder="Auther or Instructor, etc."></el-input>
+        <el-input v-model="itemForm.byline" 
+                  placeholder="Auther or Instructor, etc.">
+        </el-input>
       </el-form-item>
       <el-form-item label="Cover / Logo" prop="cover">
-        <el-input type="textarea" autosize v-model="itemForm.cover" placeholder="Image URL"></el-input>
+        <el-input type="textarea" autosize 
+                  v-model="itemForm.cover" 
+                  placeholder="Image URL">
+        </el-input>
       </el-form-item>
       <el-form-item label="Language" prop="language">
         <el-input v-model="itemForm.language"></el-input>
@@ -57,10 +79,14 @@
         <el-input v-model="itemForm.publisher"></el-input>
       </el-form-item>
       <el-form-item label="Publish Date" prop="publishDate">
-        <el-input v-model="itemForm.publishDate" placeholder="Book Publish date or Start date of a Course"></el-input>
+        <el-input v-model="itemForm.publishDate" 
+                  placeholder="Book Publish date or Start date of a Course">
+        </el-input>
       </el-form-item>
       <el-form-item label="Page / Duration" prop="page">
-        <el-input v-model="itemForm.page" placeholder="Pages of Book or Duration of video / course"></el-input>
+        <el-input v-model="itemForm.page" 
+                  placeholder="Pages of Book or Duration of video / course">
+        </el-input>
       </el-form-item>
       <el-form-item label="Level" prop="level">
         <el-input v-model="itemForm.level"></el-input>
@@ -72,11 +98,16 @@
         <el-input v-model="itemForm.price"></el-input>
       </el-form-item>
       <el-form-item label="More Details" prop="details">
-        <el-input type="textarea" v-model="itemForm.details" :autosize="{minRows:3}"></el-input>
+        <el-input type="textarea" :autosize="{minRows:3}" 
+                  v-model="itemForm.details">
+        </el-input>
         <md-tool :pretext="itemForm.details" @insertmd="updateN"></md-tool>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onNewItem('itemForm', itemForm)">Done and Add</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onNewItem('itemForm', itemForm)">
+                   Done and Add
+        </el-button>
         <!-- <el-button @click="resetForm('itemForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>

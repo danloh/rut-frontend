@@ -1,14 +1,21 @@
 <template>
   <div class="rut-comment">
     <div class="comment-main">
-      <b style="font-size:1.2em">Discuss List: &nbsp;&nbsp;</b><router-link :to="'/readuplist/' + rut.id">{{ rut.title }}</router-link>
+      <b style="font-size:1.2em">Discuss List: &nbsp;&nbsp;</b>
+      <router-link :to="'/readuplist/' + rut.id">
+        {{ rut.title }}
+      </router-link>
     </div>
     <b>{{ commentCount | pluralise('comment') }}</b>
     <div v-for="comment in comments" :key="comment.id">
       <comment :comment="comment"></comment>
     </div>
     <div v-if="hasMoreComment">
-      <el-button class="blockbtn" size="mini" @click="loadmoreComment" :disabled="!hasMoreComment">Show More Comments</el-button>
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreComment" 
+                 :disabled="!hasMoreComment">
+                 Show More Comments
+      </el-button>
     </div>
     <div class="comment">
       <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>
@@ -20,7 +27,11 @@
       <b style="font-size:1.2em">Circles</b>
       <circle-list :circles="circles"></circle-list>
       <div v-if="hasMoreCircle">
-        <el-button class="blockbtn" size="mini" @click="loadmoreCircle" :disabled="!hasMoreCircle">Show More Circles</el-button>
+        <el-button class="blockbtn" size="mini" 
+                   @click="loadmoreCircle" 
+                   :disabled="!hasMoreCircle">
+                   Show More Circles
+        </el-button>
       </div>
       <el-button type="text" @click="openDialog=true">...Launch Circle</el-button>
       <!-- dialog -->
@@ -30,21 +41,33 @@
             <el-input v-model="circleForm.name" placeholder="Name"></el-input>
           </el-form-item>
           <el-form-item prop="address">
-            <el-input v-model="circleForm.address" placeholder="Detail Address"></el-input>
+            <el-input v-model="circleForm.address" 
+                      placeholder="Detail Address">
+            </el-input>
           </el-form-item>
           <el-form-item prop="area">
-            <el-input v-model="circleForm.area" placeholder="Area, like: Bayarea SF"></el-input>
+            <el-input v-model="circleForm.area" 
+                      placeholder="Area, like: BayArea SF">
+            </el-input>
           </el-form-item>
           <el-form-item prop="time">
-            <el-input v-model="circleForm.time" placeholder="Time, like: Every Sat. 2PM - 4PM"></el-input>
+            <el-input v-model="circleForm.time" 
+                      placeholder="Time, like: Every Sat. 2PM - 4PM">
+            </el-input>
           </el-form-item>
           <el-form-item prop="note">
-            <el-input type="textarea" v-model="circleForm.note" :autosize="{minRows:3}" placeholder="Here just show basic info, You can provide more info by linking to detail page"></el-input>
+            <el-input type="textarea" v-model="circleForm.note" 
+                      :autosize="{minRows:3}" 
+                      placeholder="Can provide more info by linking to a detail page">
+            </el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="openDialog=false">Cancel</el-button>
-          <el-button type="success" @click="newCircle('circleForm', circleForm)">Launch</el-button>
+          <el-button type="success" 
+                     @click="newCircle('circleForm', circleForm)">
+                     Launch
+          </el-button>
         </div>
       </el-dialog>
       <!-- dialog end -->

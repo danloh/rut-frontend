@@ -5,10 +5,15 @@
     </div>
     <div class="info">
       <span class="title">
-        {{item.cate}} <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
+        {{item.cate}} 
+        <router-link :to="'/item/' + item.id">
+          {{ item.title }}
+        </router-link>
       </span><br>
       <span><b>Byline:</b> {{ item.byline }} </span><br>
-      <span><b>Publish:</b> {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</span><br>
+      <span><b>Publish:</b> 
+        {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
+      </span><br>
       <span><b>UID:</b> 
         {{ item.uid }} - {{ item.binding }} - {{ item.page }} 
         <a :href="item.resurl" v-if="item.resurl" 
@@ -17,7 +22,9 @@
       </span><br>
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
       <span v-if="flagNote || flagTime"><b>Note: </b>
-        <span class="flag-note" v-if="flagNote"><b>"</b>{{ flagNote }}<b>"</b></span>&nbsp;
+        <span class="flag-note" v-if="flagNote">
+          <b>"</b>{{ flagNote }}<b>"</b>
+        </span>&nbsp;
         <span class="flag-note" v-if="flagTime"> - {{ flagTime | toMDY }}</span>
       </span>
     </div>
@@ -27,9 +34,15 @@
           {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><span @click="openToFlag('schedule')">Schedule</span></el-dropdown-item>
-          <el-dropdown-item><span @click="openToFlag('working')">Working On</span></el-dropdown-item>
-          <el-dropdown-item><span @click="openToFlag('done')">Have Done</span></el-dropdown-item>
+          <el-dropdown-item>
+            <span @click="openToFlag('schedule')">Schedule</span>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <span @click="openToFlag('working')">Working On</span>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <span @click="openToFlag('done')">Have Done</span>
+          </el-dropdown-item>
           <el-dropdown-item divided v-if="flagAction==='Have Done'">
             <span @click="showAndloadData">Add to List</span>
           </el-dropdown-item>
@@ -41,7 +54,11 @@
       <el-form :model="intoForm" ref="intoForm" size="medium">
         <el-form-item prop="rut">
           <el-select v-model="intoForm.selectRutID" placeholder="Select a List">
-            <el-option v-for="r in createdRuts" :key="r.id" :label="r.title" :value="r.id"></el-option>
+            <el-option v-for="r in createdRuts" 
+                       :key="r.id" 
+                       :label="r.title" 
+                       :value="r.id">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="tips">
@@ -58,7 +75,10 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button size="mini" @click="showDialog = false">Cancel</el-button>
-        <el-button size="mini" type="success" @click="addtoRut('intoForm', intoForm)">Add</el-button>
+        <el-button size="mini" type="success" 
+                   @click="addtoRut('intoForm', intoForm)">
+                   Add
+        </el-button>
       </div>
     </el-dialog>
     <!-- addtolist dialog end -->
@@ -73,11 +93,16 @@
     <el-dialog title="Add Note and Flag It" :visible.sync="showNoteDialog" width="35%">
       <el-form :model="noteForm" :rules="noteRules" ref="noteForm">
         <el-form-item prop="note">
-          <el-input v-model="noteForm.note" placeholder="Optional, Max 42 words"></el-input>
+          <el-input v-model="noteForm.note" 
+                    placeholder="Optional, Max 42 words">
+          </el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="mini" type="success" @click="flagAddnote('noteForm', noteForm)">Done</el-button>
+        <el-button size="mini" type="success" 
+                   @click="flagAddnote('noteForm', noteForm)">
+                   Done
+        </el-button>
       </div>
     </el-dialog>
     <!-- addnote dialog end -->

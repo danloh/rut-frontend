@@ -1,4 +1,5 @@
 <template>
+  <!--building-->
   <div id="editor-box" class="editor">
     <div id="actionbar" 
          class="editor-actionbar">

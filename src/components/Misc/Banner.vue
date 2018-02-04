@@ -12,7 +12,7 @@
       <h4>Track Reading</h4>
       <p>track schedule to get done: Record quotes, note or spark of thought.</p>
     </div>
-    <a class="close" @click.prevent="show = false">X</a>
+    <a class="close" @click.prevent="show = false">&times;</a>
   </div>
 </template>
 

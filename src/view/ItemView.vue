@@ -10,24 +10,37 @@
         <div v-html="itemDetail"></div>
       </div>
       <div class="submenu">
-        <b>>></b>&nbsp;&nbsp;<b style="color: orange">Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <router-link class="editlink" :to="'/review/item/' + currentItem.id">...Post Review</router-link>
+        <b>>></b>&nbsp;&nbsp;
+        <b style="color: orange">Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <router-link class="editlink" 
+                     :to="'/review/item/' + currentItem.id">
+                     ...Post Review
+        </router-link>
       </div>
       <review-list :param="reviewsParam"></review-list>
       <div class="submenu">
-        <b>>></b>&nbsp;&nbsp;<b style="color: orange">Clips</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>>></b>&nbsp;&nbsp;
+        <b style="color: orange">Clips</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
       </div>
       <clip-list :param="cliplistParam"></clip-list>
     </div>
     <div class="item-side">
       <div class="include">
-        <b class="in-title">Included in {{currentItem.rutcount | pluralise('List')}}</b>
+        <b class="in-title">
+          Included in {{currentItem.rutcount | pluralise('List')}}
+        </b>
         <p class="in-item" v-for="(rut, index) in inRuts" :key="index" :rut="rut">
-          - <router-link :to="'/readuplist/' + rut.id" :title="rut.title"> {{ rut.title.slice(0, 42) }}...</router-link>
+          - <router-link :to="'/readuplist/' + rut.id" :title="rut.title">
+             {{ rut.title.slice(0, 42) }}...
+           </router-link>
         </p>
         <div v-if="hasMoreRut">
-          <el-button class="blockbtn" size="mini" @click="loadmoreRuts" :disabled="!hasMoreRut">Show More</el-button>
+          <el-button class="blockbtn" size="mini" 
+                     @click="loadmoreRuts" 
+                     :disabled="!hasMoreRut">
+                     Show More
+          </el-button>
         </div>
         <br>
         <router-link :to="'/myrc/item/' + currentItem.id">

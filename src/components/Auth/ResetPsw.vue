@@ -1,7 +1,10 @@
 <template>
 <div class="reset-page">
   <h3 class="title">Reset Password</h3>
-  <el-form class="reset-form" :model="resetpswForm" :rules="rules" ref="resetpswForm" size="mini">
+  <el-form class="reset-form" 
+           :model="resetpswForm" 
+           :rules="rules" 
+           ref="resetpswForm" size="mini">
     <el-form-item label="Username" prop="username">
       <el-input v-model="resetpswForm.username"></el-input>
     </el-form-item>
@@ -12,7 +15,11 @@
       <el-input :type="pwdType" v-model="resetpswForm.repassword"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button class="blockbtn" type="primary" @click="onReset('resetpswForm', resetpswForm)" :disabled="Expired">Reset</el-button>
+      <el-button class="blockbtn" type="primary" 
+                 @click="onReset('resetpswForm', resetpswForm)" 
+                 :disabled="Expired">
+                 Reset
+      </el-button>
       <br>
       <!-- <el-button @click="resetForm('resetpswForm')">Reset</el-button> -->
     </el-form-item>

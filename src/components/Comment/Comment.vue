@@ -9,11 +9,18 @@
       {{ showRe ? 'Hide' : 'Reply' }}
     </el-button>
     <span class="toggle" :class="{ open }" v-if="hasChild">
-      <a @click="open = !open">{{ open ? '[-]' : '[+] ' + childComments.length + ' collapsed' }} </a>
+      <a @click="open = !open">
+        {{ open ? '[-]' : '[+] ' + childComments.length + ' collapsed' }} 
+      </a>
     </span>
-    <reply class="reply" :refer="refer" :show.sync="showRe" @newreply="updateNew"></reply> <!--sync, hide input once submit-->
+    <reply class="reply" 
+           :refer="refer" 
+           :show.sync="showRe" 
+           @newreply="updateNew">
+    </reply> <!--sync, hide input once submit-->
     <div class="comment-children" v-show="open">
-      <comment v-for="commt in childComments" :key="commt.id" :comment="commt"></comment>  <!--recursively use-->
+      <!--recursively use component-->
+      <comment v-for="commt in childComments" :key="commt.id" :comment="commt"></comment>
     </div>
   </div>
 </template>

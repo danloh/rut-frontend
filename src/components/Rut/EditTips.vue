@@ -1,15 +1,26 @@
 <template>
   <div class="edit-page">
     <div class="title"> 
-      <b>Edit Tips in List:&nbsp;&nbsp;</b>{{ rutTitle }}&nbsp;&nbsp;<el-button type="text" @click="cancelnReturn">...Cancel Edit and Back</el-button>
+      <b>Edit Tips in List:&nbsp;&nbsp;</b>
+      {{ rutTitle }}&nbsp;&nbsp;
+      <el-button type="text" @click="cancelnReturn">
+        ...Cancel Edit and Back
+      </el-button>
     </div>
-    <el-form class="edit-form" :model="editForm" :rules="rules" ref="editForm" label-width="120px" size="mini">
+    <el-form class="edit-form" 
+             :model="editForm" 
+             :rules="rules" 
+             ref="editForm" 
+             label-width="120px" 
+             size="mini">
       <el-form-item label="Item Title:">{{ itemTitle }}</el-form-item>
       <el-form-item label="Change Order" prop="order">
         <el-input v-model="editForm.order"></el-input>
       </el-form-item>
       <el-form-item label="Edit Tips" prop="tips">
-        <el-input type="textarea" v-model="editForm.tips" :autosize="{minRows:12}"></el-input>
+        <el-input type="textarea" v-model="editForm.tips" 
+                  :autosize="{minRows:12}">
+        </el-input>
         <md-tool :pretext="editForm.tips" @insertmd="updateM"></md-tool>
       </el-form-item>
       <el-form-item label="Reminder" prop="spoiler">
@@ -19,10 +30,15 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onEdit('editForm', editForm)">Edit and Submit</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onEdit('editForm', editForm)">Edit and Submit
+        </el-button>
         <!-- <el-button @click="resetForm('editForm')">Reset</el-button> -->
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <el-button type="danger" plain size="mini" @click="showDialog = true">Delete Tips</el-button>
+        <el-button type="danger" plain size="mini" 
+                   @click="showDialog = true">
+                   Delete Tips
+        </el-button>
       </el-form-item>
     </el-form>
     <!-- confirm delete dialog -->
@@ -30,7 +46,10 @@
       <span>Confirm Delete? Can not recover</span>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="showDialog = false">Cancel</el-button>
-        <el-button type="danger" size="mini" @click="delTips">Confirm Delete</el-button>
+        <el-button type="danger" size="mini" 
+                   @click="delTips">
+                   Confirm Delete
+        </el-button>
       </span>
     </el-dialog>
     <!-- dialog end -->

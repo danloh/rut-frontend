@@ -11,7 +11,9 @@
       <div>{{ tagDetail.descript }} 
         <el-button type="text" @click="toEditTag">...Edit</el-button>
       </div>
-      <el-button class="fbtn" type="success" size="mini" plain @click="favTag">{{action}} {{favCount}}</el-button>
+      <el-button class="fbtn" type="success" size="mini" plain 
+                 @click="favTag">{{action}} {{favCount}}
+      </el-button>
     </div>
     <div class="rut-list">
       <rut-list :rutlist="currentRuts" @loadmore="loadmoreRuts"></rut-list>
@@ -24,7 +26,9 @@
       <demand-list :type="'popular'" :tag="tagName" :key="tagid"></demand-list>
     </div>
     <!-- dialog -->
-    <el-dialog title="Edit Tag Description" :visible.sync="openDialog" :before-close="cancelOnClose">
+    <el-dialog title="Edit Tag Description" 
+               :visible.sync="openDialog" 
+               :before-close="cancelOnClose">
       <el-form :model="tagForm" :rules="rules" ref="tagForm" size="mini">
         <el-form-item label="Tag Name" prop="name">
           <el-input v-model="tagForm.name"></el-input>
@@ -33,12 +37,16 @@
           <el-input v-model="tagForm.parent"></el-input>
         </el-form-item>
         <el-form-item label="Description" prop="description">
-          <el-input type="textarea" v-model="tagForm.description" :autosize="{minRows:3}"></el-input>
+          <el-input type="textarea" v-model="tagForm.description" 
+                    :autosize="{minRows:3}">
+          </el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelEditTag">Cancel</el-button>
-        <el-button type="success" @click="editTag('tagForm', tagForm)">Submit</el-button>
+        <el-button type="success" @click="editTag('tagForm', tagForm)">
+          Submit
+        </el-button>
       </div>
     </el-dialog>
     <!-- dialog end -->
@@ -49,7 +57,10 @@
 import RutList from '@/components/Rut/RutList.vue'
 import DemandList from '@/components/Demand/DemandList.vue'
 import { mapGetters } from 'vuex'
-import { editTag, checkFav, favTag, fetchTag, fetchTagRuts, checkTagLocked, lockTag, unlockTag } from '@/api/api'
+import {
+  editTag, checkFav, favTag, fetchTag,
+  fetchTagRuts, checkTagLocked, lockTag, unlockTag
+} from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
 
@@ -72,7 +83,7 @@ export default {
       },
       rules: {
         name: [
-          { required: true, validator: trimValid, message: 'Please give tag a name', trigger: 'blur' },
+          { required: true, validator: trimValid, message: 'Need a Tag Name', trigger: 'blur' },
           { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
         ],
         parent: [

@@ -3,7 +3,8 @@
     <b>{{ searchItems.length | pluralise('Result') }}</b>
     <div class="result-list" v-if="type==='item'">
       <div class="result" v-for="item in searchItems" :key="item.id" :item="item" >
-        <router-link :to="'/item/' + item.id" target="_blank" rel="noopener noreferrer">
+        <router-link :to="'/item/' + item.id" 
+                     target="_blank" rel="noopener noreferrer">
           {{ item.title }}
         </router-link>
       </div>

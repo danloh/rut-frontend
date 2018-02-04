@@ -1,21 +1,34 @@
 <template>
   <div class="edit-page">
-    <div class="title"> <b>Edit List:&nbsp;&nbsp;</b>
-      {{ rutTitle }}&nbsp;&nbsp;<el-button type="text" @click="cancelnReturn">...Cancel Edit and Back</el-button>
+    <div class="title"> 
+      <b>Edit List:&nbsp;&nbsp;</b>
+      {{ rutTitle }}&nbsp;&nbsp;
+      <el-button type="text" @click="cancelnReturn">...Cancel Edit and Back</el-button>
     </div>
-    <el-form class="edit-form" :model="editForm" :rules="rules" ref="editForm" label-width="120px" size="mini">
+    <el-form class="edit-form" 
+             :model="editForm" 
+             :rules="rules" 
+             ref="editForm" 
+             label-width="120px" 
+             size="mini">
       <el-form-item label="Title" prop="title">
         <el-input v-model="editForm.title"></el-input>
       </el-form-item>
       <el-form-item label="Preface" prop="intro">
-        <el-input type="textarea" v-model="editForm.intro" :autosize="{minRows:6}"></el-input>
+        <el-input type="textarea" 
+                  v-model="editForm.intro" 
+                  :autosize="{minRows:6}">
+        </el-input>
         <md-tool :pretext="editForm.intro" @insertmd="updateP"></md-tool>
       </el-form-item>
       <el-form-item label="Credential" prop="credential">
         <el-input v-model="editForm.credential"></el-input>
       </el-form-item>
       <el-form-item label="Epilog" prop="epilog">
-        <el-input type="textarea" v-model="editForm.epilog" :autosize="{minRows:5}"></el-input>
+        <el-input type="textarea" 
+                  v-model="editForm.epilog" 
+                  :autosize="{minRows:5}">
+        </el-input>
         <md-tool :pretext="editForm.epilog" @insertmd="updateE"></md-tool>
       </el-form-item>
       <el-form-item label="Who Can Edit?" prop="editable">
@@ -27,11 +40,18 @@
       </el-form-item>
       <el-form-item label="Rating" prop="rating">
         <el-select v-model="editForm.rating">
-          <el-option v-for="r in ratings" :key="r.value" :label="r.label" :value="r.value"></el-option>
+          <el-option v-for="r in ratings" 
+                     :key="r.value" 
+                     :label="r.label" 
+                     :value="r.value">
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" @click="onEdit('editForm', editForm)">Done and Submit</el-button>
+        <el-button type="success" size="medium" 
+                   @click="onEdit('editForm', editForm)">
+                   Done and Submit
+        </el-button>
         <!-- <el-button @click="resetForm('editForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>

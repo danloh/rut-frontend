@@ -6,12 +6,20 @@
         <el-input v-model="loginForm.username" placeholder="Username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input :type="pwdType" v-model="loginForm.password" placeholder="Password"></el-input>
+        <el-input :type="pwdType" v-model="loginForm.password" 
+                  placeholder="Password">
+        </el-input>
       </el-form-item>
-      <p style="font-size:0.75em">Notice: Just Use Cookies Here to keep you logged in for a limited period, 
-        Never collect any Private Information. The service may not function properly if disable cookies.</p>
+      <p style="font-size:0.75em">
+        Notice: Just Use Cookies Here to keep you logged in for a limited period, 
+        Never collect any Private Information. 
+        The service may not function properly if disable cookies.
+      </p>
       <el-form-item>
-        <el-button class="blockbtn" type="primary" @click="onLogin('loginForm', loginForm)">Log in</el-button>
+        <el-button class="blockbtn" type="primary" 
+                   @click="onLogin('loginForm', loginForm)">
+                   Log in
+        </el-button>
       </el-form-item>
       <router-link :to="'/register'">No Account? Sign Up</router-link>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

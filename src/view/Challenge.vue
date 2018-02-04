@@ -4,15 +4,28 @@
       <div>
         <el-form :model="clipForm" :rules="rules" ref="clipForm">
           <el-form-item prop="clip" style="margin-bottom:16px">
-            <el-input type="textarea" v-model="clipForm.clip" :autosize="{minRows:3}" placeholder="Excerpt quotes %^&1:First Chapter,Page two:2"></el-input>
+            <el-input type="textarea" v-model="clipForm.clip" 
+                      :autosize="{minRows:3}" 
+                      placeholder="Excerpt quotes %^&1:First Chapter,Page two:2">
+            </el-input>
           </el-form-item>
-          <el-form-item prop="doing" style="margin-bottom:8px" v-show="clipForm.clip.trim()">
-            <el-select class="selectItem" v-model="clipForm.doingItemID" placeholder="Pick an item which you are working on">
-              <el-option v-for="i in doingItems" :key="i.id" :label="i.title" :value="i.id"></el-option>
+          <el-form-item prop="doing" style="margin-bottom:8px" 
+                        v-show="clipForm.clip.trim()">
+            <el-select class="selectItem" v-model="clipForm.doingItemID" 
+                       placeholder="Pick an item which you are working on">
+              <el-option v-for="i in doingItems" 
+                         :key="i.id" 
+                         :label="i.title" 
+                         :value="i.id">
+              </el-option>
             </el-select>
           </el-form-item>
           <el-form-item v-show="clipForm.clip.trim()">
-            <el-button type="success" size="mini" @click="submitClip('clipForm', clipForm)" :disabled="!clipForm.clip.trim()">Submit</el-button>
+            <el-button type="success" size="mini" 
+                       @click="submitClip('clipForm', clipForm)" 
+                       :disabled="!clipForm.clip.trim()">
+                       Submit
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -29,9 +42,13 @@
       <div class="right-title">
         <b>Working on Challenge:</b>
         <br>
-        <router-link :to="'/readuplist/' + challengeRut.id"> {{ challengeRut.title || '...' }}</router-link>
+        <router-link :to="'/readuplist/' + challengeRut.id">
+           {{ challengeRut.title || '...' }}
+        </router-link>
         <br>
-        <b class="deadline">Deadline: {{ dueDate | toMDY }} <el-button type="text" @click="showPicker=true">..Set</el-button></b>
+        <b class="deadline">Deadline: {{ dueDate | toMDY }}
+           <el-button type="text" @click="showPicker=true">..Set</el-button>
+        </b>
         <br>
         <div class="datePick" v-show="showPicker">
           <el-date-picker
@@ -47,7 +64,11 @@
         <b>Including Items:</b>
       </div>
       <p class="right-item" v-for="(item, index) in items" :key="index" :item="item">
-        <b>{{ item.cate }}</b> <router-link :to="'/item/' + item.id" :title="item.title"> {{ item.title.slice(0, 42) }}...</router-link>
+        <b>{{ item.cate }}</b> 
+        <router-link :to="'/item/' + item.id" 
+                     :title="item.title"> {{ item.title.slice(0, 42) }}
+                     ...
+        </router-link>
       </p>
     </div>
   </div>

@@ -4,7 +4,11 @@
     <div class="item-list">
       <item-sum v-for="item in currentItems" :key="item.id" :item="item"></item-sum>
       <div v-if="hasMore">
-        <el-button class="blockbtn" size="mini" @click="loadmoreItems" :disabled="!hasMore">Show More</el-button>
+        <el-button class="blockbtn" size="mini" 
+                   @click="loadmoreItems" 
+                   :disabled="!hasMore">
+                   Show More
+        </el-button>
       </div>
     </div>
   </div>

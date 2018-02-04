@@ -4,10 +4,16 @@
       <div>
         <el-form :model="demandForm" :rules="rules" ref="demandForm">
           <el-form-item prop="demand" style="margin-bottom:8px">
-            <el-input type="textarea" v-model="demandForm.demand" autosize placeholder="Request something #Tag"></el-input>
+            <el-input type="textarea" v-model="demandForm.demand" autosize 
+                      placeholder="Request something #Tag">
+            </el-input>
           </el-form-item>
           <el-form-item v-show="demandForm.demand.trim()">
-            <el-button type="primary" size="mini" @click="submitDemand('demandForm', demandForm)" :disabled="!demandForm.demand.trim()">Send Request</el-button>
+            <el-button type="primary" size="mini" 
+                       @click="submitDemand('demandForm', demandForm)" 
+                       :disabled="!demandForm.demand.trim()">
+                       Send Request
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -20,7 +26,9 @@
       </div>
     </div>
     <div class="demand-side">
-      <p class="right-item">What is Your Question? Send Request Here, May Someone can Help</p>
+      <p class="right-item">
+        What is Your Question? Send Request Here, May Someone can Help
+      </p>
     </div>
   </div>
 </template>

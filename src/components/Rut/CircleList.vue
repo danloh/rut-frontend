@@ -3,7 +3,9 @@
     <!-- <p style="font-size:0.85em">Get Together with Books, etc.</p> -->
     <div class="circle-list" v-for="circle in circles" :key="circle.id">
       <b>{{ circle.name }}</b>&nbsp;&nbsp;
-      <router-link :to="'/profile/' + circle.facilitator.id" style="font-size:0.85em">{{ circle.facilitator.name.slice(0, 12) }}</router-link>
+      <router-link :to="'/profile/' + circle.facilitator.id" style="font-size:0.85em">
+        {{ circle.facilitator.name.slice(0, 12) }}
+      </router-link>
       <p>{{ circle.note }}</p>
       <p class="meta"><i class="el-icon-location-outline"></i> {{ circle.area }}</p>
       <p class="meta"><i class="el-icon-location"></i> {{ circle.address }}</p>

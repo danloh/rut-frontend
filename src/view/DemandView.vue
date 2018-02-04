@@ -4,13 +4,24 @@
       <demand :demand="demandDetail" :key="demandDetail.id"></demand>
       <div class="answer">
         <b>Answers to This Demand:</b>
-        <el-button size="mini" type="text" @click="loadCreatedThenAsAnswer">...Link To Answer</el-button>
-        <div class="title" v-for="(rut, index) in answers" :key="index" :rut="rut">
-          -- <router-link :to="'/readuplist/' + rut.id" :title="rut.title"><b>{{ rut.title.slice(0, 142) }} ...</b></router-link>
-          <!-- <p v-html="rut.intro"></p> -->
+        <el-button size="mini" type="text" 
+                   @click="loadCreatedThenAsAnswer">
+                   ...Link To Answer
+        </el-button>
+        <div class="title" 
+             v-for="(rut, index) in answers" 
+             :key="index" 
+             :rut="rut"> -- 
+             <router-link :to="'/readuplist/' + rut.id" :title="rut.title">
+               <b>{{ rut.title.slice(0, 142) }} ...</b>
+             </router-link>
         </div>
         <div v-if="hasMoreAnswer">
-          <el-button size="mini" @click="loadmoreAnswer" :disabled="!hasMoreAnswer">Show More</el-button>
+          <el-button size="mini" 
+                     @click="loadmoreAnswer" 
+                     :disabled="!hasMoreAnswer">
+                     Show More
+          </el-button>
         </div>
       </div>
       <div class="share">
@@ -21,13 +32,19 @@
         <el-form :model="asForm" ref="asForm">
           <el-form-item prop="rut">
             <el-select v-model="asForm.selectRutID">
-              <el-option v-for="r in createdRuts" :key="r.id" :label="r.title" :value="r.id"></el-option>
+              <el-option v-for="r in createdRuts" 
+                         :key="r.id" 
+                         :label="r.title" 
+                         :value="r.id">
+              </el-option>
             </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button size="mini" @click="showDialog = false">Cancel</el-button>
-          <el-button size="mini" type="success" @click="asAnswer('asForm', asForm)">As Answer</el-button>
+          <el-button size="mini" type="success" @click="asAnswer('asForm', asForm)">
+            As Answer
+          </el-button>
         </div>
       </el-dialog>
       <!-- dialog end -->
@@ -36,7 +53,11 @@
         <comment :comment="comment"></comment>
       </div>
       <div v-if="hasMoreComment">
-        <el-button class="blockbtn" size="mini" @click="loadmoreComment" :disabled="!hasMoreComment">Show More Comments</el-button>
+        <el-button class="blockbtn" size="mini" 
+                   @click="loadmoreComment" 
+                   :disabled="!hasMoreComment">
+                   Show More Comments
+        </el-button>
       </div>
       <div class="comment">
         <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>
@@ -51,7 +72,10 @@ import Demand from '@/components/Demand/Demand.vue'
 import Comment from '@/components/Comment/Comment.vue'
 import Reply from '@/components/Comment/Reply.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
-import { fetchProfileRuts, rutAsAnswer, fetchDemandComments, fetchDemandAnswers } from '@/api/api'
+import {
+  fetchProfileRuts, rutAsAnswer,
+  fetchDemandComments, fetchDemandAnswers
+} from '@/api/api'
 import { checkAuth } from '@/util/auth'
 
 export default {
