@@ -4,7 +4,7 @@
       <nav class="nav-menu">
         <router-link to="/">
             <b style="color:darkorange;font-size:1.2em;letter-spacing:0.0005em">
-              Readup.Tips
+              Readup.Tips<sup style="font-size:0.5em;color:grey"> pre-α</sup>
             </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">

@@ -46,7 +46,7 @@
            {{ challengeRut.title || '...' }}
         </router-link>
         <br>
-        <b class="deadline">Deadline: {{ dueDate | toMDY }}
+        <b class="deadline">Deadline: {{ dueDate | toMDY(rep=false) }}
            <el-button type="text" @click="showPicker=true">..Set</el-button>
         </b>
         <br>

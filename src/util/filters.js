@@ -5,9 +5,10 @@ function pluralize (time, label) {
   return time + label + 's' + ' ago'
 }
 // time ago formating
-export function timeAgo (date) {
+export function timeAgo (date, rep = true) {
   // compatibility AND timezone: YYYY-MM-DDTHH:mm:ss.sssZ
-  let realDate = new Date(date.replace(/\s+/g, 'T').concat('Z'))
+  let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
+  let realDate = new Date(repDate)
   let time = realDate.getTime()
   let offset = 0 // new Date().getTimezoneOffset() * 60
   const between = Number(Date.now()) / 1000 + offset - Number(time) / 1000
@@ -21,16 +22,18 @@ export function timeAgo (date) {
   }
 }
 // to local formating
-export function toLocal (date) {
+export function toLocal (date, rep = true) {
+  let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
   return date
-             ? new Date(date.replace(/\s+/g, 'T').concat('Z')).toLocaleString()
+             ? new Date(repDate).toLocaleString()
              : date
 }
 // MDY time formating
 const mapMon = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
-export function toMDY (date) {
+export function toMDY (date, rep = true) {
   if (!date) return date
-  date = new Date(date.replace(/\s+/g, 'T').concat('Z'))
+  let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
+  date = new Date(repDate)
   return `${mapMon[date.getMonth() + 1]} ${date.getDate()},${date.getFullYear()}` // ${date.getHours() > 11 ? 'PM' : 'AM'}
 }
 
