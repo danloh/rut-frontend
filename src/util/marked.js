@@ -19,7 +19,7 @@ const linkParse = (href, title, text) => {
   const isSelf = href.includes('readup.tips')
   const textIsImage = text.includes('<img')
   return `<a href="${href}" 
-             target="_blank" 
+             target="_blank"
              title="${title || (textIsImage ? href : text)}" 
              ${isSelf ? '' : 'rel="external nofollow noopener noreferrer"'}>${text}
           </a>`.replace(/\s+/g, ' ').replace('\n', '')
@@ -27,7 +27,7 @@ const linkParse = (href, title, text) => {
 
 const imageParse = (src, title, alt) => {
   return `<a href="${src}" 
-             target="_blank">
+             target="_blank" rel="nofollow noopener noreferrer">
             <img src="${src}" 
                 title="${title || alt || 'readup.tips'}" 
                 style="width:10%; height:15%"

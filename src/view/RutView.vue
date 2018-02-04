@@ -42,7 +42,7 @@
         <item-sum class="itemsum" :item="tip.item" :key="tip.itemid"></item-sum>
         <b class="indicator">&nbsp;&nbsp;#{{tip.order}}&nbsp;&nbsp;</b> 
         <router-link class="editlink" :to="'/edit/readuptips/' + tip.cid" v-if="canEdit">...Edit</router-link>
-        <tip-sum class="tip" :tip="tip" :key="tip.cid"></tip-sum>
+        <tip-sum class="tip" :tip="tip"></tip-sum>
       </div>
       <div v-if="hasMoreTips">
         <el-button class="blockbtn" size="mini" @click="loadmoreTips" :disabled="!hasMoreTips">Show More Items</el-button>

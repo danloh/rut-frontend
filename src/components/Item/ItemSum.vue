@@ -11,12 +11,14 @@
       <span><b>Publish:</b> {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</span><br>
       <span><b>UID:</b> 
         {{ item.uid }} - {{ item.binding }} - {{ item.page }} 
-        <a :href="item.resurl" v-if="item.resurl" target="_blank"> &nbsp;:::</a>
+        <a :href="item.resurl" v-if="item.resurl" 
+           target="_blank" rel="nofollow noopener noreferrer"> &nbsp;:::
+        </a>
       </span><br>
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
       <span v-if="flagNote || flagTime"><b>Note: </b>
         <span class="flag-note" v-if="flagNote"><b>"</b>{{ flagNote }}<b>"</b></span>&nbsp;
-        <span class="flag-note" v-if="flagTime">on {{ flagTime | toMDY }}</span>
+        <span class="flag-note" v-if="flagTime"> - {{ flagTime | toMDY }}</span>
       </span>
     </div>
     <div class="operate">
@@ -28,7 +30,9 @@
           <el-dropdown-item><span @click="openToFlag('schedule')">Schedule</span></el-dropdown-item>
           <el-dropdown-item><span @click="openToFlag('working')">Working On</span></el-dropdown-item>
           <el-dropdown-item><span @click="openToFlag('done')">Have Done</span></el-dropdown-item>
-          <el-dropdown-item divided><span @click="showAndloadData">Add to List</span></el-dropdown-item>
+          <el-dropdown-item divided v-if="flagAction==='Have Done'">
+            <span @click="showAndloadData">Add to List</span>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -123,8 +127,7 @@ export default {
     checkFlaging () {
       if (checkAuth()) {
         let itemid = this.item.id || this.$route.params.id // why?? liftcycle timing??: in list or in view
-        return checkFlag(itemid)
-        .then(resp => {
+        checkFlag(itemid).then(resp => {
           this.flagAction = resp.data.label
           this.flagNote = resp.data.note
           this.flagTime = resp.data.time
@@ -152,7 +155,7 @@ export default {
     },
     flagSchedule (note = '') {
       let params = {'note': note}
-      return flagItem('todo', this.item.id, params)
+      flagItem('todo', this.item.id, params)
       .then(() => {
         this.flagAction = 'Scheduled'
         this.flagNote = note
@@ -160,7 +163,7 @@ export default {
     },
     flagWorking (note = '') {
       let params = {'note': note}
-      return flagItem('doing', this.item.id, params)
+      flagItem('doing', this.item.id, params)
       .then(() => {
         this.flagAction = 'Working On'
         this.flagNote = note
@@ -168,7 +171,7 @@ export default {
     },
     flagDone (note = '') {
       let params = {'note': note}
-      return flagItem('done', this.item.id, params)
+      flagItem('done', this.item.id, params)
       .then(() => {
         this.flagAction = 'Have Done'
         this.flagNote = note
@@ -203,11 +206,11 @@ export default {
         }
       })
     },
-    // get created ruts before add item to one
+    // get created ruts before add item to one of
     showAndloadData () {
-      if (checkAuth()) {
+      if (checkAuth() && this.flagAction === 'Have Done') {
         let userid = this.$store.getters.currentUserID
-        return fetchProfileRuts('created', userid)
+        fetchProfileRuts('created', userid)
         .then(resp => {
           this.createdRuts = resp.data.ruts
           this.showDialog = true
