@@ -38,7 +38,7 @@
           <el-radio-button label="Everyone"></el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="Rating" prop="rating">
+      <el-form-item label="Suitable for" prop="rating">
         <el-select v-model="editForm.rating">
           <el-option v-for="r in ratings" 
                      :key="r.value" 
