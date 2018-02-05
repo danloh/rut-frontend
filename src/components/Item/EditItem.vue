@@ -235,7 +235,7 @@ export default {
     loadItemData () {
       let itemG = this.$store.getters.currentItem
       let itemid = this.$route.params.id
-      if (itemG && itemG.id === Number(itemid)) {
+      if (itemG.id === Number(itemid)) {
         let item = itemG
         this.setFormData(item)
       } else {

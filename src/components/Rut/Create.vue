@@ -141,7 +141,7 @@ export default {
         return
       } else {
         let demandG = this.$store.getters.demandDetail
-        if (demandG && demandG.id === Number(demandid)) {
+        if (demandG.id === Number(demandid)) {
           this.demandBody = demandG.body.slice(0, 142)
         } else {
           fetchOnlyDemand(demandid).then(resp => {

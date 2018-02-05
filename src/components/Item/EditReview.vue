@@ -110,7 +110,7 @@ export default {
     loadReviewData () {
       let reviewid = this.$route.params.id
       let reviewG = this.$store.getters.reviewDetail
-      if (reviewG && reviewG.id === Number(reviewid)) {
+      if (reviewG.id === Number(reviewid)) {
         let review = reviewG
         this.setFormData(review)
       } else {

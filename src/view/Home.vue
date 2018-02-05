@@ -39,16 +39,24 @@ export default {
     ])
   },
   methods: {
+    loadIndex () {
+      let loaded = this.$store.getters.allRuts
+      this.loading = true
+      if (loaded.length !== 0) {
+        this.$store.commit('ADD_RUTS', 0)
+        this.loading = false
+      } else {
+        this.$store.dispatch('getRuts').then(() => {
+          this.loading = false
+        })
+      }
+    },
     loadmoreRuts () {
       this.$store.commit('ADD_RUTS', this.currentPage)
     }
   },
   created () {
-    this.loading = true
-    this.$store.dispatch('getRuts')
-    .then(() => {
-      this.loading = false
-    })
+    this.loadIndex()
   }
 }
 </script>

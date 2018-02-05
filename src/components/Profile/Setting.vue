@@ -62,7 +62,7 @@ export default {
     loadAuthedUser () {
       let userG = this.currentUser
       let userid = this.$route.params.id
-      if (userG && userG.id === Number(userid)) {
+      if (userG.id === Number(userid)) {
         this.userid = userG.id
         this.confirmed = userG.confirmed
       } else {

@@ -15,7 +15,7 @@ const state = {
   currentUserID: Number(getID()),
   authed: Boolean(getID()) && Boolean(getToken()),
   token: getToken(),
-  currentUser: null,
+  currentUser: {},
   whoEdit: {}
 }
 const mutations = {
@@ -36,7 +36,7 @@ const mutations = {
   DEL_TOKEN (state) {
     state.token = ''
     state.currentUserID = ''
-    state.currentUser = null
+    state.currentUser = {}
     state.authed = false
     removeToken()
     removeID()
