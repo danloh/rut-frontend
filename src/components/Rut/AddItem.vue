@@ -104,7 +104,7 @@ export default {
         setTimeout(() => {
           let param = {'uid_or_title': this.inputQuery}
           searchItems(3, param).then(resp => {
-            this.doneItems = resp.data
+            this.doneItems = resp.data.items
             this.searching = false
           })
         }, 200)
