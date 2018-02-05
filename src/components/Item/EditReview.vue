@@ -26,7 +26,6 @@
                    :disabled="!canEdit">
                    Done and Submit
         </el-button>
-        <!-- <el-button @click="resetForm('reviewForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -99,9 +98,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     setFormData (review) {
       this.reviewForm.title = review.heading

@@ -33,7 +33,6 @@
         <el-button type="success" size="medium" 
                    @click="onEdit('editForm', editForm)">Edit and Submit
         </el-button>
-        <!-- <el-button @click="resetForm('editForm')">Reset</el-button> -->
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button type="danger" plain size="mini" 
                    @click="showDialog = true">
@@ -123,9 +122,6 @@ export default {
       let id = this.rutId
       unlockRut(id)
       this.$router.push(`/readuplist/${id}`)
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     loadTipsData () {
       let rut = this.$store.getters.rutDetail

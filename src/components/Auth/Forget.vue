@@ -16,8 +16,6 @@
                  @click="onReq('forgetForm', forgetForm)">
                  Request Reset Password
       </el-button>
-      <br>
-      <!-- <el-button @click="resetForm('forgetForm')">Reset</el-button> -->
     </el-form-item>
   </el-form>
 </div>
@@ -68,9 +66,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

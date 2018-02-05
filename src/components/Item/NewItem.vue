@@ -108,7 +108,6 @@
                    @click="onNewItem('itemForm', itemForm)">
                    Done and Add
         </el-button>
-        <!-- <el-button @click="resetForm('itemForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -216,26 +215,36 @@ export default {
     onNewItem (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid && checkAuth()) {
-          let data = {
-            cate: form.cate,
-            title: form.title.trim(),
-            uid: form.uid.trim(),
-            resUrl: form.resUrl.trim(),
-            byline: form.byline.trim(),
-            cover: form.cover.trim(),
-            Language: form.language.trim(),
-            Publisher: form.publisher.trim(),
-            'Publication Date': form.publishDate.trim(),
-            Level: form.level.trim(),
-            binding: form.binding.trim(),
-            page: form.page.trim(),
-            price: form.price.trim(),
-            details: form.details.trim()
+          let uid = form.uid.trim()
+          let resUrl = form.resUrl.trim()
+          if (!uid && !resUrl) {
+            this.$message({
+              showClose: true,
+              message: 'Either of UID and Resource URL is requied'
+            })
+            return false
+          } else {
+            let data = {
+              cate: form.cate,
+              title: form.title.trim(),
+              uid: uid,
+              resUrl: resUrl,
+              byline: form.byline.trim(),
+              cover: form.cover.trim(),
+              Language: form.language.trim(),
+              Publisher: form.publisher.trim(),
+              'Publication Date': form.publishDate.trim(),
+              Level: form.level.trim(),
+              binding: form.binding.trim(),
+              page: form.page.trim(),
+              price: form.price.trim(),
+              details: form.details.trim()
+            }
+            newItem(data).then(resp => {
+              let id = resp.data
+              this.$router.push(`/item/${id}`)
+            })
           }
-          newItem(data).then(resp => {
-            let id = resp.data
-            this.$router.push(`/item/${id}`)
-          })
         }
       })
     },
@@ -250,9 +259,6 @@ export default {
           query: {redirect: this.$route.fullPath}
         })
       }
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     updateN (data) {
       this.itemForm.details += data

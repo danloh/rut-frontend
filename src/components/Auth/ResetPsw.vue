@@ -5,9 +5,6 @@
            :model="resetpswForm" 
            :rules="rules" 
            ref="resetpswForm" size="mini">
-    <el-form-item label="Username" prop="username">
-      <el-input v-model="resetpswForm.username"></el-input>
-    </el-form-item>
     <el-form-item label="New Password" prop="password">
       <el-input :type="pwdType" v-model="resetpswForm.password"></el-input>
     </el-form-item>
@@ -18,10 +15,8 @@
       <el-button class="blockbtn" type="primary" 
                  @click="onReset('resetpswForm', resetpswForm)" 
                  :disabled="Expired">
-                 Reset
+                 Reset Password
       </el-button>
-      <br>
-      <!-- <el-button @click="resetForm('resetpswForm')">Reset</el-button> -->
     </el-form-item>
   </el-form>
 </div>
@@ -55,14 +50,10 @@ export default {
     }
     return {
       resetpswForm: {
-        username: '',
         password: '',
         repassword: ''
       },
       rules: {
-        username: [
-          { required: true, message: 'Required', trigger: 'blur' }
-        ],
         password: [
           { required: true, validator: validatePass, trigger: 'blur' }
         ],
@@ -79,7 +70,7 @@ export default {
       this.$store.commit('DEL_TOKEN')
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let data = {newpsw: form.password, username: form.username}
+          let data = { newpsw: form.password }
           let token = this.$route.params.token
           reset(token, data).then(resp => {
             this.$message({
@@ -96,9 +87,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     checkExpire () {
       let token = this.$route.params.token

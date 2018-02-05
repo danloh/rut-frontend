@@ -131,9 +131,6 @@ export default {
       unlockRut(id)
       this.$router.push(`/readuplist/${id}`)
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
-    },
     loadRutData () {
       let rut = this.$store.getters.rutDetail
       if (rut.id === Number(this.$route.params.id)) {

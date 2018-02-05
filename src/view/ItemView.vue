@@ -8,6 +8,11 @@
       </div>
       <div class="item-detail">
         <div v-html="itemDetail"></div>
+        <el-button type="text" size="mini" 
+                  @click="showShort=false" 
+                  v-if="showShort">
+                  ...More
+        </el-button>
       </div>
       <div class="submenu">
         <b>>></b>&nbsp;&nbsp;
@@ -58,6 +63,7 @@ import ClipList from '@/components/Challenge/ClipList.vue'
 import { fetchInRuts, checkItemLocked, lockItem } from '@/api/api'
 import marked from '@/util/marked'
 import { checkAuth } from '@/util/auth'
+import { showLess } from '@/util/filters'
 
 export default {
   name: 'item-view',
@@ -71,12 +77,21 @@ export default {
       reviewsParam: {},
       currentPage: 1,
       currentItem: {},
+      showShort: true, // show less detail
       inRuts: []
     }
   },
   computed: {
     itemDetail () {
-      return marked(this.currentItem.details)
+      let content = marked(this.currentItem.details)
+      let least = 255
+      let less = content.length > least && this.showShort
+      if (less) {
+        return showLess(content, least)
+      } else {
+        this.showShort = false
+        return content
+      }
     },
     hasMoreRut () {
       return this.inRuts.length < this.currentItem.rutcount

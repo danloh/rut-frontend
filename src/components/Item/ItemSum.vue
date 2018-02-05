@@ -15,9 +15,10 @@
         {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
       </span><br>
       <span><b>UID:</b> 
-        {{ item.uid }} - {{ item.binding }} - {{ item.page }} 
+        {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
         <a :href="item.resurl" v-if="item.resurl" 
-           target="_blank" rel="nofollow noopener noreferrer"> &nbsp;:::
+           target="_blank" rel="nofollow noopener noreferrer"> 
+           &#128279;
         </a>
       </span><br>
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
@@ -34,6 +35,9 @@
           {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item v-if="flagAction==='Have Done'">
+            <b @click="showAndloadData" style="color:orange">Add to List</b>
+          </el-dropdown-item>
           <el-dropdown-item>
             <span @click="openToFlag('schedule')">Schedule</span>
           </el-dropdown-item>
@@ -42,9 +46,6 @@
           </el-dropdown-item>
           <el-dropdown-item>
             <span @click="openToFlag('done')">Have Done</span>
-          </el-dropdown-item>
-          <el-dropdown-item divided v-if="flagAction==='Have Done'">
-            <span @click="showAndloadData">Add to List</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

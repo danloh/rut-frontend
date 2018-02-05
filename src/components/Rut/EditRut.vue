@@ -52,7 +52,6 @@
                    @click="onEdit('editForm', editForm)">
                    Done and Submit
         </el-button>
-        <!-- <el-button @click="resetForm('editForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -125,9 +124,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     cancelnReturn () {
       let id = this.rutId

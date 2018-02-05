@@ -30,7 +30,6 @@
                    @click="onSubmit('reviewForm', reviewForm)">
                    Submit
         </el-button>
-        <!-- <el-button @click="resetForm('reviewForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -86,9 +85,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     updateM (data) {
       this.reviewForm.review += data

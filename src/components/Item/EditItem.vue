@@ -83,7 +83,6 @@
                    @click="onEditItem('itemForm', itemForm)">
                    Done and Add
          </el-button>
-        <!-- <el-button @click="resetForm('itemForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -214,9 +213,6 @@ export default {
       let id = this.itemId
       unlockItem(id)
       this.$router.push(`/item/${id}`)
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     setFormData (item) {
       this.itemForm.cate = item.cate

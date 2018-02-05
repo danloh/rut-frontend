@@ -21,8 +21,6 @@
                  :disabled="!canChange">
                  Change Password
       </el-button>
-      <br>
-      <!-- <el-button @click="resetForm('changepswForm')">Reset</el-button> -->
     </el-form-item>
   </el-form>
 </div>
@@ -100,9 +98,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

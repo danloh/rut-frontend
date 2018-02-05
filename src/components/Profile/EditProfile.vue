@@ -30,7 +30,6 @@
                    :disabled="!canSetting">
                    Update
         </el-button>
-        <!-- <el-button @click="resetForm('settingForm')">Reset</el-button> -->
       </el-form-item>
     </el-form>
   </div>
@@ -97,9 +96,6 @@ export default {
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     },
     setFormData (user) {
       this.settingForm.nickname = user.nickname

@@ -28,7 +28,6 @@
                  @click="onReg('regForm', regForm)">
                  Sign Up
       </el-button>
-      <!-- <el-button @click="resetForm('regForm')">Reset</el-button> -->
     </el-form-item>
     <router-link :to="'/login'">Have an Account?  Login</router-link>
   </el-form>
@@ -149,9 +148,6 @@ export default {
     validEmail () {
       let email = this.regForm.email
       return checkEmail(email)
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }
