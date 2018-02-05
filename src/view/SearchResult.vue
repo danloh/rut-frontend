@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>{{ searchItems.length | pluralise('Result') }}</b>
+    <b>{{ searchItems.length | pluralise('Result') }} for Keyword: {{ itemKeyword }}</b>
     <div class="result-list" v-if="type==='item'">
       <div class="result" v-for="item in searchItems" :key="item.id" :item="item" >
         <router-link :to="'/item/' + item.id" 
@@ -9,21 +9,50 @@
         </router-link>
       </div>
     </div>
+    <el-button size="mini" @click="searchMoreItem" :disabled="!hasMore">
+      Maybe More
+    </el-button>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { searchItems } from '@/api/api'
+import { checkAuth } from '@/util/auth'
 
 export default {
   name: 'search-result',
   props: {
     type: String // to be: item or rut
   },
+  data () {
+    return {
+      currentPage: 1,
+      hasMore: true
+    }
+  },
   computed: {
     ...mapGetters([
-      'searchItems'
+      'searchItems',
+      'itemKeyword'
     ])
+  },
+  methods: {
+    searchMoreItem () {
+      if (checkAuth() && this.itemKeyword.trim()) {
+        let param = {
+          'uid_or_title': this.itemKeyword.trim(),
+          'page': this.currentPage
+        }
+        searchItems(0, param).then(resp => {
+          this.$store.commit('MORE_SEARCH_ITEMS', resp.data)
+          this.currentPage += 1
+          if (resp.data.items.length === 0) {
+            this.hasMore = false
+          }
+        })
+      }
+    }
   }
 }
 </script>

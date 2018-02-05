@@ -27,6 +27,7 @@ const getters = {
   currentItem: state => state.item.currentItem,
   reviewDetail: state => state.item.reviewDetail,
   searchItems: state => state.item.searchItems,
+  itemKeyword: state => state.item.itemKeyword,
   // headline
   totalHeadlines: state => state.headline.totalHeadlines,
   currentH: state => state.headline.currentH,
