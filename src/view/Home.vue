@@ -43,6 +43,7 @@ export default {
       let loaded = this.$store.getters.allRuts
       this.loading = true
       if (loaded.length !== 0) {
+        this.$store.commit('CLEAN_RUTS')
         this.$store.commit('ADD_RUTS', 0)
         this.loading = false
       } else {

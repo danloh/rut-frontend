@@ -20,17 +20,17 @@
       </div>
       <div class="content" v-if="showCon" v-html="headlineContent"></div>
       <div class="headline-bar">
-        {{ point | pluralise('Point') }}
-        | By&nbsp;
-          <router-link :to="'/profile/' + submitor.id">
-            {{ submitor.name }}
-          </router-link>
-        | {{ headline.timestamp | timeAgo }}
-        | <el-button type="text" @click="upheadline">vote</el-button>
+        By
+        <router-link :to="'/profile/' + submitor.id">
+          {{ submitor.name }}
+        </router-link>
+        {{ headline.timestamp | timeAgo }}
+        | {{ vote }}
+        <el-button type="text" @click="upheadline">vote</el-button>
         | {{headline.commentcount}}&nbsp;
-          <router-link :to="'/headline/' + headline.id">
-            Comment
-          </router-link>
+        <router-link :to="'/headline/' + headline.id">
+          Comment
+        </router-link>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@ export default {
   props: ['headline', 'showCon'],
   data () {
     return {
-      point: this.headline.point
+      vote: this.headline.vote
     }
   },
   computed: {
@@ -63,7 +63,7 @@ export default {
       if (checkAuth()) {
         let headlineid = this.headline.id
         upvoteHeadline(headlineid).then(resp => {
-          this.point = resp.data
+          this.vote = resp.data
         })
       }
     }

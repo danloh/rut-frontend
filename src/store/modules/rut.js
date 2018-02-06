@@ -71,6 +71,10 @@ const mutations = {
     state.currentPage += 1
     state.currentRuts.push(...nextRuts)
   },
+  CLEAN_RUTS (state) {
+    state.currentPage = 0
+    state.currentRuts = []
+  },
   SET_RUT (state, data) {
     state.rutDetail = data
   },
