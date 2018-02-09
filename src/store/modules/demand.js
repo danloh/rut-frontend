@@ -18,8 +18,7 @@ const state = {
 // actions
 const actions = {
   getDemands: ({commit}, params) => {
-    return fetchDemands(params)
-    .then(resp => {
+    fetchDemands(params).then(resp => {
       commit('SET_DEMANDS', resp.data)
     })
   },
@@ -35,14 +34,12 @@ const actions = {
     })
   },
   postDemand: ({commit}, params) => {
-    return newDemand(params)
-    .then(resp => {
+    newDemand(params).then(resp => {
       commit('ADD_DEMAND', resp.data)
     })
   },
   moreDemands: ({commit}, params) => {
-    return fetchDemands(params)
-    .then(resp => {
+    fetchDemands(params).then(resp => {
       commit('MORE_DEMANDS', resp.data.demands)
     })
   }

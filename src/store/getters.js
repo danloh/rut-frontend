@@ -5,11 +5,7 @@ const getters = {
   nexturl: state => state.route.path,
   whoEdit: state => state.whoEdit,
   // ruts
-  allRuts: state => state.rut.allRuts,
-  totalRuts: state => state.rut.totalRuts,
-  currentPage: state => state.rut.currentPage,
-  maxPage: state => state.rut.maxPage,
-  currentRuts: state => state.rut.currentRuts,
+  indexRuts: state => state.rut.indexRuts,
   showTags: state => state.rut.showTags,
   rutDetail: state => state.rut.rutDetail,
   // Clip

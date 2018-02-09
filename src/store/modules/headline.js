@@ -16,20 +16,17 @@ const state = {
 // actions
 const actions = {
   getHeadlines: ({commit}, params) => {
-    return fetchHeadlines(params)
-    .then(resp => {
+    fetchHeadlines(params).then(resp => {
       commit('SET_HEADLINES', resp.data)
     })
   },
   postHeadline: ({commit}, params) => {
-    return newHeadline(params)
-    .then(resp => {
+    newHeadline(params).then(resp => {
       commit('ADD_HEADLINE', resp.data)
     })
   },
   moreHeadlines: ({commit}, params) => {
-    return fetchHeadlines(params)
-    .then(resp => {
+    fetchHeadlines(params).then(resp => {
       commit('MORE_HEADLINES', resp.data.headlines)
     })
   }

@@ -2,14 +2,20 @@
   <div>
     <b>{{action.toUpperCase()}} {{totalRuts}}</b>
     <div class="rut-list">
-      <rut-list :rutlist="currentRuts" @loadmore="loadmoreRuts"></rut-list>
+      <rut-sum v-for="rut in currentRuts" :key="rut.id" :rut="rut"></rut-sum>
+    </div>
+    <div v-if="hasMore">
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreRuts" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
   </div>
 </template>
 
 <script>
-import RutList from '@/components/Rut/RutList.vue'
-import { mapGetters } from 'vuex'
+import RutSum from '@/components/Rut/RutSum.vue'
 import { fetchProfileRuts } from '@/api/api'
 
 export default {
@@ -17,13 +23,18 @@ export default {
   props: {
     action: String // to be: created, star, challenge
   },
-  components: { RutList },
+  components: { RutSum },
+  data () {
+    return {
+      totalRuts: 0,
+      currentRuts: [],
+      currentPage: 0
+    }
+  },
   computed: {
-    ...mapGetters([
-      'totalRuts',
-      'currentPage',
-      'currentRuts'
-    ])
+    hasMore () {
+      return this.currentRuts.length < this.totalRuts
+    }
   },
   methods: {
     loadmoreRuts () {
@@ -33,15 +44,20 @@ export default {
       // let params = {'action': action, 'userid': userid, 'param': param}
       fetchProfileRuts(action, userid, param)
       .then(resp => {
-        this.$store.commit('MORE_RUTS', resp.data.ruts)
+        this.currentRuts.push(...resp.data.ruts)
+        this.currentPage += 1
       })
     }
   },
   created () {
     let action = this.action
     let userid = this.$route.params.id
-    let params = {'action': action, 'userid': userid}
-    this.$store.dispatch('getProfileRuts', params)
+    fetchProfileRuts(action, userid)
+    .then(resp => {
+      this.currentRuts = resp.data.ruts
+      this.totalRuts = resp.data.total
+      this.currentPage = 1
+    })
   }
 }
 </script>

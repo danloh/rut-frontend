@@ -1,41 +1,16 @@
 // import axios from '@/main'
-import {
-  fetchIndexRuts,
-  fetchProfileRuts,
-  fetchRut
-} from '@/api/api'
+import { fetchRut } from '@/api/api'
 
 // initial state
 const perPage = 20
 const state = {
-  allRuts: [],
-  totalRuts: 0,
-  currentPage: 0,
-  currentRuts: [],
-  maxPage: 0,
+  indexRuts: [],
   showTags: [],
   rutDetail: {}
 }
 
 // actions
 const actions = {
-  getRuts: ({commit}, param) => {
-    return new Promise((resolve, reject) => {
-      fetchIndexRuts(param)
-      .then(resp => {
-        commit('SET_RUTS', resp.data)
-        resolve(resp)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-  getProfileRuts: ({commit}, params) => { // action: up to 2 args
-    return fetchProfileRuts(params['action'], params['userid'])
-    .then(resp => {
-      commit('SET_RUTS', resp.data)
-    })
-  },
   getRut: ({commit}, rutid) => {
     return new Promise((resolve, reject) => {
       fetchRut(rutid)
@@ -51,29 +26,9 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_RUTS (state, data) {
-    state.allRuts = data.ruts
-    state.totalRuts = data.total
-    state.currentPage = 1
-    state.maxPage = Math.ceil(data.total / perPage)
-    let sliced = data.ruts.slice(0, perPage)
-    state.currentRuts = sliced
+  SET_INDEX (state, data) {
+    state.indexRuts = data.ruts
     state.showTags = data.tags.slice(0, perPage)
-  },
-  MORE_RUTS (state, data) {
-    state.currentPage += 1
-    state.currentRuts.push(...data)
-  },
-  ADD_RUTS (state, page) {
-    let start = page * perPage
-    let end = start + perPage
-    let nextRuts = state.allRuts.slice(start, end)
-    state.currentPage += 1
-    state.currentRuts.push(...nextRuts)
-  },
-  CLEAN_RUTS (state) {
-    state.currentPage = 0
-    state.currentRuts = []
   },
   SET_RUT (state, data) {
     state.rutDetail = data

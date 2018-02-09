@@ -2,7 +2,7 @@
   <div class="tag-page">
     <div class="tag-side">
       <h4 class="sidetitle">Related Tags</h4>
-      <div class="sidebody" v-for="(tag, index) in showTags" :key="index">
+      <div class="sidebody" v-for="(tag, index) in relatedTags" :key="index">
         <router-link :to="'/tag/' + tag.tagid">{{tag.tagname}}</router-link>
       </div>
     </div>
@@ -16,7 +16,14 @@
       </el-button>
     </div>
     <div class="rut-list">
-      <rut-list :rutlist="currentRuts" @loadmore="loadmoreRuts"></rut-list>
+      <rut-sum v-for="rut in currentRuts" :key="rut.id" :rut="rut"></rut-sum>
+    </div>
+    <div v-if="hasMore">
+      <el-button class="blockbtn" size="mini" 
+                 @click="loadmoreRuts" 
+                 :disabled="!hasMore">
+                 Show More
+      </el-button>
     </div>
     <div class="demand-list" v-if="tagName"> <!--render child component when computed -->
       <div class="demand-list-title">
@@ -54,9 +61,8 @@
 </template>
 
 <script>
-import RutList from '@/components/Rut/RutList.vue'
+import RutSum from '@/components/Rut/RutSum.vue'
 import DemandList from '@/components/Demand/DemandList.vue'
-import { mapGetters } from 'vuex'
 import {
   editTag, checkFav, favTag, fetchTag,
   fetchTagRuts, checkTagLocked, lockTag, unlockTag
@@ -69,7 +75,7 @@ export default {
   title () {
     return this.tagDetail.tagname
   },
-  components: { RutList, DemandList },
+  components: { RutSum, DemandList },
   data () {
     return {
       action: 'Follow',
@@ -93,34 +99,40 @@ export default {
           { required: true, validator: trimValid, message: 'Please Descript it', trigger: 'blur' },
           { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
         ]
-      }
+      },
+      currentRuts: [],
+      currentPage: 0,
+      totalRuts: 0,
+      relatedTags: []
     }
   },
   computed: {
-    ...mapGetters([
-      'currentPage',
-      'currentRuts',
-      'showTags'
-    ]),
     tagid () {
       return this.tagDetail.id
     },
     tagName () {
       return this.tagDetail.tagname
+    },
+    hasMore () {
+      return this.currentRuts.length < this.totalRuts
     }
   },
   methods: {
     loadmoreRuts () {
       fetchTagRuts(this.tagDetail.id, {'page': this.currentPage})
       .then(resp => {
-        this.$store.commit('MORE_RUTS', resp.data)
+        this.currentRuts.push(...resp.data)
+        this.currentPage += 1
       })
     },
     loadData () {
       let tagid = this.$route.params.id
       fetchTag(tagid).then(resp => {
         let data = resp.data
-        this.$store.commit('SET_RUTS', data)
+        this.currentRuts = data.ruts
+        this.totalRuts = data.total
+        this.currentPage = 1
+        this.relatedTags = data.tags.slice(0, 20)
         this.tagDetail = data
         this.tagForm.name = data.tagname
         this.tagForm.description = data.descript

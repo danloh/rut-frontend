@@ -3,9 +3,7 @@
     <banner></banner>
     <div class="home-page">
       <div class="rut-list">
-        <keep-alive>
-          <rut-list :rutlist="currentRuts" @loadmore="loadmoreRuts"></rut-list>
-        </keep-alive>
+        <rut-sum v-for="rut in indexRuts" :key="rut.id" :rut="rut"></rut-sum>
       </div>
       <spinner :show="loading"></spinner>
       <div class="home-side">
@@ -21,39 +19,35 @@
 <script>
 import Spinner from '@/components/Misc/Spinner.vue'
 import Banner from '@/components/Misc/Banner.vue'
-import RutList from '@/components/Rut/RutList.vue'
+import RutSum from '@/components/Rut/RutSum.vue'
+import { fetchIndexRuts } from '@/api/api'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'home',
   title: 'Readup.Tips - Share Read List or Learning Roadmaps',
-  components: { RutList, Spinner, Banner },
+  components: { RutSum, Spinner, Banner },
   data: () => ({
     loading: true
   }),
   computed: {
     ...mapGetters([
-      'currentPage',
-      'currentRuts',
+      'indexRuts',
       'showTags'
     ])
   },
   methods: {
     loadIndex () {
-      let loaded = this.$store.getters.allRuts
+      let loaded = this.$store.getters.indexRuts
       this.loading = true
       if (loaded.length !== 0) {
-        this.$store.commit('CLEAN_RUTS')
-        this.$store.commit('ADD_RUTS', 0)
         this.loading = false
       } else {
-        this.$store.dispatch('getRuts').then(() => {
+        fetchIndexRuts().then(resp => {
+          this.$store.commit('SET_INDEX', resp.data)
           this.loading = false
         })
       }
-    },
-    loadmoreRuts () {
-      this.$store.commit('ADD_RUTS', this.currentPage)
     }
   },
   created () {
