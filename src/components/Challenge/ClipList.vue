@@ -36,6 +36,16 @@ export default {
     }
   },
   methods: {
+    loadClips () {
+      let params = this.param
+      if (this.param.ref === 'My') {
+        let userid = this.$store.getters.currentUserID
+        if (!userid) return
+        let userParam = {'userid': userid}
+        params = Object.assign(userParam, this.param)
+      }
+      this.$store.dispatch('getClips', params)
+    },
     loadmoreClip () {
       let page = { 'page': this.currentP }
       let params = Object.assign(page, this.param)
@@ -43,7 +53,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getClips', this.param)
+    this.loadClips()
   }
 }
 </script>

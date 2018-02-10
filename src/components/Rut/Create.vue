@@ -32,7 +32,7 @@
                   placeholder="Help readers understand your experience">
         </el-input>
       </el-form-item>
-      <el-form-item label="Suitable for" prop="rating">
+      <!-- <el-form-item label="Suitable for" prop="rating">
         <el-select v-model="createForm.rating">
           <el-option v-for="r in ratings" 
                      :key="r.value" 
@@ -40,7 +40,7 @@
                      :value="r.value">
           </el-option>
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="Who Can Edit?" prop="editable">
         <el-radio-group v-model="createForm.editable">
           <el-radio-button label="Creator"></el-radio-button>
@@ -93,11 +93,11 @@ export default {
           { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
         ]
       },
-      ratings: [
-        {value: 'All', label: 'All'}, {value: 'Secondary', label: 'Secondary'},
-        {value: 'College', label: 'College'}, {value: 'Elementary', label: 'Elementary'},
-        {value: 'Preschool', label: 'Preschool'}, {value: 'Professional', label: 'Professional'}
-      ],
+      // ratings: [
+      //   {value: 'All', label: 'All'}, {value: 'Secondary', label: 'Secondary'},
+      //   {value: 'College', label: 'College'}, {value: 'Elementary', label: 'Elementary'},
+      //   {value: 'Preschool', label: 'Preschool'}, {value: 'Professional', label: 'Professional'}
+      // ],
       demandid: this.$route.params.id || '',
       demandBody: ''
     }

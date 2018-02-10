@@ -14,7 +14,7 @@
 
 <script>
 import Clip from '@/components/Challenge/Clip.vue'
-import { fetchIUClips } from '@/api/api'
+import { fetchClips } from '@/api/api'
 
 export default {
   name: 'profile-clip',
@@ -38,7 +38,7 @@ export default {
     loadmoreClip () {
       let userid = this.$route.params.id
       let params = {'userid': userid, 'page': this.currentPage}
-      fetchIUClips(params).then(resp => {
+      fetchClips(params).then(resp => {
         this.clips.push(...resp.data.clips)
         this.currentPage += 1
       })
@@ -46,7 +46,7 @@ export default {
     loadClips () {
       let userid = this.$route.params.id
       let param = {'userid': userid}
-      fetchIUClips(param).then(resp => {
+      fetchClips(param).then(resp => {
         let data = resp.data
         this.clips = data.clips
         this.clipCount = data.total

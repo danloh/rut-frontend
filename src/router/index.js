@@ -142,7 +142,7 @@ const router = new Router({
       meta: {auth: true},
       children: [
         { path: '', name: 'defaultclip', redirect: 'hotclip' },
-        { path: 'myclip', name: 'Myclip', component: createClipList(), meta: {auth: true} },
+        { path: 'myclip', name: 'Myclip', component: createClipList({ref: 'My'}), meta: {auth: true} },
         { path: 'hotclip', name: 'Hotclip', component: createClipList({ref: 'Hot'}), meta: {auth: true} },
         { path: 'allclip', name: 'Allclip', component: createClipList({ref: 'All'}), meta: {auth: true} }
       ]

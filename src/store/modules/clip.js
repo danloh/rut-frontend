@@ -1,9 +1,5 @@
 // import axios from '@/main'
-import {
-  fetchClips,
-  fetchIUClips,
-  newClip
-} from '@/api/api'
+import { fetchClips, newClip } from '@/api/api'
 
 // initial state
 const perPage = 20
@@ -17,11 +13,6 @@ const state = {
 // actions
 const actions = {
   getClips: ({commit}, params) => {
-    if (params.itemid || params.userid) {
-      fetchIUClips(params).then(resp => {
-        commit('SET_CLIPS', resp.data)
-      })
-    }
     fetchClips(params).then(resp => {
       commit('SET_CLIPS', resp.data)
     })
@@ -32,11 +23,6 @@ const actions = {
     })
   },
   moreClips: ({commit}, params) => {
-    if (params.itemid || params.userid) {
-      fetchIUClips(params).then(resp => {
-        commit('MORE_CLIPS', resp.data.clips)
-      })
-    }
     fetchClips(params).then(resp => {
       commit('MORE_CLIPS', resp.data.clips)
     })

@@ -38,7 +38,7 @@
           <el-radio-button label="Everyone"></el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="Suitable for" prop="rating">
+      <!-- <el-form-item label="Suitable for" prop="rating">
         <el-select v-model="editForm.rating">
           <el-option v-for="r in ratings" 
                      :key="r.value" 
@@ -46,7 +46,7 @@
                      :value="r.value">
           </el-option>
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="success" size="medium" 
                    @click="onEdit('editForm', editForm)">
@@ -72,7 +72,7 @@ export default {
       editForm: {
         title: '',
         intro: '',
-        rating: '',
+        rating: 'All',
         credential: '',
         epilog: '',
         editable: ''
@@ -89,11 +89,11 @@ export default {
           { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
         ]
       },
-      ratings: [
-        {value: 'All', label: 'All'}, {value: 'Secondary', label: 'Secondary'},
-        {value: 'College', label: 'College'}, {value: 'Elementary', label: 'Elementary'},
-        {value: 'Preschool', label: 'Preschool'}, {value: 'Professional', label: 'Professional'}
-      ],
+      // ratings: [
+      //   {value: 'All', label: 'All'}, {value: 'Secondary', label: 'Secondary'},
+      //   {value: 'College', label: 'College'}, {value: 'Elementary', label: 'Elementary'},
+      //   {value: 'Preschool', label: 'Preschool'}, {value: 'Professional', label: 'Professional'}
+      // ],
       rutId: null,
       rutTitle: null
     }
