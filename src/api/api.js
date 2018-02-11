@@ -146,6 +146,10 @@ const unlockRut = (rutid, params) => {
 const editRut = (rutid, params) => {
   return request(`${base}/editrut/${rutid}`, params, 'post')
 }
+// edit rut credential or epilog
+const editRutce = (rutid, params) => {
+  return request(`${base}/editrutce/${rutid}`, params, 'post')
+}
 // edit rut's tags
 const editTags = (rutid, params) => {
   return request(`${base}/edittags/${rutid}`, params, 'post')
@@ -407,6 +411,7 @@ export {
   lockRut,
   unlockRut,
   editRut,
+  editRutce,
   editTags,
   addItem,
   itemToRut,

@@ -21,16 +21,6 @@
         </el-input>
         <md-tool :pretext="editForm.intro" @insertmd="updateP"></md-tool>
       </el-form-item>
-      <el-form-item label="Credential" prop="credential">
-        <el-input v-model="editForm.credential"></el-input>
-      </el-form-item>
-      <el-form-item label="Epilog" prop="epilog">
-        <el-input type="textarea" 
-                  v-model="editForm.epilog" 
-                  :autosize="{minRows:5}">
-        </el-input>
-        <md-tool :pretext="editForm.epilog" @insertmd="updateE"></md-tool>
-      </el-form-item>
       <el-form-item label="Who Can Edit?" prop="editable">
         <el-radio-group v-model="editForm.editable">
           <el-radio-button label="Creator"></el-radio-button>
@@ -73,8 +63,6 @@ export default {
         title: '',
         intro: '',
         rating: 'All',
-        credential: '',
-        epilog: '',
         editable: ''
       },
       rules: {
@@ -106,12 +94,9 @@ export default {
             title: form.title.trim(),
             intro: form.intro.trim(),
             rating: form.rating,
-            editable: form.editable,
-            credential: form.credential.trim(),
-            epilog: form.epilog.trim()
+            editable: form.editable
           }
-          editRut(this.rutId, data)
-          .then(() => {
+          editRut(this.rutId, data).then(() => {
             let id = this.rutId
             unlockRut(id)
             this.$router.push(`/readuplist/${id}`)
@@ -137,8 +122,6 @@ export default {
         this.editForm.intro = rut.intro
         this.editForm.rating = rut.rating
         this.editForm.editable = rut.editable
-        this.editForm.credential = rut.credential
-        this.editForm.epilog = rut.epilog
         this.rutId = rut.id
         this.rutTitle = rut.title
         lockRut(rut.id)
@@ -146,9 +129,6 @@ export default {
     },
     updateP (data) {
       this.editForm.intro += data
-    },
-    updateE (data) {
-      this.editForm.epilog += data
     }
   },
   created () {

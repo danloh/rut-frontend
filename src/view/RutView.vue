@@ -5,28 +5,31 @@
         <span class="tag" v-for="(tag, index) in tags" :key="index">
           <router-link :to="'/tag/' + tag.id">{{tag.tagname}}</router-link>
         </span>
-        <el-button type="text" @click="toEditTag" v-show="canTag">..Edit</el-button>
+        <el-button class="editlink" type="text" @click="toEdit('tag')" v-show="canTag">
+          ..Edit
+        </el-button>
       </div>
       <!-- edit tag dialog -->
-      <el-dialog title="Edit Tag" 
-                 :visible.sync="showDialog" 
-                 :before-close="cancelOnClose" width="30%">
+      <el-dialog title="Edit Tag" width="30%" 
+                 :visible.sync="showDialog.tag" 
+                 :before-close="cancelOnClose">
         <el-input size="mini" v-model="newTag" 
                   @keyup.enter.native="addNewTag" 
                   placeholder="Input a Tag, Press Enter to Add">
         </el-input>
         <div v-for="(tag, index) in newTags" :key="index">
           <p><el-button type="text" size="mini" 
-                        @click="newTags.splice(index, 1)">&times;
-              </el-button>&nbsp;&nbsp; {{ tag }} 
+                        @click="newTags.splice(index, 1)">
+                        &times;
+              </el-button>&nbsp;&nbsp; 
+              {{ tag }} 
           </p>
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="cancelEditTag">Cancel</el-button>
-          <el-button type="success" size="mini" @click="editTag">Done</el-button>
+          <el-button type="success" size="mini" @click="onEditTags">Done</el-button>
         </div>
       </el-dialog>
-      <!-- dialog end -->
+      <!-- edit tag dialog end -->
       <div class="title">
         <h2>{{ rutDetail.title }}</h2>
         <p class="meta">
@@ -85,13 +88,28 @@
       </div>
       <div class="epilog">
         <b class="indicator">Epilog:&nbsp;&nbsp;</b>
-        <router-link class="editlink" 
-                     :to="'/edit/readuplist/' + rutid" 
-                     v-if="canEdit">
-                     ...Edit
-        </router-link>
-        <div v-html="md(rutDetail.epilog)"></div>
+        <el-button class="editlink" type="text" @click="toEdit('epi')" v-show="canEdit">
+          ..Edit
+        </el-button>
+        <div v-html="md(epiForm.epilog)"></div>
       </div>
+      <!-- edit epilog dialog -->
+      <el-dialog title="Add or Edit Epilog" width="45%" 
+                 :visible.sync="showDialog.epi"
+                 :before-close="cancelOnClose">
+        <el-form :model="epiForm" ref="epiForm">
+          <el-form-item prop="epilog">
+            <el-input type="textarea" :autosize="{minRows:5}" v-model="epiForm.epilog"></el-input>
+            <md-tool :pretext="epiForm.epilog" @insertmd="updateE"></md-tool>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button size="mini" type="success" @click="onEditEpi('epiForm', epiForm)">
+            Done
+          </el-button>
+        </div>
+      </el-dialog>
+      <!-- edit epilog dialog end -->
       <div class="bottombar">
         <share-bar></share-bar>
       </div>
@@ -100,13 +118,28 @@
       <div class="credential">
         <p class="credential-title"><b>Creator's Credential</b></p>
         <div class="credential-body">
-          <div>{{ rutDetail.credential || aboutcreator || '...'}}</div>
-          <router-link class="editlink" 
-                       :to="'/edit/readuplist/' + rutid" v-if="canEdit">
-                       ...Edit
-          </router-link> 
+          <div>{{ creForm.credential || aboutcreator || '...' }}</div>
+          <el-button class="editlink" type="text" @click="toEdit('cre')" v-show="canEdit">
+            ..Edit
+          </el-button>
         </div>
       </div>
+      <!-- edit credential dialog -->
+      <el-dialog title="Add or Edit Credential" width="40%" 
+                 :visible.sync="showDialog.cre"
+                 :before-close="cancelOnClose">
+        <el-form :model="creForm" ref="creForm">
+          <el-form-item prop="credential">
+            <el-input type="textarea" autosize v-model="creForm.credential"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button size="mini" type="success" @click="onEditCre('creForm', creForm)">
+            Done
+          </el-button>
+        </div>
+      </el-dialog>
+      <!-- edit credential dialog end -->
       <div class="demands" v-if="demandCount">
         <b>As Answer to Request:</b>
         <p class="demand-title" 
@@ -133,11 +166,11 @@
 import ItemSum from '@/components/Item/ItemSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import TipSum from '@/components/Rut/TipSum.vue'
+import MdTool from '@/components/Misc/MdTool.vue'
 // sc: star and challenge
 import {
-  scRut, checkSC, editTags,
-  fetchRutDemands, fetchRutTips,
-  checkRutLocked, lockRut, unlockRut
+  scRut, checkSC, editTags, editRutce, fetchRutDemands,
+  fetchRutTips, checkRutLocked, lockRut, unlockRut
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { mapGetters } from 'vuex'
@@ -145,7 +178,7 @@ import marked from '@/util/marked'
 
 export default {
   name: 'rut-view',
-  components: { ItemSum, TipSum, ShareBar },
+  components: { ItemSum, TipSum, ShareBar, MdTool },
   data () {
     return {
       starAction: 'Star',
@@ -162,11 +195,21 @@ export default {
       creatorname: '',
       aboutcreator: '',
       isEveryone: false,
-      showDialog: false,
+      canEdit: false,
+      canTag: true,
+      showDialog: {
+        tag: false,
+        epi: false,
+        cre: false
+      },
       newTag: '',
       newTags: [],
-      canEdit: false,
-      canTag: true
+      epiForm: {
+        epilog: ''
+      },
+      creForm: {
+        credential: ''
+      }
     }
   },
   computed: {
@@ -180,12 +223,6 @@ export default {
     tags () {
       return this.rutDetail.tags
     },
-    // contributors () {
-    //   return this.rutDetail.contributors
-    // },
-    // contributorIDList () {
-    //   return this.rutDetail.contributoridlist
-    // },
     hasMoreTips () {
       return this.tips.length < this.tipsCount
     },
@@ -213,6 +250,8 @@ export default {
         this.tipsCount = data.itemcount
         this.demands = data.demands
         this.demandCount = data.demandcount
+        this.creForm.credential = data.credential
+        this.epiForm.epilog = data.epilog
         // check if show edit button
         let currentUserID = this.$store.getters.currentUserID
         if (!currentUserID) {
@@ -225,8 +264,7 @@ export default {
     loadmoreTips () {
       let rutid = this.$route.params.id
       let params = {'page': this.currentTP}
-      fetchRutTips(rutid, params)
-      .then(resp => {
+      fetchRutTips(rutid, params).then(resp => {
         this.tips.push(...resp.data)
         this.currentTP += 1
       })
@@ -307,30 +345,6 @@ export default {
         })
       }
     },
-    toEditTag () {
-      let currentUserID = this.$store.getters.currentUserID
-      if (!currentUserID || !checkAuth()) { // utilize short-circuit to set default auth
-        this.showDialog = false
-        this.$message('Please Log in to Continue')
-      } else {
-        checkRutLocked(currentUserID, this.rutid).then(resp => {
-          if (!resp.data) {
-            this.showDialog = true
-            lockRut(this.rutid)
-          } else {
-            this.$message('in Editing...Please Try Later')
-          }
-        })
-      }
-    },
-    cancelEditTag () {
-      this.showDialog = false
-      unlockRut(this.rutid)
-    },
-    cancelOnClose (done) {
-      this.cancelEditTag()
-      done()
-    },
     addNewTag () {
       let newT = this.newTag.trim()
       if (newT) {
@@ -343,7 +357,7 @@ export default {
         })
       }
     },
-    editTag () {
+    onEditTags () {
       if (checkAuth()) {
         let oldTags = this.tags.map(t => t.tagname)
         let newTags = this.newTags
@@ -351,7 +365,7 @@ export default {
         editTags(this.rutid, data).then(resp => {
           unlockRut(this.rutid)
           this.$store.commit('NEW_TAGS', resp.data)
-          this.showDialog = false
+          this.showDialog.tag = false
         })
       } else {
         this.$message({
@@ -363,6 +377,70 @@ export default {
           query: {redirect: this.$route.fullPath}
         })
       }
+    },
+    onEditEpi (formName, form) {
+      this.$refs[formName].validate((valid) => {
+        if (valid && checkAuth()) {
+          let data = {
+            epilog: form.epilog.trim()
+          }
+          editRutce(this.rutid, data).then(resp => {
+            let id = this.rutid
+            unlockRut(id)
+            this.showDialog.epi = false
+            form.epilog = resp.data.epilog
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: 'error!! Please Check'
+          })
+          return false
+        }
+      })
+    },
+    onEditCre (formName, form) {
+      this.$refs[formName].validate((valid) => {
+        if (valid && checkAuth()) {
+          let data = {
+            credential: form.credential.trim()
+          }
+          editRutce(this.rutid, data).then(resp => {
+            let id = this.rutid
+            unlockRut(id)
+            this.showDialog.cre = false
+            form.credential = resp.data.credential
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: 'error!! Please Check'
+          })
+          return false
+        }
+      })
+    },
+    toEdit (to) {
+      let currentUserID = this.$store.getters.currentUserID
+      if (!currentUserID || !checkAuth()) { // utilize short-circuit to set default auth
+        this.$message('Please Log in to Continue')
+      } else {
+        checkRutLocked(currentUserID, this.rutid).then(resp => {
+          if (!resp.data) {
+            this.showDialog[to] = true
+            lockRut(this.rutid)
+          } else {
+            this.$message('in Editing...Please Try Later')
+          }
+        })
+      }
+    },
+    cancelOnClose (done) {
+      unlockRut(this.rutid)
+      done()
+    },
+    updateE (data) {
+      this.epiForm.epilog += data
     },
     md (content) {
       return marked(content)
