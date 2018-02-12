@@ -43,7 +43,7 @@
         <b>Working on Challenge:</b>
         <br>
         <router-link :to="'/readuplist/' + challengeRut.id">
-           {{ challengeRut.title || '...' }}
+           {{ challengeRut.title }}
         </router-link>
         <br>
         <b class="deadline">Deadline: {{ dueDate | toMDY(rep=false) }}
@@ -136,7 +136,12 @@ export default {
       })
     },
     setDue () {
-      let params = {'date': this.pickDate}
+      let challengeRutid = this.challengeRut.id
+      if (!this.pickDate || !challengeRutid) return
+      let params = {
+        'date': this.pickDate,
+        'rutid': challengeRutid
+      }
       setDeadline(params).then((resp) => {
         this.showPicker = false
         this.dueDate = resp.data

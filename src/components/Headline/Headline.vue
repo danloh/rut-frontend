@@ -88,6 +88,7 @@ export default {
       padding 0 5px
       font-size 1.1em
       a
+        color #407481
         &:hover
           color #409eff
     .content
