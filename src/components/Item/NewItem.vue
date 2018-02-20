@@ -20,6 +20,13 @@
       <el-form-item label="URL: e.g. Amazon/Coursera url Or UID: e.g. ISBN-13" prop="url">
         <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
       </el-form-item>
+      <el-form-item label="Flag as" prop="flag">
+        <el-radio-group v-model="checkForm.flag">
+          <el-radio-button label="Have Done"></el-radio-button>
+          <el-radio-button label="Schedule"></el-radio-button>
+          <el-radio-button label="Working On"></el-radio-button>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item>
         <el-button type="success" size="medium" 
                    @click="onCheck('checkForm', checkForm)">
@@ -103,6 +110,13 @@
         </el-input>
         <md-tool :pretext="itemForm.details" @insertmd="updateN"></md-tool>
       </el-form-item>
+      <el-form-item label="Flag as" prop="flag">
+        <el-radio-group v-model="itemForm.flag">
+          <el-radio-button label="Have Done"></el-radio-button>
+          <el-radio-button label="Schedule"></el-radio-button>
+          <el-radio-button label="Working On"></el-radio-button>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item>
         <el-button type="success" size="medium" 
                    @click="onNewItem('itemForm', itemForm)">
@@ -127,7 +141,8 @@ export default {
   data () {
     return {
       checkForm: {
-        url: ''  // actually  url or uid
+        url: '',  // actually  url or uid
+        flag: ''
       },
       itemForm: {
         cate: 'Book',
@@ -143,7 +158,8 @@ export default {
         binding: '',
         page: '',
         price: '',
-        details: ''
+        details: '',
+        flag: ''
       },
       rules: {
         title: [
@@ -201,6 +217,7 @@ export default {
           }
           let data = {
             resUrl: form.url.trim(), // url or uid
+            flag: form.flag.trim(),
             how: 'spider'
           }
           newItem(data).then(resp => {
@@ -238,7 +255,8 @@ export default {
               binding: form.binding.trim(),
               page: form.page.trim(),
               price: form.price.trim(),
-              details: form.details.trim()
+              details: form.details.trim(),
+              flag: form.flag.trim()
             }
             newItem(data).then(resp => {
               let id = resp.data

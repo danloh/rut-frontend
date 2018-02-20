@@ -105,12 +105,12 @@ axios.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           store.commit('DEL_TOKEN')
-          new Vue().$message('Oops...Access Denied, Need To Log in')
           if (router.currentRoute.path !== '/login') {
             router.push({
               path: '/login',
               query: {redirect: router.currentRoute.fullPath}
             })
+            new Vue().$message('Oops...Access Denied, Need To Log in')
           }
           break
         case 403:
