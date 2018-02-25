@@ -46,16 +46,11 @@
                      :disabled="!doneForm.doneItemID">ADD to List</el-button>
         </el-form-item>
       </el-form>
-      <div style="width:480px">
+      <div>
         <el-input size="mini" v-model="itemKeyword" 
                   @keyup.enter.native="searchItem" 
-                  placeholder="or Search item and track it as done: Input keyword then Enter">
+                  placeholder="or Search item and track it as done: Input keyword then Press Enter">
         </el-input>
-        <b style="font-size:0.8em">or You can 
-          <router-link to="/newitem" 
-                       target="_blank" rel="noopener noreferrer">Submit New Item
-          </router-link> which you have done.
-        </b>
       </div>
     </div>
   </div>

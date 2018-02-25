@@ -136,7 +136,7 @@ import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'new-item',
-  title: 'Add New Item',
+  title: 'Sumbit New Item',
   components: { Spinner, MdTool },
   data () {
     return {

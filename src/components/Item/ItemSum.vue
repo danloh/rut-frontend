@@ -35,8 +35,12 @@
           {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-if="flagAction==='Have Done'">
-            <b @click="showAndloadData" style="color:orange">Add to List</b>
+          <el-dropdown-item>
+            <el-button @click="showAndloadData" 
+                       :disabled="flagAction!=='Have Done'"
+                       type="text" style="color:orange">
+                       Add to List
+            </el-button>
           </el-dropdown-item>
           <el-dropdown-item>
             <span @click="openToFlag('schedule')">Schedule</span>

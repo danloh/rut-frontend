@@ -49,12 +49,11 @@
     </div>
     <footer class="bottom">
       ©Readup.Tips - since 2018
-      <!-- | <router-link to="/about">About</router-link>
-      | <router-link to="/terms">Terms</router-link>
-      | <router-link to="/help">Help</router-link> | -->
-      | <router-link to="/newitem">Submit New Item</router-link>
+      | <router-link to="/">About</router-link>
+      | <router-link to="/">Terms</router-link>
+      | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
       <!--google site search -->
-      <div style="width:265px">
+      <div style="width:25em">
         <el-input size="mini" v-model="searchWord" 
                   @keyup.enter.native="siteSearch" 
                   placeholder="Search Readup.Tips">

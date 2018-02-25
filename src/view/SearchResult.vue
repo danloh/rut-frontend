@@ -13,6 +13,13 @@
     <el-button size="mini" @click="searchMoreItem" :disabled="!hasMore">
       Maybe More
     </el-button>
+    <br>
+    <b style="font-size:0.8em">No Result? You can help 
+      <router-link to="/newitem" 
+                   target="_blank" rel="noopener noreferrer">
+                   Submit New Item
+      </router-link>
+    </b>
   </div>
 </template>
 
