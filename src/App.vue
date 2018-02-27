@@ -4,7 +4,7 @@
       <nav class="nav-menu">
         <router-link to="/">
             <b style="color:darkorange;font-size:1.2em;letter-spacing:0.0005em">
-              Readup.Tips<sup style="font-size:0.5em;color:grey"> pre-α</sup>
+              Readup.Tips<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
@@ -39,8 +39,13 @@
           </el-dropdown>
           <div v-else>
             <router-link to="/register"><b class="login">SIGNUP</b></router-link>
-            <router-link to="/login"><b class="login">LOGIN</b></router-link>
+            <el-button type="text" @click="toLogin=true"><b class="login">SIGNIN</b></el-button>
           </div>
+          <!-- login dialog -->
+          <el-dialog :visible.sync="toLogin" width="40%" class="loginDialog">
+            <login-form :next="'current'" @close="toLogin=false"></login-form>
+          </el-dialog>
+          <!-- login dialog end -->
         </div>
       </nav>
     </header>
@@ -65,12 +70,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import LoginForm from '@/components/Auth/LoginForm.vue'
 
 export default {
   name: 'app',
+  components: { LoginForm },
   data () {
     return {
-      searchWord: ''
+      searchWord: '',
+      toLogin: false
     }
   },
   computed: {
