@@ -53,17 +53,20 @@
     <div class="view">
       <router-view></router-view>
     </div>
-    <footer class="bottom">
-      ©Readup.Tips - since 2018
-      | <router-link to="/newitem">submit</router-link>
-      | <router-link to="/">About</router-link>
-      | <router-link to="/">Terms</router-link>
-      | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
-      <!--google site search -->
-      <div style="width:29em">
-        <el-input size="mini" v-model="searchWord" 
+    <footer class="footer">
+      <div class="bottom">
+        ©Readup.Tips - since 2018
+        | <router-link to="/newitem">submit</router-link>
+        | <router-link to="/">About</router-link>
+        | <router-link to="/">Terms</router-link>
+        | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
+        <!--google site search -->
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <el-input size="mini" style="width:16em"
+                  v-model="searchWord"
                   @keyup.enter.native="siteSearch" 
                   placeholder="Search Readup.Tips">
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </div>
     </footer>
@@ -179,10 +182,12 @@ blockquote
   width 100%
   margin 0 auto
   position relative
-.bottom
-  max-width 960px
-  box-sizing border-box
-  margin 5px auto
-  padding 8px 0px
-  font-size 0.75em
+.footer
+  border-top 2px dotted #cfc0cf
+  .bottom
+    max-width 960px
+    box-sizing border-box
+    margin 5px auto
+    padding 8px 0px
+    font-size 0.75em
 </style>

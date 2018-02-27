@@ -72,6 +72,7 @@
         <el-input size="mini" v-model="itemKeyword" 
                   @keyup.enter.native="searchItem" 
                   placeholder="Search Item in Readup.Tips">
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </div>
     </div>

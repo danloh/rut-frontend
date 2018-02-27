@@ -47,9 +47,10 @@
         </el-form-item>
       </el-form>
       <div>
-        <el-input size="mini" v-model="itemKeyword" 
+        <el-input size="small" v-model="itemKeyword" 
                   @keyup.enter.native="searchItem" 
                   placeholder="or Search item and track it as done: Input keyword then Press Enter">
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </div>
     </div>

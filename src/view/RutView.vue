@@ -56,11 +56,11 @@
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
         <router-link class="editlink" 
                      :to="'/edit/readuplist/' + rutid" v-if="canEdit">
-                      EDIT 
+                      <b>Edit </b>
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
         <router-link class="editlink" 
                      :to="'/additemto/readuplist/' + rutid" v-if="canEdit">
-                      ADD ITEM 
+                      <b>Add Item </b>
         </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button size="mini" plain @click="starRut">
           <b>{{ starAction }}&nbsp;{{ starCount }}</b>
