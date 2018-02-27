@@ -38,8 +38,9 @@
             </el-dropdown-menu>
           </el-dropdown>
           <div v-else>
-            <router-link to="/register"><b class="login">SIGNUP</b></router-link>
-            <el-button type="text" @click="toLogin=true"><b class="login">SIGNIN</b></el-button>
+            <el-button type="text" @click="toLogin=true">
+              <b class="login">Log in</b>
+            </el-button>
           </div>
           <!-- login dialog -->
           <el-dialog :visible.sync="toLogin" width="40%" class="loginDialog">
@@ -54,11 +55,12 @@
     </div>
     <footer class="bottom">
       ©Readup.Tips - since 2018
+      | <router-link to="/newitem">submit</router-link>
       | <router-link to="/">About</router-link>
       | <router-link to="/">Terms</router-link>
       | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
       <!--google site search -->
-      <div style="width:25em">
+      <div style="width:29em">
         <el-input size="mini" v-model="searchWord" 
                   @keyup.enter.native="siteSearch" 
                   placeholder="Search Readup.Tips">
