@@ -184,6 +184,7 @@ blockquote
   position relative
 .footer
   border-top 2px dotted #cfc0cf
+  margin-top 3em
   .bottom
     max-width 960px
     box-sizing border-box

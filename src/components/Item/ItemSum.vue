@@ -6,9 +6,16 @@
     <div class="info">
       <span class="title">
         {{item.cate}} 
-        <router-link :to="'/item/' + item.id">
-          {{ item.title }}
-        </router-link>
+        <template v-if="out"><!--in itemview page, out to resource link-->
+          <a :href="item.resurl" v-if="item.resurl" 
+             target="_blank" rel="nofollow noopener noreferrer">
+             {{ item.title }}
+          </a>
+          <b v-else style="color:#337ab7">{{ item.title }}</b>
+        </template>
+        <template v-else>
+          <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
+        </template>
       </span><br>
       <span><b>Byline:</b> {{ item.byline }} </span><br>
       <span><b>Publish:</b> 
@@ -18,7 +25,7 @@
         {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
         <a :href="item.resurl" v-if="item.resurl" 
            target="_blank" rel="nofollow noopener noreferrer"> 
-           &#128279;
+           :::
         </a>
       </span><br>
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
@@ -121,7 +128,7 @@ import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'item-sum',
-  props: ['item'],
+  props: ['item', 'out'], // out for  link to resource
   components: { MdTool },
   data () {
     return {
@@ -301,7 +308,7 @@ export default {
 .item-sum
   background-color lighten(#deecec, 85%)
   min-height 180px
-  padding 10px 110px 10px 135px
+  padding 10px 114px 10px 131px
   border-bottom 1px solid #eee
   position relative
   .thumb

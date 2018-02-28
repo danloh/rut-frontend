@@ -1,7 +1,7 @@
 <template>
   <div class="item-page" v-if="currentItem.id">
     <div class="item-main">
-      <item-sum :item="currentItem" :key="currentItem.id"></item-sum> <!--key to re-render-->
+      <item-sum :item="currentItem" :out="true" :key="currentItem.id"></item-sum> <!--key to re-render-->
       <div>
         <b>>></b>&nbsp;&nbsp;<b>More Details</b> &nbsp;&nbsp;&nbsp;
         <el-button type="text" @click="toEditItem"> ...Edit Detail</el-button>
