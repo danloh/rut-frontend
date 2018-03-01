@@ -7,8 +7,8 @@
       <span class="title">
         {{item.cate}} 
         <template v-if="out"><!--in itemview page, out to resource link-->
-          <a :href="item.resurl" v-if="item.resurl" 
-             target="_blank" rel="nofollow noopener noreferrer">
+          <a v-if="item.resurl" 
+             :href="item.resurl" target="_blank" rel="nofollow noopener noreferrer">
              {{ item.title }}
           </a>
           <b v-else style="color:#337ab7">{{ item.title }}</b>

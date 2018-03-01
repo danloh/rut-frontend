@@ -72,6 +72,7 @@ export default {
               type: 'error'
             })
           })
+          this.resetForm(formName)
         } else {
           this.$message('error!! Please Check')
           return false
@@ -81,6 +82,9 @@ export default {
     toNext (next) {
       this.$router.push(next)
       this.$emit('close')
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }

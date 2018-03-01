@@ -22,7 +22,7 @@
         <div class="right-menu">
           <div v-if="authed">
             <router-link to="/create" v-if="num >= 10">
-              <b style="color:green">Create Now</b>
+              <b style="color:orange">Create Now</b>
             </router-link>
             <el-dropdown>
               <el-button type="success" size="small">
@@ -41,7 +41,7 @@
           </div>
           <div v-else>
             <el-button type="text" @click="toLogin=true">
-              <b class="login">Log in</b>
+              <b>Log in</b>
             </el-button>
           </div>
           <!-- login dialog -->
@@ -157,10 +157,6 @@ blockquote
     padding 8px 0px
     .right-menu
       float right
-      .login
-        color green
-        font-size 1.0em
-        font-weight 700
   a
     color #080400
     line-height 24px
