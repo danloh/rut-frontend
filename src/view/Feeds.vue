@@ -27,13 +27,6 @@
       <div class="sidebody" v-for="(tag, index) in showTags" :key="index">
         <router-link :to="'/tag/' + tag.id">{{tag.tagname}}</router-link>
       </div>
-      <div v-if="hasMore">
-        <el-button class="blockbtn" type="text" size="mini" 
-                   @click="loadMoreTags" 
-                   :disabled="!hasMore">
-                   Show More
-        </el-button>
-      </div>
     </div>
   </div>
 </template>
@@ -47,14 +40,7 @@ export default {
   data () {
     return {
       activity: [],
-      showTags: [],
-      tagCount: '',
-      currentPage: 0
-    }
-  },
-  computed: {
-    hasMore () {
-      return this.showTags.length < this.tagCount
+      showTags: []
     }
   },
   methods: {
@@ -67,15 +53,6 @@ export default {
       let userid = this.$store.getters.currentUserID
       fetchFavTags(userid).then(resp => {
         this.showTags = resp.data.tags
-        this.tagCount = resp.data.total
-      })
-    },
-    loadMoreTags () {
-      let userid = this.$store.getters.currentUserID
-      let params = {'page': this.currentPage}
-      fetchFavTags(userid, params).then(resp => {
-        this.showTags.push(...resp.data.tags)
-        this.currentPage += 1
       })
     }
   },

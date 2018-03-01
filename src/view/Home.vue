@@ -1,6 +1,5 @@
 <template>
   <div>
-    <banner></banner>
     <div class="home-page">
       <div class="rut-list">
         <rut-sum v-for="rut in indexRuts" :key="rut.id" :rut="rut"></rut-sum>
@@ -18,7 +17,6 @@
 
 <script>
 import Spinner from '@/components/Misc/Spinner.vue'
-import Banner from '@/components/Misc/Banner.vue'
 import RutSum from '@/components/Rut/RutSum.vue'
 import { fetchIndexRuts } from '@/api/api'
 import { mapGetters } from 'vuex'
@@ -26,7 +24,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'home',
   title: 'Readup.Tips - Share Learning Roadmaps',
-  components: { RutSum, Spinner, Banner },
+  components: { RutSum, Spinner },
   data: () => ({
     loading: true
   }),

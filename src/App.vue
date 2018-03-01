@@ -62,8 +62,7 @@
         | <router-link to="/">About</router-link>
         | <router-link to="/">Terms</router-link>
         | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
-        <!--google site search -->
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!--google site search -->&nbsp;&nbsp;&nbsp;
         <el-input size="mini" style="width:16em"
                   v-model="searchWord"
                   @keyup.enter.native="siteSearch" 
@@ -178,6 +177,7 @@ blockquote
 .view
   max-width 960px
   min-width 800px
+  min-height 42em
   width 100%
   margin 0 auto
   position relative
@@ -186,8 +186,6 @@ blockquote
   margin-top 3em
   .bottom
     max-width 960px
-    box-sizing border-box
     margin 5px auto
-    padding 8px 0px
     font-size 0.75em
 </style>

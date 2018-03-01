@@ -126,7 +126,7 @@ export default {
     getChallengeRut () {
       fetchChallengeRut().then(resp => {
         this.challengeRut = resp.data.rut
-        this.items = resp.data.items
+        this.items = resp.data.items.slice(0, 10)
         this.dueDate = resp.data.deadline
       })
     },
