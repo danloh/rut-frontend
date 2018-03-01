@@ -19,7 +19,7 @@
                      :remote-method="storeQuery"
                      :loading="searching"
                      @keyup.enter.native="getDoneItems"
-                     placeholder="input keyword: UID or Title, then Press Enter, will search from your have-dones">
+                     placeholder="input: UID or Title, then Press Enter, will search from your have-dones only">
             <el-option v-for="i in doneItems" 
                        :key="i.id" 
                        :label="i.title" 
@@ -47,9 +47,10 @@
         </el-form-item>
       </el-form>
       <div>
+        or if the item you want to add not in your have-dones, Search and track it as done:
         <el-input size="small" v-model="itemKeyword" 
                   @keyup.enter.native="searchItem" 
-                  placeholder="or Search item and track it as done: Input keyword then Press Enter">
+                  placeholder=" Input keyword then Press Enter">
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </div>
@@ -156,11 +157,12 @@ export default {
 
 <style lang="stylus" scoped>
 .add-page
-  padding 10px 120px 10px 80px
+  padding 10px 160px 10px 120px
   position relative
   .done-form
     padding 20px
     border 1px dotted #689f38
+    margin-bottom 10px
   .title
     margin-bottom 10px
   .select-item

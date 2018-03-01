@@ -19,24 +19,26 @@
         <router-link to="/headlines">
           <b>Headline</b>
         </router-link>
-        <router-link to="/create">
-          <b>Create Now</b>
-        </router-link>
         <div class="right-menu">
-          <el-dropdown v-if="authed">
-            <el-button type="success" size="small">
-              <i class="el-icon-menu"></i>
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <router-link :to="'/profile/' + currentUserID">Profile</router-link>
-              </el-dropdown-item>
-              <el-dropdown-item divided>
-                <el-button type="text" size="mini" @click="onLogout">Log out</el-button>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+          <div v-if="authed">
+            <router-link to="/create" v-if="num >= 10">
+              <b style="color:green">Create Now</b>
+            </router-link>
+            <el-dropdown>
+              <el-button type="success" size="small">
+                <i class="el-icon-menu"></i>
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <router-link :to="'/profile/' + currentUserID">Profile</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item divided>
+                  <el-button type="text" size="mini" @click="onLogout">Log out</el-button>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
           <div v-else>
             <el-button type="text" @click="toLogin=true">
               <b class="login">Log in</b>
@@ -89,7 +91,8 @@ export default {
   computed: {
     ...mapGetters([
       'currentUserID',
-      'authed'
+      'authed',
+      'num'
     ])
   },
   methods: {

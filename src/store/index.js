@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getToken, setToken, removeToken, getID, setID, removeID } from '@/util/auth'
+import {
+  getToken, setToken, removeToken, getID, setID, removeID, setNum, getNum
+} from '@/util/auth'
 import getters from './getters'
 import rut from './modules/rut'
 import item from './modules/item'
@@ -15,6 +17,7 @@ const state = {
   currentUserID: Number(getID()),
   authed: Boolean(getID()) && Boolean(getToken()),
   token: getToken(),
+  num: getNum(),
   currentUser: {},
   whoEdit: {}
 }
@@ -24,6 +27,8 @@ const mutations = {
     state.currentUserID = userid
     state.authed = Boolean(userid)
     setID(userid, obj.exp)
+    state.num = obj.donenum
+    setNum(obj.donenum)
   },
   SET_TOKEN (state, obj) {
     let token = obj.token

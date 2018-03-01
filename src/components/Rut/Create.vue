@@ -11,10 +11,10 @@
              :model="createForm" 
              :rules="rules" 
              ref="createForm" 
-             label-width="120px" 
+             label-width="110px" 
              size="mini">
       <el-form-item label="Title" prop="title">
-        <el-input v-model="createForm.title" clearable></el-input>
+        <el-input type="textarea" v-model="createForm.title" autosize></el-input>
       </el-form-item>
       <el-form-item label="Tags" prop="tag">
         <el-input v-model="createForm.tag" clearable 
@@ -28,7 +28,7 @@
         <md-tool :pretext="createForm.intro" @insertmd="updateM"></md-tool>
       </el-form-item>
       <el-form-item label="Credential" prop="credential">
-        <el-input v-model="createForm.credential" 
+        <el-input v-model="createForm.credential" clearable
                   placeholder="Help readers understand your experience">
         </el-input>
       </el-form-item>
@@ -159,7 +159,7 @@ export default {
 
 <style lang="stylus" scoped>
 .create-page
-  padding 10px 120px 10px 80px
+  padding 10px 200px 10px 80px
   position relative
   .create-form
     padding 20px

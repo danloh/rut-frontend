@@ -9,10 +9,10 @@
              :model="editForm" 
              :rules="rules" 
              ref="editForm" 
-             label-width="120px" 
+             label-width="110px" 
              size="mini">
       <el-form-item label="Title" prop="title">
-        <el-input v-model="editForm.title"></el-input>
+        <el-input type="textarea" autosize v-model="editForm.title"></el-input>
       </el-form-item>
       <el-form-item label="Preface" prop="intro">
         <el-input type="textarea" 
@@ -139,7 +139,7 @@ export default {
 
 <style lang="stylus" scoped>
 .edit-page
-  padding 10px 120px 10px 80px
+  padding 10px 160px 10px 100px
   position relative
   .edit-form
     padding 20px
