@@ -25,7 +25,7 @@
       <review-list :param="reviewsParam"></review-list>
       <div class="submenu">
         <b>>></b>&nbsp;&nbsp;
-        <b style="color: orange">Clips</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b style="color: orange">Quotes</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
       </div>
       <clip-list :param="cliplistParam"></clip-list>

@@ -6,18 +6,15 @@
       </router-link>
     </div>
     <div class="demand-bar">
-      Requseted by 
-      <router-link :to="'/profile/' + requestor.id">
-        {{ requestor.name }}
-      </router-link>
-      | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">Upvote</el-button>
-      | {{ answercount }}&nbsp;
-        <router-link :to="'/create/' + demand.id">
-          <b>Answer</b>
+      - <router-link :to="'/profile/' + requestor.id">
+          {{ requestor.name }}
         </router-link>
-      | {{demand.commentcount}}&nbsp;
-        <router-link :to="'/demand/' + demand.id">
-          Discuss
+      | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">Upvote</el-button>
+      | <router-link :to="'/create/' + demand.id">
+          {{ answercount | pluralise('Answer') }} &nbsp;
+        </router-link>
+      | <router-link :to="'/demand/' + demand.id">
+          {{demand.commentcount | pluralise('Comment')}} &nbsp;
         </router-link>
     </div>
   </div>
@@ -56,18 +53,15 @@ export default {
 
 <style lang="stylus" scoped>
 .demand-main
-  padding 5px
+  padding 10px
   background-color lighten(#f1f3f5, 50%)
-  border-bottom 1px solid #eee
+  border-bottom 2px solid #eee
   .demand-body
-    background-color #f1f3f5
-    padding 5px
-    font-size 1.15em
+    font-size 1.05em
     a
       color #00838f
       &:hover
         color #409eff
   .demand-bar
-    text-align right
-    font-size 0.8em
+    font-size 0.75em
 </style>

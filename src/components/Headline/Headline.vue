@@ -27,10 +27,9 @@
         {{ headline.timestamp | timeAgo }}
         | {{ vote }}
         <el-button type="text" @click="upheadline">vote</el-button>
-        | {{headline.commentcount}}&nbsp;
-        <router-link :to="'/headline/' + headline.id">
-          Comment
-        </router-link>
+        | <router-link :to="'/headline/' + headline.id">
+            {{headline.commentcount | pluralise('Comment')}}&nbsp;
+          </router-link>
       </div>
     </div>
   </div>
@@ -75,8 +74,8 @@ export default {
 .headline
   padding 5px 5px 5px 10px
   position relative
-  background-color lighten(#f1f3f5, 50%)
-  border-bottom 1px solid #eee
+  background-color lighten(#f6f5f2, 50%)
+  border-bottom 2px solid #eee
   .vote
     position absolute
     top 5px

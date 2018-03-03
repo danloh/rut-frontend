@@ -5,7 +5,7 @@
         <el-form :model="clipForm" :rules="rules" ref="clipForm">
           <el-form-item prop="clip" style="margin-bottom:16px">
             <el-input type="textarea" v-model="clipForm.clip" 
-                      :autosize="{minRows:3}" 
+                      :autosize="{minRows:2}" 
                       placeholder="Excerpt quotes %^&1:First Chapter,Page two:2">
             </el-input>
           </el-form-item>
@@ -30,9 +30,10 @@
         </el-form>
       </div>
       <div class="submenu">
-        <router-link to="/challenge/allclip">All Clips</router-link>
-        <router-link to="/challenge/hotclip">Popular Clips</router-link>
-        <router-link to="/challenge/myclip">My Clips</router-link>
+        <b>Sparks Of Readers&nbsp;&nbsp;</b>
+        <router-link to="/challenge/allclip">All</router-link>
+        <router-link to="/challenge/hotclip">Popular</router-link>
+        <router-link to="/challenge/myclip">My</router-link>
       </div>
       <div class="clip-view">
         <router-view></router-view>

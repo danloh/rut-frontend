@@ -473,7 +473,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
     .intro
       background-color $bgcolor
       padding 5px 10px
-      border-bottom 1px dotted #f3bc59
+      border-bottom 2px solid #eee
     .itemtip
       background-color $bgcolor
       .itemsum
@@ -484,7 +484,6 @@ $bgcolor = lighten(#f6f6f1, 50%)
       background-color $bgcolor
       padding 10px
       margin-top 5px
-      border-top 1px dotted orange
     .tagbar
       display inline-blcok
       .tag
