@@ -2,7 +2,7 @@
   <div class="demand-main" v-if="requestor"> <!--render after requestor get data-->
     <div class="demand-body">
       <router-link :to="'/demand/' + demand.id">
-        <span>{{ demand.body }}</span>
+        <b>{{ demand.body }}</b>
       </router-link>
     </div>
     <div class="demand-bar">

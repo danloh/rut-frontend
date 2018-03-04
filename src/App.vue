@@ -63,12 +63,12 @@
         | <router-link to="/">Terms</router-link>
         | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
         <!--google site search -->&nbsp;&nbsp;&nbsp;
-        <el-input size="mini" style="width:16em"
+        <!-- <el-input size="mini" style="width:16em"
                   v-model="searchWord"
                   @keyup.enter.native="siteSearch" 
                   placeholder="Search Readup.Tips">
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
-        </el-input>
+        </el-input> -->
       </div>
     </footer>
   </div>

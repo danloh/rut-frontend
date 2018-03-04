@@ -132,7 +132,7 @@ export default {
         this.currentRuts = data.ruts
         this.totalRuts = data.total
         this.currentPage = 1
-        this.relatedTags = data.tags.slice(0, 20)
+        this.relatedTags = data.tags.slice(0, 16)
         this.tagDetail = data
         this.tagForm.name = data.tagname
         this.tagForm.description = data.descript
