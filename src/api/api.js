@@ -174,6 +174,42 @@ const editTips = (cid, params) => {
 const deleteTips = (cid, params) => {
   return request(`${base}/del/tips/${cid}`, params)
 }
+// create new road
+const newRoad = params => {
+  return request(`${base}/newroad`, params, 'post')
+}
+// edit road
+const editRoad = (roadid, params) => {
+  return request(`${base}/editroad/${roadid}`, params, 'post')
+}
+// edit deadline
+const editDeadline = (roadid, params) => {
+  return request(`${base}/resetdeadline/${roadid}`, params)
+}
+// edit mark in road
+const editMark = (gid, params) => {
+  return request(`${base}/editmark/${gid}`, params, 'post')
+}
+// delete mark
+const deleteMark = (gid, params) => {
+  return request(`${base}/delmark/${gid}`, params)
+}
+// add item to road
+const itemToRoad = (itemid, roadid, params) => {
+  return request(`${base}/item/${itemid}/toroad/${roadid}`, params, 'post')
+}
+// get a road
+const fetchRoad = (roadid, params) => {
+  return request(`${base}/road/${roadid}`, params)
+}
+// get roads
+const fetchRoads = (userid, params) => {
+  return request(`${base}/${userid}/roads`, params)
+}
+// get all roads
+const fetchAllRoads = (userid, params) => {
+  return request(`${base}/${userid}/allroads`, params)
+}
 // get favored tags
 const fetchFavTags = (userid, params) => { // !!
   return request(`${base}/${userid}/fav/tags`, params)
@@ -418,6 +454,15 @@ export {
   checkItem,
   editTips,
   deleteTips,
+  newRoad,
+  editRoad,
+  editDeadline,
+  editMark,
+  deleteMark,
+  itemToRoad,
+  fetchRoad,
+  fetchRoads,
+  fetchAllRoads,
   fetchFavTags,
   fetchTag,
   fetchTagRuts,

@@ -13,6 +13,8 @@ const DemandView = () => import('@/view/DemandView')
 const Headlines = () => import('@/view/Headlines')
 const HeadlineView = () => import('@/view/HeadlineView')
 const Profile = () => import('@/view/Profile')
+const RoadView = () => import('@/view/RoadView')
+const NewRoad = () => import('@/components/Road/NewRoad')
 const RutView = () => import('@/view/RutView')
 const RutComment = () => import('@/view/RutComment')
 const ItemView = () => import('@/view/ItemView')
@@ -42,6 +44,7 @@ const createDemandList = param => () => import('@/components/Demand/CreateDemand
 const createHList = param => () => import('@/components/Headline/CreateHList').then(m => m.default(param))
 const createProfileRuts = param => () => import('@/components/Profile/CreateProfileRuts').then(m => m.default(param))
 const createProfileItems = param => () => import('@/components/Profile/CreateProfileItems').then(m => m.default(param))
+const ProfileRoads = () => import('@/components/Profile/ProfileRoads')
 const ProfileReviews = () => import('@/components/Profile/ProfileReviews')
 const ProfileDemands = () => import('@/components/Profile/ProfileDemands')
 const ProfileClips = () => import('@/components/Profile/ProfileClips')
@@ -161,6 +164,7 @@ const router = new Router({
       children: [
         { path: '', name: 'defaultProfile', redirect: 'activity' },
         { path: 'activity', name: 'Activity', component: ProfileActivity },
+        { path: 'roadmaps', name: 'Roadmaps', component: ProfileRoads },
         { path: 'created', name: 'CreatedRuts', component: createProfileRuts('created') },
         { path: 'star', name: 'StarRuts', component: createProfileRuts('star') },
         { path: 'challenge', name: 'ChallengeRuts', component: createProfileRuts('challenge') },
@@ -173,6 +177,8 @@ const router = new Router({
         { path: 'followeds', name: 'Followeds', component: FollowedList }
       ]
     },
+    { path: '/newroad', component: NewRoad, name: 'NewRoad', meta: {auth: true} },
+    { path: '/roadmap/:id', component: RoadView, name: 'RoadView' },
     { path: '/setting/:id',
       component: Setting,
       children: [

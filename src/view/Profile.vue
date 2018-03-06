@@ -28,6 +28,13 @@
         <p class="user-info">From: {{user.location || '...'}}</p>
       </div>
       <div class="right-nav">
+        <router-link :to="'/profile/' + userid + '/roadmaps/'">
+          <b style="color:orange">/</b> Roadmaps
+        </router-link>
+        <router-link to="/newroad">
+          <small style="color:orange">&nbsp; new</small>
+        </router-link>
+        <br>
         <router-link :to="'/profile/' + userid + '/created/'">
           <b style="color:royalblue">*</b> Created
         </router-link>

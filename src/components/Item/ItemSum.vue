@@ -42,10 +42,15 @@
           {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>
-            <el-button @click="showAndloadData" 
-                       :disabled="flagAction!=='Have Done'"
+          <el-dropdown-item v-if="flagAction!=='Have Done'">
+            <el-button @click="showAndloadRoads" 
                        type="text" style="color:orange">
+                       Add to Map
+            </el-button>
+          </el-dropdown-item>
+          <el-dropdown-item v-if="flagAction=='Have Done'">
+            <el-button @click="showAndloadData" 
+                       type="text" style="color:green">
                        Add to List
             </el-button>
           </el-dropdown-item>
@@ -118,11 +123,47 @@
       </div>
     </el-dialog>
     <!-- addnote dialog end -->
+    <!-- addtoroad dialog -->
+    <el-dialog title="Add Item to RoadMap" :visible.sync="showAddtoRoad" width="45%">
+      <el-form :model="toRoadForm" ref="toRoadForm" size="medium">
+        <el-form-item prop="road">
+          <el-select v-model="toRoadForm.selectRoadID" placeholder="Select a Roadmap">
+            <el-option v-for="r in roads" 
+                       :key="r.id" 
+                       :label="r.title" 
+                       :value="r.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="mark">
+          <el-input type="textarea" v-model="toRoadForm.mark" 
+                    :autosize="{minRows:3}" placeholder="Mark"></el-input>
+          <md-tool :pretext="toRoadForm.mark" @insertmd="updateR"></md-tool>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="mini" @click="showAddtoRoad = false">Cancel</el-button>
+        <el-button size="mini" type="success" 
+                   @click="addtoRoad('toRoadForm', toRoadForm)">
+                   Add
+        </el-button>
+      </div>
+    </el-dialog>
+    <!-- addtolist dialog end -->
+    <!-- redirect dialog -->
+    <el-dialog :visible.sync="showRedtoRoad" width="30%">
+      <router-link :to="'/roadmap/' + toRoadForm.selectRoadID">
+        <b>Go To The Roadmap Page?</b>
+      </router-link>
+    </el-dialog>
+    <!-- redirect dialog end-->
   </div>
 </template>
 
 <script>
-import { flagItem, checkFlag, fetchProfileRuts, itemToRut } from '@/api/api'
+import {
+  flagItem, checkFlag, fetchProfileRuts, itemToRut, fetchRoads, itemToRoad
+} from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import MdTool from '@/components/Misc/MdTool.vue'
 
@@ -152,7 +193,14 @@ export default {
           { max: 42, message: 'Max Length should be 42', trigger: 'blur' }
         ]
       },
-      createdRuts: []
+      createdRuts: [],
+      roads: [],
+      showAddtoRoad: false,
+      toRoadForm: {
+        mark: '',
+        selectRoadID: null
+      },
+      showRedtoRoad: false
     }
   },
   computed: {
@@ -217,7 +265,7 @@ export default {
     flagAddnote (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (checkAuth()) {
-          let note = form.note.trim()
+          let note = form.note
           let to = this.flagTo
           switch (to) {
             case 'schedule':
@@ -294,8 +342,61 @@ export default {
         }
       })
     },
+    // get roadmap before add item to one of
+    showAndloadRoads () {
+      if (checkAuth()) {
+        let userid = this.$store.getters.currentUserID
+        fetchRoads(userid).then(resp => {
+          this.roads = resp.data.roads
+          this.showAddtoRoad = true
+        })
+      } else {
+        this.showAddtoRoad = false
+        this.$message({
+          showClose: true,
+          message: 'Should Log in to Access'
+        })
+        this.$router.push({
+          path: '/login',
+          query: {redirect: this.$route.fullPath}
+        })
+      }
+    },
+    addtoRoad (formName, form) {
+      if (!form.selectRoadID) {
+        this.$message({
+          showClose: true,
+          message: 'Please Select one'
+        })
+        return false
+      }
+      this.$refs[formName].validate((valid) => {
+        if (valid && checkAuth()) {
+          let roadid = form.selectRoadID
+          let itemid = this.item.id
+          let data = {'mark': form.mark}
+          itemToRoad(itemid, roadid, data).then(() => {
+            this.showAddtoRoad = false
+            this.showRedtoRoad = true
+          })
+        } else if (!checkAuth()) {
+          this.showAddtoRoad = false
+          this.$message({
+            showClose: true,
+            message: 'Should Log in to Access'
+          })
+          this.$router.push({
+            path: '/login',
+            query: {redirect: this.$route.fullPath}
+          })
+        }
+      })
+    },
     updateT (data) {
       this.intoForm.tips += data
+    },
+    updateR (data) {
+      this.toRoadForm.mark += data
     }
   },
   created () {
