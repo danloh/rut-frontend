@@ -7,11 +7,12 @@
           <span>By 
             <router-link :to="'/profile/' + ownerid">
               {{ ownername }}
-            </router-link> | 
+            </router-link> 
           </span> 
           | include {{ roadObj.itemcount | pluralise('item') }} 
           | Start: {{ roadObj.createat | toMDY }} 
           -- Due: {{ roadObj.deadline | toMDY(rep=false) }}
+            {{ roadObj.done ? '✔' : '..'  }}
         </p>
       </div>
       <div class="intro">

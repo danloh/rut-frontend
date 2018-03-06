@@ -41,27 +41,15 @@
     </div>
     <div class="challenge-side">
       <div class="right-title">
-        <b>Working on Challenge:</b>
+        <b>Working on RoadMap:</b>
         <br>
-        <router-link :to="'/readuplist/' + challengeRut.id">
-           {{ challengeRut.title }}
+        <router-link :to="'/roadmap/' + onRoad.id">
+           <b style="font-size:1.1em">{{ onRoad.title }}</b>
         </router-link>
         <br>
-        <b class="deadline">Deadline: {{ dueDate | toMDY(rep=false) }}
-           <el-button type="text" @click="showPicker=true">..Set</el-button>
-        </b>
+        <b class="deadline">Deadline: {{ dueDate | toMDY(rep=false) }}</b>
+        <el-button type="text" @click="markRoadAsDone"> -></el-button>
         <br>
-        <div class="datePick" v-show="showPicker">
-          <el-date-picker
-            v-model="pickDate"
-            type="date"
-            size="mini"
-            placeholder="Pick a day"
-            value-format="yyyy-MM-dd"
-            :picker-options="pickerOptions">
-          </el-date-picker>
-          <el-button type="text" @click="setDue">OK</el-button>
-        </div>
         <b>Including Items:</b>
       </div>
       <p class="right-item" v-for="(item, index) in items" :key="index" :item="item">
@@ -76,7 +64,7 @@
 </template>
 
 <script>
-import { fetchChallengeItems, fetchChallengeRut, setDeadline } from '@/api/api'
+import { fetchChallengeItems, fetchOnRoad, markRoadDone } from '@/api/api'
 
 export default {
   name: 'challenge',
@@ -95,17 +83,10 @@ export default {
           { required: true, message: 'Required', trigger: 'change' }
         ]
       },
-      challengeRut: {},
-      items: [], // items in challenge rut
+      onRoad: {},
+      items: [], // items in challenge road
       dueDate: '',
-      doingItems: [],
-      showPicker: false,
-      pickerOptions: {
-        disabledDate (time) {
-          return time.getTime() < Date.now()
-        }
-      },
-      pickDate: null
+      doingItems: []
     }
   },
   methods: {
@@ -124,11 +105,19 @@ export default {
         }
       })
     },
-    getChallengeRut () {
-      fetchChallengeRut().then(resp => {
-        this.challengeRut = resp.data.rut
+    getOnRoad () {
+      fetchOnRoad().then(resp => {
+        this.onRoad = resp.data
         this.items = resp.data.items.slice(0, 10)
         this.dueDate = resp.data.deadline
+      })
+    },
+    markRoadAsDone () {
+      let roadid = this.onRoad.id
+      markRoadDone(roadid).then(resp => {
+        if (resp.data) {
+          this.getOnRoad()
+        }
       })
     },
     getChallengeItems () {
@@ -136,24 +125,12 @@ export default {
         this.doingItems = resp.data
       })
     },
-    setDue () {
-      let challengeRutid = this.challengeRut.id
-      if (!this.pickDate || !challengeRutid) return
-      let params = {
-        'date': this.pickDate,
-        'rutid': challengeRutid
-      }
-      setDeadline(params).then((resp) => {
-        this.showPicker = false
-        this.dueDate = resp.data
-      })
-    },
     resetForm (formName) {
       this.$refs[formName].resetFields()
     }
   },
   mounted () {
-    this.getChallengeRut()
+    this.getOnRoad()
     this.getChallengeItems()
   }
 }

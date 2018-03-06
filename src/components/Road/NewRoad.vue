@@ -58,6 +58,9 @@ export default {
         ],
         intro: [
           { required: true, validator: trimValid, message: 'Need an introduction', trigger: 'blur' }
+        ],
+        deadline: [
+          { required: true, message: 'Required', trigger: 'blur' }
         ]
       }
     }
@@ -74,10 +77,6 @@ export default {
           newRoad(data).then(resp => {
             let id = resp.data.id
             this.$router.push(`/roadmap/${id}`)
-            this.$message({
-              showClose: true,
-              message: 'New Roadmap Created, Now Add item to it'
-            })
           })
         } else {
           this.$message({

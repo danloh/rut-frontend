@@ -98,9 +98,13 @@ const fetchChallengeItems = params => {
 const setDeadline = params => {
   return request(`${base}/setdeadline`, params)
 }
-
+// per created, stared, ..
 const fetchProfileRuts = (action, userid, params) => {  // act: created, challenge, star
   return request(`${base}/${userid}/${action}/ruts`, params)
+}
+// search ruts
+const searchRuts = (params) => {
+  return request(`${base}/search/ruts`, params)
 }
 // get a rut
 const fetchRut = (rutid, params) => { // !!
@@ -205,6 +209,14 @@ const fetchRoad = (roadid, params) => {
 // get roads
 const fetchRoads = (userid, params) => {
   return request(`${base}/${userid}/roads`, params)
+}
+// get challenging road
+const fetchOnRoad = params => {
+  return request(`${base}/getonroad`, params)
+}
+// mark road as done
+const markRoadDone = (roadid, params) => {
+  return request(`${base}/markasdone/${roadid}`, params)
 }
 // get all roads
 const fetchAllRoads = (userid, params) => {
@@ -434,6 +446,7 @@ export {
   fetchChallengeItems,
   setDeadline,
   fetchProfileRuts,
+  searchRuts,
   fetchRut,
   fetchRutTips,
   fetchRutDemands,
@@ -463,6 +476,8 @@ export {
   fetchRoad,
   fetchRoads,
   fetchAllRoads,
+  fetchOnRoad,
+  markRoadDone,
   fetchFavTags,
   fetchTag,
   fetchTagRuts,

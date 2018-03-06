@@ -1,8 +1,8 @@
 <template>
   <div>
     <b>ROADMAPS {{totalRoads}}</b>
-    <div class="r-list"  v-for="road in currentRoads" :key="road.id">
-      <template class="r-sum">
+    <div class="r-list">
+      <div class="r-sum" v-for="road in currentRoads" :key="road.id">
         <router-link :to="'/roadmap/' + road.id">
           <span>
             <img class="cover" :src="road.cover" style="width:80px; height:100px" alt="Cover">
@@ -13,9 +13,11 @@
           <div class="intro" v-html="md(road.intro)"></div>
         </router-link>
         <span class="meta">
-          <span> Deadline- {{ road.headline | toMDY(rep=false) }}</span>
+          <span>
+            Due: {{ road.deadline | toMDY(rep=false) }} &nbsp; {{ road.done ? '✔' : '..'  }} 
+          </span>
         </span>
-      </template>
+      </div>
     </div>
     <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
@@ -76,28 +78,28 @@ export default {
 .r-list
   width 100%
   margin-top 5px
-.r-sum
-  background-color lighten(#e5ebe4, 90%)
-  min-height 120px
-  padding 10px 30px 10px 100px
-  border-bottom 1px solid #eee
-  position relative
-  &:hover
-    background-color lighten(#f3f3ed, 60%)
-  .cover
-    position absolute
-    top 10px
-    left 5px
-  .title
-    font-size 1.2em
-    font-weight 700
-    padding-top 10px
-    a
-      &:hover
-        color #ff6600
-  .intro
-    color #828282
-  .meta
-    font-size .85em
-    color #337ab7
+  .r-sum
+    background-color lighten(#e5ebe4, 90%)
+    min-height 120px
+    padding 5px 30px 5px 100px
+    border-bottom 2px solid #eee
+    position relative
+    &:hover
+      background-color lighten(#f3f3ed, 60%)
+    .cover
+      position absolute
+      top 10px
+      left 5px
+    .title
+      font-size 1.2em
+      font-weight 700
+      padding-top 10px
+      a
+        &:hover
+          color #ff6600
+    .intro
+      color #828282
+    .meta
+      font-size .85em
+      color #337ab7
 </style>
