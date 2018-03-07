@@ -12,6 +12,7 @@ const Demands = () => import('@/view/Demands')
 const DemandView = () => import('@/view/DemandView')
 const Headlines = () => import('@/view/Headlines')
 const HeadlineView = () => import('@/view/HeadlineView')
+const Circles = () => import('@/view/Circles')
 const Profile = () => import('@/view/Profile')
 const RoadView = () => import('@/view/RoadView')
 const NewRoad = () => import('@/components/Road/NewRoad')
@@ -157,6 +158,7 @@ const router = new Router({
         { path: 'new', name: 'NewHeadline', component: createHList('new') }
       ]
     },
+    { path: '/circles', name: 'Circles', component: Circles },
     { path: '/profile/:id',
       component: Profile,
       children: [

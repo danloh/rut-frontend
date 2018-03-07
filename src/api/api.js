@@ -367,12 +367,20 @@ const fetchRutComments = (rutid, params) => {
   return request(`${base}/commentsonrut/${rutid}`, params)
 }
 // get circles for a rut
-const fetchRutCircles = (rutid, params) => {
-  return request(`${base}/rut/${rutid}/circles`, params)
+const fetchCircles = params => {
+  return request(`${base}/circles`, params)
 }
 // post new circle
-const postCircle = (rutid, params) => {
-  return request(`${base}/newcircle/rut/${rutid}`, params, 'post')
+const postCircle = params => {
+  return request(`${base}/newcircle`, params, 'post')
+}
+// edit circle
+const editCircle = (cid, params) => {
+  return request(`${base}/editcircle/${cid}`, params, 'post')
+}
+// del circle
+const delCircle = (cid, params) => {
+  return request(`${base}/delcircle/${cid}`, params)
 }
 // get headline list
 const fetchHeadlines = (params) => {
@@ -429,7 +437,10 @@ export {
   fetchRutTips,
   fetchRutDemands,
   fetchRutComments,
-  fetchRutCircles,
+  fetchCircles,
+  postCircle,
+  editCircle,
+  delCircle,
   checkStar,
   starRut,
   checkRutLocked,
@@ -493,7 +504,6 @@ export {
   upvoteDemand,
   rutAsAnswer,
   newComment,
-  postCircle,
   fetchHeadlines,
   fetchHeadline,
   fetchHlComments,

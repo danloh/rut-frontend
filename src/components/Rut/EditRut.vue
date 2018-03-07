@@ -38,9 +38,13 @@
         </el-select>
       </el-form-item> -->
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" size="mini" 
                    @click="onEdit('editForm', editForm)">
                    Done and Submit
+        </el-button>
+        <el-button size="mini" 
+                   @click="cancelnReturn">
+                   Cancel
         </el-button>
       </el-form-item>
     </el-form>

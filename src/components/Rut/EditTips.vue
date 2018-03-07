@@ -23,20 +23,24 @@
         </el-input>
         <md-tool :pretext="editForm.tips" @insertmd="updateM"></md-tool>
       </el-form-item>
-      <el-form-item label="Reminder" prop="spoiler">
+      <el-form-item prop="spoiler">
         <el-radio-group v-model="editForm.spoiler">
           <el-radio-button label="No Spoiler"></el-radio-button>
           <el-radio-button label="Spoiler Ahead"></el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
-                   @click="onEdit('editForm', editForm)">Edit and Submit
+        <el-button type="success" size="mini" 
+                   @click="onEdit('editForm', editForm)">
+                   Edit and Submit
         </el-button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <el-button type="danger" plain size="mini" 
+        <el-button size="mini" 
+                   @click="cancelnReturn">
+                   Cancel
+        </el-button>
+        <el-button type="danger" size="mini" style="float:right"
                    @click="showDialog = true">
-                   Delete Tips
+                   Delete
         </el-button>
       </el-form-item>
     </el-form>
