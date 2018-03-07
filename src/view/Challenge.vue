@@ -84,7 +84,7 @@ export default {
         ]
       },
       onRoad: {},
-      items: [], // items in challenge road
+      items: [], // items in road
       dueDate: '',
       doingItems: []
     }

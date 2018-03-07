@@ -21,9 +21,6 @@
         </router-link>
         <div class="right-menu">
           <div v-if="authed">
-            <router-link to="/create" v-if="num >= 10">
-              <b style="color:orange">Create Now</b>
-            </router-link>
             <el-dropdown>
               <el-button type="success" size="small">
                 <i class="el-icon-menu"></i>
@@ -31,7 +28,12 @@
               </el-button>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
-                  <router-link :to="'/profile/' + currentUserID">Profile</router-link>
+                  <router-link to="/create" v-if="num >= 10">
+                    <b style="color:orange">Share Now</b>
+                  </router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link :to="'/profile/' + currentUserID">My Profile</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item divided>
                   <el-button type="text" size="mini" @click="onLogout">Log out</el-button>

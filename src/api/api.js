@@ -86,20 +86,12 @@ const newRut = (params, demandid) => {
 const fetchIndexRuts = params => {
   return request(`${base}/index/ruts`, params)
 }
-// get one challenge rut
-const fetchChallengeRut = params => {
-  return request(`${base}/challengerut`, params)
-}
 // get some working on items to challenge page
 const fetchChallengeItems = params => {
   return request(`${base}/challengeitems`, params)
 }
-// set challenge deadline
-const setDeadline = params => {
-  return request(`${base}/setdeadline`, params)
-}
 // per created, stared, ..
-const fetchProfileRuts = (action, userid, params) => {  // act: created, challenge, star
+const fetchProfileRuts = (action, userid, params) => {  // act: created, star
   return request(`${base}/${userid}/${action}/ruts`, params)
 }
 // search ruts
@@ -118,16 +110,12 @@ const fetchRutTips = (rutid, params) => {
 const fetchRutDemands = (rutid, params) => {
   return request(`${base}/rut/${rutid}/demands`, params)
 }
-// get challengers of a rut response to
-const fetchRutChallengers = (rutid, params) => {
-  return request(`${base}/rut/${rutid}/challengers`, params)
-}
-// check if user star or challenge a rut
-const checkSC = (rutid, action, params) => {
+// check if user star  a rut
+const checkStar = (rutid, action, params) => {
   return request(`${base}/check${action}/rut/${rutid}`, params)
 }
-// tag star or challenge a rut
-const scRut = (action, rutid, params) => {
+// tag star  a rut
+const starRut = (action, rutid, params) => {
   return request(`${base}/${action}/rut/${rutid}`, params)
 }
 // check rut if locked, when edit rut's tag
@@ -158,17 +146,9 @@ const editRutce = (rutid, params) => {
 const editTags = (rutid, params) => {
   return request(`${base}/edittags/${rutid}`, params, 'post')
 }
-// add item to rut, new or check existing
-const addItem = (rutid, params) => {
-  return request(`${base}/additemtorut/${rutid}`, params, 'post')
-}
 // add existing item to rut
 const itemToRut = (itemid, rutid, params) => {
   return request(`${base}/item/${itemid}/torut/${rutid}`, params, 'post')
-}
-// check item to add
-const checkItem = (rutid, params) => {
-  return request(`${base}/checkitemtoadd/${rutid}`, params, 'post')
 }
 // edit tips
 const editTips = (cid, params) => {
@@ -442,9 +422,7 @@ export {
   followOne,
   newRut,
   fetchIndexRuts,
-  fetchChallengeRut,
   fetchChallengeItems,
-  setDeadline,
   fetchProfileRuts,
   searchRuts,
   fetchRut,
@@ -452,9 +430,8 @@ export {
   fetchRutDemands,
   fetchRutComments,
   fetchRutCircles,
-  fetchRutChallengers,
-  checkSC,
-  scRut,
+  checkStar,
+  starRut,
   checkRutLocked,
   checkEditable,
   lockRut,
@@ -462,9 +439,7 @@ export {
   editRut,
   editRutce,
   editTags,
-  addItem,
   itemToRut,
-  checkItem,
   editTips,
   deleteTips,
   newRoad,

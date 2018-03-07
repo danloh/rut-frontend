@@ -20,9 +20,6 @@
     <div class="comment">
       <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>
     </div>
-    <div v-if="hasChallenge">
-      <challenge-list></challenge-list>
-    </div>
     <div class="circle-side">
       <b style="font-size:1.2em">Circles</b>
       <circle-list :circles="circles"></circle-list>
@@ -79,7 +76,6 @@
 import { fetchRutComments, fetchRutCircles, postCircle } from '@/api/api'
 import Comment from '@/components/Comment/Comment.vue'
 import Reply from '@/components/Comment/Reply.vue'
-import ChallengeList from '@/components/Rut/ChallengeList.vue'
 import CircleList from '@/components/Rut/CircleList.vue'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
@@ -89,7 +85,7 @@ export default {
   title () {
     return 'Discuss: ' + this.rut.title
   },
-  components: { Comment, Reply, ChallengeList, CircleList },
+  components: { Comment, Reply, CircleList },
   data () {
     return {
       rut: {},
@@ -138,9 +134,6 @@ export default {
     },
     hasMoreCircle () {
       return this.circles.length < this.circleCount
-    },
-    hasChallenge () {
-      return this.rut.challengecount > 0
     }
   },
   methods: {

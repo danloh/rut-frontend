@@ -37,8 +37,6 @@ const EditItem = () => import('@/components/Item/EditItem')
 const NewReview = () => import('@/components/Item/NewReview')
 const EditReview = () => import('@/components/Item/EditReview')
 const MyItemRC = () => import('@/components/Item/MyItemRC')
-// import createClipList from '@/components/Challenge/CreateClipList'
-// import createDemandList from '@/components/Demand/CreateDemandList'
 const createClipList = params => () => import('@/components/Challenge/CreateClipList').then(m => m.default(params))
 const createDemandList = param => () => import('@/components/Demand/CreateDemandList').then(m => m.default(param))
 const createHList = param => () => import('@/components/Headline/CreateHList').then(m => m.default(param))
@@ -167,7 +165,6 @@ const router = new Router({
         { path: 'roadmaps', name: 'Roadmaps', component: ProfileRoads },
         { path: 'created', name: 'CreatedRuts', component: createProfileRuts('created') },
         { path: 'star', name: 'StarRuts', component: createProfileRuts('star') },
-        { path: 'challenge', name: 'ChallengeRuts', component: createProfileRuts('challenge') },
         { path: 'working', name: 'WorkingItems', component: createProfileItems('doing') },
         { path: 'scheduled', name: 'ScheduledItems', component: createProfileItems('todo') },
         { path: 'havedone', name: 'DoneItems', component: createProfileItems('done') },

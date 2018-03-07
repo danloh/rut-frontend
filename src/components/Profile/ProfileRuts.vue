@@ -21,7 +21,7 @@ import { fetchProfileRuts } from '@/api/api'
 export default {
   name: 'profile-ruts',
   props: {
-    action: String // to be: created, star, challenge
+    action: String // to be: created, star
   },
   components: { RutSum },
   data () {

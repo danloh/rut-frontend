@@ -65,9 +65,6 @@
         <el-button size="mini" plain @click="starRut">
           <b>{{ starAction }}&nbsp;{{ starCount }}</b>
         </el-button>
-        <el-button size="mini" plain @click="challengeRut">
-          <b>{{ challengeAction }}&nbsp;{{ challengeCount }}</b>
-        </el-button>
       </div>
       <div class="itemtip" v-for="tip in tips" :key="tip.cid">
         <item-sum class="itemsum" :item="tip.item" :key="tip.itemid"></item-sum>
@@ -167,9 +164,8 @@ import ItemSum from '@/components/Item/ItemSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import TipSum from '@/components/Rut/TipSum.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
-// sc: star and challenge
 import {
-  scRut, checkSC, editTags, editRutce, fetchRutDemands,
+  starRut, checkStar, editTags, editRutce, fetchRutDemands,
   fetchRutTips, checkRutLocked, lockRut, unlockRut
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
@@ -182,9 +178,7 @@ export default {
   data () {
     return {
       starAction: 'Star',
-      challengeAction: 'Challenge',
       starCount: 0,
-      challengeCount: 0,
       tips: [],
       currentTP: 1,
       tipsCount: 0,
@@ -240,7 +234,6 @@ export default {
       .then(resp => {
         let data = resp.data
         this.starCount = data.starcount
-        this.challengeCount = data.challengecount
         this.creatorid = data.creator.id
         this.creatorname = data.creator.name
         this.aboutcreator = data.creator.about
@@ -280,58 +273,24 @@ export default {
     checkStar () {
       if (checkAuth()) {
         let rutid = this.$route.params.id // ?? liftcycle timing
-        checkSC(rutid, 'star').then(resp => {
+        checkStar(rutid, 'star').then(resp => {
           this.starAction = resp.data
         })
       } else {
         this.starAction = 'Star'
       }
     },
-    checkChallenge () {
-      if (checkAuth()) {
-        let rutid = this.$route.params.id // ?? liftcycle timing
-        checkSC(rutid, 'challenge').then(resp => {
-          this.challengeAction = resp.data
-        })
-      } else {
-        this.challengeAction = 'Challenge'
-      }
-    },
     starRut () {
       if (checkAuth()) {
         if (this.starAction === 'Star') {
-          scRut('star', this.rutid).then(() => {
+          starRut('star', this.rutid).then(() => {
             this.starAction = 'Unstar'
             this.starCount += 1
           })
         } else {
-          scRut('unstar', this.rutid).then(() => {
+          starRut('unstar', this.rutid).then(() => {
             this.starAction = 'Star'
             this.starCount -= 1
-          })
-        }
-      } else {
-        this.$message({
-          showClose: true,
-          message: 'Should Log in to Continue'
-        })
-        this.$router.push({
-          path: '/login',
-          query: {redirect: this.$route.fullPath}
-        })
-      }
-    },
-    challengeRut () {
-      if (checkAuth()) {
-        if (this.challengeAction === 'Challenge') {
-          scRut('challenge', this.rutid).then(() => {
-            this.challengeAction = 'Endchallenge'
-            this.challengeCount += 1
-          })
-        } else {
-          scRut('unchallenge', this.rutid).then(() => {
-            this.challengeAction = 'Challenge'
-            this.challengeCount -= 1
           })
         }
       } else {
@@ -452,7 +411,6 @@ export default {
   created () {
     this.loadRutData()
     this.checkStar()
-    this.checkChallenge()
   }
 }
 </script>
