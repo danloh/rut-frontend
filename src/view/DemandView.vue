@@ -173,14 +173,15 @@ export default {
         if (valid && checkAuth()) {
           let rutid = form.selectRutID
           let demandid = this.demandDetail.id
-          rutAsAnswer(rutid, demandid).then((resp) => {
-            this.showDialog = false
+          rutAsAnswer(rutid, demandid).then(resp => {
+            if (resp.data) {
+              this.showDialog = false
+              this.answers.push(resp.data)
+            }
             this.$message({
               showClose: true,
-              message: 'Link a New Answer, Done',
-              type: 'success'
+              message: resp.data ? 'Done' : 'Up To 6'
             })
-            this.answers.push(resp.data)
           })
         } else if (!checkAuth()) {
           this.showDialog = false

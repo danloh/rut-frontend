@@ -70,7 +70,12 @@
     <el-dialog title="Add Item to Created List" :visible.sync="showDialog" width="45%">
       <el-form :model="intoForm" ref="intoForm" size="medium">
         <el-form-item prop="rut">
-          <el-select v-model="intoForm.selectRutID" placeholder="Select a List">
+          <el-select v-model="intoForm.selectRutID"
+                     filterable remote 
+                     :remote-method="storeKey"
+                     :loading="searching"
+                     @keyup.enter.native="searchCreatedRuts" 
+                     placeholder="Select a List, Can search">
             <el-option v-for="r in createdRuts" 
                        :key="r.id" 
                        :label="r.title" 
@@ -162,7 +167,7 @@
 
 <script>
 import {
-  flagItem, checkFlag, fetchProfileRuts, itemToRut, fetchRoads, itemToRoad
+  flagItem, checkFlag, fetchProfileRuts, searchRuts, itemToRut, fetchRoads, itemToRoad
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import MdTool from '@/components/Misc/MdTool.vue'
@@ -193,6 +198,8 @@ export default {
           { max: 42, message: 'Max Length should be 42', trigger: 'blur' }
         ]
       },
+      searchKey: '', // store the keyword, then search once enter press
+      searching: false,
       createdRuts: [],
       roads: [],
       showAddtoRoad: false,
@@ -291,7 +298,26 @@ export default {
         }
       })
     },
-    // get created ruts before add item to one of
+    // store keyword to search created rut
+    // :flow: pre-load -> or input key then search -> select
+    storeKey (query) {
+      if (query.trim() !== '') {
+        this.searchKey = query.trim()
+      }
+    },
+    // search created rut
+    searchCreatedRuts () {
+      if (checkAuth()) {
+        this.searching = true
+        if (this.searchKey.length < 6) return // least keyword length
+        let param = {'title': this.searchKey}
+        searchRuts(param).then(resp => {
+          this.createdRuts = resp.data
+          this.searching = false
+        })
+      }
+    },
+    // pre-load created ruts before add item to one of
     showAndloadData () {
       if (checkAuth() && this.flagAction === 'Have Done') {
         let userid = this.$store.getters.currentUserID

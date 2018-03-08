@@ -18,7 +18,7 @@
                      filterable remote 
                      :remote-method="storeQuery"
                      :loading="searching"
-                     @keyup.enter.native="getDoneItems"
+                     @keyup.enter.native="searchDoneItems"
                      placeholder="input: UID or Title, then Press Enter, will search from your have-dones only">
             <el-option v-for="i in doneItems" 
                        :key="i.id" 
@@ -101,16 +101,16 @@ export default {
       }
     },
     // make the search controllable
-    getDoneItems () {
+    searchDoneItems () {
       if (checkAuth()) {
         this.searching = true
-        setTimeout(() => {
-          let param = {'uid_or_title': this.inputQuery}
-          searchItems(3, param).then(resp => {
-            this.doneItems = resp.data.items
-            this.searching = false
-          })
-        }, 200)
+        let l = this.inputQuery.length
+        if (l < 6 && l !== 0) return  // least keyword length
+        let param = {'uid_or_title': this.inputQuery}
+        searchItems(3, param).then(resp => {
+          this.doneItems = resp.data.items
+          this.searching = false
+        })
       }
     },
     // add done item

@@ -96,7 +96,7 @@ const fetchProfileRuts = (action, userid, params) => {  // act: created, star
 }
 // search ruts
 const searchRuts = (params) => {
-  return request(`${base}/search/ruts`, params)
+  return request(`${base}/searchruts`, params)
 }
 // get a rut
 const fetchRut = (rutid, params) => { // !!

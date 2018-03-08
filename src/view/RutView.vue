@@ -63,7 +63,7 @@
                       <b>Add Item </b>
         </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button size="mini" plain @click="starRut">
-          <b>{{ starAction }}&nbsp;{{ starCount }}</b>
+          <b><i class="el-icon-star-on"></i> {{ starAction }}&nbsp;{{ starCount }}</b>
         </el-button>
       </div>
       <div class="itemtip" v-for="tip in tips" :key="tip.cid">
