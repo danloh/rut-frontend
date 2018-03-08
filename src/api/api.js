@@ -182,6 +182,10 @@ const deleteMark = (gid, params) => {
 const itemToRoad = (itemid, roadid, params) => {
   return request(`${base}/item/${itemid}/toroad/${roadid}`, params, 'post')
 }
+// convert road to rut
+const roadToRut = (roadid, params) => {
+  return request(`${base}/convertroad/${roadid}/torut`, params)
+}
 // get a road
 const fetchRoad = (roadid, params) => {
   return request(`${base}/road/${roadid}`, params)
@@ -464,6 +468,7 @@ export {
   fetchAllRoads,
   fetchOnRoad,
   markRoadDone,
+  roadToRut,
   fetchFavTags,
   fetchTag,
   fetchTagRuts,

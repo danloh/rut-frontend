@@ -49,7 +49,7 @@
             </el-button>
           </el-dropdown-item>
           <el-dropdown-item v-if="flagAction=='Have Done'">
-            <el-button @click="showAndloadData" 
+            <el-button @click="showAndloadRuts" 
                        type="text" style="color:green">
                        Add to List
             </el-button>
@@ -67,7 +67,7 @@
       </el-dropdown>
     </div>
     <!-- addtolist dialog -->
-    <el-dialog title="Add Item to Created List" :visible.sync="showDialog" width="45%">
+    <el-dialog title="Add Item to one of my Shared Read Lists" :visible.sync="showDialog" width="45%">
       <el-form :model="intoForm" ref="intoForm" size="medium">
         <el-form-item prop="rut">
           <el-select v-model="intoForm.selectRutID"
@@ -129,7 +129,7 @@
     </el-dialog>
     <!-- addnote dialog end -->
     <!-- addtoroad dialog -->
-    <el-dialog title="Add Item to RoadMap" :visible.sync="showAddtoRoad" width="45%">
+    <el-dialog title="Add Item to one of my Road Maps" :visible.sync="showAddtoRoad" width="45%">
       <el-form :model="toRoadForm" ref="toRoadForm" size="medium">
         <el-form-item prop="road">
           <el-select v-model="toRoadForm.selectRoadID" placeholder="Select a Roadmap">
@@ -318,7 +318,7 @@ export default {
       }
     },
     // pre-load created ruts before add item to one of
-    showAndloadData () {
+    showAndloadRuts () {
       if (checkAuth() && this.flagAction === 'Have Done') {
         let userid = this.$store.getters.currentUserID
         fetchProfileRuts('created', userid)
@@ -370,7 +370,7 @@ export default {
     },
     // get roadmap before add item to one of
     showAndloadRoads () {
-      if (checkAuth()) {
+      if (checkAuth() && this.flagAction !== 'Have Done') {
         let userid = this.$store.getters.currentUserID
         fetchRoads(userid).then(resp => {
           this.roads = resp.data.roads

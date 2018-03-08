@@ -2,8 +2,8 @@
   <div class="road-page">
     <div class="road-view">
       <div class="title">
-        <h2>RoadMap: {{ introForm.title }}</h2>
-        <p class="meta">
+        <h2><b style="color:grey">RoadMap:</b> {{ introForm.title }}</h2>
+        <div class="meta">
           <span>By 
             <router-link :to="'/profile/' + ownerid">
               {{ ownername }}
@@ -13,7 +13,12 @@
           | Start: {{ roadObj.createat | toMDY }} 
           -- Due: {{ roadObj.deadline | toMDY(rep=false) }}
             {{ roadObj.done ? '✔' : '..'  }}
-        </p>
+          <el-button v-if="roadObj.done && !roadObj.converted"
+                     class="editlink" type="text" 
+                     @click="convertRoadToRut">
+                     Convert
+          </el-button>
+        </div>
       </div>
       <div class="intro">
         <div v-html="md(introForm.intro)"></div>
@@ -58,7 +63,7 @@ import ItemSum from '@/components/Item/ItemSum.vue'
 import MarkSum from '@/components/Road/MarkSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
-import { fetchRoad, editRoad } from '@/api/api'
+import { fetchRoad, editRoad, roadToRut } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import marked from '@/util/marked'
 
@@ -125,6 +130,15 @@ export default {
             message: 'error!! Please Check'
           })
           return false
+        }
+      })
+    },
+    convertRoadToRut () {
+      let roadid = this.roadid
+      roadToRut(roadid).then(resp => {
+        if (resp.data) {
+          let id = resp.data.id
+          this.$router.push(`/readuplist/${id}`)
         }
       })
     },
