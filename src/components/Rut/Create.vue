@@ -55,6 +55,11 @@
         </el-button>
       </el-form-item>
     </el-form>
+    <div style="color:green;font-size:0.8em">
+      <p>Read List, collection of books, courses, etc., 
+        for sharing some items on a specific topic you have read up. 
+      </p>
+    </div>
   </div>
 </template>
 

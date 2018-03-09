@@ -28,10 +28,15 @@
       <el-form-item>
         <el-button type="success" size="medium" 
                    @click="onCreate('roadForm', roadForm)">
-                   New RoadMap, Add Item Later
+                   New RoadMap, Add Items Later
         </el-button>
       </el-form-item>
     </el-form>
+    <div style="color:green;font-size:0.8em">
+      <p>Road Map, a collection of books, courses, 
+        video, etc., help to read up on a specific subject.
+      </p>
+    </div>
   </div>
 </template>
 

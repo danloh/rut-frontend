@@ -21,9 +21,9 @@
           <md-tool :pretext="editMarkForm.mark" @insertmd="updateM"></md-tool>
         </el-form-item>
         <el-form-item>
-          <el-button type="danger" plain size="mini" 
-                    @click="showConfirm = true">
-                    Delete
+          <el-button type="danger" size="mini" 
+                     @click="showConfirm = true">
+                     Delete
           </el-button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <el-button size="mini" @click="showEditMark=false">Cancel</el-button>
