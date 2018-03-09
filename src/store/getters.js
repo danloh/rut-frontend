@@ -25,6 +25,10 @@ const getters = {
   reviewDetail: state => state.item.reviewDetail,
   searchItems: state => state.item.searchItems,
   itemKeyword: state => state.item.itemKeyword,
+  // preload
+  createdRuts: state => state.preload.createdRuts,
+  onRoads: state => state.preload.onRoads,
+  sdoneItems: state => state.preload.sdoneItems,
   // headline
   totalHeadlines: state => state.headline.totalHeadlines,
   currentH: state => state.headline.currentH,

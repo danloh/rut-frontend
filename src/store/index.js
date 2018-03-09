@@ -9,6 +9,7 @@ import item from './modules/item'
 import clip from './modules/clip'
 import demand from './modules/demand'
 import headline from './modules/headline'
+import preload from './modules/preload'
 
 Vue.use(Vuex)
 
@@ -101,7 +102,8 @@ const store = new Vuex.Store({
     item,
     clip,
     demand,
-    headline
+    headline,
+    preload
   }
 })
 

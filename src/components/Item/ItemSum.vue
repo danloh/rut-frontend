@@ -67,7 +67,7 @@
       </el-dropdown>
     </div>
     <!-- addtolist dialog -->
-    <el-dialog title="Add Item to one of my Shared Read Lists" :visible.sync="showDialog" width="45%">
+    <el-dialog title="Add Item to one of my Shared Read Lists" :visible.sync="showAddtoRut" width="45%">
       <el-form :model="intoForm" ref="intoForm" size="medium">
         <el-form-item prop="rut">
           <el-select v-model="intoForm.selectRutID"
@@ -96,7 +96,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="showDialog = false">Cancel</el-button>
+        <el-button size="mini" @click="showAddtoRut = false">Cancel</el-button>
         <el-button size="mini" type="success" 
                    @click="addtoRut('intoForm', intoForm)">
                    Add
@@ -181,7 +181,7 @@ export default {
       flagAction: 'Flag It',
       flagNote: '',
       flagTime: '',
-      showDialog: false,
+      showAddtoRut: false,
       showRedirect: false,
       intoForm: {
         tips: '',
@@ -320,14 +320,21 @@ export default {
     // pre-load created ruts before add item to one of
     showAndloadRuts () {
       if (checkAuth() && this.flagAction === 'Have Done') {
-        let userid = this.$store.getters.currentUserID
-        fetchProfileRuts('created', userid)
-        .then(resp => {
-          this.createdRuts = resp.data.ruts
-          this.showDialog = true
-        })
-      } else {
-        this.showDialog = false
+        // Check store first, reduce api call
+        let preRuts = this.$store.getters.createdRuts
+        if (preRuts.length === 0) {
+          let userid = this.$store.getters.currentUserID
+          fetchProfileRuts('created', userid).then(resp => {
+            this.createdRuts = resp.data.ruts
+            // call api ,then store
+            this.$store.commit('SET_RUTS', resp.data.ruts)
+          })
+        } else {
+          this.createdRuts = preRuts
+        }
+        this.showAddtoRut = true
+      } else if (!checkAuth()) {
+        this.showAddtoRut = false
         this.$message({
           showClose: true,
           message: 'Should Log in to Access'
@@ -352,11 +359,11 @@ export default {
           let itemid = this.item.id
           let data = {'tips': form.tips, 'spoiler': form.spoiler}
           itemToRut(itemid, rutid, data).then(() => {
-            this.showDialog = false
+            this.showAddtoRut = false
             this.showRedirect = true
           })
         } else if (!checkAuth()) {
-          this.showDialog = false
+          this.showAddtoRut = false
           this.$message({
             showClose: true,
             message: 'Should Log in to Access'
@@ -371,12 +378,19 @@ export default {
     // get roadmap before add item to one of
     showAndloadRoads () {
       if (checkAuth() && this.flagAction !== 'Have Done') {
-        let userid = this.$store.getters.currentUserID
-        fetchRoads(userid).then(resp => {
-          this.roads = resp.data.roads
-          this.showAddtoRoad = true
-        })
-      } else {
+        // Check store first, reduce api call
+        let preRoads = this.$store.getters.onRoads
+        if (preRoads.length === 0) {
+          let userid = this.$store.getters.currentUserID
+          fetchRoads(userid).then(resp => {
+            this.roads = resp.data.roads
+            this.$store.commit('SET_ROADS', resp.data.roads)
+          })
+        } else {
+          this.roads = preRoads
+        }
+        this.showAddtoRoad = true
+      } else if (!checkAuth()) {
         this.showAddtoRoad = false
         this.$message({
           showClose: true,
