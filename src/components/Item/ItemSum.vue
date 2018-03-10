@@ -31,7 +31,7 @@
       <span><b>Listed:</b> {{ item.rutcount }} </span><br>
       <span v-if="flagNote || flagTime"><b>Note: </b>
         <span class="flag-note" v-if="flagNote">
-          <b>"</b>{{ flagNote }}<b>"</b>
+          <b>'</b>{{ flagNote }}
         </span>&nbsp;
         <span class="flag-note" v-if="flagTime"> - {{ flagTime | toMDY }}</span>
       </span>
@@ -448,18 +448,19 @@ export default {
 <style lang="stylus" scoped>
 .item-sum
   background-color lighten(#deecec, 85%)
-  min-height 180px
-  padding 10px 114px 10px 131px
+  min-height 135px
+  padding 10px 115px 10px 115px
   border-bottom 1px solid #eee
   position relative
   .thumb
-    width 120px
-    height 160px
+    width 100px
+    height 135px
     position absolute
     top 10px
     left 2px
   .info
-    font-size 0.9em
+    font-size 13px
+    line-height 1.6em
     .title
       font-size 1.2em
       font-weight 700
@@ -467,7 +468,6 @@ export default {
         &:hover
           color red
     .flag-note
-      font-size 0.8em
       color grey
   .operate
     position absolute
