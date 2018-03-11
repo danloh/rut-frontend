@@ -22,6 +22,7 @@ const ItemView = () => import('@/view/ItemView')
 const ReviewView = () => import('@/view/ReviewView')
 const TagView = () => import('@/view/TagView')
 const SearchResult = () => import('@/view/SearchResult')
+const About = () => import('@/components/Misc/About')
 const NotFound = () => import('@/view/NotFound')
 const Register = () => import('@/components/Auth/Register')
 const Confirm = () => import('@/components/Auth/Confirm')
@@ -188,6 +189,7 @@ const router = new Router({
     },
     { path: '/newitem', component: NewItem, name: 'NewItem', meta: {auth: true} },
     { path: '/searchresult/:type', component: SearchResult, name: 'SearchResult', props: true },
+    { path: '/about', component: About, name: 'About' },
     { path: '/404', component: NotFound, name: 'NotFound', hidden: true },
     { path: '*', hidden: true, redirect: { path: '/404' } }
   ]

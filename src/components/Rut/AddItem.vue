@@ -14,11 +14,12 @@
                size="medium">
         <el-form-item label="Pick one of Your Have-Dones by Searching" 
                       prop="doneItem" style="margin-bottom:8px">
-          <el-select class="select-item" v-model="doneForm.doneItemID"
+          <el-select v-model="doneForm.doneItemID"
                      filterable remote 
                      :remote-method="storeQuery"
                      :loading="searching"
                      @keyup.enter.native="searchDoneItems"
+                     style="width:100%"
                      placeholder="input: UID or Title, then Press Enter, will search from your have-dones only">
             <el-option v-for="i in doneItems" 
                        :key="i.id" 
@@ -173,6 +174,4 @@ export default {
     margin-bottom 10px
   .title
     margin-bottom 10px
-  .select-item
-    width 100%
 </style>

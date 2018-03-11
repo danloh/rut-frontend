@@ -22,14 +22,20 @@
       </div>
       <div class="intro">
         <div v-html="md(introForm.intro)"></div>
-        <el-button class="editlink" type="text" v-show="canEdit"
-                   @click="showDialog=true">
-                   ..Edit
-        </el-button>
+        <div v-if="canEdit">
+          <el-button class="editlink" type="text"
+                    @click="showEdit=true">
+                    ..Edit
+          </el-button>
+          <el-button class="editlink" type="text"
+                    @click="showAdd=true">
+                    ..Add
+          </el-button>
+        </div>
       </div>
       <!-- edit intro dialog -->
       <el-dialog title="Edit RoadMap" width="45%" 
-                 :visible.sync="showDialog">
+                 :visible.sync="showEdit">
         <el-form :model="introForm" ref="introForm">
           <el-form-item prop="title">
             <el-input type="textarea" autosize v-model="introForm.title"></el-input>
@@ -46,6 +52,38 @@
         </div>
       </el-dialog>
       <!-- edit intro dialog end -->
+      <!-- add item dialog -->
+      <el-dialog title="Add Item to  RoadMap" width="45%" 
+                 :visible.sync="showAdd">
+        <el-form :model="addForm" :rules="addRules"  ref="addForm">
+          <el-form-item prop="itemID">
+            <el-select v-model="addForm.itemID"
+                       filterable remote 
+                       :remote-method="storeKey"
+                       :loading="searching"
+                       @keyup.enter.native="queryItems"
+                       placeholder="input: UID or Title, then Press Enter to Search"
+                       style="width:100%">
+              <el-option v-for="i in sItems" 
+                        :key="i.id" 
+                        :label="i.title" 
+                        :value="i.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item prop="mark">
+            <el-input type="textarea" :autosize="{minRows:5}" v-model="addForm.mark"></el-input>
+            <md-tool :pretext="addForm.mark" @insertmd="updateM"></md-tool>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button size="mini" type="success" @click="onAddItem('addForm', addForm)">
+            Add
+          </el-button>
+        </div>
+        <p>If no result, Would you help <a href="/newitem">submit</a> the item?</p>
+      </el-dialog>
+      <!-- add item dialog end -->
       <div class="itemmark" v-for="mark in marks" :key="mark.gid">
         <item-sum class="itemsum" :item="mark.item" :key="mark.itemid"></item-sum>
         <mark-sum :mark="mark" :canEdit="canEdit"></mark-sum>
@@ -63,7 +101,7 @@ import ItemSum from '@/components/Item/ItemSum.vue'
 import MarkSum from '@/components/Road/MarkSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
-import { fetchRoad, editRoad, roadToRut } from '@/api/api'
+import { fetchRoad, editRoad, roadToRut, searchItems, itemToRoad } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import marked from '@/util/marked'
 
@@ -80,12 +118,25 @@ export default {
       ownerid: null,
       ownername: '',
       canEdit: false,
-      showDialog: false,
+      showEdit: false,
       introForm: {
         title: '',
         intro: '',
         deadline: ''
-      }
+      },
+      showAdd: false,
+      addForm: {
+        mark: '',
+        itemID: null
+      },
+      addRules: {
+        itemID: [
+          { required: true, message: 'Required', trigger: 'change' }
+        ]
+      },
+      searchKey: '',
+      searching: false,
+      sItems: []
     }
   },
   computed: {
@@ -122,7 +173,7 @@ export default {
             intro: form.intro.trim()
           }
           editRoad(this.roadid, data).then(resp => {
-            this.showDialog = false
+            this.showEdit = false
           })
         } else {
           this.$message({
@@ -142,8 +193,40 @@ export default {
         }
       })
     },
+    storeKey (query) {
+      if (query.trim() !== '') {
+        this.searchKey = query.trim()
+      }
+    },
+    queryItems () {
+      if (checkAuth()) {
+        this.searching = true
+        if (this.searchKey.length < 6) return  // least keyword length
+        let param = {'uid_or_title': this.searchKey}
+        searchItems(0, param).then(resp => {
+          this.sItems = resp.data.items
+          this.searching = false
+        })
+      }
+    },
+    onAddItem (formName, form) {
+      this.$refs[formName].validate((valid) => {
+        if (valid && checkAuth()) {
+          let itemid = form.itemID
+          let mark = form.mark
+          let data = { 'mark': mark, 'load': true }
+          itemToRoad(itemid, this.roadid, data).then(resp => {
+            this.marks.push(resp.data)
+            this.showAdd = false
+          })
+        }
+      })
+    },
     updateE (data) {
       this.introForm.intro += data
+    },
+    updateM (data) {
+      this.addForm.mark += data
     },
     md (content) {
       return marked(content)

@@ -19,7 +19,9 @@
       </el-input>
     </el-form-item>
     <p style="font-size:0.75em">
-      Notice: Will Use Cookies to keep you logged in for a limited period, 
+      Notice: Will use email address for account confirmation and password resetting only, 
+      will never send you any spams;
+      Will Use Cookies to keep you logged in for a limited period, 
       Never collect any Private Information. 
       The service may not function properly if disable cookies.
     </p>

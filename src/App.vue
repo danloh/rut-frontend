@@ -60,10 +60,9 @@
     <footer class="footer">
       <div class="bottom">
         ©Readup.Tips - since 2018
-        | <router-link to="/newitem">submit</router-link>
-        | <router-link to="/">About</router-link>
-        | <router-link to="/">Terms</router-link>
-        | <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Contact</a>
+        | <a href="/newitem">submit</a>
+        | <a href="/about">About</a>
+        | <a href="/about">Terms</a>
         <!--google site search -->&nbsp;&nbsp;&nbsp;
         <!-- <el-input size="mini" style="width:16em"
                   v-model="searchWord"
