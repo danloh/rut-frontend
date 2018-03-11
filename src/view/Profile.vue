@@ -29,10 +29,7 @@
       </div>
       <div class="right-nav">
         <router-link :to="'/profile/' + userid + '/roadmaps/'">
-          <b style="color:orange">*</b> Roadmaps
-        </router-link>
-        <router-link to="/newroad" v-if="showSetting">
-          <small style="color:orange">&nbsp; new</small>
+          <b style="color:orange">*</b> Road Map
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/star/'">
@@ -40,7 +37,7 @@
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/created/'">
-          <b style="color:royalblue">*</b> Created
+          <b style="color:royalblue">*</b> Read List
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/scheduled/'">

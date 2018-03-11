@@ -31,7 +31,7 @@
       </el-dialog>
       <!-- edit tag dialog end -->
       <div class="title">
-        <h2>{{ rutDetail.title }}</h2>
+        <h2><b style="color:grey">ReadList:&nbsp;</b>{{ rutDetail.title }}</h2>
         <p class="meta">
           <span v-if="!isEveryone">By 
             <router-link :to="'/profile/' + creatorid">

@@ -2,7 +2,7 @@
   <div class="road-page">
     <div class="road-view">
       <div class="title">
-        <h2><b style="color:grey">RoadMap:</b> {{ introForm.title }}</h2>
+        <h2><b style="color:grey">RoadMap:&nbsp;</b>{{ introForm.title }}</h2>
         <div class="meta">
           <span>By 
             <router-link :to="'/profile/' + ownerid">

@@ -1,9 +1,8 @@
 import Cookies from 'js-cookie'
 import axios from '@/main'
 
-const TokenKey = 'R-Token'
-const IDKey = 'R-ID'
-const NumKey = 'R-N'
+const TokenKey = 'NoIsSeSNekoTr'
+const IDKey = 'YtITnEdIr'
 
 export function getToken () {
   return Cookies.get(TokenKey)
@@ -27,14 +26,6 @@ export function setID (id, exp = 0) {
 
 export function removeID () {
   return Cookies.remove(IDKey)
-}
-
-export function getNum () {
-  return Cookies.get(NumKey)
-}
-
-export function setNum (n) {
-  return Cookies.set(NumKey, n)
 }
 
 export function checkAuth () {
