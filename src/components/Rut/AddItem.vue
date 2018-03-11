@@ -100,7 +100,7 @@ export default {
       if (query.trim() !== '') {
         this.inputQuery = query.trim()
       }
-      this.doneItems = this.$store.getters.sdoneItems  // show options when focus
+      this.doneItems = this.$store.getters.seItems  // show options when focus
     },
     // make the search controllable
     searchDoneItems () {
@@ -110,10 +110,11 @@ export default {
         if (l < 6 && l !== 0) return  // least keyword length
         let param = {'uid_or_title': this.inputQuery}
         searchItems(3, param).then(resp => {
-          this.$store.commit('ADD_ITEMS', resp.data.items)
+          let resItems = resp.data.items
+          this.doneItems = resItems
+          this.$store.commit('ADD_ITEMS', resItems)
           this.searching = false
         })
-        this.doneItems = this.$store.getters.sdoneItems
       }
     },
     // add done item

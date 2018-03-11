@@ -73,3 +73,16 @@ export function host (url) {
   if (parts[0] === 'www') parts.shift()
   return parts.join('.')
 }
+
+// uniq
+export function uniq (arr) {
+  let result = {}
+  let final = []
+  for (let i = 0; i < arr.length; i++) {
+    result[arr[i].id] = arr[i]
+  }
+  for (let t in result) {
+    final.push(result[t])
+  }
+  return final
+}

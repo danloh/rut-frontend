@@ -1,34 +1,10 @@
-import { fetchProfileRuts, fetchRoads } from '@/api/api'
+import { uniq } from '@/util/filters'
 
 // initial state
 const state = {
   createdRuts: [],
   onRoads: [],
-  sdoneItems: []
-}
-
-// actions, can be del? no needed
-const actions = {
-  preloadRuts: ({commit}, userid) => {
-    return new Promise((resolve, reject) => {
-      fetchProfileRuts('created', userid).then(resp => {
-        commit('SET_RUTS', resp.data.ruts)
-        resolve(resp)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-  preloadRoads: ({commit}, userid) => {
-    return new Promise((resolve, reject) => {
-      fetchRoads(userid).then(resp => {
-        commit('SET_ROADS', resp.data.roads)
-        resolve(resp)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  }
+  seItems: []
 }
 
 // mutations
@@ -40,13 +16,12 @@ const mutations = {
     state.onRoads = data
   },
   ADD_ITEMS (state, data) {
-    state.sdoneItems.unshift(...data)
-    state.sdoneItems = Array.from(new Set(state.sdoneItems)) // de-dup, why not work?
+    state.seItems.unshift(...data)
+    state.seItems = uniq(state.seItems) // Array.from(new Set()) not work
   }
 }
 
 export default {
   state,
-  actions,
   mutations
 }

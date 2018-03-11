@@ -195,6 +195,7 @@ export default {
       if (query.trim() !== '') {
         this.searchKey = query.trim()
       }
+      this.sItems = this.$store.getters.seItems
     },
     queryItems () {
       if (checkAuth()) {
@@ -202,7 +203,9 @@ export default {
         if (this.searchKey.length < 6) return  // least keyword length
         let param = {'uid_or_title': this.searchKey}
         searchItems(0, param).then(resp => {
-          this.sItems = resp.data.items
+          let resItems = resp.data.items
+          this.sItems = resItems
+          this.$store.commit('ADD_ITEMS', resItems)
           this.searching = false
         })
       }

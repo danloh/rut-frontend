@@ -27,7 +27,7 @@ const getters = {
   // preload
   createdRuts: state => state.preload.createdRuts,
   onRoads: state => state.preload.onRoads,
-  sdoneItems: state => state.preload.sdoneItems,
+  seItems: state => state.preload.seItems,
   // headline
   totalHeadlines: state => state.headline.totalHeadlines,
   currentH: state => state.headline.currentH,
