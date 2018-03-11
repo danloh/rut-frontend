@@ -5,7 +5,7 @@
         <span class="tag" v-for="(tag, index) in tags" :key="index">
           <router-link :to="'/tag/' + tag.id">{{tag.tagname}}</router-link>
         </span>
-        <el-button class="editlink" type="text" @click="toEdit('tag')" v-show="canTag">
+        <el-button class="indicator" type="text" @click="toEdit('tag')" v-show="canTag">
           ..Edit
         </el-button>
       </div>
@@ -50,15 +50,15 @@
         <div v-html="md(rutDetail.intro)"></div>
       </div>
       <div class="toolbar">
-        <router-link class="editlink" :to="'/profile/' + whoEdit.editorid" 
+        <router-link class="indicator" :to="'/profile/' + whoEdit.editorid" 
                      v-if="whoEdit.editorid && rutid === whoEdit.rutid">
                      In Editing
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
-        <router-link class="editlink" 
+        <router-link class="indicator" 
                      :to="'/edit/readuplist/' + rutid" v-if="canEdit">
                       <b>Edit </b>
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
-        <router-link class="editlink" 
+        <router-link class="indicator" 
                      :to="'/additemto/readuplist/' + rutid" v-if="canEdit">
                       <b>Add Item </b>
         </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -69,7 +69,7 @@
       <div class="itemtip" v-for="tip in tips" :key="tip.cid">
         <item-sum class="itemsum" :item="tip.item" :key="tip.itemid"></item-sum>
         <b class="indicator">&nbsp;&nbsp;#{{tip.order}}&nbsp;&nbsp;</b> 
-        <router-link class="editlink" 
+        <router-link class="indicator" 
                      :to="'/edit/readuptips/' + tip.cid" 
                      v-if="canEdit">
                      ...Edit
@@ -85,7 +85,7 @@
       </div>
       <div class="epilog">
         <b class="indicator">Epilog:&nbsp;&nbsp;</b>
-        <el-button class="editlink" type="text" @click="toEdit('epi')" v-show="canEdit">
+        <el-button class="indicator" type="text" @click="toEdit('epi')" v-show="canEdit">
           ..Edit
         </el-button>
         <div v-html="md(epiForm.epilog)"></div>
@@ -116,7 +116,7 @@
         <p class="credential-title"><b>Creator's Credential</b></p>
         <div class="credential-body">
           <div>{{ creForm.credential || aboutcreator || '...' }}</div>
-          <el-button class="editlink" type="text" @click="toEdit('cre')" v-show="canEdit">
+          <el-button class="indicator" type="text" @click="toEdit('cre')" v-show="canEdit">
             ..Edit
           </el-button>
         </div>
@@ -453,7 +453,6 @@ $bgcolor = lighten(#f6f6f1, 50%)
           font-weight 700
     .toolbar
       display flex
-      align-items center
       justify-content flex-end
     .bottombar
       font-size 0.85em
@@ -462,9 +461,6 @@ $bgcolor = lighten(#f6f6f1, 50%)
   .indicator
     font-size 0.7em
     color #668e66
-  .editlink
-    font-size 0.7em
-    font-weight 600
   .rut-side
     position absolute
     right 0

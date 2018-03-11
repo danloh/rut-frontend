@@ -31,7 +31,7 @@
         <router-link :to="'/profile/' + userid + '/roadmaps/'">
           <b style="color:orange">*</b> Roadmaps
         </router-link>
-        <router-link to="/newroad">
+        <router-link to="/newroad" v-if="showSetting">
           <small style="color:orange">&nbsp; new</small>
         </router-link>
         <br>

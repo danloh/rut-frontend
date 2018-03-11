@@ -1,7 +1,7 @@
 <template>
   <div class="mark-sum">
     <b class="indicator">&nbsp;&nbsp;#{{mark.order}}&nbsp;&nbsp;</b>
-    <el-button class="editlink" type="text" v-show="canEdit"
+    <el-button class="indicator" type="text" v-show="canEdit"
                @click="showEditMark=true">
                ..Edit
     </el-button> 

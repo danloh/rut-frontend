@@ -13,25 +13,23 @@
           | Start: {{ roadObj.createat | toMDY }} 
           -- Due: {{ roadObj.deadline | toMDY(rep=false) }}
             {{ roadObj.done ? '✔' : '..'  }}
-          <el-button v-if="roadObj.done && !roadObj.converted"
-                     class="editlink" type="text" 
-                     @click="convertRoadToRut">
-                     Convert
-          </el-button>
+          <span v-if="canEdit">
+            <el-button v-if="roadObj.done && !roadObj.converted"
+                      type="text" size="mini" @click="convertRoadToRut">
+                      Convert
+            </el-button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <el-button type="text" size="mini" @click="showEdit=true">
+                      ..Edit
+            </el-button>
+            <el-button type="text" size="mini" @click="showAdd=true">
+                      ..Add
+            </el-button>
+          </span>
         </div>
       </div>
       <div class="intro">
         <div v-html="md(introForm.intro)"></div>
-        <div v-if="canEdit">
-          <el-button class="editlink" type="text"
-                    @click="showEdit=true">
-                    ..Edit
-          </el-button>
-          <el-button class="editlink" type="text"
-                    @click="showAdd=true">
-                    ..Add
-          </el-button>
-        </div>
       </div>
       <!-- edit intro dialog -->
       <el-dialog title="Edit RoadMap" width="45%" 
@@ -266,9 +264,6 @@ $bgcolor = lighten(#f6f6f1, 50%)
       font-size 0.85em
       padding 5px
       text-align right
-  .editlink
-    font-size 0.7em
-    font-weight 600
   .road-side
     position absolute
     right 0
