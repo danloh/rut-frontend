@@ -215,7 +215,11 @@ export default {
         if (valid && checkAuth()) {
           let itemid = form.itemID
           let mark = form.mark
-          let data = { 'mark': mark, 'load': true }
+          let data = {
+            'mark': mark,
+            'alter': this.roadObj.done, // if done, alt to not-done once add item
+            'load': true           // if load added-item info
+          }
           itemToRoad(itemid, this.roadid, data).then(resp => {
             this.marks.push(resp.data)
             this.showAdd = false

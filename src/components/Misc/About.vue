@@ -23,16 +23,16 @@
         You can set web browsers to accept cookies automatically 
         or enable cookies on demand. </ul>
         <ul>You own and are responsible for your contents and 
-        grant us a license to use your contents</ul>
+        grant us a license to use your contents.</ul>
         <ul>If you believe that your content has been used in a way that 
-        constitutes copyright infringement, Please contact us to claim</ul>
-      <p>We will keep our best effort to make sure the service is reliable. But it may break sometime</p>
+        constitutes copyright infringement, Please contact us to claim.</ul>
+      <p>We will keep our best effort to make sure the service is reliable. But it may break sometimes.</p>
     </div>
     <div class="contact">
       <h2>Contact</h2>
       <p>If any questions or suggestion, can always send an email at
       <a href="mailto:readup.tips@gmail.com?subject=Feedback...">here</a>,
-      Any feedback is appreciated</p>
+      Any feedback is appreciated.</p>
     </div>
     <div class="about-side">
       <a href="/register">Sign up now</a>
