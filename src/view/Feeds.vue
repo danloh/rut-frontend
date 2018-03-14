@@ -36,7 +36,7 @@ import { fetchFeeds, fetchFavTags } from '@/api/api'
 
 export default {
   name: 'feeds',
-  title: 'Feeds',
+  title: 'Feeds From Readers',
   data () {
     return {
       activity: [],

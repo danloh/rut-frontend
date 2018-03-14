@@ -39,7 +39,7 @@ import { checkAuth } from '@/util/auth'
 
 export default {
   name: 'demands',
-  title: 'Readup.Tips - Request',
+  title: 'Requests By Readers',
   data () {
     return {
       demandForm: {

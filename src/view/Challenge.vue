@@ -68,7 +68,7 @@ import { fetchChallengeItems, fetchOnRoad, markRoadDone } from '@/api/api'
 
 export default {
   name: 'challenge',
-  title: 'Readup.Tips - Challenge To Reading Anything',
+  title: 'Sparks Of Readers',
   data () {
     return {
       clipForm: {
