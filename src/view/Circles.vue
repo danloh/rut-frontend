@@ -1,15 +1,17 @@
 <template>
   <div class="circle">
     <div class="circle-main">
+      <b>Get-Together With Readers&nbsp;&nbsp;</b>
       <b style="font-size:1.2em">Circles</b>
-      <br>
+    </div>
+    <div class="circle-view">
       <circle-list :circles="circles"></circle-list>
       <div v-if="hasMoreCircle">
-      <el-button size="mini" 
-                 @click="loadmoreCircle" 
-                 :disabled="!hasMoreCircle">
-                 Show More Circles
-      </el-button>
+        <el-button size="mini" 
+                  @click="loadmoreCircle" 
+                  :disabled="!hasMoreCircle">
+                  Show More Circles
+        </el-button>
       </div>
     </div>
     <div class="circle-side">
@@ -63,9 +65,7 @@ import { trimValid } from '@/util/filters'
 
 export default {
   name: 'circles',
-  title () {
-    return 'Circles'
-  },
+  title: 'Get-Together With Readers',
   components: { CircleList },
   data () {
     return {
@@ -165,6 +165,7 @@ export default {
   position relative
   .circle-main
     padding auto
+    margin-bottom 5px
   .circle-side
     position absolute
     top 10px

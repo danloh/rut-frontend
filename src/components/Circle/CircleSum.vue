@@ -162,10 +162,12 @@ export default {
 
 <style lang="stylus" scoped>
 .circle-sum
+  background-color lighten(#f1f8f9, 75%)
+  padding 10px
   border-bottom 2px solid #eee
-.meta
-  font-size 0.75em
-.info
-  font-size 0.85em
-  color green
+  .meta
+    font-size 0.75em
+  .info
+    font-size 0.85em
+    color green
 </style>

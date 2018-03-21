@@ -101,9 +101,8 @@ const router = new Router({
     { path: '/confirm/:token', component: Confirm, name: 'Confirm', meta: {auth: true} },
     { path: '/forget', component: Forget, name: 'Forget' },
     { path: '/reset/:token', component: ResetPsw, name: 'ResetPsw' },
-    { path: '/changepsw', component: ChangePsw, name: 'ChangePsw' },
     { path: '/login', component: Login, name: 'Login' },
-    { path: '/tag/:id', component: TagView, name: 'Tag' },
+    { path: '/tag/:id', component: TagView, name: 'Tag', meta: {auth: true} },
     { path: '/create/:id(\\d+)?', component: Create, name: 'CreateRut', meta: {auth: true} },
     { path: '/readuplist/:id', component: RutView, name: 'Rutview' },
     { path: '/edit/readuplist/:id',
@@ -124,8 +123,8 @@ const router = new Router({
       meta: {auth: true},
       beforeEnter
     },
-    { path: '/commenton/rut/:id', component: RutComment, name: 'RutComment' },
-    { path: '/item/:id', component: ItemView, name: 'Item' },
+    { path: '/commenton/rut/:id', component: RutComment, name: 'RutComment', meta: {auth: true} },
+    { path: '/item/:id', component: ItemView, name: 'Item', meta: {auth: true} },
     { path: '/myrc/item/:itemid', component: MyItemRC, name: 'MyRc', props: true, meta: {auth: true} },
     { path: '/edit/item/:id', component: EditItem, name: 'EditItem', meta: {auth: true} },
     { path: '/review/item/:id', component: NewReview, name: 'NewReview', meta: {auth: true} },
@@ -135,14 +134,13 @@ const router = new Router({
       component: Demands,
       children: [
         { path: '', name: 'defaultdemand', redirect: 'popular' },
-        { path: 'popular', name: 'Populardemand', component: createDemandList('popular') },
-        { path: 'new', name: 'Newdemand', component: createDemandList('new') }
+        { path: 'popular', name: 'Populardemand', component: createDemandList('popular'), meta: {auth: true} },
+        { path: 'new', name: 'Newdemand', component: createDemandList('new'), meta: {auth: true} }
       ]
     },
-    { path: '/demand/:id', name: 'demand', component: DemandView },
+    { path: '/demand/:id', name: 'demand', component: DemandView, meta: {auth: true} },
     { path: '/challenge',
       component: Challenge,
-      meta: {auth: true},
       children: [
         { path: '', name: 'defaultclip', redirect: 'myclip' },
         { path: 'myclip', name: 'Myclip', component: createClipList({ref: 'My'}), meta: {auth: true} },
@@ -150,7 +148,7 @@ const router = new Router({
         { path: 'allclip', name: 'Allclip', component: createClipList({ref: 'All'}), meta: {auth: true} }
       ]
     },
-    { path: '/headline/:id', name: 'Headline', component: HeadlineView },
+    { path: '/headline/:id', name: 'Headline', component: HeadlineView, meta: {auth: true} },
     { path: '/headlines',
       component: Headlines,
       children: [
@@ -159,22 +157,22 @@ const router = new Router({
         { path: 'new', name: 'NewHeadline', component: createHList('new') }
       ]
     },
-    { path: '/circles', name: 'Circles', component: Circles },
+    { path: '/circles', name: 'Circles', component: Circles, meta: {auth: true} },
     { path: '/profile/:id',
       component: Profile,
       children: [
         { path: '', name: 'defaultProfile', redirect: 'activity' },
-        { path: 'activity', name: 'Activity', component: ProfileActivity },
-        { path: 'roadmaps', name: 'Roadmaps', component: ProfileRoads },
-        { path: 'created', name: 'CreatedRuts', component: createProfileRuts('created') },
-        { path: 'star', name: 'StarRuts', component: createProfileRuts('star') },
-        { path: 'working', name: 'WorkingItems', component: createProfileItems('doing') },
-        { path: 'scheduled', name: 'ScheduledItems', component: createProfileItems('todo') },
-        { path: 'havedone', name: 'DoneItems', component: createProfileItems('done') },
-        { path: 'reviews', name: 'Reviews', component: ProfileReviews },
-        { path: 'demands', name: 'Demands', component: ProfileDemands },
-        { path: 'clips', name: 'Clips', component: ProfileClips },
-        { path: 'followeds', name: 'Followeds', component: FollowedList }
+        { path: 'activity', name: 'Activity', component: ProfileActivity, meta: {auth: true} },
+        { path: 'roadmaps', name: 'Roadmaps', component: ProfileRoads, meta: {auth: true} },
+        { path: 'created', name: 'CreatedRuts', component: createProfileRuts('created'), meta: {auth: true} },
+        { path: 'star', name: 'StarRuts', component: createProfileRuts('star'), meta: {auth: true} },
+        { path: 'working', name: 'WorkingItems', component: createProfileItems('doing'), meta: {auth: true} },
+        { path: 'scheduled', name: 'ScheduledItems', component: createProfileItems('todo'), meta: {auth: true} },
+        { path: 'havedone', name: 'DoneItems', component: createProfileItems('done'), meta: {auth: true} },
+        { path: 'reviews', name: 'Reviews', component: ProfileReviews, meta: {auth: true} },
+        { path: 'demands', name: 'Demands', component: ProfileDemands, meta: {auth: true} },
+        { path: 'clips', name: 'Clips', component: ProfileClips, meta: {auth: true} },
+        { path: 'followeds', name: 'Followeds', component: FollowedList, meta: {auth: true} }
       ]
     },
     { path: '/newroad', component: NewRoad, name: 'NewRoad', meta: {auth: true} },
