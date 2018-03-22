@@ -124,7 +124,7 @@ const router = new Router({
       beforeEnter
     },
     { path: '/commenton/rut/:id', component: RutComment, name: 'RutComment', meta: {auth: true} },
-    { path: '/item/:id', component: ItemView, name: 'Item', meta: {auth: true} },
+    { path: '/item/:id', component: ItemView, name: 'Item' },
     { path: '/myrc/item/:itemid', component: MyItemRC, name: 'MyRc', props: true, meta: {auth: true} },
     { path: '/edit/item/:id', component: EditItem, name: 'EditItem', meta: {auth: true} },
     { path: '/review/item/:id', component: NewReview, name: 'NewReview', meta: {auth: true} },
