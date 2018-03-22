@@ -11,9 +11,8 @@
              :model="editForm" 
              :rules="rules" 
              ref="editForm" 
-             label-width="120px" 
              size="mini">
-      <el-form-item label="Item Title:">{{ itemTitle }}</el-form-item>
+      <el-form-item label="*Item Title:">{{ itemTitle }}</el-form-item>
       <el-form-item label="Change Order" prop="order">
         <el-input v-model="editForm.order"></el-input>
       </el-form-item>
@@ -30,17 +29,13 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="mini" 
+        <el-button type="success" size="mini" class="blockbtn"
                    @click="onEdit('editForm', editForm)">
                    Edit and Submit
         </el-button>
-        <el-button size="mini" 
-                   @click="cancelnReturn">
-                   Cancel
-        </el-button>
-        <el-button type="danger" size="mini" style="float:right"
+        <el-button type="text" size="mini"
                    @click="showDialog = true">
-                   Delete
+                   or Delete ?
         </el-button>
       </el-form-item>
     </el-form>
@@ -154,7 +149,7 @@ export default {
 
 <style lang="stylus" scoped>
 .edit-page
-  padding 10px 120px 10px 80px
+  padding 10px 160px 10px 120px
   position relative
   .edit-form
     padding 20px

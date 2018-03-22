@@ -1,6 +1,6 @@
 <template>
 <div class="change-page">
-  <h3 class="title">Change Password</h3>
+  <h3 class="title">Change My Password</h3>
   <el-form class="change-form" 
            :model="changepswForm" 
            :rules="rules" 
@@ -105,7 +105,7 @@ export default {
 
 <style lang="stylus" scoped>
 .change-page
-  padding 10px 120px 10px 80px
+  padding 10px 60px 10px 160px
   position relative
   .change-form
     padding 20px

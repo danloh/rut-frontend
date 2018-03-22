@@ -9,7 +9,6 @@
              :model="editForm" 
              :rules="rules" 
              ref="editForm" 
-             label-width="110px" 
              size="mini">
       <el-form-item label="Title" prop="title">
         <el-input type="textarea" autosize v-model="editForm.title"></el-input>
@@ -38,13 +37,9 @@
         </el-select>
       </el-form-item> -->
       <el-form-item>
-        <el-button type="success" size="mini" 
+        <el-button type="success" size="mini" class="blockbtn"
                    @click="onEdit('editForm', editForm)">
                    Done and Submit
-        </el-button>
-        <el-button size="mini" 
-                   @click="cancelnReturn">
-                   Cancel
         </el-button>
       </el-form-item>
     </el-form>
@@ -143,7 +138,7 @@ export default {
 
 <style lang="stylus" scoped>
 .edit-page
-  padding 10px 160px 10px 100px
+  padding 10px 160px 10px 120px
   position relative
   .edit-form
     padding 20px

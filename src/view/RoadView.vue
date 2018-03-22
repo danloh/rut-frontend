@@ -32,7 +32,7 @@
         <div v-html="md(introForm.intro)"></div>
       </div>
       <!-- edit intro dialog -->
-      <el-dialog title="Edit RoadMap" width="45%" 
+      <el-dialog title="Edit RoadMap" width="50%" 
                  :visible.sync="showEdit">
         <el-form :model="introForm" ref="introForm">
           <el-form-item prop="title">
@@ -51,7 +51,7 @@
       </el-dialog>
       <!-- edit intro dialog end -->
       <!-- add item dialog -->
-      <el-dialog title="Add Item to  RoadMap" width="45%" 
+      <el-dialog title="Add Item to  RoadMap" width="50%" 
                  :visible.sync="showAdd">
         <el-form :model="addForm" :rules="addRules"  ref="addForm">
           <el-form-item prop="itemID">

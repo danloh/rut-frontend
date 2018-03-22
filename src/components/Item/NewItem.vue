@@ -28,8 +28,9 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
-                   @click="onCheck('checkForm', checkForm)">
+        <el-button type="success" size="mini" class="blockbtn"
+                   @click="onCheck('checkForm', checkForm)"
+                   :disabled="!checkForm.url">
                    Fetch Via Spider
         </el-button>
       </el-form-item>
@@ -118,9 +119,9 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" size="mini" class="blockbtn"
                    @click="onNewItem('itemForm', itemForm)">
-                   Done and Add
+                   Done and Submit
         </el-button>
       </el-form-item>
     </el-form>

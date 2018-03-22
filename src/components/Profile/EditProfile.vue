@@ -5,7 +5,7 @@
              :model="settingForm" 
              :rules="rules" 
              ref="settingForm" 
-             label-width="120px" 
+             label-width="100px" 
              size="mini">
       <el-form-item label="Nickname" prop="nickname">
         <el-input v-model="settingForm.nickname"></el-input>
@@ -25,10 +25,10 @@
         <el-input v-model="settingForm.url"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" size="mini" class="blockbtn"
                    @click="onSetting('settingForm', settingForm)" 
                    :disabled="!canSetting">
-                   Update
+                   Update My Profile
         </el-button>
       </el-form-item>
     </el-form>
@@ -116,7 +116,7 @@ export default {
 
 <style lang="stylus" scoped>
 .edit-page
-  padding 10px 120px 10px 80px
+  padding 10px 60px 10px 40px
   position relative
   .edit-form
     padding 20px

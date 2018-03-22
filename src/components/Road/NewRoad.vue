@@ -5,7 +5,6 @@
              :model="roadForm" 
              :rules="rules" 
              ref="roadForm" 
-             label-width="110px" 
              size="mini">
       <el-form-item label="Title" prop="title">
         <el-input type="textarea" v-model="roadForm.title" autosize></el-input>
@@ -100,7 +99,7 @@ export default {
 
 <style lang="stylus" scoped>
 .road-page
-  padding 10px 200px 10px 80px
+  padding 10px 160px 10px 120px
   position relative
   .road-form
     padding 20px

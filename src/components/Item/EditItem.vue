@@ -79,9 +79,9 @@
         <md-tool :pretext="itemForm.details" @insertmd="updateI"></md-tool>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" size="mini" class="blockbtn"
                    @click="onEditItem('itemForm', itemForm)">
-                   Done and Add
+                   Edit and Submit
          </el-button>
       </el-form-item>
     </el-form>

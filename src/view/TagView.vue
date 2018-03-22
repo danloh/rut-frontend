@@ -50,7 +50,6 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="cancelEditTag">Cancel</el-button>
         <el-button type="success" @click="editTag('tagForm', tagForm)">
           Submit
         </el-button>

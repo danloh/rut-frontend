@@ -42,14 +42,10 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" size="mini" 
+          <el-button type="success" size="mini" class="blockbtn"
                      @click="addDoneItem('doneForm', doneForm)" 
                      :disabled="!doneForm.doneItemID">
                      ADD to List
-          </el-button>
-          <el-button size="mini" 
-                     @click="cancelnReturn">
-                     Cancel
           </el-button>
         </el-form-item>
       </el-form>
