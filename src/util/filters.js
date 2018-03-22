@@ -1,8 +1,6 @@
-function pluralize (time, label) {
-  if (time === 1) {
-    return time + label + ' ago'
-  }
-  return time + label + 's' + ' ago'
+// pluralise
+export function pluralise (n, unit) {
+  return n + ' ' + unit + (n <= 1 ? '' : 's')
 }
 // time ago formating
 export function timeAgo (date, rep = true) {
@@ -14,11 +12,24 @@ export function timeAgo (date, rep = true) {
   const between = Number(Date.now()) / 1000 + offset - Number(time) / 1000
   if (between < 3600) {
     if (Object.is(~~(between / 60), 0)) return 'just now'
-    return pluralize(~~(between / 60), ' minute') // double bitwise NOT -> floor
+    return pluralise(~~(between / 60), 'minute') + ' ago' // double bitwise NOT -> floor
   } else if (between < 86400) {
-    return pluralize(~~(between / 3600), ' hour')
+    return pluralise(~~(between / 3600), 'hour') + ' ago'
   } else {
-    return pluralize(~~(between / 86400), ' day')
+    return pluralise(~~(between / 86400), 'day') + ' ago'
+  }
+}
+// time gap
+export function timeGap (date, rep = true) {
+  let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
+  let realDate = new Date(repDate)
+  let time = realDate.getTime()
+  const gap = Number(Date.now()) / 1000 - Number(time) / 1000
+  let days = pluralise(~~(Math.abs(gap) / 86400), 'day')
+  if (gap < 0) {
+    return days + ' Left'
+  } else {
+    return days + ' Past'
   }
 }
 // to local formating
@@ -50,11 +61,6 @@ export function showLess (content, least = 155, less = true) {
   } else {
     return content
   }
-}
-
-// pluralise
-export function pluralise (n, unit) {
-  return n + ' ' + unit + (n <= 1 ? '' : 's')
 }
 
 // trim input and valid

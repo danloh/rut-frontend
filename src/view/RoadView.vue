@@ -90,7 +90,15 @@
         <share-bar></share-bar>
       </div>
     </div>
-    <div class="road-side"></div>
+    <div class="road-side">
+      <b class="countdown">{{ roadObj.deadline | timeGap(rep=false) }}</b><br>
+      <b class="complete">{{
+        roadObj.itemcount > 0 
+          ? Math.round(roadObj.donenum / roadObj.itemcount * 100) + '%' 
+          : '0%' 
+        }} Completed
+      </b>
+    </div>
   </div>
 </template>
 
@@ -276,4 +284,5 @@ $bgcolor = lighten(#f6f6f1, 50%)
     right 0
     top 10px
     width 240px
+    color grey
 </style>

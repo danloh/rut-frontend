@@ -48,7 +48,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" plain size="medium" class="blockbtn"
+        <el-button type="success" plain size="mini" class="blockbtn"
                    @click="onCreate('createForm', createForm)">
                    Create New ReadList, Then Add Items
         </el-button>
@@ -166,7 +166,7 @@ export default {
   padding 10px 160px 10px 120px
   position relative
   .create-form
-    padding 20px
+    padding 10px 20px
     border 1px dotted #689f38
   .title
     text-align center

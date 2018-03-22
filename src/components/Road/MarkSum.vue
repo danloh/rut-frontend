@@ -2,8 +2,8 @@
   <div class="mark-sum">
     <b class="indicator">&nbsp;&nbsp;#{{mark.order}}&nbsp;&nbsp;</b>
     <el-button class="indicator" type="text" v-show="canEdit"
-               @click="showEditMark=true">
-               ..Edit
+               @click="showEditMark=!showEditMark">
+               {{ showEditMark ? 'Cancel' : '..Edit' }}
     </el-button> 
     <div class="mark" v-html="md(mark.mark)" v-show="!showEditMark"></div>
     <!--edit mark-->
@@ -26,7 +26,6 @@
                      Delete
           </el-button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-button size="mini" @click="showEditMark=false">Cancel</el-button>
           <el-button type="success" size="mini" 
                     @click="onEditMark('editMarkForm', editMarkForm, mark.gid)">
                     Done
