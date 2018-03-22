@@ -34,8 +34,10 @@
     <div class="contact">
       <h2>Contact</h2>
       <p>If any questions or suggestion, can always send an email at
-      <a href="mailto:readup.tips@gmail.com?subject=Feedback...">here</a>,
+      <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Here</a>,
       Any feedback is appreciated.</p>
+      <p>Also, You can follow us on Twitter 
+      <a href="https://twitter.com/ReadupTips" target="_blank" rel="nofollow noopener noreferrer">@ReadupTips</a></p>
     </div>
     <div class="about-side">
       <a href="/register">Sign up now</a>

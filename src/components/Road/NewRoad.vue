@@ -1,6 +1,6 @@
 <template>
   <div class="road-page">
-    <h3 class="title">New Road Map</h3>
+    <h3 class="title">Create New Road Map</h3>
     <el-form class="road-form" 
              :model="roadForm" 
              :rules="rules" 
@@ -19,16 +19,15 @@
       <el-form-item label="Set Deadline" prop="deadline">
         <el-date-picker
           v-model="roadForm.deadline"
-          type="date"
-          size="mini"
-          placeholder="Pick a day"
+          type="date" size="mini" style="width:100%"
+          placeholder="Pick a date, Cannot be Changed later"
           value-format="yyyy-MM-dd">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" plain size="medium" class="blockbtn"
                    @click="onCreate('roadForm', roadForm)">
-                   New RoadMap, Add Items Later
+                   Create New RoadMap, Add Items Later
         </el-button>
       </el-form-item>
     </el-form>

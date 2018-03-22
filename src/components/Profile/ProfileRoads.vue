@@ -14,7 +14,9 @@
         </router-link>
         <span class="meta">
           <span>
-            Due: {{ road.deadline | toMDY(rep=false) }} &nbsp; {{ road.done ? '✔' : '..'  }} 
+            including {{ road.itemcount | pluralise('item') }}
+            | Due By <span style="color:orange">{{ road.deadline | toMDY(rep=false) }}</span>
+              &nbsp; {{ road.done ? '✔' : '...'  }} 
           </span>
         </span>
       </div>

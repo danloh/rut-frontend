@@ -11,12 +11,12 @@
           </span> 
           | include {{ roadObj.itemcount | pluralise('item') }} 
           | Start: {{ roadObj.createat | toMDY }} 
-          -- Due: {{ roadObj.deadline | toMDY(rep=false) }}
-            {{ roadObj.done ? '✔' : '..'  }}
+          ~ Due: <b style="color:orange">{{ roadObj.deadline | toMDY(rep=false) }}</b>
+            &nbsp; {{ roadObj.done ? '✔' : '...'  }}
           <span v-if="canEdit">
             <el-button v-if="roadObj.done && !roadObj.converted"
-                      type="text" size="mini" @click="convertRoadToRut">
-                      Convert
+                       type="text" size="mini" @click="convertRoadToRut">
+                       Convert
             </el-button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <el-button type="text" size="mini" @click="showEdit=true">

@@ -49,9 +49,9 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" plain size="medium" class="blockbtn"
                    @click="onCreate('createForm', createForm)">
-                   Create New Then Add Items
+                   Create New ReadList, Then Add Items
         </el-button>
       </el-form-item>
     </el-form>
