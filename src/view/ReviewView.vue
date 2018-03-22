@@ -28,6 +28,7 @@ import ReviewSum from '@/components/Item/ReviewSum.vue'
 import Comment from '@/components/Comment/Comment.vue'
 import Reply from '@/components/Comment/Reply.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
+import { checkAuth } from '@/util/auth'
 
 export default {
   name: 'review-view',
@@ -46,14 +47,13 @@ export default {
   },
   computed: {
     hasMoreComment () {
-      return this.comments.length < this.commentCount
+      return this.comments.length < this.commentCount && checkAuth()
     }
   },
   methods: {
     loadReviewData () {
       let reviewid = this.$route.params.id
-      this.$store.dispatch('getReview', reviewid)
-      .then(resp => {
+      this.$store.dispatch('getReview', reviewid).then(resp => {
         let data = resp.data
         this.review = data
         this.comments = data.comments
@@ -61,10 +61,10 @@ export default {
       })
     },
     loadmoreComment () {
+      if (!checkAuth()) return
       let reviewid = this.$route.params.id
       let params = {'page': this.currentPage}
-      fetchReviewComments(reviewid, params)
-      .then(resp => {
+      fetchReviewComments(reviewid, params).then(resp => {
         this.comments.push(...resp.data)
         this.currentPage += 1
       })

@@ -5,7 +5,7 @@
         <b>News For Readers&nbsp;&nbsp;</b>
         <router-link to="/headlines/top">Top</router-link>
         <router-link to="/headlines/new">New</router-link>
-        <el-button type="text" style="float:right" 
+        <el-button type="text" style="float:right" v-if="canSub"
                    @click="showForm=!showForm">
                    Submit
         </el-button>
@@ -57,6 +57,7 @@ export default {
   title: 'News For Readers',
   data () {
     return {
+      canSub: checkAuth(),
       headlineForm: {
         title: '',
         url: '',

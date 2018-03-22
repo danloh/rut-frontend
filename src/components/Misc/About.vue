@@ -10,20 +10,23 @@
     </div>
     <div class="terms">
       <h2>Terms of Service</h2>
-      <p>Thank you for using Readup.Tips('the Service').
+      <small>-- March 21, 2018</small>
+      <p>Thank you for using Readup.Tips ('the Service').
         <br> 
         Your access to and use of the Service is conditioned on your acceptance 
         of and compliance with the Terms of service. 
         The terms of service may change over time. </p>
-        <ul>We won't collect or store any private information. The email you provided 
+        <ul>We will never collect or store any private information. The email you provided 
         will be used for account confirmation or password ressetting only,
         We will never send you any spams.</ul>
-        <ul>We don't use cookies to collect data. However, 
+        <ul>We do not use cookies to collect data. However, 
         some services may not function properly if you disable cookies.
         You can set web browsers to accept cookies automatically 
         or enable cookies on demand. </ul>
         <ul>You own and are responsible for your contents and 
-        grant us a license to use your contents.</ul>
+        grant us a license to use your contents: to display, to distribute, 
+        to create derivative works, to republish. We will never analyze you per your contents.
+        No third-party can use your contents without your permission.</ul>
         <ul>If you believe that your content has been used in a way that 
         constitutes copyright infringement, Please contact us to claim.</ul>
       <p>We will keep our best effort to make sure the service is reliable. But it may break sometimes.</p>
