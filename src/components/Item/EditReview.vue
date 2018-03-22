@@ -21,10 +21,10 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" size="mini" class="blockbtn"
                    @click="onEdit('reviewForm', reviewForm)" 
                    :disabled="!canEdit">
-                   Done and Submit
+                   Edit and Submit
         </el-button>
       </el-form-item>
     </el-form>

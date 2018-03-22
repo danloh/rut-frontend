@@ -26,7 +26,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" 
+        <el-button type="success" size="mini" class="blockbtn" 
                    @click="onSubmit('reviewForm', reviewForm)">
                    Submit
         </el-button>
