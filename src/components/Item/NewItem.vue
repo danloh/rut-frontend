@@ -17,7 +17,7 @@
              ref="checkForm" 
              size="mini" 
              v-show="!show">
-      <el-form-item label="URL: e.g. Amazon/Coursera url Or UID: e.g. ISBN-13" prop="url">
+      <el-form-item label="URL: e.g. Amazon, Coursera url" prop="url">
         <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
       </el-form-item>
       <el-form-item label="Flag as" prop="flag">
@@ -142,7 +142,7 @@ export default {
   data () {
     return {
       checkForm: {
-        url: '',  // actually  url or uid
+        url: '',
         flag: ''
       },
       itemForm: {
@@ -217,7 +217,7 @@ export default {
             return false
           }
           let data = {
-            resUrl: form.url.trim(), // url or uid
+            resUrl: form.url.trim(),
             flag: form.flag.trim(),
             how: 'spider'
           }

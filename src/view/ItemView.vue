@@ -20,7 +20,7 @@
       <div class="include">
         <div class="in-item" v-for="(rut, index) in inRuts" :key="index" :rut="rut">
           - <router-link :to="'/readuplist/' + rut.id" :title="rut.title">
-             {{ rut.title.slice(0, 142) }} ...
+             {{ rut.title.slice(0, 120) }} ...
            </router-link>
         </div>
         <div v-if="hasMoreRut && canEdit" style="text-align:right">

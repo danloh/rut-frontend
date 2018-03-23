@@ -54,8 +54,7 @@ import { fetchCurrentUser, register, login } from '@/api/api'
 const actions = {
   getCurrentUser: ({ commit }) => {
     return new Promise((resolve, reject) => {
-      fetchCurrentUser()
-      .then(resp => {
+      fetchCurrentUser().then(resp => {
         commit('SET_INFO', resp.data)
         resolve(resp)
       }).catch(error => {

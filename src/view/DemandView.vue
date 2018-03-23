@@ -3,7 +3,7 @@
     <div class="demand-main">
       <demand :demand="demandDetail" :key="demandDetail.id"></demand>
       <div class="answer">
-        <b>Answers to This Demand:</b>
+        <b style="font-size:12px">Answers to This Demand:</b>
         <el-button size="mini" type="text" 
                    @click="loadCreatedThenAsAnswer">
                    ...Link To Answer
@@ -11,7 +11,7 @@
         <div class="title" 
              v-for="(rut, index) in answers" 
              :key="index" 
-             :rut="rut"> -- 
+             :rut="rut"> - 
              <router-link :to="'/readuplist/' + rut.id" :title="rut.title">
                <b>{{ rut.title.slice(0, 142) }} ...</b>
              </router-link>
@@ -208,10 +208,9 @@ export default {
   padding 10px 260px 10px 0px
   position relative
   .demand-main
-    padding auto
     .answer
       background-color white
-      padding 5px
+      padding 5px 10px
       margin-bottom 5px
       .title
         a

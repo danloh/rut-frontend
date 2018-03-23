@@ -23,7 +23,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'home',
-  title: 'Share ReadList or RoadMaps To Readers',
+  title: 'Share ReadList or Learning RoadMap To Readers',
   components: { RutSum, Spinner },
   data: () => ({
     loading: true

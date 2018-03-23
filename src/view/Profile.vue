@@ -175,8 +175,8 @@ export default {
   .profile-head
     background-color #f6f6f1
     border-bottom 1px dotted orange
-    min-height 40px
-    padding 10px 215px 10px 10px
+    min-height 60px
+    padding 5px 215px 5px 10px
     margin-bottom 10px
     position relative
     .fobar
@@ -195,17 +195,17 @@ export default {
     background-color lighten(#e5ebe4, 75%)
     .right-avatar
       background-color #e5ebe4
-      min-height 80px
+      min-height 60px
       padding 5px
       position relative
       .avatar
-        width 60px
-        height 80px
+        width 50px
+        height 60px
       .user-info
         position absolute
         top 10px
         right 0
-        width 145px
+        width 155px
     .right-nav
       padding 5px 20px
       a

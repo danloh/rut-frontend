@@ -132,6 +132,7 @@ a
   text-decoration none
 h2, h3, h4
   margin 8px 0
+  line-height 1.2em
 p
   margin 5px 0
 pre

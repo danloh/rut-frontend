@@ -57,7 +57,7 @@ export default {
   background-color lighten(#f1f3f5, 50%)
   border-bottom 2px solid #eee
   .demand-body
-    font-size 1.05em
+    font-size 1.1em
     a
       color #00838f
       &:hover
