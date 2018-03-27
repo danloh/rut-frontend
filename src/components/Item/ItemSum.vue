@@ -106,7 +106,7 @@
     <!-- addtolist dialog end -->
     <!-- redirect dialog -->
     <el-dialog :visible.sync="showRedirect" width="30%">
-      <router-link :to="'/readuplist/' + intoForm.selectRutID">
+      <router-link :to="'/readlist/' + intoForm.selectRutID">
         <b>Go To The List Page You Just Add Item To?</b>
       </router-link>
     </el-dialog>

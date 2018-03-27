@@ -2,7 +2,7 @@
   <div class="rut-comment">
     <div class="comment-main">
       <b style="font-size:1.2em">Discuss List: &nbsp;&nbsp;</b>
-      <router-link :to="'/readuplist/' + rut.id">
+      <router-link :to="'/readlist/' + rut.id">
         {{ rut.title }}
       </router-link>
     </div>

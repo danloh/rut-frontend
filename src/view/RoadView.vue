@@ -195,7 +195,7 @@ export default {
       roadToRut(roadid).then(resp => {
         if (resp.data) {
           let id = resp.data.id
-          this.$router.push(`/readuplist/${id}`)
+          this.$router.push(`/readlist/${id}`)
         }
       })
     },

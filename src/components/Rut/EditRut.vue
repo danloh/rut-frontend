@@ -98,7 +98,7 @@ export default {
           editRut(this.rutId, data).then(() => {
             let id = this.rutId
             unlockRut(id)
-            this.$router.push(`/readuplist/${id}`)
+            this.$router.push(`/readlist/${id}`)
           })
         } else {
           this.$message({
@@ -112,7 +112,7 @@ export default {
     cancelnReturn () {
       let id = this.rutId
       unlockRut(id)
-      this.$router.push(`/readuplist/${id}`)
+      this.$router.push(`/readlist/${id}`)
     },
     loadRutData () {
       let rut = this.$store.getters.rutDetail

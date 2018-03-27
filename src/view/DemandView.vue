@@ -12,7 +12,7 @@
              v-for="(rut, index) in answers" 
              :key="index" 
              :rut="rut"> - 
-             <router-link :to="'/readuplist/' + rut.id" :title="rut.title">
+             <router-link :to="'/readlist/' + rut.id" :title="rut.title">
                <b>{{ rut.title.slice(0, 142) }} ...</b>
              </router-link>
         </div>

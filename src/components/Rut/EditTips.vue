@@ -99,7 +99,7 @@ export default {
           .then(() => {
             let id = this.rutId
             unlockRut(id)
-            this.$router.push(`/readuplist/${id}`)
+            this.$router.push(`/readlist/${id}`)
           })
         } else {
           this.$message({
@@ -114,13 +114,13 @@ export default {
       let cid = this.$route.params.id
       deleteTips(cid).then(() => {
         let id = this.rutId
-        this.$router.push(`/readuplist/${id}`)
+        this.$router.push(`/readlist/${id}`)
       })
     },
     cancelnReturn () {
       let id = this.rutId
       unlockRut(id)
-      this.$router.push(`/readuplist/${id}`)
+      this.$router.push(`/readlist/${id}`)
     },
     loadTipsData () {
       let rut = this.$store.getters.rutDetail

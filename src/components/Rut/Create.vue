@@ -121,7 +121,7 @@ export default {
           let demandid = this.$route.params.id || ''
           newRut(data, demandid).then(resp => {
             let id = resp.data.id
-            this.$router.push(`/readuplist/${id}`)
+            this.$router.push(`/readlist/${id}`)
             this.$message({
               showClose: true,
               message: 'New List Created, Now Add item to it'

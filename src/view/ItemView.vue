@@ -19,7 +19,7 @@
       </div>
       <div class="include">
         <div class="in-item" v-for="(rut, index) in inRuts" :key="index" :rut="rut">
-          - <router-link :to="'/readuplist/' + rut.id" :title="rut.title">
+          - <router-link :to="'/readlist/' + rut.id" :title="rut.title">
              {{ rut.title.slice(0, 120) }} ...
            </router-link>
         </div>

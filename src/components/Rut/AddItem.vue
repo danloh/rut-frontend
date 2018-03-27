@@ -124,7 +124,7 @@ export default {
           itemToRut(itemid, this.rutId, data).then(() => {
             let id = this.rutId
             unlockRut(id)
-            this.$router.push(`/readuplist/${id}`) // how to scoll to bottom? once push
+            this.$router.push(`/readlist/${id}`) // how to scoll to bottom? once push
           })
         }
       })
@@ -132,7 +132,7 @@ export default {
     cancelnReturn () {
       let id = this.rutId
       unlockRut(id)
-      this.$router.push(`/readuplist/${id}`)
+      this.$router.push(`/readlist/${id}`)
     },
     loadRutData () {
       let rut = this.$store.getters.rutDetail

@@ -55,11 +55,11 @@
                      In Editing
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
         <router-link class="indicator" 
-                     :to="'/edit/readuplist/' + rutid" v-if="canEdit">
+                     :to="'/edit/readlist/' + rutid" v-if="canEdit">
                       <b>Edit </b>
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
         <router-link class="indicator" 
-                     :to="'/additemto/readuplist/' + rutid" v-if="canEdit">
+                     :to="'/additemto/readlist/' + rutid" v-if="canEdit">
                       <b>Add Item </b>
         </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button size="mini" plain @click="starRut">

@@ -1,17 +1,17 @@
 <template>
   <div class="rut-sum">
-    <router-link :to="'/readuplist/' + rut.id">
+    <router-link :to="'/readlist/' + rut.id">
       <span>
         <img class="cover" :src="cover" style="width:80px; height:100px" alt="Cover">
       </span>
       <span class="title">
-        <router-link :to="'/readuplist/' + rut.id"> {{ rut.title }}</router-link>
+        <router-link :to="'/readlist/' + rut.id"> {{ rut.title }}</router-link>
       </span>
       <div class="intro" v-html="intro"></div>
     </router-link>
     <span class="meta">
       <span>  including {{ rut.itemcount | pluralise('item') }}  
-              | <router-link :to="'/readuplist/' + rut.id">...See Detail</router-link>
+              | <router-link :to="'/readlist/' + rut.id">...See Detail</router-link>
       </span>
     </span>
   </div>

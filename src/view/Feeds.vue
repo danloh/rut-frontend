@@ -9,7 +9,7 @@
         <router-link :to="'/profile/' + act.actor.id">
           <img class="avatar" 
                :src="act.actor.avatar" 
-               style="width:30px; border-radius:50%" 
+               style="width:40px;height:40px;border-radius:50%" 
                alt="Avatar">
           <b>{{ act.actor.name }}</b>
         </router-link>
@@ -77,10 +77,10 @@ export default {
     border-top 1px solid #eee
     background-color #eceff1
     position relative
-    padding 5px 50px
+    padding 5px 65px 5px 55px
     .avatar
       position absolute
-      top 5px
+      top 10px
       left 5px
     .act-time
       font-size 0.8em
