@@ -17,7 +17,7 @@
         of and compliance with the Terms of service. 
         The terms of service may change over time. </p>
         <ul>We will never collect or store any private information. The email you provided 
-        will be used for account confirmation or password ressetting only,
+        will be used for account confirmation or password ressetting only and will not be publicly displayed,
         We will never send you any spams.</ul>
         <ul>We do not use cookies to collect data. However, 
         some services may not function properly if you disable cookies.

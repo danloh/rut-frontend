@@ -25,7 +25,14 @@
     <div class="profile-side">
       <div class="right-avatar">
         <img class="avatar" :src="user.avatar" alt="Avatar">
-        <p class="user-info">From: {{user.location || '...'}}</p>
+        <p class="user-info" v-if="user.location">
+          <i class="el-icon-location"></i> {{user.location}}
+        </p>
+        <p class="user-info" v-if="user.exlink"> 
+          ~ <a :href="user.exlink" target="_blank" rel="nofollow noopener noreferrer">
+               {{user.exlink.slice(0,24) + '...'}}
+            </a>
+        </p>
       </div>
       <div class="right-nav">
         <router-link :to="'/profile/' + userid + '/roadmaps/'">
@@ -199,15 +206,10 @@ export default {
       padding 5px
       position relative
       .avatar
-        width 50px
-        height 60px
-      .user-info
-        position absolute
-        top 10px
-        right 0
-        width 155px
+        width 210px
+        height 210px
     .right-nav
-      padding 5px 20px
+      padding 5px 10px
       a
         color grey
         line-height 28px

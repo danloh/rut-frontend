@@ -4,9 +4,10 @@
       <router-view></router-view>
     </div>
     <div class="setting-side">
-      <div class="right-avatar">
-        <img class="avatar" :src="currentUser.avatar" alt="Avatar">
-        <p class="user-info">From: {{currentUser.location || 'Unknown'}}</p>
+      <div class="right-info">
+        <b>Setting: 
+          <router-link :to="'/profile/' + userid">{{currentUser.name}}</router-link>
+        </b>
       </div>
       <div class="right-nav">
         <router-link :to="'/setting/' + userid + '/setting'">Edit Profile</router-link>
@@ -100,21 +101,11 @@ export default {
     right 0
     width 220px
     background-color white
-    .right-avatar
+    .right-info
       background-color #e5ebe4
-      min-height 80px
       padding 5px
-      position relative
-      .avatar
-        width 60px
-        height 80px
-      .user-info
-        position absolute
-        top 10px
-        right 0
-        width 145px
     .right-nav
-      padding 5px 20px
+      padding 5px 10px
       a
         color grey
         line-height 28px

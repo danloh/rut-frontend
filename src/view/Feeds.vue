@@ -19,6 +19,9 @@
         </router-link>
         <br>
         <span class="act-time">{{act.timestamp | timeAgo}}</span>
+        <img v-if="act.event.cover" class="act-cover"
+           :src="act.event.cover" 
+           style="width:50px;height:60px">
       </div>
       <div v-if="activity.length === 0">Nothing Happened</div>
     </div>
@@ -69,11 +72,12 @@ export default {
   position relative
   padding 10px 240px 10px 0px
   .activity-list
+    min-height 60px
     margin-top 5px
     border-top 1px solid #eee
     background-color #eceff1
     position relative
-    padding 5px 5px 5px 50px
+    padding 5px 50px
     .avatar
       position absolute
       top 5px
@@ -81,6 +85,10 @@ export default {
     .act-time
       font-size 0.8em
       color green
+    .act-cover
+      position absolute
+      top 5px
+      right 5px
   .tag-side
     position absolute
     top 40px
