@@ -49,16 +49,16 @@
               <b>Log in</b>
             </el-button>
           </div>
-          <!-- login dialog -->
-          <el-dialog :visible.sync="toLogin" width="40%" class="loginDialog">
-            <login-form :next="'current'" @close="toLogin=false"></login-form>
-          </el-dialog>
-          <!-- login dialog end -->
         </div>
       </nav>
     </header>
     <div class="view">
       <router-view></router-view>
+      <!-- login dialog -->
+      <el-dialog :visible.sync="toLogin" width="40%" class="loginDialog">
+        <login-form :next="'current'" @close="toLogin=false"></login-form>
+      </el-dialog>
+      <!-- login dialog end -->
     </div>
     <footer class="footer">
       <div class="bottom">
