@@ -8,7 +8,7 @@
              label-width="100px" 
              size="mini">
       <el-form-item label="Nickname" prop="nickname">
-        <el-input v-model="settingForm.nickname"></el-input>
+        <el-input v-model="settingForm.nickname" placeholder="a-zA-Z_0-9{2,20}"></el-input>
       </el-form-item>
       <el-form-item label="Location" prop="location">
         <el-input v-model="settingForm.location"></el-input>
@@ -52,9 +52,6 @@ export default {
         url: ''
       },
       rules: {
-        nickname: [
-          { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
-        ],
         location: [
           { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
         ],
@@ -72,16 +69,17 @@ export default {
   methods: {
     onSetting (formName, form) {
       this.$refs[formName].validate((valid) => {
+        let regName = /^\w{2,20}$/
+        let nickName = form.nickname.trim()
         if (valid && checkAuth() && this.canSetting) {
           let data = {
-            nickname: form.nickname.trim(),
+            nickname: regName.test(nickName) ? nickName : '',
             location: form.location.trim(),
             avatarUrl: form.avatarUrl.trim(),
             about: form.about.trim(),
             url: form.url.trim()
           }
-          editProfile(data)
-          .then((resp) => {
+          editProfile(data).then((resp) => {
             this.$router.push(`/profile/${this.userid}`)
             this.$message({
               showClose: true,
@@ -91,7 +89,7 @@ export default {
         } else {
           this.$message({
             showClose: true,
-            message: 'error!! Please Check'
+            message: 'Something Wrong, Please Check'
           })
           return false
         }

@@ -3,7 +3,7 @@
   <h3 class="title">Welcome to Join</h3>
   <el-form class="sign-form" :model="regForm" :rules="rules" ref="regForm">
     <el-form-item prop="username">
-      <el-input v-model="regForm.username" placeholder="Username"></el-input>
+      <el-input v-model="regForm.username" placeholder="Username: a-z_0-9{3,20}"></el-input>
     </el-form-item>
     <el-form-item prop="email">
       <el-input v-model="regForm.email" placeholder="Email"></el-input>
@@ -44,7 +44,8 @@ export default {
   title: 'Register',
   data () {
     var validateName = (rule, value, callback) => {
-      if (value.trim() !== '') {
+      let regName = /^[a-z][0-9a-z_]{2,19}$/
+      if (regName.test(value.trim())) {
         this.validName().then(resp => { // call Promise here
           if (resp.data) {
             callback()
@@ -53,11 +54,11 @@ export default {
           }
         })
       } else {
-        callback(new Error('Please Input Username'))
+        callback(new Error('Please check Username'))
       }
     }
     var validateEmail = (rule, value, callback) => {
-      let regEmail = /^[a-zA-Z0-9_-]+([-_.][A-Za-z0-9]+)*@[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+$/
+      let regEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
       if (regEmail.test(value.trim())) {
         this.validEmail().then(resp => {
           if (resp.data) {
