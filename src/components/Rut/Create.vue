@@ -1,6 +1,9 @@
 <template>
   <div class="create-page">
     <h3 class="title">Create New Read List</h3>
+    <b style="color:green;font-size:0.8em">Read List, collection of books, courses, etc., 
+      for sharing some items on a specific topic you have read up. 
+    </b>
     <p v-if="demandid"> As Answer To The 
       <router-link :to="'/demand/' + demandid" 
                    target="_blank" rel="noopener noreferrer">
@@ -54,11 +57,6 @@
         </el-button>
       </el-form-item>
     </el-form>
-    <div style="color:green;font-size:0.8em">
-      <p>Read List, collection of books, courses, etc., 
-        for sharing some items on a specific topic you have read up. 
-      </p>
-    </div>
   </div>
 </template>
 

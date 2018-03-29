@@ -10,7 +10,7 @@
     </el-form-item>
     <el-form-item prop="password">
       <el-input :type="pwdType" v-model="regForm.password" 
-                placeholder="Password, at least 6 characters">
+                placeholder="Password: 6 - 12 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
       </el-input>
     </el-form-item>
     <el-form-item prop="repassword">
@@ -72,8 +72,9 @@ export default {
       }
     }
     var validatePass = (rule, value, callback) => {
-      if (value.trim() === '') {
-        callback(new Error('Please input the password'))
+      let regPsw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#@!~%^$&*-])[a-zA-Z\d#@!~%^$&*-]{6,12}$/
+      if (!regPsw.test(value.trim())) {
+        callback(new Error('Please input or check the password'))
       } else {
         if (this.regForm.repassword !== '') {
           this.$refs.regForm.validateField('repassword')
@@ -105,12 +106,10 @@ export default {
           { required: true, validator: validateEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, validator: validatePass, trigger: 'blur' },
-          { min: 6, message: 'At Least 6 characters', trigger: 'blur' }
+          { required: true, validator: validatePass, trigger: 'blur' }
         ],
         repassword: [
-          { required: true, validator: validaterePass, trigger: 'blur' },
-          { min: 6, message: 'At Least 6 characters', trigger: 'blur' }
+          { required: true, validator: validaterePass, trigger: 'blur' }
         ]
       },
       pwdType: 'password'
@@ -158,7 +157,7 @@ export default {
 
 <style lang="stylus" scoped>
 .sign-page
-  padding 10px 250px 10px 250px
+  padding 10px 210px 10px 210px
   position relative
   .sign-form
     padding 20px

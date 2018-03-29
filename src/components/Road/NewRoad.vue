@@ -1,6 +1,9 @@
 <template>
   <div class="road-page">
     <h3 class="title">Create New Road Map</h3>
+    <b style="color:green;font-size:0.8em">Road Map, collection of books, courses, 
+      etc., help to read up on a specific subject.
+    </b>
     <el-form class="road-form" 
              :model="roadForm" 
              :rules="rules" 
@@ -30,11 +33,6 @@
         </el-button>
       </el-form-item>
     </el-form>
-    <div style="color:green;font-size:0.8em">
-      <p>Road Map, a collection of books, courses, 
-        video, etc., help to read up on a specific subject.
-      </p>
-    </div>
   </div>
 </template>
 
