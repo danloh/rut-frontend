@@ -17,7 +17,7 @@
         of and compliance with the Terms of service. 
         The terms of service may change over time. </p>
         <ul>We will never collect or store any private information. The email you provided 
-        will be used for account confirmation or password ressetting only and will not be publicly displayed,
+        will be used for account confirmation or password resetting only and will not be publicly displayed,
         We will never send you any spams.</ul>
         <ul>We do not use cookies to collect data. However, 
         some services may not function properly if you disable cookies.
@@ -26,7 +26,7 @@
         <ul>You own and are responsible for your contents and 
         grant us a license to use your contents: to display, to distribute, 
         to create derivative works, to republish. We will never analyze you per your contents.
-        No third-party can use your contents without your permission.</ul>
+        No third-party is permitted to use your contents without your permission.</ul>
         <ul>If you believe that your content has been used in a way that 
         constitutes copyright infringement, Please contact us to claim.</ul>
       <p>We will keep our best effort to make sure the service is reliable. But it may break sometimes.</p>

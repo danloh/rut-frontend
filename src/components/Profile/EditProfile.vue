@@ -1,6 +1,9 @@
 <template>
   <div class="edit-page">
     <h3 class="title"> Edit My Profile</h3>
+    <b style="color:green;font-size:0.8em">
+      Please Note: The Profile Information will be displayed publicly
+    </b>
     <el-form class="edit-form" 
              :model="settingForm" 
              :rules="rules" 

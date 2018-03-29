@@ -29,7 +29,7 @@
           <el-button type="success" size="mini" @click="onEditTags">Done</el-button>
         </div>
       </el-dialog>
-      <!-- edit tag dialog end -->
+      <!-- end edit tag dialog -->
       <div class="title">
         <h2><b style="color:grey">ReadList:&nbsp;</b>{{ rutDetail.title }}</h2>
         <p class="meta">
@@ -106,7 +106,7 @@
           </el-button>
         </div>
       </el-dialog>
-      <!-- edit epilog dialog end -->
+      <!-- end edit epilog dialog -->
       <div class="bottombar">
         <share-bar></share-bar>
       </div>
@@ -136,7 +136,7 @@
           </el-button>
         </div>
       </el-dialog>
-      <!-- edit credential dialog end -->
+      <!-- end edit credential dialog -->
       <div class="demands" v-if="demandCount">
         <b>As Answer to Request:</b>
         <p class="demand-title" 

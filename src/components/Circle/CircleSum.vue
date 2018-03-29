@@ -54,7 +54,7 @@
         </el-button>
     </div>
     </el-dialog>
-    <!-- edit dialog end -->
+    <!-- end edit dialog -->
     <!-- confirm delete dialog -->
     <el-dialog title="Confirm Delete?" :visible.sync="confirm" width="30%">
       <span>Confirm Delete? Can not recover</span>
@@ -66,7 +66,7 @@
         </el-button>
       </span>
     </el-dialog>
-    <!-- confirm dialog end -->
+    <!-- end confirm del dialog -->
   </div>
 </template>
 

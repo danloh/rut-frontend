@@ -32,7 +32,7 @@
       </div>
       <demand-list :type="'popular'" :tag="tagName" :key="tagid"></demand-list>
     </div>
-    <!-- dialog -->
+    <!-- edit tag dialog -->
     <el-dialog title="Edit Tag Description" 
                :visible.sync="openDialog" 
                :before-close="cancelOnClose">
@@ -55,7 +55,7 @@
         </el-button>
       </div>
     </el-dialog>
-    <!-- dialog end -->
+    <!-- end edit tag dialog -->
   </div>
 </template>
 

@@ -16,7 +16,7 @@
     </div>
     <div class="circle-side">
       <el-button type="text" @click="openDialog=true">...Launch Circle</el-button>
-      <!-- dialog -->
+      <!-- launch dialog -->
       <el-dialog title="Launch Circle" :visible.sync="openDialog" width="40%">
       <el-form :model="circleForm" :rules="rules" ref="circleForm" size="mini">
           <el-form-item prop="name">
@@ -52,7 +52,7 @@
           </el-button>
       </div>
       </el-dialog>
-      <!-- dialog end -->
+      <!-- end launch dialog -->
     </div>
   </div>
 </template>

@@ -103,14 +103,14 @@
         </el-button>
       </div>
     </el-dialog>
-    <!-- addtolist dialog end -->
+    <!-- end addtolist dialog -->
     <!-- redirect dialog -->
     <el-dialog :visible.sync="showRedirect" width="30%">
       <router-link :to="'/readlist/' + intoForm.selectRutID">
         <b>Go To The List Page You Just Add Item To?</b>
       </router-link>
     </el-dialog>
-    <!-- redirect dialog end-->
+    <!-- end redirect dialog-->
     <!-- addnote dialog -->
     <el-dialog title="Add Note and Flag It" :visible.sync="showNoteDialog" width="35%">
       <el-form :model="noteForm" :rules="noteRules" ref="noteForm">
@@ -127,7 +127,7 @@
         </el-button>
       </div>
     </el-dialog>
-    <!-- addnote dialog end -->
+    <!-- end addnote dialog -->
     <!-- addtoroad dialog -->
     <el-dialog title="Add Item to one of my Road Maps" :visible.sync="showAddtoRoad" width="45%">
       <el-form :model="toRoadForm" ref="toRoadForm" size="medium">
@@ -154,14 +154,14 @@
         </el-button>
       </div>
     </el-dialog>
-    <!-- addtolist dialog end -->
+    <!-- end addtolist dialog -->
     <!-- redirect dialog -->
     <el-dialog :visible.sync="showRedtoRoad" width="30%">
       <router-link :to="'/roadmap/' + toRoadForm.selectRoadID">
         <b>Go To The Roadmap Page?</b>
       </router-link>
     </el-dialog>
-    <!-- redirect dialog end-->
+    <!-- end redirect dialog-->
   </div>
 </template>
 

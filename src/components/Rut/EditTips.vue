@@ -50,7 +50,7 @@
         </el-button>
       </span>
     </el-dialog>
-    <!-- dialog end -->
+    <!-- end confirm delete dialog -->
   </div>
 </template>
 

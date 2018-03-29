@@ -47,7 +47,7 @@
           </el-button>
         </div>
       </el-dialog>
-      <!-- dialog end -->
+      <!-- end list2ans dialog -->
       <b>Discuss</b>
       <div v-for="comment in comments" :key="comment.id">
         <comment :comment="comment"></comment>

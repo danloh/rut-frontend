@@ -43,7 +43,7 @@
           </el-button>
         </span>
       </el-dialog>
-      <!-- dialog end -->
+      <!-- end confirm delete dialog -->
     </div>
     <!--end edit mark-->
   </div>

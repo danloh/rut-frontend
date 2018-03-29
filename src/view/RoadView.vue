@@ -49,7 +49,7 @@
           </el-button>
         </div>
       </el-dialog>
-      <!-- edit intro dialog end -->
+      <!-- end edit intro dialog -->
       <!-- add item dialog -->
       <el-dialog title="Add Item to  RoadMap" width="50%" 
                  :visible.sync="showAdd">
@@ -81,7 +81,7 @@
         </div>
         <p>If no result, Would you help <a href="/newitem">submit</a> the item?</p>
       </el-dialog>
-      <!-- add item dialog end -->
+      <!-- end add item dialog -->
       <div class="itemmark" v-for="mark in marks" :key="mark.gid">
         <item-sum class="itemsum" :item="mark.item" :key="mark.itemid"></item-sum>
         <mark-sum :mark="mark" :canEdit="canEdit"></mark-sum>

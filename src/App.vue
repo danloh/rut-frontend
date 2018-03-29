@@ -58,7 +58,7 @@
       <el-dialog :visible.sync="toLogin" width="40%" class="loginDialog">
         <login-form :next="'current'" @close="toLogin=false"></login-form>
       </el-dialog>
-      <!-- login dialog end -->
+      <!-- end login dialog -->
     </div>
     <footer class="footer">
       <div class="bottom">
