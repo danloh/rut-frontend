@@ -1,12 +1,13 @@
 <template>
 <div class="reset-page">
   <h3 class="title">Reset Password</h3>
-  <el-form class="reset-form" 
-           :model="resetpswForm" 
-           :rules="rules" 
-           ref="resetpswForm" size="mini">
+  <el-form class="reset-form" size="mini" 
+           :model="resetpswForm" :rules="rules" 
+           ref="resetpswForm">
     <el-form-item label="New Password" prop="password">
-      <el-input :type="pwdType" v-model="resetpswForm.password"></el-input>
+      <el-input :type="pwdType" v-model="resetpswForm.password"
+                placeholder="6 - 12 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
+      </el-input>
     </el-form-item>
     <el-form-item label="Confirm Password" prop="repassword">
       <el-input :type="pwdType" v-model="resetpswForm.repassword"></el-input>
@@ -30,8 +31,9 @@ export default {
   title: 'Reset Password',
   data () {
     var validatePass = (rule, value, callback) => {
-      if (value.trim() === '') {
-        callback(new Error('Please input the password'))
+      let regPsw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#@!~%^$&*-])[a-zA-Z\d#@!~%^$&*-]{6,12}$/
+      if (!regPsw.test(value.trim())) {
+        callback(new Error('Please input or check the password'))
       } else {
         if (this.resetpswForm.repassword !== '') {
           this.$refs.resetpswForm.validateField('repassword')

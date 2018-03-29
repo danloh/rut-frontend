@@ -4,12 +4,9 @@
     <b style="color:green;font-size:0.8em">
       Please Note: The Profile Information will be displayed publicly
     </b>
-    <el-form class="edit-form" 
-             :model="settingForm" 
-             :rules="rules" 
-             ref="settingForm" 
-             label-width="100px" 
-             size="mini">
+    <el-form class="edit-form" size="mini" 
+             :model="settingForm" :rules="rules" 
+             ref="settingForm" label-width="90px">
       <el-form-item label="Nickname" prop="nickname">
         <el-input v-model="settingForm.nickname" placeholder="a-zA-Z_0-9{2,20}"></el-input>
       </el-form-item>
@@ -17,15 +14,17 @@
         <el-input v-model="settingForm.location"></el-input>
       </el-form-item>
       <el-form-item label="Avatar URL" prop="avatarurl">
-        <el-input v-model="settingForm.avatarUrl"></el-input>
+        <el-input type="textarea" autosize v-model="settingForm.avatarUrl"></el-input>
       </el-form-item>
       <el-form-item label="About Me" prop="about">
         <el-input type="textarea" v-model="settingForm.about" 
                   :autosize="{minRows:3}">
         </el-input>
       </el-form-item>
-      <el-form-item label="Url" prop="url">
-        <el-input v-model="settingForm.url"></el-input>
+      <el-form-item label="Website" prop="url">
+        <el-input type="textarea" autosize v-model="settingForm.url" 
+                  placeholder="Personal Page or Website Url">
+        </el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="success" size="mini" class="blockbtn"
@@ -117,7 +116,7 @@ export default {
 
 <style lang="stylus" scoped>
 .edit-page
-  padding 10px 60px 10px 40px
+  padding 10px 40px 10px 40px
   position relative
   .edit-form
     padding 20px

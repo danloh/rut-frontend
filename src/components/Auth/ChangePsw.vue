@@ -1,16 +1,16 @@
 <template>
 <div class="change-page">
   <h3 class="title">Change My Password</h3>
-  <el-form class="change-form" 
-           :model="changepswForm" 
-           :rules="rules" 
-           ref="changepswForm" 
-           size="mini">
+  <el-form class="change-form" size="mini" 
+           :model="changepswForm" :rules="rules" 
+           ref="changepswForm">
     <el-form-item label="Current Password" prop="password">
       <el-input :type="pwdType" v-model="changepswForm.password"></el-input>
     </el-form-item>
     <el-form-item label="New Password" prop="newpassword">
-      <el-input :type="pwdType" v-model="changepswForm.newpassword"></el-input>
+      <el-input :type="pwdType" v-model="changepswForm.newpassword"
+                placeholder="6 - 12 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
+      </el-input>
     </el-form-item>
     <el-form-item label="Confirm New Password" prop="repassword">
       <el-input :type="pwdType" v-model="changepswForm.repassword"></el-input>
@@ -35,8 +35,9 @@ export default {
   title: 'Change Password',
   data () {
     var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the new password'))
+      let regPsw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#@!~%^$&*-])[a-zA-Z\d#@!~%^$&*-]{6,12}$/
+      if (!regPsw.test(value.trim())) {
+        callback(new Error('Please input or check the new password'))
       } else {
         if (this.changepswForm.repassword !== '') {
           this.$refs.changepswForm.validateField('repassword')
@@ -105,7 +106,7 @@ export default {
 
 <style lang="stylus" scoped>
 .change-page
-  padding 10px 60px 10px 160px
+  padding 10px 60px 10px 100px
   position relative
   .change-form
     padding 20px
