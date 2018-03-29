@@ -62,7 +62,7 @@ export default {
           { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
         ],
         url: [
-          { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
+          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
         ]
       },
       userid: null,
