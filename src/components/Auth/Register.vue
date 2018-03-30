@@ -10,7 +10,7 @@
     </el-form-item>
     <el-form-item prop="password">
       <el-input :type="pwdType" v-model="regForm.password" 
-                placeholder="Password: 6 - 12 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
+                placeholder="Password: 6 - 18 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
       </el-input>
     </el-form-item>
     <el-form-item prop="repassword">
@@ -38,13 +38,13 @@
 
 <script>
 import { checkName, checkEmail } from '@/api/api'
+import { regName, regEmail, regPsw } from '@/util/constant'
 
 export default {
   name: 'register',
   title: 'Register',
   data () {
     var validateName = (rule, value, callback) => {
-      let regName = /^[a-z][0-9a-z_]{2,19}$/
       if (regName.test(value.trim())) {
         this.validName().then(resp => { // call Promise here
           if (resp.data) {
@@ -58,7 +58,6 @@ export default {
       }
     }
     var validateEmail = (rule, value, callback) => {
-      let regEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
       if (regEmail.test(value.trim())) {
         this.validEmail().then(resp => {
           if (resp.data) {
@@ -72,7 +71,6 @@ export default {
       }
     }
     var validatePass = (rule, value, callback) => {
-      let regPsw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#@!~%^$&*-])[a-zA-Z\d#@!~%^$&*-]{6,12}$/
       if (!regPsw.test(value.trim())) {
         callback(new Error('Please input or check the password'))
       } else {

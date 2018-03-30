@@ -6,7 +6,7 @@
            ref="resetpswForm">
     <el-form-item label="New Password" prop="password">
       <el-input :type="pwdType" v-model="resetpswForm.password"
-                placeholder="6 - 12 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
+                placeholder="6 - 18 in length, at least 1 number, 1 letter, 1 special(#@!~%^$&*-)">
       </el-input>
     </el-form-item>
     <el-form-item label="Confirm Password" prop="repassword">
@@ -25,13 +25,13 @@
 
 <script>
 import { reset, checkExpired } from '@/api/api'
+import { regPsw } from '@/util/constant'
 
 export default {
   name: 'resetpsw',
   title: 'Reset Password',
   data () {
     var validatePass = (rule, value, callback) => {
-      let regPsw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#@!~%^$&*-])[a-zA-Z\d#@!~%^$&*-]{6,12}$/
       if (!regPsw.test(value.trim())) {
         callback(new Error('Please input or check the password'))
       } else {

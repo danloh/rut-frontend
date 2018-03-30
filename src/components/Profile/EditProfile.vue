@@ -40,6 +40,7 @@
 <script>
 import { editProfile } from '@/api/api'
 import { checkAuth } from '@/util/auth'
+import { regNname } from '@/util/constant'
 
 export default {
   name: 'edit-profile',
@@ -71,11 +72,10 @@ export default {
   methods: {
     onSetting (formName, form) {
       this.$refs[formName].validate((valid) => {
-        let regName = /^\w{2,20}$/
         let nickName = form.nickname.trim()
         if (valid && checkAuth() && this.canSetting) {
           let data = {
-            nickname: regName.test(nickName) ? nickName : '',
+            nickname: regNname.test(nickName) ? nickName : '',
             location: form.location.trim(),
             avatarUrl: form.avatarUrl.trim(),
             about: form.about.trim(),
