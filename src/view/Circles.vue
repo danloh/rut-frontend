@@ -17,7 +17,8 @@
     <div class="circle-side">
       <el-button type="text" @click="openDialog=true">...Launch Circle</el-button>
       <!-- launch dialog -->
-      <el-dialog title="Launch Circle" :visible.sync="openDialog" width="40%">
+      <el-dialog title="Launch Circle" width="520px" 
+                 :visible.sync="openDialog">
       <el-form :model="circleForm" :rules="rules" ref="circleForm" size="mini">
           <el-form-item prop="name">
           <el-input v-model="circleForm.name" placeholder="Name"></el-input>
@@ -45,10 +46,9 @@
           </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-          <el-button @click="openDialog=false">Cancel</el-button>
           <el-button type="success" 
-                      @click="newCircle('circleForm', circleForm)">
-                      Launch
+                     @click="newCircle('circleForm', circleForm)">
+                     Launch
           </el-button>
       </div>
       </el-dialog>

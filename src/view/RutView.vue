@@ -10,7 +10,7 @@
         </el-button>
       </div>
       <!-- edit tag dialog -->
-      <el-dialog title="Edit Tag" width="30%" 
+      <el-dialog title="Edit Tag" width="350px" 
                  :visible.sync="showDialog.tag" 
                  :before-close="cancelOnClose">
         <el-input size="mini" v-model="newTag" 
@@ -91,7 +91,7 @@
         <div v-html="md(epiForm.epilog)"></div>
       </div>
       <!-- edit epilog dialog -->
-      <el-dialog title="Add or Edit Epilog" width="45%" 
+      <el-dialog title="Add or Edit Epilog" width="520px" 
                  :visible.sync="showDialog.epi"
                  :before-close="cancelOnClose">
         <el-form :model="epiForm" ref="epiForm">
@@ -122,7 +122,7 @@
         </div>
       </div>
       <!-- edit credential dialog -->
-      <el-dialog title="Add or Edit Credential" width="40%" 
+      <el-dialog title="Add or Edit Credential" width="450px" 
                  :visible.sync="showDialog.cre"
                  :before-close="cancelOnClose">
         <el-form :model="creForm" ref="creForm">

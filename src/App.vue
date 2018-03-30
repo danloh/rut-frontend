@@ -55,7 +55,7 @@
     <div class="view">
       <router-view></router-view>
       <!-- login dialog -->
-      <el-dialog :visible.sync="toLogin" width="40%" class="loginDialog">
+      <el-dialog :visible.sync="toLogin" width="450px" class="loginDialog">
         <login-form :next="'current'" @close="toLogin=false"></login-form>
       </el-dialog>
       <!-- end login dialog -->

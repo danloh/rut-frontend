@@ -27,8 +27,9 @@
       <div class="share">
         <share-bar :prefix="'Would you like answer this question:  '"></share-bar>
       </div>
-      <!-- link to a rut as answer dialog -->
-      <el-dialog title="Link A list as Answer" :visible.sync="showDialog" width="45%">
+      <!-- link rut as answer dialog -->
+      <el-dialog title="Link A list as Answer" width="480px" 
+                 :visible.sync="showDialog">
         <el-form :model="asForm" ref="asForm">
           <el-form-item prop="rut">
             <el-select v-model="asForm.selectRutID">
@@ -41,13 +42,12 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="showDialog = false">Cancel</el-button>
           <el-button size="mini" type="success" @click="asAnswer('asForm', asForm)">
             As Answer
           </el-button>
         </div>
       </el-dialog>
-      <!-- end list2ans dialog -->
+      <!-- end link rut as answer dialog -->
       <b>Discuss</b>
       <div v-for="comment in comments" :key="comment.id">
         <comment :comment="comment"></comment>

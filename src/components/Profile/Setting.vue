@@ -22,7 +22,8 @@
         <br>
         <el-button type="text" @click="showDialog=true">Invite Friends</el-button>
         <!-- share to invite dialog -->
-        <el-dialog title="Share Link To Invite Your Friends" :visible.sync="showDialog">
+        <el-dialog title="Share Link To Invite Your Friends" width="420px"
+                   :visible.sync="showDialog">
           <b>Send this Link to Invite Your Friend To Readup.Tips</b>
           <p style="color: green">{{invitelink}}</p>
           <share-bar :passTitle="'Invite You To Readup.Tips'" 

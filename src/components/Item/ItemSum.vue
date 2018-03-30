@@ -55,19 +55,20 @@
             </el-button>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('schedule')">Schedule</span>
+            <span @click="openToFlag('Schedule')">Schedule</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('working')">Working On</span>
+            <span @click="openToFlag('Working')">Working On</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('done')">Have Done</span>
+            <span @click="openToFlag('Done')">Have Done</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
     <!-- addtolist dialog -->
-    <el-dialog title="Add Item to one of my Shared Read Lists" :visible.sync="showAddtoRut" width="45%">
+    <el-dialog title="Add Item to one of my Shared Read Lists" width="520px" 
+               :visible.sync="showAddtoRut">
       <el-form :model="intoForm" ref="intoForm" size="medium">
         <el-form-item prop="rut">
           <el-select v-model="intoForm.selectRutID"
@@ -96,7 +97,6 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="showAddtoRut = false">Cancel</el-button>
         <el-button size="mini" type="success" 
                    @click="addtoRut('intoForm', intoForm)">
                    Add
@@ -105,14 +105,15 @@
     </el-dialog>
     <!-- end addtolist dialog -->
     <!-- redirect dialog -->
-    <el-dialog :visible.sync="showRedirect" width="30%">
+    <el-dialog :visible.sync="showRedirect" width="270px">
       <router-link :to="'/readlist/' + intoForm.selectRutID">
-        <b>Go To The List Page You Just Add Item To?</b>
+        <b>Go To The ReadList Page?</b>
       </router-link>
     </el-dialog>
     <!-- end redirect dialog-->
     <!-- addnote dialog -->
-    <el-dialog title="Add Note and Flag It" :visible.sync="showNoteDialog" width="35%">
+    <el-dialog :title="'Add Note and Flag As ' + flagTo"  width="450px" 
+               :visible.sync="showNoteDialog">
       <el-form :model="noteForm" :rules="noteRules" ref="noteForm">
         <el-form-item prop="note">
           <el-input v-model="noteForm.note" 
@@ -129,7 +130,8 @@
     </el-dialog>
     <!-- end addnote dialog -->
     <!-- addtoroad dialog -->
-    <el-dialog title="Add Item to one of my Road Maps" :visible.sync="showAddtoRoad" width="45%">
+    <el-dialog title="Add Item to one of my Road Maps" width="520px" 
+               :visible.sync="showAddtoRoad">
       <el-form :model="toRoadForm" ref="toRoadForm" size="medium">
         <el-form-item prop="road">
           <el-select v-model="toRoadForm.selectRoadID" placeholder="Select a Roadmap">
@@ -147,7 +149,6 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="showAddtoRoad = false">Cancel</el-button>
         <el-button size="mini" type="success" 
                    @click="addtoRoad('toRoadForm', toRoadForm)">
                    Add
@@ -156,9 +157,9 @@
     </el-dialog>
     <!-- end addtolist dialog -->
     <!-- redirect dialog -->
-    <el-dialog :visible.sync="showRedtoRoad" width="30%">
+    <el-dialog :visible.sync="showRedtoRoad" width="270px">
       <router-link :to="'/roadmap/' + toRoadForm.selectRoadID">
-        <b>Go To The Roadmap Page?</b>
+        <b>Go To The RoadMap Page?</b>
       </router-link>
     </el-dialog>
     <!-- end redirect dialog-->
@@ -275,13 +276,13 @@ export default {
           let note = form.note
           let to = this.flagTo
           switch (to) {
-            case 'schedule':
+            case 'Schedule':
               this.flagSchedule(note)
               break
-            case 'working':
+            case 'Working':
               this.flagWorking(note)
               break
-            case 'done':
+            case 'Done':
               this.flagDone(note)
               break
           }

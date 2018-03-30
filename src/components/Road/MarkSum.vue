@@ -33,7 +33,8 @@
         </el-form-item>
       </el-form>
       <!-- confirm delete dialog -->
-      <el-dialog title="Confirm Delete This Item?" :visible.sync="showConfirm" width="30%">
+      <el-dialog title="Confirm Delete This Item?" width="320px" 
+                 :visible.sync="showConfirm">
         <span>Confirm Delete? Can not recover</span>
         <span slot="footer" class="dialog-footer">
           <el-button size="mini" @click="showConfirm = false">Cancel</el-button>

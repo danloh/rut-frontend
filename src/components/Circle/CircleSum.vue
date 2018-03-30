@@ -18,7 +18,7 @@
       <p><i class="el-icon-time"></i> {{ circle.time }}</p>
     </div>
     <!-- edit dialog -->
-    <el-dialog title="Edit Circle" :visible.sync="openDialog" width="40%">
+    <el-dialog title="Edit Circle" :visible.sync="openDialog" width="480px">
     <el-form :model="editForm" :rules="rules" ref="editForm" size="mini">
         <el-form-item prop="name">
         <el-input v-model="editForm.name" placeholder="Name"></el-input>
@@ -46,17 +46,16 @@
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-        <el-button type="danger" size="mini" @click="confirm=true">Delete</el-button>
-        <el-button @click="openDialog=false">Cancel</el-button>
+        <el-button type="text" size="mini" @click="confirm=true">Delete?</el-button>
         <el-button type="success" 
-                    @click="onEditCircle('editForm', editForm)">
-                    Done
+                   @click="onEditCircle('editForm', editForm)">
+                   Edit  Done
         </el-button>
     </div>
     </el-dialog>
     <!-- end edit dialog -->
     <!-- confirm delete dialog -->
-    <el-dialog title="Confirm Delete?" :visible.sync="confirm" width="30%">
+    <el-dialog title="Confirm Delete?" :visible.sync="confirm" width="320px">
       <span>Confirm Delete? Can not recover</span>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="confirm = false">Cancel</el-button>

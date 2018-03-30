@@ -33,7 +33,7 @@
       <demand-list :type="'popular'" :tag="tagName" :key="tagid"></demand-list>
     </div>
     <!-- edit tag dialog -->
-    <el-dialog title="Edit Tag Description" 
+    <el-dialog title="Edit Tag Description" width="480px" 
                :visible.sync="openDialog" 
                :before-close="cancelOnClose">
       <el-form :model="tagForm" :rules="rules" ref="tagForm" size="mini">
