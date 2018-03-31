@@ -9,14 +9,18 @@ export function timeAgo (date, rep = true) {
   let realDate = new Date(repDate)
   let time = realDate.getTime()
   let offset = 0 // new Date().getTimezoneOffset() * 60
-  const between = Number(Date.now()) / 1000 + offset - Number(time) / 1000
-  if (between < 3600) {
-    if (Object.is(~~(between / 60), 0)) return 'just now'
-    return pluralise(~~(between / 60), 'minute') + ' ago' // double bitwise NOT -> floor
-  } else if (between < 86400) {
-    return pluralise(~~(between / 3600), 'hour') + ' ago'
+  const delta = Number(Date.now()) / 1000 + offset - Number(time) / 1000
+  if (delta < 3600) {
+    if (Object.is(~~(delta / 60), 0)) return 'just now'
+    return pluralise(~~(delta / 60), 'minute') + ' ago' // double bitwise NOT -> floor
+  } else if (delta < 86400) {
+    return pluralise(~~(delta / 3600), 'hour') + ' ago'
+  } else if (delta < 2592000) {
+    return pluralise(~~(delta / 86400), 'day') + ' ago'
+  } else if (delta < 31104000) {
+    return pluralise(~~(delta / 2592000), 'month') + ' ago'
   } else {
-    return pluralise(~~(between / 86400), 'day') + ' ago'
+    return pluralise(~~(delta / 31104000), 'year') + ' ago'
   }
 }
 // time gap

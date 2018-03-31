@@ -69,13 +69,13 @@ export default {
       &:hover
         color red
   .clipbody
-    padding 8px
+    padding 0px 10px
     font-size 1.05em
     color #2b2117
     position relative
     .quoteleft
       position absolute
-      top 10px
+      top 0px
       left 0px
       color grey
 </style>

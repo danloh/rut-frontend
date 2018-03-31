@@ -10,11 +10,9 @@
         {{ 'Request:  ' + demandBody || 'Request' }}
       </router-link>
     </p>
-    <el-form class="create-form" 
-             :model="createForm" 
-             :rules="rules" 
-             ref="createForm" 
-             size="mini">
+    <el-form class="create-form" size="mini" 
+             :model="createForm" :rules="rules" 
+             ref="createForm">
       <el-form-item label="Title" prop="title">
         <el-input type="textarea" v-model="createForm.title" autosize></el-input>
       </el-form-item>
@@ -89,7 +87,7 @@ export default {
         ],
         tag: [
           { required: true, validator: trimValid, message: 'Please set some tags', trigger: 'blur' },
-          { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
+          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
         ],
         credential: [
           { max: 255, message: 'Max Length should be 255', trigger: 'blur' }

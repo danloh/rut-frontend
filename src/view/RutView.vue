@@ -129,6 +129,7 @@
           <el-form-item prop="credential">
             <el-input type="textarea" autosize v-model="creForm.credential"></el-input>
           </el-form-item>
+          <small>Max 255 characters</small>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button size="mini" type="success" @click="onEditCre('creForm', creForm)">
@@ -306,7 +307,7 @@ export default {
     },
     addNewTag () {
       let newT = this.newTag.trim()
-      if (newT) {
+      if (newT && newT.length < 64) {
         this.newTags.push(newT)
         this.newTag = ''
       } else {
@@ -340,9 +341,7 @@ export default {
     onEditEpi (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid && checkAuth()) {
-          let data = {
-            epilog: form.epilog.trim()
-          }
+          let data = { epilog: form.epilog.trim() }
           editRutce(this.rutid, data).then(resp => {
             let id = this.rutid
             unlockRut(id)
@@ -361,9 +360,9 @@ export default {
     onEditCre (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid && checkAuth()) {
-          let data = {
-            credential: form.credential.trim()
-          }
+          let cred = form.credential.trim()
+          if (cred.length > 255) return
+          let data = { credential: cred }
           editRutce(this.rutid, data).then(resp => {
             let id = this.rutid
             unlockRut(id)

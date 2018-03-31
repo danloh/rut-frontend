@@ -56,7 +56,7 @@
       <p class="right-item" v-for="(item, index) in items" :key="index" :item="item">
         <b>{{ item.cate }}</b> 
         <router-link :to="'/item/' + item.id" 
-                     :title="item.title"> {{ item.title.slice(0, 42) }}
+                     :title="item.title"> {{ item.title.slice(0, 72) }}
                      ...
         </router-link>
       </p>
@@ -139,7 +139,7 @@ export default {
 
 <style lang="stylus" scoped>
 .challenge-page
-  padding 10px 285px 10px 0px
+  padding 10px 320px 10px 0px
   position relative
   .challenge-view
     padding auto
@@ -159,7 +159,7 @@ export default {
     position absolute
     top 10px
     right 0
-    width 270px
+    width 305px
     background-color #f0f3f0
     padding 5px
     .right-title
