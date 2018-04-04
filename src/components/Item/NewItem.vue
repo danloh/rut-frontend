@@ -2,7 +2,7 @@
   <div class="new-page">
     <div class="title"> <b>Submit New Item</b>&nbsp;</div>
     <p style="color:green;font-size:0.8em">
-      An Item can be anything: Book, Course, Documentary, Paper, Atlas, Place to visit, Exppriment to perform, etc.
+      An Item can be anything: Book, Course, Documentary, Paper, Podcast, Atlas, Place, etc.
     </p>
     <spinner :show="loading"></spinner>
     <el-button size="small" type="primary">
@@ -45,13 +45,13 @@
       <el-form-item label="Type" prop="cate">
         <el-radio-group v-model="itemForm.cate">
           <el-radio-button label="Book"></el-radio-button>
-          <el-radio-button label="Video"></el-radio-button>
           <el-radio-button label="Course"></el-radio-button>
+          <el-radio-button label="Video"></el-radio-button>
           <el-radio-button label="Online"></el-radio-button>
           <el-radio-button label="Paper"></el-radio-button>
           <el-radio-button label="Atlas"></el-radio-button>
           <el-radio-button label="Album"></el-radio-button>
-          <el-radio-button label="Place"></el-radio-button>
+          <el-radio-button label="Podcast"></el-radio-button>
           <el-radio-button label="Other"></el-radio-button>
         </el-radio-group>
       </el-form-item>
@@ -291,7 +291,7 @@ export default {
 
 <style lang="stylus" scoped>
 .new-page
-  padding 10px 120px 10px 80px
+  padding 10px 100px 10px 80px
   position relative
   .new-form, .check-form
     padding 20px

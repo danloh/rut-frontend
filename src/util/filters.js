@@ -33,7 +33,7 @@ export function timeGap (date, rep = true) {
   if (gap < 0) {
     return days + ' Left'
   } else {
-    return days + ' Past'
+    return '\u26A0' + days + ' Past'
   }
 }
 // to local formating

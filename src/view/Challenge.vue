@@ -41,15 +41,19 @@
     </div>
     <div class="challenge-side">
       <div class="right-title">
-        <b>On RoadMap: </b>
-        <b class="deadline">&nbsp;&nbsp; {{ dueDate | timeGap(rep=false) }}</b>
+        <b>On RoadMap to
+          <el-button type="text" @click="markRoadAsDone" title="Click to mark as Done">
+            Get Done: 
+          </el-button>
+        </b>
         <br>
         <router-link :to="'/roadmap/' + onRoad.id">
            <b style="font-size:1.2em">{{ onRoad.title }}</b>
         </router-link>
         <br>
-        <b class="deadline">Due By: {{ dueDate | toMDY(rep=false) }}</b>
-        <el-button type="text" @click="markRoadAsDone">&nbsp;&nbsp; -> Done</el-button>
+        <b class="deadline">{{ dueDate | timeGap(rep=false) }}
+          |&nbsp;Due By: {{ dueDate | toMDY(rep=false) }}
+        </b>
         <br>
         <b>Including Items:</b>
       </div>
@@ -167,7 +171,7 @@ export default {
       b
         font-size 0.85em
       .deadline
-        color: grey
+        color: orange
     .right-item
       padding 0 0 0 10px
       font-size 0.85em
