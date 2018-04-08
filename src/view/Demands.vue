@@ -27,9 +27,7 @@
       </div>
     </div>
     <div class="demand-side">
-      <p class="right-item">
-        What is Your Question? Send Request Here, May Someone can Help
-      </p>
+      <p class="right-item">What is Your Question?</p>
     </div>
   </div>
 </template>

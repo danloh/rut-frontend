@@ -68,7 +68,7 @@
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/clips/'">
-          <b style="color:teal">></b> Clips
+          <b style="color:teal">></b> Sparks
         </router-link>
         <br><br>
         <router-link :to="'/setting/' + userid" v-if="showSetting">

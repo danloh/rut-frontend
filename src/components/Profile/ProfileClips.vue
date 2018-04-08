@@ -1,6 +1,6 @@
 <template>
   <div class="clip-list">
-    <b>CLIPS {{ clipCount }}</b>
+    <b>SPARKS {{ clipCount }}</b>
     <clip v-for="clip in clips" :key="clip.id" :clip="clip"></clip>
     <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
