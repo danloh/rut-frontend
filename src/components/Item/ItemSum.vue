@@ -1,7 +1,7 @@
 <template>
   <div class="item-sum">
     <div>
-      <img class="thumb" :src="cover" alt="Cover">
+      <img class="thumb" :src="cover" alt="Cover" referrerPolicy="no-referrer">
     </div>
     <div class="info">
       <span class="title">

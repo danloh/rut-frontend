@@ -5,7 +5,8 @@
       <div class="r-sum" v-for="road in currentRoads" :key="road.id">
         <router-link :to="'/roadmap/' + road.id">
           <span>
-            <img class="cover" :src="road.cover" style="width:80px; height:100px" alt="Cover">
+            <img class="cover" :src="road.cover" referrerPolicy="no-referrer" 
+                 style="width:80px; height:100px" alt="Cover">
           </span>
           <span class="title">
             <router-link :to="'/roadmap/' + road.id"> {{ road.title }}</router-link>

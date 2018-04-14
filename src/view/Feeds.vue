@@ -9,6 +9,7 @@
         <router-link :to="'/profile/' + act.actor.id">
           <img class="avatar" 
                :src="act.actor.avatar" 
+               referrerPolicy="no-referrer" 
                style="width:40px;height:40px;border-radius:50%" 
                alt="Avatar">
           <b>{{ act.actor.name }}</b>
@@ -21,6 +22,7 @@
         <span class="act-time">{{act.timestamp | timeAgo}}</span>
         <img v-if="act.event.cover" class="act-cover"
            :src="act.event.cover" 
+           referrerPolicy="no-referrer" 
            style="width:50px;height:60px">
       </div>
       <div v-if="activity.length === 0">Nothing Happened</div>

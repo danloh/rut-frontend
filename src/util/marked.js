@@ -29,6 +29,7 @@ const imageParse = (src, title, alt) => {
   return `<a href="${src}" 
              target="_blank" rel="nofollow noopener noreferrer">
             <img src="${src}" 
+                referrerPolicy="no-referrer" 
                 title="${title || alt || 'readup.tips'}" 
                 style="width:10%; height:15%"
                 alt="${alt || title || src}"/>

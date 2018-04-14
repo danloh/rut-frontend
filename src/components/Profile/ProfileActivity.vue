@@ -11,6 +11,7 @@
       <br><span class="act-time">{{ act.timestamp | timeAgo }}</span>
       <img v-if="act.event.cover" class="act-cover"
            :src="act.event.cover" 
+           referrerPolicy="no-referrer"
            style="width:50px;height:60px">
     </div>
     <div v-if="activity.length === 0">Nothing Happened</div>

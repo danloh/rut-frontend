@@ -1,7 +1,7 @@
 <template>
   <div class="user-sum">
     <div>
-      <img class="thumb" :src="avatar" alt="Avatar">
+      <img class="thumb" :src="avatar" alt="Avatar" referrerPolicy="no-referrer">
     </div>
     <div class="info">
       <span class="name">

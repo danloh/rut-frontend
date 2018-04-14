@@ -24,7 +24,7 @@
     </div>
     <div class="profile-side">
       <div class="right-avatar">
-        <img class="avatar" :src="user.avatar" alt="Avatar">
+        <img class="avatar" :src="user.avatar" alt="Avatar" referrerPolicy="no-referrer">
         <p class="user-info" v-if="user.location">
           <i class="el-icon-location"></i> {{user.location}}
         </p>
