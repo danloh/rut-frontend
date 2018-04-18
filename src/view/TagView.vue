@@ -11,9 +11,13 @@
       <div>{{ tagDetail.descript }} 
         <el-button type="text" @click="toEditTag">...Edit</el-button>
       </div>
-      <el-button class="fbtn" type="success" size="mini" plain 
-                 @click="favTag">{{action}} {{favCount}}
-      </el-button>
+      <div class="fobtn">
+        <img v-if="tagLogo" style="width:65px;height:65px" 
+             :src="tagLogo" alt="Logo" referrerPolicy="no-referrer"><br>
+        <el-button type="success" size="mini" plain 
+                   @click="favTag">{{action}} {{favCount}}
+        </el-button>
+      </div>
     </div>
     <div class="rut-list">
       <rut-sum v-for="rut in currentRuts" :key="rut.id" :rut="rut"></rut-sum>
@@ -42,6 +46,9 @@
         </el-form-item>
         <el-form-item label="Parent Tag" prop="parent">
           <el-input v-model="tagForm.parent"></el-input>
+        </el-form-item>
+        <el-form-item label="Logo" prop="logo">
+          <el-input type="textarea" autosize v-model="tagForm.logo"></el-input>
         </el-form-item>
         <el-form-item label="Description" prop="description">
           <el-input type="textarea" v-model="tagForm.description" 
@@ -84,6 +91,7 @@ export default {
       tagForm: {
         name: '',
         parent: '',
+        logo: '',
         description: ''
       },
       rules: {
@@ -93,6 +101,9 @@ export default {
         ],
         parent: [
           { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
+        ],
+        logo: [
+          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
         ],
         description: [
           { required: true, validator: trimValid, message: 'Please Descript it', trigger: 'blur' },
@@ -111,6 +122,9 @@ export default {
     },
     tagName () {
       return this.tagDetail.tagname
+    },
+    tagLogo () {
+      return this.tagDetail.logo
     },
     hasMore () {
       return this.currentRuts.length < this.totalRuts
@@ -135,6 +149,7 @@ export default {
         this.tagDetail = data
         this.tagForm.name = data.tagname
         this.tagForm.description = data.descript
+        this.tagForm.logo = data.logo
         this.favCount = data.favcount
         this.action = this.checkFavor() // || 'Follow'
       })
@@ -173,11 +188,11 @@ export default {
           let data = {
             name: form.name.trim(),
             parent: form.parent.trim(),
+            logo: form.logo.trim(),
             description: form.description.trim()
           }
           let tagid = this.tagDetail.id
-          editTag(tagid, data)
-          .then((resp) => {
+          editTag(tagid, data).then((resp) => {
             this.openDialog = false
             unlockTag(this.tagid)
             this.loadData()  // can be less consumption
@@ -263,13 +278,13 @@ export default {
           color #ff6600
   .tagmeta
     background-color white
-    min-height: 40px
-    padding 5px 10px
+    min-height: 100px
+    padding 5px 75px 5px 10px
     margin-bottom 5px
     position relative
-    .fbtn
+    .fobtn
       position absolute
-      top 10px
+      top 5px
       right 5px
   .rut-list
     padding auto
