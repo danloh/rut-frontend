@@ -366,6 +366,10 @@ const rutAsAnswer = (rutid, demandid, params) => {
 const newComment = (ref, id, params) => {
   return request(`${base}/comment/${ref}/${id}`, params, 'post')
 }
+// upvote comment
+const upvoteComment = (commentid, params) => {
+  return request(`${base}/upvotecomment/${commentid}`, params)
+}
 // get comments for a rut
 const fetchRutComments = (rutid, params) => {
   return request(`${base}/commentsonrut/${rutid}`, params)
@@ -509,6 +513,7 @@ export {
   upvoteDemand,
   rutAsAnswer,
   newComment,
+  upvoteComment,
   fetchHeadlines,
   fetchHeadline,
   fetchHlComments,

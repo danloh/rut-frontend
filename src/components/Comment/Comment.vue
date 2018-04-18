@@ -1,12 +1,17 @@
 <template>
   <div v-if="comment" class="comment">
     <div class="by">
-      <router-link :to="'/profile/' + creator.id">{{ creator.name }}</router-link>
-      ~ {{ comment.timestamp | timeAgo }}
+      <router-link :to="'/profile/' + creator.id">
+        <b>{{ creator.name }}</b>
+      </router-link>
+      &nbsp; {{ comment.timestamp | timeAgo }}
     </div>
     <div class="content" v-html="commentContent"></div>
+    <el-button type="text" size="mini" @click="upComment" title="like">
+      <i class="el-icon-caret-top" style="color:grey"></i>
+    </el-button>
     <el-button type="text" size="mini" @click="showRe = !showRe">
-      {{ showRe ? 'Hide' : 'Reply' }}
+      {{ showRe ? 'hide' : 'reply' }}
     </el-button>
     <span class="toggle" :class="{ open }" v-if="hasChild">
       <a @click="open = !open">
@@ -28,6 +33,8 @@
 <script>
 import Reply from '@/components/Comment/Reply.vue'
 import marked from '@/util/marked'
+import { checkAuth } from '@/util/auth'
+import { upvoteComment } from '@/api/api'
 
 export default {
   name: 'comment',
@@ -51,6 +58,11 @@ export default {
     }
   },
   methods: {
+    upComment () {
+      if (checkAuth()) {
+        upvoteComment(this.comment.id)
+      }
+    },
     updateNew (data) {
       this.open = true
       this.childComments.unshift(data)
