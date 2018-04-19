@@ -102,14 +102,6 @@ const searchRuts = (params) => {
 const fetchRut = (rutid, params) => { // !!
   return request(`${base}/rut/${rutid}`, params)
 }
-// get more tips of a rut
-const fetchRutTips = (rutid, params) => {
-  return request(`${base}/rut/${rutid}/tips`, params)
-}
-// get demands of a rut response to
-const fetchRutDemands = (rutid, params) => {
-  return request(`${base}/rut/${rutid}/demands`, params)
-}
 // check if user star  a rut
 const checkStar = (rutid, action, params) => {
   return request(`${base}/check${action}/rut/${rutid}`, params)
@@ -442,8 +434,6 @@ export {
   fetchProfileRuts,
   searchRuts,
   fetchRut,
-  fetchRutTips,
-  fetchRutDemands,
   fetchRutComments,
   fetchCircles,
   postCircle,

@@ -22,7 +22,9 @@
             <el-button type="text" size="mini" @click="showEdit=true">
                       ..Edit
             </el-button>
-            <el-button type="text" size="mini" @click="showAdd=true">
+            <el-button type="text" size="mini" 
+                       v-if="roadObj.itemcount<=42"
+                       @click="showAdd=true">
                       ..Add
             </el-button>
           </span>

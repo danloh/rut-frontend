@@ -58,9 +58,9 @@
                      :to="'/edit/readlist/' + rutid" v-if="canEdit">
                       <b>Edit </b>
         </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
-        <router-link class="indicator" 
-                     :to="'/additemto/readlist/' + rutid" v-if="canEdit">
-                      <b>Add Item </b>
+        <router-link class="indicator" :to="'/additemto/readlist/' + rutid" 
+                     v-if="canEdit && rutDetail.itemcount<=42">
+                     <b>Add Item </b>
         </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button size="mini" plain @click="starRut">
           <b><i class="el-icon-star-on"></i> {{ starAction }}&nbsp;{{ starCount }}</b>
@@ -75,13 +75,6 @@
                      ...Edit
         </router-link>
         <tip-sum class="tip" :tip="tip"></tip-sum>
-      </div>
-      <div v-if="hasMoreTips">
-        <el-button class="blockbtn" size="mini" 
-                   @click="loadmoreTips" 
-                   :disabled="!hasMoreTips">
-                   Show More Items
-        </el-button>
       </div>
       <div class="epilog">
         <b class="indicator">Epilog:&nbsp;&nbsp;</b>
@@ -138,23 +131,15 @@
         </div>
       </el-dialog>
       <!-- end edit credential dialog -->
-      <div class="demands" v-if="demandCount">
+      <div class="demands" v-if="rutDetail.demandcount">
         <b>As Answer to Request:</b>
         <p class="demand-title" 
            v-for="(demand, index) in demands" 
-           :key="index" 
-           :demand="demand">
+           :key="index" :demand="demand">
           - <router-link :to="'/demand/' + demand.id">
                {{ demand.demand.slice(0, 42) }}...
             </router-link>
         </p>
-        <div v-if="hasMoreDemand">
-          <el-button size="mini" 
-                     @click="loadmoreDemand" 
-                     :disabled="!hasMoreDemand">
-                     Show More
-          </el-button>
-        </div>
       </div>
     </div>
   </div>
@@ -166,8 +151,7 @@ import ShareBar from '@/components/Misc/ShareBar.vue'
 import TipSum from '@/components/Rut/TipSum.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
 import {
-  starRut, checkStar, editTags, editRutce, fetchRutDemands,
-  fetchRutTips, checkRutLocked, lockRut, unlockRut
+  starRut, checkStar, editTags, editRutce, checkRutLocked, lockRut, unlockRut
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { mapGetters } from 'vuex'
@@ -181,11 +165,7 @@ export default {
       starAction: 'Star',
       starCount: 0,
       tips: [],
-      currentTP: 1,
-      tipsCount: 0,
       demands: [],
-      currentDP: 1,
-      demandCount: 0,
       creatorid: null,
       creatorname: '',
       aboutcreator: '',
@@ -217,12 +197,6 @@ export default {
     },
     tags () {
       return this.rutDetail.tags
-    },
-    hasMoreTips () {
-      return this.tips.length < this.tipsCount
-    },
-    hasMoreDemand () {
-      return this.demands.length < this.demandCount
     }
   },
   title () {
@@ -231,8 +205,7 @@ export default {
   methods: {
     loadRutData () {
       let crutid = this.$route.params.id
-      this.$store.dispatch('getRut', crutid)
-      .then(resp => {
+      this.$store.dispatch('getRut', crutid).then(resp => {
         let data = resp.data
         this.starCount = data.starcount
         this.creatorid = data.creator.id
@@ -241,9 +214,7 @@ export default {
         this.isEveryone = data.editable === 'Everyone'
         this.newTags = data.tags.map(t => t.tagname)
         this.tips = data.tips
-        this.tipsCount = data.itemcount
         this.demands = data.demands
-        this.demandCount = data.demandcount
         this.creForm.credential = data.credential
         this.epiForm.epilog = data.epilog
         // check if show edit button
@@ -253,22 +224,6 @@ export default {
         } else if (currentUserID === this.creatorid || this.isEveryone) {
           this.canEdit = true
         }
-      })
-    },
-    loadmoreTips () {
-      let rutid = this.$route.params.id
-      let params = {'page': this.currentTP}
-      fetchRutTips(rutid, params).then(resp => {
-        this.tips.push(...resp.data)
-        this.currentTP += 1
-      })
-    },
-    loadmoreDemand () {
-      let rutid = this.$route.params.id
-      let params = {'page': this.currentDP}
-      fetchRutDemands(rutid, params).then(resp => {
-        this.demands.push(...resp.data)
-        this.currentDP += 1
       })
     },
     checkStar () {

@@ -41,27 +41,23 @@
     </div>
     <div class="challenge-side">
       <div class="right-title">
-        <b>On RoadMap to
-          <el-button type="text" @click="markRoadAsDone" title="Click to mark as Done">
-            Get Done: 
-          </el-button>
+        <b class="deadline">
+          {{ dueDate | timeGap(rep=false) }} - Due By: {{ dueDate | toMDY(rep=false) }}
         </b>
         <br>
-        <router-link :to="'/roadmap/' + onRoad.id">
-           <b style="font-size:1.2em">{{ onRoad.title }}</b>
+        <el-button type="text" @click="markRoadAsDone" title="Click to mark as Completed">
+          To Complete: 
+        </el-button><br>
+        <router-link :to="'/roadmap/' + onRoad.id" :title="onRoad.title">
+           <b style="font-size:1.1em">{{ onRoad.title.slice(0, 95) }}...</b>
         </router-link>
         <br>
-        <b class="deadline">{{ dueDate | timeGap(rep=false) }}
-          |&nbsp;Due By: {{ dueDate | toMDY(rep=false) }}
-        </b>
-        <br>
-        <b>Including Items:</b>
+        including items:
       </div>
       <p class="right-item" v-for="(item, index) in items" :key="index" :item="item">
         <b>{{ item.cate }}</b> 
-        <router-link :to="'/item/' + item.id" 
-                     :title="item.title"> {{ item.title.slice(0, 72) }}
-                     ...
+        <router-link :to="'/item/' + item.id" :title="item.title">
+           {{ item.title.slice(0, 72) }}...
         </router-link>
       </p>
     </div>
