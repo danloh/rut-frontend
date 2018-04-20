@@ -16,6 +16,9 @@
         <router-link to="/demands">
           <b>Request</b>
         </router-link>
+        <router-link to="/circles">
+          <b>Circle</b>
+        </router-link>
         <router-link to="/challenge">
           <b>Challenge</b>
         </router-link>

@@ -1,57 +1,52 @@
 <template>
   <div class="circle-sum">
-    <b>{{ circle.name }}</b>&nbsp;&nbsp;
-    <el-button type="text" @click="openDialog=true" v-if="canEdit">
-      <small>...Edit</small>
-    </el-button>
-    <div>
-      {{ circle.note }}
-      <span class="meta">
-        <router-link :to="'/profile/' + circle.facilitator.id" style="font-size:0.85em">
-          ...By {{ circle.facilitator.name.slice(0, 12) }}
-        </router-link>
-      </span>
-    </div>
+    <b style="font-size:1.2em">{{ circle.name }}</b>
     <div class="info">
-      <p><i class="el-icon-location-outline"></i> {{ circle.area }}</p>
-      <p><i class="el-icon-location"></i> {{ circle.address }}</p>
+      <p><a :href="'https://www.google.com/maps/place/' + circle.address" 
+            target="_blank"><i class="el-icon-location"></i>
+          </a> {{ circle.address }}</p>
       <p><i class="el-icon-time"></i> {{ circle.time }}</p>
     </div>
+    <div class="detail">
+      <div v-html="noteContent"></div>
+      <span class="meta">
+        <el-button type="text" @click="openDialog=true" v-if="canEdit">
+          <small style="font-size:0.75em">...Edit</small>
+        </el-button>
+        <router-link :to="'/profile/' + circle.facilitator.id" 
+                     style="font-size:0.85em;color:grey">
+                     -- {{ circle.facilitator.name.slice(0, 12) }}
+        </router-link>
+      </span>
+      <el-button type="text" size="mini" @click="less=false" v-if="less">
+                 ...more
+      </el-button>
+    </div>
     <!-- edit dialog -->
-    <el-dialog title="Edit Circle" :visible.sync="openDialog" width="480px">
-    <el-form :model="editForm" :rules="rules" ref="editForm" size="mini">
+    <el-dialog title="Edit Circle Information" :visible.sync="openDialog" width="480px">
+      <el-form :model="editForm" :rules="rules" ref="editForm" size="mini">
         <el-form-item prop="name">
-        <el-input v-model="editForm.name" placeholder="Name"></el-input>
+          <el-input type="textarea" autosize v-model="editForm.name" placeholder="Name"></el-input>
         </el-form-item>
         <el-form-item prop="address">
-        <el-input v-model="editForm.address" 
-                    placeholder="Detail Address">
-        </el-input>
-        </el-form-item>
-        <el-form-item prop="area">
-        <el-input v-model="editForm.area" 
-                    placeholder="Area, like: BayArea SF">
-        </el-input>
+          <el-input type="textarea" autosize v-model="editForm.address" placeholder="Address"></el-input>
         </el-form-item>
         <el-form-item prop="time">
-        <el-input v-model="editForm.time" 
-                    placeholder="Time, like: Every Sat. 2PM - 4PM">
-        </el-input>
+          <el-input v-model="editForm.time" placeholder="Time, like: Every Sat. 2PM - 4PM"></el-input>
         </el-form-item>
         <el-form-item prop="note">
-        <el-input type="textarea" v-model="editForm.note" 
-                    :autosize="{minRows:3}" 
+          <el-input type="textarea" :autosize="{minRows:3}" v-model="editForm.note" 
                     placeholder="Can provide more info by linking to a detail page">
-        </el-input>
+          </el-input>
         </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
+      </el-form>
+      <div slot="footer" class="dialog-footer">
         <el-button type="text" size="mini" @click="confirm=true">Delete?</el-button>
         <el-button type="success" 
                    @click="onEditCircle('editForm', editForm)">
                    Edit  Done
         </el-button>
-    </div>
+      </div>
     </el-dialog>
     <!-- end edit dialog -->
     <!-- confirm delete dialog -->
@@ -72,7 +67,8 @@
 <script>
 import { editCircle, delCircle } from '@/api/api'
 import { checkAuth } from '@/util/auth'
-import { trimValid } from '@/util/filters'
+import { trimValid, showLess } from '@/util/filters'
+import marked from '@/util/marked'
 
 export default {
   name: 'circle-sum',
@@ -83,10 +79,10 @@ export default {
       canEdit: this.ifCanEdit(),
       openDialog: false,
       confirm: false,
+      less: this.circleObj.note.length > 255,
       editForm: {
         name: this.circle.name,
         address: this.circle.address,
-        area: this.circle.area,
         time: this.circle.time,
         note: this.circle.note
       },
@@ -97,21 +93,22 @@ export default {
         ],
         address: [
           { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
-          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
-        ],
-        area: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
-          { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
+          { max: 200, message: 'Max Length should be 200', trigger: 'blur' }
         ],
         time: [
           { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
           { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
         ],
         note: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
-          { max: 120, message: 'Max Length should be 200', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' }
         ]
       }
+    }
+  },
+  computed: {
+    noteContent () {
+      let content = marked(this.circle.note)
+      return this.less ? showLess(content, 255) : content
     }
   },
   methods: {
@@ -127,7 +124,6 @@ export default {
           let data = {
             name: form.name.trim(),
             address: form.address.trim(),
-            area: form.area.trim(),
             time: form.time.trim(),
             note: form.note.trim()
           }
@@ -163,10 +159,11 @@ export default {
 .circle-sum
   background-color lighten(#f1f8f9, 75%)
   padding 10px
-  border-bottom 2px solid #eee
+  border-bottom 3px solid #eee
   .meta
     font-size 0.75em
   .info
     font-size 0.85em
     color green
+    border-bottom 1px dotted #eee
 </style>
