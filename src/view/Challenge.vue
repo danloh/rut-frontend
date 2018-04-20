@@ -6,7 +6,7 @@
           <el-form-item prop="clip" style="margin-bottom:16px">
             <el-input type="textarea" v-model="clipForm.clip" 
                       :autosize="{minRows:2}" 
-                      placeholder="Excerpt quotes %^&1:First Chapter,Page two:2">
+                      placeholder="Excerpt quotes, #Chapter:Section:Page">
             </el-input>
           </el-form-item>
           <el-form-item prop="doing" style="margin-bottom:8px" 
@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="challenge-side">
-      <div class="right-title">
+      <div class="right-title" v-if="onRoad.title">
         <b class="deadline">
           {{ dueDate | timeGap(rep=false) }} - Due By: {{ dueDate | toMDY(rep=false) }}
         </b>
@@ -53,6 +53,9 @@
         </router-link>
         <br>
         including items:
+      </div>
+      <div v-else>
+        <a href="/newroad"> Create New RoadMap</a> To Challenge
       </div>
       <p class="right-item" v-for="(item, index) in items" :key="index" :item="item">
         <b>{{ item.cate }}</b> 

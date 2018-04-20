@@ -6,15 +6,18 @@
       </router-link>
     </div>
     <div class="demand-bar">
+      <router-link :to="'/tag/' + demand.tagid" v-if="demand.tagStr">
+        #{{ demand.tagStr }}
+      </router-link>
       - <router-link :to="'/profile/' + requestor.id">
           {{ requestor.name }}
         </router-link>
       | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">Upvote</el-button>
       | <router-link :to="'/create/' + demand.id">
-          {{ answercount | pluralise('Answer') }} &nbsp;
+          {{ answercount | pluralise('Answer') }}
         </router-link>
-      | <router-link :to="'/demand/' + demand.id">
-          {{demand.commentcount | pluralise('Comment')}} &nbsp;
+      - <router-link :to="'/demand/' + demand.id">
+          {{demand.commentcount | pluralise('Comment')}}
         </router-link>
     </div>
   </div>

@@ -18,7 +18,7 @@
     <div class="circle-side">
       <el-button type="text" @click="openDialog=true">...Launch Circle</el-button><br>
       <el-input size="mini" v-model="areaKeyword" clearable
-                @keyup.enter.native="loadCircles" placeholder="Search Area">
+                @keyup.enter.native="loadCircles" placeholder="Search Area; []">
                 <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
       <br><br>

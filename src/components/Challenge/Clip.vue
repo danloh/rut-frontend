@@ -5,7 +5,9 @@
       <span v-html="clipContent"></span>
     </div>
     <div class="meta">
-      From 
+      ~ {{ clip.chapnum && clip.sectnum && clip.pagenum 
+            ? 'Ch' + clip.chapnum + ':' + clip.sectnum + 'P' + clip.pagenum 
+            : '' }}
       <router-link :to="'/item/' + fromitem.id" :title="fromitem.title">
         {{ fromitem.title.slice(0, 42) }}...
       </router-link>

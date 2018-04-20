@@ -1,6 +1,16 @@
 <template>
   <div class="circle-sum">
-    <b style="font-size:1.2em">{{ circle.name }}</b>
+    <b style="font-size:21px">{{ circle.name }}</b>
+    <el-button type="text" @click="openDialog=true" v-if="canEdit">
+      <small style="font-size:0.75em">...Edit</small>
+    </el-button>
+    <!-- <div class="meta">
+      <a :href="'/profile/' + circle.facilitator.id">
+        <img :src="circle.facilitator.avatar" referrerPolicy="no-referrer" 
+              style="width:14px;height:14px;border-radius:50%">
+        {{ circle.facilitator.name.slice(0,12) }}
+      </a>
+    </div> -->
     <div class="info">
       <p><a :href="'https://www.google.com/maps/place/' + circle.address" 
             target="_blank"><i class="el-icon-location"></i>
@@ -9,15 +19,6 @@
     </div>
     <div class="detail">
       <div v-html="noteContent"></div>
-      <span class="meta">
-        <el-button type="text" @click="openDialog=true" v-if="canEdit">
-          <small style="font-size:0.75em">...Edit</small>
-        </el-button>
-        <router-link :to="'/profile/' + circle.facilitator.id" 
-                     style="font-size:0.85em;color:grey">
-                     -- {{ circle.facilitator.name.slice(0, 12) }}
-        </router-link>
-      </span>
       <el-button type="text" size="mini" @click="less=false" v-if="less">
                  ...more
       </el-button>
@@ -157,13 +158,12 @@ export default {
 
 <style lang="stylus" scoped>
 .circle-sum
-  background-color lighten(#f1f8f9, 75%)
-  padding 10px
-  border-bottom 3px solid #eee
+  background-color lighten(#ecf7ef, 75%)
+  padding 20px 10px
+  border-bottom 2px solid #eee
   .meta
-    font-size 0.75em
+    font-size 10px
   .info
-    font-size 0.85em
+    font-size 14px
     color green
-    border-bottom 1px dotted #eee
 </style>

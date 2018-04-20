@@ -18,11 +18,10 @@ const paragraphParse = text => `<p>${text}</p>`
 const linkParse = (href, title, text) => {
   const isSelf = href.includes('readup.tips')
   const textIsImage = text.includes('<img')
-  return `<a href="${href}" 
-             target="_blank"
+  return `<a href="${href}" target="_blank"
              title="${title || (textIsImage ? href : text)}" 
-             ${isSelf ? '' : 'rel="external nofollow noopener noreferrer"'}>${text}
-          </a>`.replace(/\s+/g, ' ').replace('\n', '')
+             ${isSelf ? '' : 'rel="external nofollow noopener noreferrer"'}>
+             ${text}</a>`.replace(/\s+/g, ' ').replace('\n', '')
 }
 
 const imageParse = (src, title, alt) => {
@@ -36,9 +35,23 @@ const imageParse = (src, title, alt) => {
           </a>`.replace(/\s+/g, ' ').replace('\n', '')
 }
 
+// const headingParse = (text, level, raw) => {
+//   if (level === 1) {
+//     let url = '/tag/' + text
+//     let tag = '#' + text
+//     return `<a href="${url}" target="_blank" rel="nofollow noopener noreferrer">
+//                ${tag}
+//             </a>`.replace(/\s+/g, ' ').replace('\n', '')
+//   } else {
+//     // ignore IDs
+//     return '<h' + level + '>' + text + '</h' + level + '>\n'
+//   }
+// }
+
 renderer.link = linkParse
 renderer.image = imageParse
 renderer.paragraph = paragraphParse
+// renderer.heading = headingParse
 
 export default (content) => {
   // console.log('content', content)
