@@ -17,19 +17,23 @@
           <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
         </template>
       </span><br>
-      <span><b>Byline:</b> {{ item.byline }} </span><br>
-      <span><b>Publish:</b> 
+      <span>Byline &nbsp;: {{ item.byline }} </span><br>
+      <span>Publish: 
         {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
       </span><br>
-      <span><b>UID:</b> 
-        {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
+      <span>UID &nbsp; &nbsp; &nbsp;: {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
         <a :href="item.resurl" v-if="item.resurl" 
            target="_blank" rel="nofollow noopener noreferrer"> 
            :::
         </a>
       </span><br>
-      <span><b>Listed:</b> {{ item.rutcount }} </span><br>
-      <span v-if="flagNote || flagTime"><b>Note: </b>
+      <span>Listed &nbsp;: {{ item.rutcount }} &nbsp;</span>
+      <span v-for="(t, index) in item.tags" :key="index">
+        <a :href="'/tag/' + t.id" :title="t.tagname">
+          <small>#{{ t.tagname.slice(0, 8) }}</small>
+        </a>&nbsp;
+      </span><br>
+      <span v-if="flagNote || flagTime">Note &nbsp; &nbsp;: 
         <span class="flag-note" v-if="flagNote">
           <b>'</b>{{ flagNote }}
         </span>&nbsp;

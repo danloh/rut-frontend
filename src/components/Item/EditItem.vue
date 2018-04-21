@@ -47,6 +47,11 @@
                   placeholder="Image URL">
         </el-input>
       </el-form-item>
+      <el-form-item label="Topic Tags" prop="tags">
+        <el-input type="textarea" autosize v-model="itemForm.tags" 
+                  placeholder="Comma can be as Separator">
+        </el-input>
+      </el-form-item>
       <el-form-item label="Language" prop="language">
         <el-input v-model="itemForm.language"></el-input>
       </el-form-item>
@@ -107,6 +112,7 @@ export default {
         resUrl: '',
         byline: '',
         cover: '',
+        tags: '',
         language: '',
         publisher: '',
         publishDate: '',
@@ -133,6 +139,9 @@ export default {
         ],
         cover: [
           { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+        ],
+        tags: [
+          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
         ],
         language: [
           { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
@@ -171,6 +180,7 @@ export default {
             resUrl: form.resUrl.trim(),
             byline: form.byline.trim(),
             cover: form.cover.trim(),
+            tags: form.tags.trim(),
             language: form.language.trim(),
             publisher: form.publisher.trim(),
             publishDate: form.publishDate.trim(),

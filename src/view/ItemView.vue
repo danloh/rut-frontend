@@ -14,22 +14,7 @@
           ...More
         </el-button>
       </div>
-      <div class="in-row">
-        <b>In {{currentItem.rutcount | pluralise('List')}}</b>
-      </div>
-      <div class="include">
-        <div class="in-item" v-for="(rut, index) in inRuts" :key="index" :rut="rut">
-          - <router-link :to="'/readlist/' + rut.id" :title="rut.title">
-             {{ rut.title.slice(0, 120) }} ...
-           </router-link>
-        </div>
-        <div v-if="hasMoreRut && canEdit" style="text-align:right">
-          <el-button type="text" @click="loadmoreRuts" :disabled="!hasMoreRut">
-            Show More
-          </el-button>
-        </div>
-      </div>
-      <div v-if="canEdit">
+      <div class="review-clip" v-if="canEdit">
         <div class="review-row">
           <b>Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <router-link class="editlink" :to="'/review/item/' + currentItem.id">
@@ -42,6 +27,23 @@
           <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
         </div>
         <clip-list :param="cliplistParam"></clip-list>
+      </div>
+      <div class="include">
+        <div class="inrut-row">
+          <b>In {{currentItem.rutcount | pluralise('List')}}</b>
+        </div>
+        <div v-for="(rut, index) in inRuts" :key="index" :rut="rut"
+             :class="[index % 2 == 0 ? 'odd-in-rut' : '', 'in-rut']">
+          {{ index +1 }}. 
+          <router-link :to="'/readlist/' + rut.id" :title="rut.title">
+            {{ rut.title.slice(0, 120) }} ...
+          </router-link>
+        </div>
+        <div v-if="hasMoreRut && canEdit" style="text-align:right">
+          <el-button type="text" @click="loadmoreRuts" :disabled="!hasMoreRut">
+            Show More
+          </el-button>
+        </div>
       </div>
     </div>
     <div class="item-side">
@@ -144,19 +146,21 @@ export default {
   padding 10px 255px 10px 0px
   position relative
   .item-main
-    padding auto
+    margin-top 5px
     .item-detail
       background-color lighten(#f0f3f0, 45%)
       padding 5px
     .include
       padding 5px
       background-color lighten(#f0f3f0, 45%)
-      .in-item
-        padding 5px 0
+      .in-rut
+        padding 5px
         a
           &:hover
             color #ff6600
-    .in-row, .review-row, .clip-row
+      .odd-in-rut
+        background-color lighten(#e0e6da, 55%)
+    .inrut-row, .review-row, .clip-row
       color green
       margin 5px 0
       padding 5px
