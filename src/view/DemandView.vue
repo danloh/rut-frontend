@@ -9,9 +9,7 @@
                    ...Link To Answer
         </el-button>
         <div class="title" 
-             v-for="(rut, index) in answers" 
-             :key="index" 
-             :rut="rut"> - 
+             v-for="(rut, index) in answers" :key="index" :rut="rut"> - 
              <router-link :to="'/readlist/' + rut.id" :title="rut.title">
                <b>{{ rut.title.slice(0, 142) }} ...</b>
              </router-link>
@@ -48,7 +46,6 @@
         </div>
       </el-dialog>
       <!-- end link rut as answer dialog -->
-      <b>Discuss</b>
       <div v-for="comment in comments" :key="comment.id">
         <comment :comment="comment"></comment>
       </div>
@@ -209,7 +206,7 @@ export default {
   position relative
   .demand-main
     .answer
-      background-color white
+      background-color lighten(#f1f3f5, 45%)
       padding 5px 10px
       margin-bottom 5px
       .title

@@ -1,12 +1,11 @@
 <template>
   <div class="rut-comment">
     <div class="comment-main">
-      <b style="font-size:1.2em">Discuss List: &nbsp;&nbsp;</b>
+      <b style="font-size:1.2em">{{ commentCount | pluralise('Comment') }} on ReadList: &nbsp;</b>
       <router-link :to="'/readlist/' + rut.id">
         {{ rut.title }}
       </router-link>
     </div>
-    <b>{{ commentCount | pluralise('comment') }}</b>
     <div v-for="comment in comments" :key="comment.id">
       <comment :comment="comment"></comment>
     </div>
@@ -86,7 +85,7 @@ export default {
   padding 5px 180px 10px 0px
   position relative
   .comment-main
-    padding auto
+    padding 10px
   .rcomment-side
     position absolute
     top 10px

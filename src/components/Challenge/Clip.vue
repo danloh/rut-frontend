@@ -62,7 +62,7 @@ export default {
 .clip-main
   background-color lighten(#f6f6f1, 50%)
   padding 5px
-  border-bottom 2px solid #eee
+  border-bottom 1px dashed #ddd
   position relative
   .meta
     font-size .75em

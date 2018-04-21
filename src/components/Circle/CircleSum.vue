@@ -159,8 +159,8 @@ export default {
 <style lang="stylus" scoped>
 .circle-sum
   background-color lighten(#ecf7ef, 75%)
-  padding 20px 10px
-  border-bottom 2px solid #eee
+  padding 20px
+  border-bottom 1px dashed #ddd
   .meta
     font-size 10px
   .info

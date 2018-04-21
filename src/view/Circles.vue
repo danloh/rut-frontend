@@ -161,11 +161,10 @@ export default {
 
 <style lang="stylus" scoped>
 .circle
-  padding 5px 280px 10px 0px
+  padding 10px 260px 10px 0px
   position relative
   .circle-main
-    padding auto
-    margin-bottom 8px
+    margin-bottom 5px
   .circle-side
     position absolute
     top 10px

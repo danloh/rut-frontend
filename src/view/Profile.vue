@@ -181,7 +181,7 @@ export default {
   position relative
   .profile-head
     background-color #f6f6f1
-    border-bottom 1px dotted orange
+    border-bottom 1px dashed orange
     min-height 60px
     padding 5px 215px 5px 10px
     margin-bottom 10px
