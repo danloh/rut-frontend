@@ -42,7 +42,7 @@ export default {
   background-color lighten(#e5ebe4, 90%)
   min-height 120px
   padding 10px 30px 10px 100px
-  border-bottom 2px solid #eee
+  border-bottom 1px dashed #ddd
   position relative
   &:hover
     background-color lighten(#f3f3ed, 60%)

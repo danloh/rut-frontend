@@ -58,7 +58,7 @@ export default {
 .demand-main
   padding 10px
   background-color lighten(#f1f3f5, 50%)
-  border-bottom 2px solid #eee
+  border-bottom 1px dashed #ddd
   .demand-body
     font-size 1.1em
     a

@@ -1,6 +1,6 @@
 <template>
   <div v-if="comment" class="comment">
-    <div class="by">
+    <div class="by" :id="'comment' + commentid">
       <router-link :to="'/profile/' + creator.id">
         <b>{{ creator.name }}</b>
       </router-link>
@@ -46,6 +46,7 @@ export default {
       showRe: false,
       hasChild: this.comment.children.length > 0,
       childComments: this.comment.children,
+      commentid: this.comment.id,
       refer: { re: 'comment', id: this.comment.id } // Reply's prop
     }
   },

@@ -75,7 +75,7 @@ export default {
   padding 5px 5px 5px 10px
   position relative
   background-color lighten(#f6f5f2, 50%)
-  border-bottom 2px solid #eee
+  border-bottom 1px dashed #ddd
   .vote
     position absolute
     top 5px
