@@ -6,8 +6,7 @@
     </div>
     <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
-                 @click="loadmoreRuts" 
-                 :disabled="!hasMore">
+                 @click="loadmoreRuts" :disabled="!hasMore">
                  Show More
       </el-button>
     </div>
@@ -42,8 +41,7 @@ export default {
       let userid = this.$route.params.id
       let param = {'page': this.currentPage}
       // let params = {'action': action, 'userid': userid, 'param': param}
-      fetchProfileRuts(action, userid, param)
-      .then(resp => {
+      fetchProfileRuts(action, userid, param).then(resp => {
         this.currentRuts.push(...resp.data.ruts)
         this.currentPage += 1
       })
@@ -52,8 +50,7 @@ export default {
   created () {
     let action = this.action
     let userid = this.$route.params.id
-    fetchProfileRuts(action, userid)
-    .then(resp => {
+    fetchProfileRuts(action, userid).then(resp => {
       this.currentRuts = resp.data.ruts
       this.totalRuts = resp.data.total
       this.currentPage = 1

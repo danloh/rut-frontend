@@ -211,8 +211,16 @@ const fetchTag = (tagid, params) => { // !!
   return request(`${base}/tag/${tagid}`, params)
 }
 // fetch ruts of a Tag
-const fetchTagRuts = (tagid, params) => { // !!
+const fetchTagRuts = (tagid, params) => {
   return request(`${base}/tag/${tagid}/ruts`, params)
+}
+// fetch demands of a Tag
+const fetchTagDemands = (tagid, params) => {
+  return request(`${base}/tag/${tagid}/demands`, params)
+}
+// fetch items of a Tag
+const fetchTagItems = (tagid, params) => {
+  return request(`${base}/tag/${tagid}/items`, params)
 }
 // lock tag
 const lockTag = (tagid, params) => {
@@ -471,6 +479,8 @@ export {
   fetchTagID,
   fetchTag,
   fetchTagRuts,
+  fetchTagDemands,
+  fetchTagItems,
   lockTag,
   unlockTag,
   checkTagLocked,

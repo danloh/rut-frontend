@@ -40,8 +40,7 @@ export default {
     loadItems () {
       let flag = this.flag
       let userid = this.$route.params.id
-      fetchProfileItems(flag, userid)
-      .then(resp => {
+      fetchProfileItems(flag, userid).then(resp => {
         this.totalItems = resp.data.total
         this.currentItems = resp.data.items
       })
@@ -50,8 +49,7 @@ export default {
       let flag = this.flag
       let userid = this.$route.params.id
       let param = {'page': this.currentPage}
-      fetchProfileItems(flag, userid, param)
-      .then(resp => {
+      fetchProfileItems(flag, userid, param).then(resp => {
         this.currentItems.push(...resp.data.items)
         this.currentPage += 1
       })

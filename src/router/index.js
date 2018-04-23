@@ -21,6 +21,9 @@ const RutComment = () => import('@/view/RutComment')
 const ItemView = () => import('@/view/ItemView')
 const ReviewView = () => import('@/view/ReviewView')
 const TagView = () => import('@/view/TagView')
+const TagRut = () => import('@/components/Tag/TagRuts')
+const TagDemand = () => import('@/components/Tag/TagDemands')
+const TagItem = () => import('@/components/Tag/TagItems')
 const SearchResult = () => import('@/view/SearchResult')
 const About = () => import('@/components/Misc/About')
 const NotFound = () => import('@/view/NotFound')
@@ -102,7 +105,6 @@ const router = new Router({
     { path: '/forget', component: Forget, name: 'Forget' },
     { path: '/reset/:token', component: ResetPsw, name: 'ResetPsw' },
     { path: '/login', component: Login, name: 'Login' },
-    { path: '/tag/:id', component: TagView, name: 'Tag', meta: {auth: true} },
     { path: '/create/:id(\\d+)?', component: Create, name: 'CreateRut', meta: {auth: true} },
     { path: '/readlist/:id', component: RutView, name: 'Rutview' },
     { path: '/edit/readlist/:id',
@@ -130,6 +132,15 @@ const router = new Router({
     { path: '/review/item/:id', component: NewReview, name: 'NewReview', meta: {auth: true} },
     { path: '/editreview/:id', component: EditReview, name: 'EditReview', meta: {auth: true} },
     { path: '/review/:id', component: ReviewView, name: 'ReviewView' },
+    { path: '/tag/:id',
+      component: TagView,
+      children: [
+        { path: '', name: 'defaultTag', redirect: 'readlist' },
+        { path: 'readlist', name: 'TagReadlist', component: TagRut, meta: {auth: true} },
+        { path: 'demand', name: 'TagDemand', component: TagDemand, meta: {auth: true} },
+        { path: 'item', name: 'TagItem', component: TagItem, meta: {auth: true} }
+      ]
+    },
     { path: '/demands',
       component: Demands,
       children: [

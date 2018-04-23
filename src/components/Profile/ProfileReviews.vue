@@ -42,16 +42,14 @@ export default {
     loadmoreReviews () {
       let userid = this.$route.params.id
       let params = {'page': this.currentPage}
-      fetchProfileReviews(userid, params)
-      .then(resp => {
+      fetchProfileReviews(userid, params).then(resp => {
         this.reviews.push(...resp.data.reviews)
         this.currentPage += 1
       })
     },
     loadReviews () {
       let userid = this.$route.params.id
-      fetchProfileReviews(userid)
-      .then(resp => {
+      fetchProfileReviews(userid).then(resp => {
         let data = resp.data
         this.reviews = data.reviews
         this.reviewCount = data.reviewcount

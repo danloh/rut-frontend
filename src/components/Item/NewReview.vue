@@ -5,17 +5,15 @@
                  target="_blank" rel="noopener noreferrer">
                  Item
     </router-link>
-    <el-form class="review-form" 
-             :model="reviewForm" 
-             :rules="rules" 
-             ref="reviewForm" 
-             size="mini">
+    <el-form class="review-form" size="mini" 
+             :model="reviewForm" :rules="rules" ref="reviewForm">
       <el-form-item prop="title">
         <el-input v-model="reviewForm.title" placeholder="Title"></el-input>
       </el-form-item>
       <el-form-item prop="review">
         <el-input type="textarea" :autosize="{minRows:12}" 
-                  v-model="reviewForm.review">
+                  v-model="reviewForm.review" 
+                  placeholder="Compose review..., Support #hashtag">
         </el-input>
         <md-tool :pretext="reviewForm.review" @insertmd="updateM"></md-tool>
       </el-form-item>

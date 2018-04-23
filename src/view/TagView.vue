@@ -19,22 +19,13 @@
         </el-button>
       </div>
     </div>
-    <div class="rut-list">
-      <rut-sum v-for="rut in currentRuts" :key="rut.id" :rut="rut"></rut-sum>
+    <div class="submenu">
+      <router-link :to="'/tag/' + tagid +'/readlist'">ReadList</router-link>
+      <router-link :to="'/tag/' + tagid +'/demand'">Request</router-link>
+      <router-link :to="'/tag/' + tagid +'/item'">Item</router-link>
     </div>
-    <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" 
-                 @click="loadmoreRuts" 
-                 :disabled="!hasMore">
-                 Show More
-      </el-button>
-    </div>
-    <div class="demand-list" v-if="tagName"> <!--render child component when computed -->
-      <div class="demand-list-title">
-        <b style="font-size:1.2em">Related Requests on This Topic</b> &nbsp;&nbsp; &nbsp;&nbsp;
-        <router-link to="/demands">Send a Request</router-link>
-      </div>
-      <demand-list :type="'popular'" :tag="tagName" :key="tagid"></demand-list>
+    <div class="tag-view">
+      <router-view></router-view>
     </div>
     <!-- edit tag dialog -->
     <el-dialog title="Edit Tag Description" width="480px" 
@@ -258,7 +249,7 @@ export default {
     }
   },
   watch: {
-    '$route': 'loadData' // watch to render re-used component
+    '$route.params.id': 'loadData' // watch to render re-used component
   },
   created () {
     this.loadData()
@@ -293,9 +284,15 @@ export default {
       position absolute
       top 5px
       right 5px
-  .rut-list
-    padding auto
-  .demand-list-title
-    border-top 4px solid #eee
-    padding 10px 0
+  .submenu
+    margin-bottom 10px
+    border-bottom 1px solid #eee
+    a
+      color grey
+      margin-right 0.85em
+      &:hover
+        color darkgreen
+      &.router-link-active
+        color orange
+        font-weight 800
 </style>
