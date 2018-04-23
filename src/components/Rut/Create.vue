@@ -1,9 +1,9 @@
 <template>
   <div class="create-page">
     <h3 class="title">Create New Read List</h3>
-    <b style="color:green;font-size:0.8em">Read List, collection of books, courses, etc., 
-      for sharing some items on a specific topic you have read up. 
-    </b>
+    <p style="color:green;font-size:0.8em;text-align:center">
+      Read List, collection of books, courses, etc., for sharing some items on a specific topic you have read up. 
+    </p>
     <p v-if="demandid"> As Answer To The 
       <router-link :to="'/demand/' + demandid" 
                    target="_blank" rel="noopener noreferrer">
@@ -16,14 +16,9 @@
       <el-form-item label="Title" prop="title">
         <el-input type="textarea" v-model="createForm.title" autosize></el-input>
       </el-form-item>
-      <el-form-item label="Tags" prop="tag">
-        <el-input v-model="createForm.tag" clearable 
-                  placeholder="Comma can be as Separator">
-        </el-input>
-      </el-form-item>
       <el-form-item label="Preface" prop="intro">
-        <el-input type="textarea" v-model="createForm.intro" 
-                  :autosize="{minRows:5}">
+        <el-input type="textarea" v-model="createForm.intro" :autosize="{minRows:5}" 
+                  placeholder="Can end with #hashtag">
         </el-input>
         <md-tool :pretext="createForm.intro" @insertmd="updateM"></md-tool>
       </el-form-item>
@@ -72,7 +67,6 @@ export default {
       createForm: {
         title: '',
         intro: '',
-        tag: '',
         rating: 'All',
         credential: '',
         editable: 'Creator'
@@ -84,10 +78,6 @@ export default {
         ],
         intro: [
           { required: true, validator: trimValid, message: 'Need an introduction', trigger: 'blur' }
-        ],
-        tag: [
-          { required: true, validator: trimValid, message: 'Please set some tags', trigger: 'blur' },
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
         ],
         credential: [
           { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
@@ -109,7 +99,6 @@ export default {
           let data = {
             title: form.title.trim(),
             intro: form.intro.trim(),
-            tag: form.tag.trim(),
             rating: form.rating,
             credential: form.credential.trim(),
             editable: 'Creator' // form.editable

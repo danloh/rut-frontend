@@ -70,7 +70,7 @@
 import RutSum from '@/components/Rut/RutSum.vue'
 import DemandList from '@/components/Demand/DemandList.vue'
 import {
-  editTag, checkFav, favTag, fetchTag,
+  editTag, checkFav, favTag, fetchTag, fetchTagID,
   fetchTagRuts, checkTagLocked, lockTag, unlockTag
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
@@ -88,6 +88,7 @@ export default {
       favCount: 0,
       openDialog: false,
       tagDetail: {},
+      tagid: null,
       tagForm: {
         name: '',
         parent: '',
@@ -117,9 +118,6 @@ export default {
     }
   },
   computed: {
-    tagid () {
-      return this.tagDetail.id
-    },
     tagName () {
       return this.tagDetail.tagname
     },
@@ -132,15 +130,26 @@ export default {
   },
   methods: {
     loadmoreRuts () {
-      fetchTagRuts(this.tagDetail.id, {'page': this.currentPage})
+      fetchTagRuts(this.tagid, {'page': this.currentPage})
       .then(resp => {
         this.currentRuts.push(...resp.data)
         this.currentPage += 1
       })
     },
     loadData () {
-      let tagid = this.$route.params.id
-      fetchTag(tagid).then(resp => {
+      let tagparam = this.$route.params.id
+      if (tagparam.startsWith('@')) {
+        fetchTagID(tagparam).then(resp => {
+          this.tagid = resp.data
+          this.fetchData(this.tagid)
+        })
+      } else {
+        this.tagid = tagparam
+        this.fetchData(this.tagid)
+      }
+    },
+    fetchData (tgid) {
+      fetchTag(tgid).then(resp => {
         let data = resp.data
         this.currentRuts = data.ruts
         this.totalRuts = data.total
@@ -191,11 +200,10 @@ export default {
             logo: form.logo.trim(),
             description: form.description.trim()
           }
-          let tagid = this.tagDetail.id
-          editTag(tagid, data).then((resp) => {
+          editTag(this.tagid, data).then((resp) => {
             this.openDialog = false
             unlockTag(this.tagid)
-            this.loadData()  // can be less consumption
+            this.fetchData(this.tagid)  // can be less consumption?
             this.$message({
               showClose: true,
               message: resp.data,
@@ -216,8 +224,7 @@ export default {
     },
     checkFavor () {
       if (checkAuth()) {
-        let tagid = this.$route.params.id
-        checkFav(tagid).then(resp => {
+        checkFav(this.tagid).then(resp => {
           this.action = resp.data
         })
       } else {
@@ -226,7 +233,7 @@ export default {
     },
     favTag () {
       if (checkAuth()) {
-        let tagid = this.$route.params.id
+        let tagid = this.tagid
         if (this.action === 'Follow') {
           favTag('fav', tagid).then(() => {
             this.action = 'UnFollow'

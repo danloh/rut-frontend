@@ -1,20 +1,17 @@
 <template>
   <div class="road-page">
     <h3 class="title">Create New Road Map</h3>
-    <b style="color:green;font-size:0.8em">Road Map, collection of books, courses, 
-      etc., help to read up on a specific subject.
-    </b>
-    <el-form class="road-form" 
-             :model="roadForm" 
-             :rules="rules" 
-             ref="roadForm" 
-             size="mini">
+    <p style="color:green;font-size:0.8em;text-align:center">
+      Road Map, collection of books, courses, etc., help to read up on a specific subject.
+    </p>
+    <el-form class="road-form" size="mini" 
+             :model="roadForm" :rules="rules" ref="roadForm">
       <el-form-item label="Title" prop="title">
         <el-input type="textarea" v-model="roadForm.title" autosize></el-input>
       </el-form-item>
       <el-form-item label="Introduction" prop="intro">
-        <el-input type="textarea" v-model="roadForm.intro" 
-                  :autosize="{minRows:5}">
+        <el-input type="textarea" v-model="roadForm.intro" :autosize="{minRows:5}" 
+                  placeholder="Can end with #hashtag">
         </el-input>
         <md-tool :pretext="roadForm.intro" @insertmd="updateM"></md-tool>
       </el-form-item>

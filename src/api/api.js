@@ -203,6 +203,10 @@ const fetchFavTags = (userid, params) => { // !!
   return request(`${base}/${userid}/fav/tags`, params)
 }
 // get tag
+const fetchTagID = (tagname, params) => { // !!
+  return request(`${base}/gettag/${tagname}`, params)
+}
+// get tag
 const fetchTag = (tagid, params) => { // !!
   return request(`${base}/tag/${tagid}`, params)
 }
@@ -464,6 +468,7 @@ export {
   markRoadDone,
   roadToRut,
   fetchFavTags,
+  fetchTagID,
   fetchTag,
   fetchTagRuts,
   lockTag,

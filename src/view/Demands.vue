@@ -5,7 +5,7 @@
         <el-form :model="demandForm" :rules="rules" ref="demandForm">
           <el-form-item prop="demand" style="margin-bottom:8px">
             <el-input type="textarea" v-model="demandForm.demand" autosize 
-                      placeholder="Request something #Tag">
+                      placeholder="Request something, can end with #hashtag">
             </el-input>
           </el-form-item>
           <el-form-item v-show="demandForm.demand.trim()">

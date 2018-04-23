@@ -54,7 +54,8 @@ export default {
       return this.comment.creator
     },
     commentContent () {
-      return marked(this.comment.body)
+      let mkContent = marked(this.comment.body)
+      return mkContent.replace(/#(\w+)/g, '<a href="/tag/@$1"><small>#$1</small></a>')
     }
   },
   methods: {

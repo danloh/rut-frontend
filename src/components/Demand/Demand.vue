@@ -6,10 +6,10 @@
       </router-link>
     </div>
     <div class="demand-bar">
-      <router-link :to="'/tag/' + demand.tagid" v-if="demand.tagStr">
-        #{{ demand.tagStr }}
+      <router-link :to="'/tag/' + demand.tag.id" v-if="demand.tag.tagname">
+        #{{ demand.tag.tagname }}
       </router-link>
-      - <router-link :to="'/profile/' + requestor.id">
+      -by <router-link :to="'/profile/' + requestor.id">
           {{ requestor.name }}
         </router-link>
       | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">Upvote</el-button>
