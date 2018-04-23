@@ -58,5 +58,7 @@ export default (content) => {
   if (typeof content !== 'string') {
     return ''
   }
-  return marked(content, { renderer })
+  return marked(
+    content, { renderer }
+  ) // .replace(/#(\w+)/g, '<a href="/tag/@$1"><small>#$1</small></a>')
 }
