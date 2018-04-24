@@ -13,10 +13,8 @@
     </p>
     <div class="review-body">
       <div v-html="reviewContent"></div>
-      <el-button type="text" size="mini" 
-                 @click="showFull" 
-                 v-if="spoiler || short">
-                 {{ readMore }}
+      <el-button type="text" size="mini" @click="showFull" v-if="spoiler || short">
+        {{ readMore }}
       </el-button>
     </div>
     <div class="bar">

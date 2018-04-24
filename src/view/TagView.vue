@@ -7,16 +7,27 @@
       </div>
     </div>
     <div class="tagmeta">
-      <h4><b style="font-size:1.5em">{{ tagName }}</b></h4>
-      <div>{{ tagDetail.descript }} 
-        <el-button type="text" @click="toEditTag">...Edit</el-button>
+      <h4>
+        <b style="font-size:1.5em">{{ tagName }}</b>
+        <el-button type="text" @click="toEditTag">
+          <small style="font-size:0.65em">...Edit</small>
+        </el-button>
+      </h4>
+      <div>
+        <div v-html="detailContent || '...'"></div>
+        <el-button type="text" size="mini" @click="short=false" v-if="less">
+          ...More
+        </el-button>
+        <el-button type="text" size="mini" @click="short=true" v-if="!short">
+          ...Less
+        </el-button>
       </div>
       <div class="fobtn">
-        <img v-if="tagLogo" style="width:65px;height:65px" 
-             :src="tagLogo" alt="Logo" referrerPolicy="no-referrer"><br>
         <el-button type="success" size="mini" plain 
                    @click="favTag">{{action}} {{favCount}}
-        </el-button>
+        </el-button><br>
+        <img v-if="tagLogo" style="width:65px;height:65px;margin-top:10px" 
+             :src="tagLogo" alt="Logo" referrerPolicy="no-referrer">
       </div>
     </div>
     <div class="submenu">
@@ -58,27 +69,27 @@
 </template>
 
 <script>
-import RutSum from '@/components/Rut/RutSum.vue'
-import DemandList from '@/components/Demand/DemandList.vue'
 import {
   editTag, checkFav, favTag, fetchTag, fetchTagID,
-  fetchTagRuts, checkTagLocked, lockTag, unlockTag
+  checkTagLocked, lockTag, unlockTag
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
-import { trimValid } from '@/util/filters'
+import { trimValid, showLess } from '@/util/filters'
+import marked from '@/util/marked'
 
 export default {
   name: 'tag-view',
   title () {
-    return this.tagDetail.tagname
+    return '#' + this.tagDetail.tagname
   },
-  components: { RutSum, DemandList },
   data () {
     return {
       action: 'Follow',
       favCount: 0,
       openDialog: false,
       tagDetail: {},
+      short: true, // for btn show more or less
+      less: true,  // for content more or less
       tagid: null,
       tagForm: {
         name: '',
@@ -98,35 +109,32 @@ export default {
           { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
         ],
         description: [
-          { required: true, validator: trimValid, message: 'Please Descript it', trigger: 'blur' },
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Please Descript it', trigger: 'blur' }
         ]
       },
-      currentRuts: [],
-      currentPage: 0,
-      totalRuts: 0,
       relatedTags: []
     }
   },
   computed: {
+    detailContent () {
+      let content = marked(this.tagDetail.descript)
+      let least = 128
+      this.less = content.length > least && this.short
+      if (this.less) {
+        return showLess(content, least)
+      } else {
+        // this.short = false // due to sync get tagDetail?
+        return content
+      }
+    },
     tagName () {
       return this.tagDetail.tagname
     },
     tagLogo () {
       return this.tagDetail.logo
-    },
-    hasMore () {
-      return this.currentRuts.length < this.totalRuts
     }
   },
   methods: {
-    loadmoreRuts () {
-      fetchTagRuts(this.tagid, {'page': this.currentPage})
-      .then(resp => {
-        this.currentRuts.push(...resp.data)
-        this.currentPage += 1
-      })
-    },
     loadData () {
       let tagparam = this.$route.params.id
       if (tagparam.startsWith('@')) {
@@ -142,9 +150,6 @@ export default {
     fetchData (tgid) {
       fetchTag(tgid).then(resp => {
         let data = resp.data
-        this.currentRuts = data.ruts
-        this.totalRuts = data.total
-        this.currentPage = 1
         this.relatedTags = data.tags.slice(0, 16)
         this.tagDetail = data
         this.tagForm.name = data.tagname
@@ -276,14 +281,15 @@ export default {
           color #ff6600
   .tagmeta
     background-color white
-    min-height: 100px
+    min-height: 120px
     padding 5px 75px 5px 10px
     margin-bottom 5px
     position relative
     .fobtn
       position absolute
-      top 5px
+      top 15px
       right 5px
+      text-align right
   .submenu
     margin-bottom 10px
     border-bottom 1px solid #eee
