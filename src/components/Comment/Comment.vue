@@ -57,7 +57,7 @@ export default {
     commentContent () {
       return marked(
         this.comment.body
-      ).replace(/#(\w+)/g, '<a href="/tag/@$1"><small>#$1</small></a>')
+      ).replace(/ #(\w+)/g, ' <a href="/tag/@$1"><small>#$1</small></a>')
     }
   },
   methods: {

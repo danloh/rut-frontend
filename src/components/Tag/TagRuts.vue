@@ -60,6 +60,9 @@ export default {
       })
     }
   },
+  watch: {
+    '$route.params.id': 'loadRuts'
+  },
   created () {
     this.loadRuts()
   }

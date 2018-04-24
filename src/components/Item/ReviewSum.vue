@@ -53,7 +53,7 @@ export default {
     reviewContent () {
       let content = marked(
         this.review.body
-      ).replace(/#(\w+)/g, '<a href="/tag/@$1"><small>#$1</small></a>')
+      ).replace(/ #(\w+)/g, ' <a href="/tag/@$1"><small>#$1</small></a>')
       let least = this.spoiler ? 0 : 255
       return this.short || this.spoiler ? showLess(content, least) : content
     },
