@@ -51,8 +51,7 @@ export default {
   methods: {
     loadCommentData () {
       let rutid = this.$route.params.id
-      fetchRutComments(rutid)
-      .then(resp => {
+      fetchRutComments(rutid).then(resp => {
         let data = resp.data
         this.rut = data
         this.comments = data.comments
@@ -62,8 +61,7 @@ export default {
     loadmoreComment () {
       let rutid = this.$route.params.id
       let params = {'page': this.currentPage}
-      fetchRutComments(rutid, params)
-      .then(resp => {
+      fetchRutComments(rutid, params).then(resp => {
         this.comments.push(...resp.data.comments)
         this.currentPage += 1
       })

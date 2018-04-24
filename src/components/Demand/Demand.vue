@@ -12,7 +12,7 @@
       -by <router-link :to="'/profile/' + requestor.id">
           {{ requestor.name }}
         </router-link>
-      | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">Upvote</el-button>
+      | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">vote</el-button>
       | <router-link :to="'/create/' + demand.id">
           {{ answercount | pluralise('Answer') }}
         </router-link>
