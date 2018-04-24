@@ -93,7 +93,7 @@ export default {
       right 5px
   .tag-side
     position absolute
-    top 40px
+    top 5px
     right 0
     width 220px
     background-color lighten(#e5ebe4, 80%)

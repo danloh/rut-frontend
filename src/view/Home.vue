@@ -6,7 +6,7 @@
       </div>
       <spinner :show="loading"></spinner>
       <div class="home-side">
-        <h4 class="right-title">Top Topics</h4>
+        <h4 class="right-title">Explore Topics...</h4>
         <div class="right-body" v-for="(tag, index) in showTags" :key="index">
           <router-link :to="'/tag/' + tag.tagid">{{tag.tagname}}</router-link>
         </div>

@@ -15,6 +15,11 @@
         </el-button>
       </div>
       <div class="review-clip" v-if="canEdit">
+        <div class="clip-row">
+          <b>Quotes</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
+        </div>
+        <clip-list :param="cliplistParam"></clip-list>
         <div class="review-row">
           <b>Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <router-link class="editlink" :to="'/review/item/' + currentItem.id">
@@ -22,11 +27,6 @@
           </router-link>
         </div>
         <review-list :param="reviewsParam"></review-list>
-        <div class="clip-row">
-          <b>Quotes</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
-        </div>
-        <clip-list :param="cliplistParam"></clip-list>
       </div>
       <div class="include">
         <div class="inrut-row">

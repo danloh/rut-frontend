@@ -10,15 +10,15 @@
         <router-link to="/feeds" v-if="authed">
           <b>Feed</b>
         </router-link>
-        <router-link to="/headlines">
+        <!-- <router-link to="/headlines">
           <b>Headline</b>
-        </router-link>
+        </router-link> -->
         <router-link to="/demands">
           <b>Request</b>
         </router-link>
-        <router-link to="/circles">
+        <!-- <router-link to="/circles">
           <b>Circle</b>
-        </router-link>
+        </router-link> -->
         <router-link to="/challenge">
           <b>Challenge</b>
         </router-link>
@@ -38,9 +38,9 @@
                 <el-dropdown-item>
                   <router-link :to="'/profile/' + currentUserID">> My Profile</router-link>
                 </el-dropdown-item>
-                <el-dropdown-item>
+                <!-- <el-dropdown-item>
                   <router-link to="/create">+ ReadList</router-link>
-                </el-dropdown-item>
+                </el-dropdown-item> -->
                 <el-dropdown-item divided>
                   <el-button type="text" size="mini" @click="onLogout">Log out</el-button>
                 </el-dropdown-item>

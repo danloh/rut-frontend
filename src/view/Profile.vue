@@ -46,6 +46,9 @@
         <router-link :to="'/profile/' + userid + '/created/'">
           <b style="color:royalblue">*</b> Read List
         </router-link>
+        <router-link to="/create">
+          <small style="color:orange"> +New</small>
+        </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/scheduled/'">
           <b style="color:coral">#</b> Scheduled
