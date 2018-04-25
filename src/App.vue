@@ -42,7 +42,7 @@
                   <router-link to="/create">+ ReadList</router-link>
                 </el-dropdown-item> -->
                 <el-dropdown-item divided>
-                  <el-button type="text" size="mini" @click="onLogout">Log out</el-button>
+                  <el-button type="text" @click="onLogout">Log out</el-button>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
