@@ -26,7 +26,7 @@
         <el-button type="success" size="mini" plain 
                    @click="favTag">{{action}} {{favCount}}
         </el-button><br>
-        <img v-if="tagLogo" style="width:65px;height:65px;margin-top:10px" 
+        <img v-if="tagLogo" style="max-width:65px;max-height:65px;margin-top:10px" 
              :src="tagLogo" alt="Logo" referrerPolicy="no-referrer">
       </div>
     </div>
