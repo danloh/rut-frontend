@@ -10,9 +10,9 @@
         <router-link to="/feeds" v-if="authed">
           <b>Feed</b>
         </router-link>
-        <!-- <router-link to="/headlines">
+        <router-link to="/headlines">
           <b>Headline</b>
-        </router-link> -->
+        </router-link>
         <router-link to="/demands">
           <b>Request</b>
         </router-link>
