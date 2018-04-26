@@ -14,7 +14,7 @@
         </template>
         <template v-else>
           <router-link :to="'/headline/' + headline.id">
-            <b>{{ headline.title }}</b>
+            <h4>{{ headline.title }}</h4>
           </router-link>
         </template>
       </div>

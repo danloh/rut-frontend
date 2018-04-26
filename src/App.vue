@@ -3,24 +3,24 @@
     <header class="header">
       <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-size:1.2em;letter-spacing:0.0005em">
+            <b style="color:darkorange;font-family:serif;font-size:1.25em;letter-spacing:0.0005em">
               Readup.Tips<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
-          <b>Feed</b>
+          <h3>Feed</h3>
         </router-link>
         <router-link to="/headlines">
-          <b>Headline</b>
+          <h3>Headline</h3>
         </router-link>
         <router-link to="/demands">
-          <b>Request</b>
+          <h3>Request</h3>
         </router-link>
         <!-- <router-link to="/circles">
-          <b>Circle</b>
+          <h3>Circle</h3>
         </router-link> -->
         <router-link to="/challenge">
-          <b>Challenge</b>
+          <h3>Challenge</h3>
         </router-link>
         <div class="right-menu">
           <div v-if="authed">
@@ -119,8 +119,10 @@ export default {
 </script>
 
 <style lang="stylus">
+$tfonts = Lato, Roboto, Open Sans, serif
+$bfonts = Lato, Roboto, Open Sans, sans-serif
 body
-  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family $bfonts
   font-size 16px
   line-height 1.6em
   background-color lighten(#eceef1, 30%)
@@ -136,6 +138,7 @@ a
 h2, h3, h4
   margin 8px 0
   line-height 1.2em
+  font-family $tfonts
 p
   margin 5px 0
 pre
@@ -151,7 +154,7 @@ blockquote
   background-color #fafafa
   position fixed
   z-index 999
-  height 40px
+  height 42px
   top 0
   left 0
   right 0
@@ -168,7 +171,7 @@ blockquote
     line-height 24px
     display inline-block
     vertical-align middle
-    font-weight 600
+    font-weight 800
     letter-spacing .075em
     margin-right 0.85em
     &:hover

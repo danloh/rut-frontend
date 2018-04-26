@@ -35,23 +35,21 @@ const imageParse = (src, title, alt) => {
           </a>`.replace(/\s+/g, ' ').replace('\n', '')
 }
 
-// const headingParse = (text, level, raw) => {
-//   if (level === 1) {
-//     let url = '/tag/' + text
-//     let tag = '#' + text
-//     return `<a href="${url}" target="_blank" rel="nofollow noopener noreferrer">
-//                ${tag}
-//             </a>`.replace(/\s+/g, ' ').replace('\n', '')
-//   } else {
-//     // ignore IDs
-//     return '<h' + level + '>' + text + '</h' + level + '>\n'
-//   }
-// }
+const headingParse = (text, level, raw) => {
+  let realLevel = level + 2
+  // if (this.options.headerIds) {
+  //   return '<h' + realLevel + ' id="' + this.options.headerPrefix +
+  //    raw.toLowerCase().replace(/[^\w]+/g, '-') + '">' +
+  //    text + '</h' + realLevel + '>\n'
+  // }
+  // ignore IDs
+  return '<h' + realLevel + '>' + text + '</h' + realLevel + '>\n'
+}
 
 renderer.link = linkParse
 renderer.image = imageParse
 renderer.paragraph = paragraphParse
-// renderer.heading = headingParse
+renderer.heading = headingParse
 
 export default (content) => {
   // console.log('content', content)
