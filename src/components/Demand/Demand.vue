@@ -9,7 +9,8 @@
       <router-link :to="'/tag/' + demand.tag.id" v-if="demand.tag.tagname">
         #{{ demand.tag.tagname }}
       </router-link>
-      -by <router-link :to="'/profile/' + requestor.id">
+      | {{ demand.timestamp | toMDY }}
+      - by <router-link :to="'/profile/' + requestor.id">
           {{ requestor.name }}
         </router-link>
       | {{ vote }}&nbsp;<el-button type="text" @click="upDemand">vote</el-button>

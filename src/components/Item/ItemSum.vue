@@ -17,23 +17,23 @@
           <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
         </template>
       </span><br>
-      <span>Byline &nbsp;: {{ item.byline }} </span><br>
-      <span>Publish: 
+      <span><small class="indicator">Byline &nbsp;:</small> {{ item.byline }} </span><br>
+      <span><small class="indicator">Publish:</small> 
         {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
       </span><br>
-      <span>UID &nbsp; &nbsp; &nbsp;: {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
+      <span><small class="indicator">UID &nbsp;&nbsp; &nbsp;:</small> {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
         <a :href="item.resurl" v-if="item.resurl" 
            target="_blank" rel="nofollow noopener noreferrer"> 
            :::
         </a>
       </span><br>
-      <span>Listed &nbsp;: {{ item.rutcount }} &nbsp;</span>
+      <span><small class="indicator">Listed &nbsp;:</small> {{ item.rutcount }} &nbsp;</span>
       <span v-for="(t, index) in item.tags" :key="index">
         <a :href="'/tag/' + t.id" :title="t.tagname">
           <small>#{{ t.tagname.slice(0, 8) }}</small>
         </a>&nbsp;
       </span><br>
-      <span v-if="flagNote || flagTime">Note &nbsp; &nbsp;: 
+      <span v-if="flagNote || flagTime"><small class="indicator">Note &nbsp; &nbsp;:</small> 
         <span class="flag-note" v-if="flagNote">
           <b>'</b>{{ flagNote }}
         </span>&nbsp;
@@ -472,6 +472,9 @@ export default {
       a
         &:hover
           color red
+    .indicator
+      font-size 14px
+      color: #777
     .flag-note
       color grey
   .operate

@@ -106,7 +106,7 @@
     </div>
     <div class="rut-side">
       <div class="credential">
-        <p class="credential-title"><b>Creator's Credential</b></p>
+        <p class="credential-title">Creator's Credential</p>
         <div class="credential-body">
           <div>{{ creForm.credential || aboutcreator || '...' }}</div>
           <el-button class="indicator" type="text" @click="toEdit('cre')" v-show="canEdit">

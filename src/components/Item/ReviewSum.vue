@@ -7,8 +7,8 @@
       By <router-link :to="'/profile/' + creator.id">{{ creator.name }}</router-link>
       | {{ review.timestamp | toMDY }}
       | on 
-        <router-link :to="'/item/' + review.item.id">
-          {{ review.item.title.slice(0, 42) }}...
+        <router-link :to="'/item/' + review.item.id" :title="review.item.title">
+          {{ review.item.title.slice(0, 42) }} ...
         </router-link>
     </p>
     <div class="review-body">
