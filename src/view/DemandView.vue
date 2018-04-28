@@ -11,7 +11,7 @@
         <div class="title" 
              v-for="(rut, index) in answers" :key="index" :rut="rut"> - 
              <router-link :to="'/readlist/' + rut.id" :title="rut.title">
-               <b>{{ rut.title.slice(0, 142) }} ...</b>
+               {{ rut.title.slice(0, 142) }} ...
              </router-link>
         </div>
         <div v-if="hasMoreAnswer">

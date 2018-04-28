@@ -65,14 +65,13 @@ export default {
   border-bottom 1px dashed #ddd
   position relative
   .meta
-    font-size .75em
+    font-size 12px
     text-align right
     a
       &:hover
         color red
   .clipbody
     padding 0px 10px
-    font-size 1.05em
     color #2b2117
     position relative
     .quoteleft

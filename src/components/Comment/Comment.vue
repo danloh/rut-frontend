@@ -1,7 +1,7 @@
 <template>
   <div class="comment-view">
-    <img class="avatar" style="width:25px;height:25px;border-radius:25%" 
-         :src="creator.avatar" referrerPolicy="no-referrer" alt="Avatar">
+    <!-- <img class="avatar" style="width:25px;height:25px;border-radius:25%" 
+         :src="creator.avatar" referrerPolicy="no-referrer" alt="Avatar"> -->
     <div v-if="comment" class="comment">
       <div class="by" :id="'comment' + commentid">
         <router-link :to="'/profile/' + creator.id">
@@ -80,9 +80,9 @@ export default {
 
 <style lang="stylus" scoped>
 .comment-view
-  background-color lighten(#f3f3ed, 60%)
+  background-color lighten(#f3f3ed, 75%)
   border-top 1px solid #eee
-  padding 5px 2px 5px 30px
+  padding 5px 2px 5px 5px
   position relative
   .avatar
     position absolute
@@ -91,7 +91,7 @@ export default {
   .comment
     padding 5px
     .by, .toggle
-      font-size 0.7em
+      font-size 10px
       margin 2px 0
     .by
       color #bbb
@@ -99,7 +99,6 @@ export default {
         color #828282
         text-decoration underline
     .content
-      font-size 1.1em
       margin 0.2em 0
       a:hover
         color #ff6600

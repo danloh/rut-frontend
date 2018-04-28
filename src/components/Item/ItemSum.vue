@@ -464,10 +464,10 @@ export default {
     top 10px
     left 2px
   .info
-    font-size 13px
+    font-size 14px
     line-height 1.6em
     .title
-      font-size 1.2em
+      font-size 18px
       font-weight 700
       a
         &:hover

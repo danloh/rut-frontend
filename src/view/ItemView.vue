@@ -165,7 +165,7 @@ export default {
       margin 5px 0
       padding 5px
   .editlink
-    font-size 0.75em
+    font-size 12px
     font-weight 600
     color #409eff
   .item-side

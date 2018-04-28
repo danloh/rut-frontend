@@ -85,14 +85,12 @@ export default {
     padding 5px
     .headline-title
       padding 0 5px
-      font-size 1.1em
       a
-        color #407481
         &:hover
           color #409eff
     .content
       padding auto
     .headline-bar, .host
       color #828282
-      font-size 0.75em
+      font-size 12px
 </style>

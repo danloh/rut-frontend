@@ -2,7 +2,7 @@
   <div class="demand-main" v-if="requestor"> <!--render after requestor get data-->
     <div class="demand-body">
       <router-link :to="'/demand/' + demand.id">
-        <h4>{{ demand.body }}</h4>
+        <b>{{ demand.body }}</b>
       </router-link>
     </div>
     <div class="demand-bar">
@@ -60,11 +60,9 @@ export default {
   background-color lighten(#f1f3f5, 50%)
   border-bottom 1px dashed #ddd
   .demand-body
-    font-size 1.1em
     a
-      color #008ea4
       &:hover
         color #409eff
   .demand-bar
-    font-size 0.75em
+    font-size 12px
 </style>

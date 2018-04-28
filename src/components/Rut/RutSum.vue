@@ -51,7 +51,7 @@ export default {
     top 10px
     left 5px
   .title
-    font-size 1.2em
+    font-size 20px
     font-weight 700
     padding-top 10px
     a
@@ -60,6 +60,6 @@ export default {
   .intro
     color #828282
   .meta
-    font-size .85em
+    font-size 14px
     color #337ab7
 </style>

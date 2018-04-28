@@ -100,7 +100,7 @@
         </div>
       </el-dialog>
       <!-- end edit epilog dialog -->
-      <div class="bottombar">
+      <div class="sharebar">
         <share-bar></share-bar>
       </div>
     </div>
@@ -381,7 +381,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
       padding 0 10px
       .meta 
         color #828282
-        font-size 0.8em
+        font-size 12px
     .intro
       background-color $bgcolor
       padding 5px 10px
@@ -408,12 +408,12 @@ $bgcolor = lighten(#f6f6f1, 50%)
     .toolbar
       display flex
       justify-content flex-end
-    .bottombar
+    .sharebar
       font-size 0.85em
       padding 5px
       text-align right
   .indicator
-    font-size 0.7em
+    font-size 12px
     color #668e66
   .rut-side
     position absolute

@@ -3,24 +3,24 @@
     <header class="header">
       <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-family:serif;font-size:1.25em;letter-spacing:0.0005em">
+            <b style="color:darkorange;font-family:serif;font-size:1.2em;letter-spacing:0.0005em">
               Readup.Tips<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
-          <h3>Feed</h3>
+          <b>Feed</b>
         </router-link>
         <router-link to="/headlines">
-          <h3>Headline</h3>
+          <b>Headline</b>
         </router-link>
         <router-link to="/demands">
-          <h3>Request</h3>
+          <b>Request</b>
         </router-link>
         <!-- <router-link to="/circles">
-          <h3>Circle</h3>
+          <b>Circle</b>
         </router-link> -->
         <router-link to="/challenge">
-          <h3>Challenge</h3>
+          <b>Challenge</b>
         </router-link>
         <div class="right-menu">
           <div v-if="authed">
@@ -123,7 +123,7 @@ $tfonts = Lato, Roboto, Open Sans, serif
 $bfonts = Lato, Roboto, Open Sans, sans-serif
 body
   font-family $bfonts
-  font-size 16px
+  font-size 18px
   line-height 1.6em
   background-color lighten(#eceef1, 30%)
   margin 0
@@ -152,6 +152,7 @@ blockquote
   font-size 14px
 .header
   background-color #fafafa
+  border-bottom 2px solid #eee
   position fixed
   z-index 999
   height 42px
@@ -163,7 +164,7 @@ blockquote
     min-width 800px
     box-sizing border-box
     margin 0px auto
-    padding 8px 0px
+    padding 6px 0px
     .right-menu
       float right
   a

@@ -13,18 +13,17 @@
           | Start: {{ roadObj.createat | toMDY }} 
           ~ Due: <b style="color:orange">{{ roadObj.deadline | toMDY(rep=false) }}</b>
             &nbsp; {{ roadObj.done ? '✔' : '...'  }}
-          <span v-if="canEdit">
+          <span v-if="canEdit" class="toolbar" style="float:right">
             <el-button v-if="roadObj.done && !roadObj.converted"
                        type="text" size="mini" @click="convertRoadToRut">
-                       Convert
+                       ..Convert To ReadList
             </el-button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <el-button type="text" size="mini" @click="showEdit=true">
                       ..Edit
             </el-button>
             <el-button type="text" size="mini" 
-                       v-if="roadObj.itemcount<=42"
-                       @click="showAdd=true">
+                      v-if="roadObj.itemcount<=42"
+                      @click="showAdd=true">
                       ..Add
             </el-button>
           </span>
@@ -93,7 +92,7 @@
         <item-sum class="itemsum" :item="mark.item" :key="mark.itemid"></item-sum>
         <mark-sum :mark="mark" :canEdit="canEdit"></mark-sum>
       </div>
-      <div class="bottombar">
+      <div class="sharebar">
         <share-bar></share-bar>
       </div>
     </div>
@@ -273,7 +272,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
       padding 0 10px
       .meta 
         color #828282
-        font-size 0.8em
+        font-size 12px
     .intro
       background-color $bgcolor
       padding 5px 10px
@@ -282,7 +281,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
       background-color $bgcolor
       .itemsum
         margin 5px
-    .bottombar
+    .sharebar
       font-size 0.85em
       padding 5px
       text-align right
