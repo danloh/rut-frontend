@@ -31,7 +31,7 @@
       </el-dialog>
       <!-- end edit tag dialog -->
       <div class="title">
-        <h2><b style="color:grey">ReadList:&nbsp;</b>{{ rutDetail.title }}</h2>
+        <h2>{{ rutDetail.title }}</h2>
         <p class="meta">
           <span v-if="!isEveryone">By 
             <router-link :to="'/profile/' + creatorid">
@@ -108,7 +108,7 @@
       <div class="credential">
         <p class="credential-title">Creator's Credential</p>
         <div class="credential-body">
-          <div>{{ creForm.credential || aboutcreator || '...' }}</div>
+          <div v-html="md(creForm.credential || aboutcreator || '...')"></div>
           <el-button class="indicator" type="text" @click="toEdit('cre')" v-show="canEdit">
             ..Edit
           </el-button>
@@ -413,7 +413,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
       padding 5px
       text-align right
   .indicator
-    font-size 12px
+    font-size 10px
     color #668e66
   .rut-side
     position absolute

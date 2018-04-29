@@ -12,9 +12,11 @@
           | include {{ roadObj.itemcount | pluralise('item') }} 
           | Start: {{ roadObj.createat | toMDY }} 
           ~ Due: <b style="color:orange">{{ roadObj.deadline | toMDY(rep=false) }}</b>
-            &nbsp; {{ roadObj.done ? '✔' : '...'  }}
+            <el-button type="text" @click="markRoadAsDone" title="Click to mark as Completed">
+              &nbsp; {{ ifDone ? '✔' : '...'  }}
+            </el-button>
           <span v-if="canEdit" class="toolbar" style="float:right">
-            <el-button v-if="roadObj.done && !roadObj.converted"
+            <el-button v-show="ifDone && !roadObj.converted"
                        type="text" size="mini" @click="convertRoadToRut">
                        ..Convert To ReadList
             </el-button>
@@ -113,7 +115,7 @@ import ItemSum from '@/components/Item/ItemSum.vue'
 import MarkSum from '@/components/Road/MarkSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
-import { fetchRoad, editRoad, roadToRut, searchItems, itemToRoad } from '@/api/api'
+import { fetchRoad, editRoad, roadToRut, searchItems, itemToRoad, markRoadDone } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import marked from '@/util/marked'
 
@@ -131,6 +133,7 @@ export default {
       ownername: '',
       canEdit: false,
       showEdit: false,
+      ifDone: false,
       introForm: {
         title: '',
         intro: '',
@@ -162,6 +165,7 @@ export default {
       fetchRoad(roadid).then(resp => {
         let data = resp.data
         this.roadObj = data
+        this.ifDone = data.done
         this.ownerid = data.owner.id
         this.ownername = data.owner.name
         this.marks = data.marks
@@ -196,14 +200,23 @@ export default {
         }
       })
     },
-    convertRoadToRut () {
-      let roadid = this.roadid
-      roadToRut(roadid).then(resp => {
-        if (resp.data) {
-          let id = resp.data.id
-          this.$router.push(`/readlist/${id}`)
-        }
+    markRoadAsDone () {
+      let roadid = this.roadObj.id
+      markRoadDone(roadid).then(resp => {
+        this.ifDone = resp.data
       })
+    },
+    convertRoadToRut () {
+      let canConvert = this.ifDone && !this.roadObj.converted && this.markRoadAsDone()
+      if (canConvert) {
+        let roadid = this.roadid
+        roadToRut(roadid).then(resp => {
+          if (resp.data) {
+            let id = resp.data.id
+            this.$router.push(`/readlist/${id}`)
+          }
+        })
+      }
     },
     storeKey (query) {
       if (query.trim() !== '') {
@@ -231,7 +244,7 @@ export default {
           let mark = form.mark
           let data = {
             'mark': mark,
-            'alter': this.roadObj.done, // if done, alt to not-done once add item
+            'alter': this.ifDone, // if done, alt to not-done once add item
             'load': true           // if load added-item info
           }
           itemToRoad(itemid, this.roadid, data).then(resp => {

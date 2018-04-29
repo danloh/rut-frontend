@@ -111,7 +111,7 @@ export default {
 
 <style lang="stylus" scoped>
 .indicator
-  font-size 0.7em
+  font-size 10px
   color #668e66
 .mark
   padding 5px 10px
