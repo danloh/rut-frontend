@@ -21,7 +21,8 @@
       <span><small class="indicator">Publish:</small> 
         {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
       </span><br>
-      <span><small class="indicator">UID &nbsp;&nbsp; &nbsp;:</small> {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
+      <span><small class="indicator">UID &nbsp;&nbsp; &nbsp;:</small>
+        {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
         <a :href="item.resurl" v-if="item.resurl" 
            target="_blank" rel="nofollow noopener noreferrer"> 
            :::
@@ -30,7 +31,7 @@
       <span><small class="indicator">Listed &nbsp;:</small> {{ item.rutcount }} &nbsp;</span>
       <span v-for="(t, index) in item.tags" :key="index">
         <a :href="'/tag/' + t.id" :title="t.tagname">
-          <small>#{{ t.tagname.slice(0, 8) }}</small>
+          <small>#{{ t.tagname.slice(0, 12) }}</small>
         </a>&nbsp;
       </span><br>
       <span v-if="flagNote || flagTime"><small class="indicator">Note &nbsp; &nbsp;:</small> 

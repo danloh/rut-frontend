@@ -33,7 +33,7 @@
         <div v-html="md(introForm.intro)"></div>
         <span v-for="(t, index) in roadObj.tags" :key="index">
           <a :href="'/tag/' + t.id" :title="t.tagname">
-            <small>#{{ t.tagname.slice(0, 8) }}</small>
+            <small>#{{ t.tagname.slice(0, 12) }}</small>
           </a>&nbsp;
         </span>
       </div>

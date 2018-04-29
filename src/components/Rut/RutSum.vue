@@ -59,6 +59,7 @@ export default {
         color #ff6600
   .intro
     color #828282
+    font-size: 16px
   .meta
     font-size 14px
     color #337ab7
