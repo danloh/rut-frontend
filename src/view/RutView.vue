@@ -68,6 +68,10 @@
                      v-if="canEdit && rutDetail.itemcount<=42">
                      <b>Add Item </b>
         </router-link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <router-link :to="'/readlist/' + rutid + '/readmode'" 
+                     title="Reader Mode, w/o Spoiler-Warning">
+                     <b style="font-size:12px">ReaderMode</b>
+        </router-link>&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button size="mini" plain @click="starRut">
           <b><i class="el-icon-star-on"></i> {{ starAction }}&nbsp;{{ starCount }}</b>
         </el-button>

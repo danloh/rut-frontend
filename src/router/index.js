@@ -34,6 +34,7 @@ const ResetPsw = () => import('@/components/Auth/ResetPsw')
 const ChangePsw = () => import('@/components/Auth/ChangePsw')
 const Login = () => import('@/components/Auth/Login')
 const Create = () => import('@/components/Rut/Create')
+const ReadMode = () => import('@/components/Rut/ReadMode')
 const EditRut = () => import('@/components/Rut/EditRut')
 const AddItem = () => import('@/components/Rut/AddItem')
 const EditTips = () => import('@/components/Rut/EditTips')
@@ -107,6 +108,7 @@ const router = new Router({
     { path: '/login', component: Login, name: 'Login' },
     { path: '/create/:id(\\d+)?', component: Create, name: 'CreateRut', meta: {auth: true} },
     { path: '/readlist/:id', component: RutView, name: 'Rutview' },
+    { path: '/readlist/:id/readmode', component: ReadMode, name: 'ReadMode' },
     { path: '/edit/readlist/:id',
       component: EditRut,
       name: 'EditRut',
