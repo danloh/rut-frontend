@@ -2,8 +2,7 @@
   <div class="rut-sum">
     <router-link :to="'/readlist/' + rut.id">
       <span>
-        <img class="cover" :src="cover" referrerPolicy="no-referrer"  
-             style="width:80px; height:100px" alt="Cover">
+        <img class="cover" :src="cover" referrerPolicy="no-referrer" alt="Cover">
       </span>
       <span class="title">
         <router-link :to="'/readlist/' + rut.id"> {{ rut.title }}</router-link>
@@ -48,6 +47,8 @@ export default {
     background-color lighten(#f3f3ed, 60%)
   .cover
     position absolute
+    max-width 80px
+    max-height 100px
     top 10px
     left 5px
   .title

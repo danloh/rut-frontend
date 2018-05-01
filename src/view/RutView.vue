@@ -48,6 +48,12 @@
       <div class="intro">
         <b class="indicator">Preface:&nbsp;</b>
         <div v-html="md(rutDetail.intro)"></div>
+        <span v-if="convertfrom.id" style="color:grey;font-size:10px">
+          Converted from RoadMap: 
+          <a :href="'/roadmap/' + convertfrom.id" :title="convertfrom.title">
+            {{convertfrom.title.slice(0, 42)}}
+          </a>
+        </span>
       </div>
       <div class="toolbar">
         <router-link class="indicator" :to="'/profile/' + whoEdit.editorid" 
@@ -162,6 +168,9 @@ export default {
   components: { ItemSum, TipSum, ShareBar, MdTool },
   data () {
     return {
+      rutDetail: {},
+      rutid: '',
+      tags: [],
       starAction: 'Star',
       starCount: 0,
       tips: [],
@@ -169,6 +178,7 @@ export default {
       creatorid: null,
       creatorname: '',
       aboutcreator: '',
+      convertfrom: {},
       isEveryone: false,
       canEdit: false,
       canTag: true,
@@ -189,15 +199,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'rutDetail',
       'whoEdit'
-    ]),
-    rutid () {
-      return this.rutDetail.id
-    },
-    tags () {
-      return this.rutDetail.tags
-    }
+    ])
   },
   title () {
     return this.rutDetail.title
@@ -207,9 +210,13 @@ export default {
       let crutid = this.$route.params.id
       this.$store.dispatch('getRut', crutid).then(resp => {
         let data = resp.data
+        this.rutDetail = data
+        this.rutid = data.id
+        this.tags = data.tags
         this.starCount = data.starcount
         this.creatorid = data.creator.id
         this.creatorname = data.creator.name
+        this.convertfrom = data.convertfrom
         this.aboutcreator = data.creator.about
         this.isEveryone = data.editable === 'Everyone'
         this.newTags = data.tags.map(t => t.tagname)

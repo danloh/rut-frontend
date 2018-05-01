@@ -205,6 +205,7 @@ export default {
       markRoadDone(roadid).then(resp => {
         this.ifDone = resp.data
       })
+      return true
     },
     convertRoadToRut () {
       let canConvert = this.ifDone && !this.roadObj.converted && this.markRoadAsDone()

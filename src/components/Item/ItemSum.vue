@@ -459,8 +459,8 @@ export default {
   border-bottom 1px solid #eee
   position relative
   .thumb
-    width 100px
-    height 135px
+    max-width 100px
+    max-height 135px
     position absolute
     top 10px
     left 2px
