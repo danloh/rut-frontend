@@ -149,6 +149,7 @@ export default {
     .selectItem
       width 100%
     .submenu
+      border-bottom 1px solid #eee
       margin-bottom 5px
       a
         color grey

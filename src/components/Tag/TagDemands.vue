@@ -12,14 +12,14 @@
 
 <script>
 import Demand from '@/components/Demand/Demand.vue'
-import { fetchTagDemands, fetchTagID } from '@/api/api'
+import { fetchTagDemands } from '@/api/api'
 
 export default {
   name: 'tag-demand',
   components: { Demand },
   data () {
     return {
-      tagid: null,
+      tagname: null,
       demands: [],
       currentPage: 1,
       demandCount: 0
@@ -33,31 +33,23 @@ export default {
   methods: {
     loadmoreDemand () {
       let params = {'page': this.currentPage}
-      fetchTagDemands(this.tagid, params).then(resp => {
+      fetchTagDemands(this.tagname, params).then(resp => {
         this.demands.push(...resp.data.demands)
         this.currentPage += 1
       })
     },
     loadDemands () {
-      let tagparam = this.$route.params.id
-      if (tagparam.startsWith('@')) {
-        fetchTagID(tagparam).then(resp => {
-          this.tagid = resp.data
-          this.fetchDemands(this.tagid)
-        })
-      } else {
-        this.tagid = tagparam
-        this.fetchDemands(this.tagid)
-      }
-    },
-    fetchDemands (tagid) {
-      fetchTagDemands(tagid).then(resp => {
+      this.tagname = this.$route.params.name
+      fetchTagDemands(this.tagname).then(resp => {
         let data = resp.data
         this.demands = data.demands
         this.demandCount = data.demandcount
       })
     }
   },
+  // watch: {
+  //   '$route.params.name': 'loadDemands'
+  // },
   created () {
     this.loadDemands()
   }

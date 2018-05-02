@@ -8,7 +8,7 @@
       <div class="home-side">
         <h4 class="right-title">Explore Topics...</h4>
         <div class="right-body" v-for="(tag, index) in showTags" :key="index">
-          <router-link :to="'/tag/' + tag.tagid" :title="tag.tagname">
+          <router-link :to="'/tag/' + tag.tagname" :title="tag.tagname">
             {{ tag.tagname.slice(0,18) }}
           </router-link>
         </div>

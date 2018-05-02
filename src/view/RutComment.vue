@@ -73,7 +73,6 @@ export default {
   },
   created () {
     this.loadCommentData()
-    this.loadCircles()
   }
 }
 </script>

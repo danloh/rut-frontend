@@ -1,4 +1,5 @@
 import marked from 'marked'
+// import { regTag } from '@/util/constant'
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -13,7 +14,7 @@ marked.setOptions({
 
 const renderer = new marked.Renderer()
 
-const paragraphParse = text => `<p>${text}</p>`
+const paragraphParse = text => `<p>\n${text}</p>`
 
 const linkParse = (href, title, text) => {
   const isSelf = href.includes('readup.tips')
@@ -58,5 +59,5 @@ export default (content) => {
   }
   return marked(
     content, { renderer }
-  ) // .replace(/#(\w+)/g, '<a href="/tag/@$1"><small>#$1</small></a>')
+  ) // .replace(regTag, '<a href="/tag/$1"><small>#$1</small></a>')
 }

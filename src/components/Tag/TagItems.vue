@@ -12,13 +12,13 @@
 
 <script>
 import ItemSum from '@/components/Item/ItemSum.vue'
-import { fetchTagItems, fetchTagID } from '@/api/api'
+import { fetchTagItems } from '@/api/api'
 
 export default {
   name: 'tag-items',
   data () {
     return {
-      tagid: null,
+      tagname: null,
       itemCount: 0,
       items: [],
       currentPage: 1
@@ -32,19 +32,8 @@ export default {
   },
   methods: {
     loadItems () {
-      let tagparam = this.$route.params.id
-      if (tagparam.startsWith('@')) {
-        fetchTagID(tagparam).then(resp => {
-          this.tagid = resp.data
-          this.fetchItems(this.tagid)
-        })
-      } else {
-        this.tagid = tagparam
-        this.fetchItems(this.tagid)
-      }
-    },
-    fetchItems (tagid) {
-      fetchTagItems(tagid).then(resp => {
+      this.tagname = this.$route.params.name
+      fetchTagItems(this.tagname).then(resp => {
         let data = resp.data
         this.items = data.items
         this.itemCount = data.itemcount
@@ -52,12 +41,15 @@ export default {
     },
     loadmoreItems () {
       let param = {'page': this.currentPage}
-      fetchTagItems(this.tagid, param).then(resp => {
+      fetchTagItems(this.tagname, param).then(resp => {
         this.items.push(...resp.data.items)
         this.currentPage += 1
       })
     }
   },
+  // watch: {
+  //   '$route.params.name': 'loadItems'
+  // },
   created () {
     this.loadItems()
   }

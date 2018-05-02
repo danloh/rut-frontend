@@ -3,7 +3,7 @@
     <div class="rut-view">
       <div class="tagbar">
         <span class="tag" v-for="(tag, index) in tags" :key="index">
-          <router-link :to="'/tag/' + tag.id">{{tag.tagname}}</router-link>
+          <router-link :to="'/tag/' + tag.tagname">{{tag.tagname}}</router-link>
         </span>
         <el-button class="indicator" type="text" @click="toEdit('tag')" v-show="canTag">
           ..Edit
@@ -144,8 +144,7 @@
       <div class="demands" v-if="rutDetail.demandcount">
         <b>As Answer to Request:</b>
         <p class="demand-title" 
-           v-for="(demand, index) in demands" 
-           :key="index" :demand="demand">
+           v-for="(demand, index) in demands" :key="index" :demand="demand">
           - <router-link :to="'/demand/' + demand.id">
                {{ demand.demand.slice(0, 42) }}...
             </router-link>

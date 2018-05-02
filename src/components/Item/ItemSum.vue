@@ -30,7 +30,7 @@
       </span><br>
       <span><small class="indicator">Listed &nbsp;:</small> {{ item.rutcount }} &nbsp;</span>
       <span v-for="(t, index) in item.tags" :key="index">
-        <a :href="'/tag/' + t.id" :title="t.tagname">
+        <a :href="'/tag/' + t.tagname" :title="t.tagname">
           <small>#{{ t.tagname.slice(0, 12) }}</small>
         </a>&nbsp;
       </span><br>

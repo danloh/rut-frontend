@@ -14,14 +14,14 @@
 
 <script>
 import RutSum from '@/components/Rut/RutSum.vue'
-import { fetchTagRuts, fetchTagID } from '@/api/api'
+import { fetchTagRuts } from '@/api/api'
 
 export default {
   name: 'tag-ruts',
   components: { RutSum },
   data () {
     return {
-      tagid: null,
+      tagname: null,
       rutCount: 0,
       ruts: [],
       currentPage: 1
@@ -34,19 +34,8 @@ export default {
   },
   methods: {
     loadRuts () {
-      let tagparam = this.$route.params.id
-      if (tagparam.startsWith('@')) {
-        fetchTagID(tagparam).then(resp => {
-          this.tagid = resp.data
-          this.fetchRuts(this.tagid)
-        })
-      } else {
-        this.tagid = tagparam
-        this.fetchRuts(this.tagid)
-      }
-    },
-    fetchRuts (tagid) {
-      fetchTagRuts(tagid).then(resp => {
+      this.tagname = this.$route.params.name
+      fetchTagRuts(this.tagname).then(resp => {
         let data = resp.data
         this.ruts = data.ruts
         this.rutCount = data.rutcount
@@ -54,14 +43,14 @@ export default {
     },
     loadmoreRuts () {
       let param = {'page': this.currentPage}
-      fetchTagRuts(this.tagid, param).then(resp => {
+      fetchTagRuts(this.tagname, param).then(resp => {
         this.ruts.push(...resp.data.ruts)
         this.currentPage += 1
       })
     }
   },
   watch: {
-    '$route.params.id': 'loadRuts'
+    '$route.params.name': 'loadRuts'
   },
   created () {
     this.loadRuts()

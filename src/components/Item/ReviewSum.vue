@@ -32,6 +32,7 @@ import { upvoteReview } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { showLess } from '@/util/filters'
 import marked from '@/util/marked'
+import { regTag } from '@/util/constant.js'
 
 export default {
   name: 'review-sum',
@@ -53,7 +54,7 @@ export default {
     reviewContent () {
       let content = marked(
         this.review.body
-      ).replace(/ #(\w+)/g, ' <a href="/tag/@$1"><small>#$1</small></a>')
+      ).replace(regTag, ' <a href="/tag/$1"><small>#$1</small></a>')
       let least = this.spoiler ? 0 : 255
       return this.short || this.spoiler ? showLess(content, least) : content
     },
@@ -94,6 +95,7 @@ export default {
         color #ff6600
   .meta
     font-size 0.75em
+    color #999
   .bar
     font-size 0.7em
     text-align right

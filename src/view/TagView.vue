@@ -3,12 +3,12 @@
     <div class="tag-side">
       <h4 class="sidetitle">Related Tags</h4>
       <div class="sidebody" v-for="(tag, index) in relatedTags" :key="index">
-        <router-link :to="'/tag/' + tag.tagid">{{tag.tagname}}</router-link>
+        <router-link :to="'/tag/' + tag.tagname">{{tag.tagname}}</router-link>
       </div>
     </div>
     <div class="tagmeta">
       <h4>
-        <b style="font-size:1.5em">{{ tagName }}</b>
+        <b style="font-size:1.5em">{{ tagname }}</b>
         <el-button type="text" @click="toEditTag">
           <small style="font-size:0.65em">...Edit</small>
         </el-button>
@@ -31,9 +31,9 @@
       </div>
     </div>
     <div class="submenu">
-      <router-link :to="'/tag/' + tagid +'/readlist'">ReadList</router-link>
-      <router-link :to="'/tag/' + tagid +'/demand'">Request</router-link>
-      <router-link :to="'/tag/' + tagid +'/item'">Item</router-link>
+      <router-link :to="'/tag/' + tagname +'/readlist'">ReadList</router-link>
+      <router-link :to="'/tag/' + tagname +'/demand'">Request</router-link>
+      <router-link :to="'/tag/' + tagname +'/item'">Item</router-link>
     </div>
     <div class="tag-view">
       <router-view></router-view>
@@ -70,8 +70,7 @@
 
 <script>
 import {
-  editTag, checkFav, favTag, fetchTag, fetchTagID,
-  checkTagLocked, lockTag, unlockTag
+  editTag, checkFav, favTag, fetchTag, checkTagLocked, lockTag, unlockTag
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid, showLess } from '@/util/filters'
@@ -80,7 +79,7 @@ import marked from '@/util/marked'
 export default {
   name: 'tag-view',
   title () {
-    return '#' + this.tagDetail.tagname
+    return '#' + this.tagname
   },
   data () {
     return {
@@ -91,6 +90,7 @@ export default {
       short: true, // for btn show more or less
       less: true,  // for content more or less
       tagid: null,
+      tagname: '',
       tagForm: {
         name: '',
         parent: '',
@@ -127,31 +127,18 @@ export default {
         return content
       }
     },
-    tagName () {
-      return this.tagDetail.tagname
-    },
     tagLogo () {
       return this.tagDetail.logo
     }
   },
   methods: {
     loadData () {
-      let tagparam = this.$route.params.id
-      if (tagparam.startsWith('@')) {
-        fetchTagID(tagparam).then(resp => {
-          this.tagid = resp.data
-          this.fetchData(this.tagid)
-        })
-      } else {
-        this.tagid = tagparam
-        this.fetchData(this.tagid)
-      }
-    },
-    fetchData (tgid) {
-      fetchTag(tgid).then(resp => {
+      this.tagname = this.$route.params.name
+      fetchTag(this.tagname).then(resp => {
         let data = resp.data
-        this.relatedTags = data.tags.slice(0, 16)
         this.tagDetail = data
+        this.tagid = data.id
+        this.relatedTags = data.tags.slice(0, 16)
         this.tagForm.name = data.tagname
         this.tagForm.description = data.descript
         this.tagForm.logo = data.logo
@@ -254,7 +241,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.id': 'loadData' // watch to render re-used component
+    '$route.params.name': 'loadData' // watch to render re-used component
   },
   created () {
     this.loadData()

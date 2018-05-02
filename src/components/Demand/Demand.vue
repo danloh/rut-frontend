@@ -6,7 +6,7 @@
       </router-link>
     </div>
     <div class="demand-bar">
-      <router-link :to="'/tag/' + demand.tag.id" v-if="demand.tag.tagname">
+      <router-link :to="'/tag/' + demand.tag.tagname" v-if="demand.tag.tagname">
         #{{ demand.tag.tagname }}
       </router-link>
       | {{ demand.timestamp | toMDY }}

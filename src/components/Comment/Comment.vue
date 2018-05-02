@@ -39,6 +39,7 @@ import Reply from '@/components/Comment/Reply.vue'
 import marked from '@/util/marked'
 import { checkAuth } from '@/util/auth'
 import { upvoteComment } from '@/api/api'
+import { regTag } from '@/util/constant'
 
 export default {
   name: 'comment',
@@ -61,7 +62,7 @@ export default {
     commentContent () {
       return marked(
         this.comment.body
-      ).replace(/ #(\w+)/g, ' <a href="/tag/@$1"><small>#$1</small></a>')
+      ).replace(regTag, ' <a href="/tag/$1"><small>#$1</small></a>')
     }
   },
   methods: {

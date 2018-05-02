@@ -134,7 +134,7 @@ const router = new Router({
     { path: '/review/item/:id', component: NewReview, name: 'NewReview', meta: {auth: true} },
     { path: '/editreview/:id', component: EditReview, name: 'EditReview', meta: {auth: true} },
     { path: '/review/:id', component: ReviewView, name: 'ReviewView' },
-    { path: '/tag/:id',
+    { path: '/tag/:name',
       component: TagView,
       children: [
         { path: '', name: 'defaultTag', redirect: 'readlist' },

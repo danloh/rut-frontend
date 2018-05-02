@@ -28,7 +28,7 @@
     <div class="tag-side">
       <h4 class="sidetitle">Favorite Topics</h4>
       <div class="sidebody" v-for="(tag, index) in showTags" :key="index">
-        <router-link :to="'/tag/' + tag.id" :title="tag.tagname">
+        <router-link :to="'/tag/' + tag.tagname" :title="tag.tagname">
           {{ tag.tagname.slice(0,18) }}
         </router-link>
       </div>
