@@ -1,21 +1,19 @@
 <template>
   <div class="view-main">
-    <b style="font-size: 1.2em">My Reviews And Excerpts On The Item:</b>
-    <router-link :to="'/item/' + itemid">
-      {{currentItem.title || '......'}}
+    <b> My Reviews / Excerpts On:</b>
+    <router-link :to="'/item/' + itemid" style="font-size:14px">
+      {{ (currentItem.title || ':::').slice(0, 64) }}
     </router-link>
     <div class="submenu">
-      <b>>></b>&nbsp;&nbsp;
-      <b style="color: orange">Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <router-link class="editlink" :to="'/review/item/' + itemid">
+      <b style="color: orange">Reviews</b>
+      <router-link class="editlink" :to="'/review/item/' + itemid" style="float:right">
         ...Post Review
       </router-link>
     </div>
     <review-list :param="listParam"></review-list>
     <div class="submenu">
-      <b>>></b>&nbsp;&nbsp;
-      <b style="color: orange">Clips</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
+      <b style="color: orange">Quotes</b>
+      <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
     </div>
     <clip-list :param="listParam"></clip-list>
   </div>
@@ -47,9 +45,10 @@ export default {
 .view-main
   padding 10px 255px 10px 0px
   .submenu
-      margin 5px 0
-      padding 5px
+    margin 5px 0
+    padding 5px
+    border-bottom 1px solid #eee
 .editlink
-  font-size 0.75em
+  font-size 12px
   font-weight 600
 </style>

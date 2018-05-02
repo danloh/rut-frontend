@@ -1,17 +1,18 @@
 <template>
   <div class="review-page">
-    <h3 class="title"> Post New Review:</h3>
-    <router-link :to="'/item/' + itemId" 
-                 target="_blank" rel="noopener noreferrer">
-                 Item
+    <b class="title"> Post New Review:</b>&nbsp;&nbsp;
+    <router-link :to="'/item/' + itemId" target="_blank"
+                 rel="noopener noreferrer" style="font-size:14px"
+                 :title="currentItem.title || ''">
+                 {{ (currentItem.title || ':::').slice(0, 72) }}
     </router-link>
     <el-form class="review-form" size="mini" 
              :model="reviewForm" :rules="rules" ref="reviewForm">
       <el-form-item prop="title">
-        <el-input v-model="reviewForm.title" placeholder="Title"></el-input>
+        <el-input type="textarea" autosize v-model="reviewForm.title" placeholder="Title"></el-input>
       </el-form-item>
       <el-form-item prop="review">
-        <el-input type="textarea" :autosize="{minRows:12}" 
+        <el-input type="textarea" :autosize="{minRows:16}" 
                   v-model="reviewForm.review" 
                   placeholder="Compose review..., Support #hashtag">
         </el-input>
@@ -24,7 +25,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="mini" class="blockbtn" 
+        <el-button type="success" plain size="mini" class="blockbtn" 
                    @click="onSubmit('reviewForm', reviewForm)">
                    Submit
         </el-button>
@@ -58,6 +59,7 @@ export default {
           { required: true, validator: trimValid, message: 'Required', trigger: 'blur' }
         ]
       },
+      currentItem: this.$store.getters.currentItem,
       itemId: this.$route.params.id
     }
   },

@@ -1,15 +1,13 @@
 <template>
   <div class="review-page">
-    <h3 class="title"> Edit Review</h3>
+    <b class="title"> Edit Review</b>
     <el-form class="review-form" size="mini" 
-             :model="reviewForm" 
-             :rules="rules" 
-             ref="reviewForm">
+             :model="reviewForm" :rules="rules" ref="reviewForm">
       <el-form-item prop="title">
-        <el-input v-model="reviewForm.title"></el-input>
+        <el-input type="textarea" autosize v-model="reviewForm.title"></el-input>
       </el-form-item>
       <el-form-item prop="review">
-        <el-input type="textarea" :autosize="{minRows:12}" 
+        <el-input type="textarea" :autosize="{minRows:16}" 
                   v-model="reviewForm.review">
         </el-input>
         <md-tool :pretext="reviewForm.review" @insertmd="updateM"></md-tool>
@@ -21,9 +19,8 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="mini" class="blockbtn"
-                   @click="onEdit('reviewForm', reviewForm)" 
-                   :disabled="!canEdit">
+        <el-button type="success" plain size="mini" class="blockbtn"
+                   @click="onEdit('reviewForm', reviewForm)" :disabled="!canEdit">
                    Edit and Submit
         </el-button>
       </el-form-item>

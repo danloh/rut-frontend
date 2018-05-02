@@ -16,19 +16,19 @@
       </div>
       <div class="review-clip" v-if="canEdit">
         <div class="clip-row">
-          <b>Quotes</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link>
+          <b>Quotes</b>
+          <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
         </div>
         <clip-list :param="cliplistParam"></clip-list>
         <div class="review-row">
-          <b>Reviews</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <router-link class="editlink" :to="'/review/item/' + currentItem.id">
+          <b>Reviews</b>
+          <router-link class="editlink" :to="'/review/item/' + currentItem.id" style="float:right">
             ...Post Review
           </router-link>
         </div>
         <review-list :param="reviewsParam"></review-list>
       </div>
-      <div class="include">
+      <div class="include" v-if="currentItem.rutcount > 0">
         <div class="inrut-row">
           <b>In {{currentItem.rutcount | pluralise('List')}}</b>
         </div>
@@ -159,11 +159,12 @@ export default {
           &:hover
             color #ff6600
       .odd-in-rut
-        background-color lighten(#e0e6da, 55%)
+        background-color lighten(#e0e6da, 60%)
     .inrut-row, .review-row, .clip-row
       color green
       margin 5px 0
       padding 5px
+      border-bottom 1px solid #eee
   .editlink
     font-size 12px
     font-weight 600

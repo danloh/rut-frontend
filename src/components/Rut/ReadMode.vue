@@ -6,10 +6,9 @@
       <br>
       <div v-for="tip in tips" :key="tip.cid">
         <b>#{{tip.order}}&nbsp;&nbsp;{{tip.item.title}}</b>
-        <br>
         <a :href="'https://www.google.com/search?q=' + tip.item.title" target="_blank"
-           style="font-size:14px">
-          &nbsp;&nbsp;By: {{tip.item.byline}}&nbsp;&nbsp;UID: {{tip.item.uid}}
+           style="color:#999;font-size:14px">
+           ({{tip.item.byline}}&nbsp;#{{tip.item.uid}})
         </a>
         <div v-html="md(tip.tip)"></div>
       </div>
@@ -69,7 +68,7 @@ export default {
   position relative
   background-color lighten(#eceef1, 50%)
   .rut-view
-    padding 10px 20px
+    padding 10px 30px
     background-color lighten(#f6f6f1, 50%)
   .rut-side
     position absolute
