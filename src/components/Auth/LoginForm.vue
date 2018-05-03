@@ -58,7 +58,8 @@ export default {
             password: form.password
           }
           this.$store.dispatch('loginUser').then(() => {
-            let nextUrl = this.next === 'current'
+            let currentPath = this.$route.path
+            let nextUrl = this.next === 'current' && currentPath !== '/login'
                           ? this.$route.fullPath
                           : this.$route.query.redirect || '/challenge'
             this.$router.push(nextUrl)

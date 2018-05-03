@@ -32,7 +32,7 @@ import { upvoteReview } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { showLess } from '@/util/filters'
 import marked from '@/util/marked'
-import { regTag } from '@/util/constant.js'
+import { regTag } from '@/util/constant'
 
 export default {
   name: 'review-sum',

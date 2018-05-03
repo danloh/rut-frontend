@@ -33,11 +33,6 @@
       </div>
       <div class="intro">
         <div v-html="md(introForm.intro)"></div>
-        <span v-for="(t, index) in roadObj.tags" :key="index">
-          <a :href="'/tag/' + t.tagname" :title="t.tagname">
-            <small>#{{ t.tagname.slice(0, 12) }}</small>
-          </a>&nbsp;
-        </span>
       </div>
       <!-- edit intro dialog -->
       <el-dialog title="Edit RoadMap" width="520px" 
@@ -115,9 +110,12 @@ import ItemSum from '@/components/Item/ItemSum.vue'
 import MarkSum from '@/components/Road/MarkSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import MdTool from '@/components/Misc/MdTool.vue'
-import { fetchRoad, editRoad, roadToRut, searchItems, itemToRoad, markRoadDone } from '@/api/api'
+import {
+  fetchRoad, editRoad, roadToRut, searchItems, itemToRoad, markRoadDone
+} from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import marked from '@/util/marked'
+import { regTag } from '@/util/constant'
 
 export default {
   name: 'road-view',
@@ -262,7 +260,9 @@ export default {
       this.addForm.mark += data
     },
     md (content) {
-      return marked(content)
+      return marked(
+        content
+      ).replace(regTag, ' <a href="/tag/$1"><small>#$1</small></a>')
     }
   },
   watch: {
