@@ -278,6 +278,10 @@ const newItem = (params) => {
 const editItem = (itemid, params) => {
   return request(`${base}/edititem/${itemid}`, params, 'post')
 }
+// add item's tag
+const addItemTag = (itemid, params) => {
+  return request(`${base}/additemtag/${itemid}`, params, 'post')
+}
 // fetch to-dos, doings, dones
 const fetchProfileItems = (flag, userid, params) => {
   return request(`${base}/${userid}/${flag}/items`, params)
@@ -493,6 +497,7 @@ export {
   checkItemLocked,
   newItem,
   editItem,
+  addItemTag,
   fetchProfileItems,
   fetchClips,
   newReview,

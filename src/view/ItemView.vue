@@ -47,8 +47,25 @@
       </div>
     </div>
     <div class="item-side">
+      <div class="tags">
+        <b>Tags</b>
+        <el-button class="editlink" type="text" 
+                   @click="showAdd=!showAdd" v-if="canEdit">
+                   {{ showAdd ? '..Cancel': '...Add' }}
+        </el-button>
+        <el-input size="mini" v-model="newTags" v-show="showAdd" 
+                  @keyup.enter.native="addTags" 
+                  placeholder="Input Tag, then Press Enter">
+        </el-input>
+        <br>
+        <span class="tag" v-for="(t, index) in itemTags" :key="index">
+          <a :href="'/tag/' + t.tagname">
+            <small>{{ t.tagname }}</small>
+          </a>
+        </span>&nbsp;&nbsp;
+      </div>
       <router-link :to="'/myrc/item/' + currentItem.id">
-        <b style="font-size:0.8em">&nbsp;My Reviews or Excerpts</b>
+        <b>My Reviews or Excerpts</b>
       </router-link>
     </div>
   </div>
@@ -58,7 +75,7 @@
 import ItemSum from '@/components/Item/ItemSum.vue'
 import ReviewList from '@/components/Item/ReviewList.vue'
 import ClipList from '@/components/Challenge/ClipList.vue'
-import { fetchInRuts, checkItemLocked, lockItem } from '@/api/api'
+import { fetchInRuts, checkItemLocked, lockItem, addItemTag } from '@/api/api'
 import marked from '@/util/marked'
 import { checkAuth } from '@/util/auth'
 import { showLess } from '@/util/filters'
@@ -77,7 +94,10 @@ export default {
       currentPage: 1,
       currentItem: {},
       showShort: true, // show less detail
-      inRuts: []
+      inRuts: [],
+      itemTags: [],
+      showAdd: false,
+      newTags: ''
     }
   },
   computed: {
@@ -102,8 +122,10 @@ export default {
       this.cliplistParam = {'itemid': itemid}
       this.reviewsParam = {'itemid': itemid, 'ref': 'hot'}
       this.$store.dispatch('getItem', itemid).then(resp => {
-        this.currentItem = resp.data
-        this.inRuts = resp.data.inruts
+        let data = resp.data
+        this.currentItem = data
+        this.inRuts = data.inruts
+        this.itemTags = data.tags
       })
     },
     loadmoreRuts () {
@@ -133,6 +155,16 @@ export default {
           }
         })
       }
+    },
+    addTags () {
+      if (!this.newTags.trim()) return
+      let itemid = this.$route.params.id
+      let param = {'tags': this.newTags.trim()}
+      addItemTag(itemid, param).then(resp => {
+        this.showAdd = false
+        if (!resp.data) return
+        this.itemTags = resp.data
+      })
     }
   },
   created () {
@@ -173,5 +205,15 @@ export default {
     position absolute
     top 10px
     right 0
-    width 245px   
+    width 250px
+    .tags
+      background-color lighten(#e5ebe4, 50%)
+      .tag
+        background-color #eee
+        padding 2px
+        margin-right 5px
+        a
+          &:hover
+            background-color #ddd
+            padding 2px
 </style>

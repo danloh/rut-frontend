@@ -8,7 +8,7 @@
     </div>
     <div class="tagmeta">
       <h4>
-        <b style="font-size:1.5em">{{ tagname }}</b>
+        <b style="font-size:1.5em">{{ tagDetail.tagname }}</b>
         <el-button type="text" @click="toEditTag">
           <small style="font-size:0.65em">...Edit</small>
         </el-button>
@@ -59,7 +59,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="success" @click="editTag('tagForm', tagForm)">
+        <el-button type="success" @click="onEditTag('tagForm', tagForm)">
           Submit
         </el-button>
       </div>
@@ -91,6 +91,7 @@ export default {
       less: true,  // for content more or less
       tagid: null,
       tagname: '',
+      tagLogo: '',
       tagForm: {
         name: '',
         parent: '',
@@ -126,25 +127,24 @@ export default {
         // this.short = false // due to sync get tagDetail?
         return content
       }
-    },
-    tagLogo () {
-      return this.tagDetail.logo
     }
   },
   methods: {
     loadData () {
-      this.tagname = this.$route.params.name
-      fetchTag(this.tagname).then(resp => {
-        let data = resp.data
-        this.tagDetail = data
-        this.tagid = data.id
-        this.relatedTags = data.tags.slice(0, 16)
-        this.tagForm.name = data.tagname
-        this.tagForm.description = data.descript
-        this.tagForm.logo = data.logo
-        this.favCount = data.favcount
+      let tg = this.$route.params.name
+      fetchTag(tg).then(resp => {
+        this.setData(resp.data)
+        this.relatedTags = resp.data.tags.slice(0, 16)
         this.action = this.checkFavor() // || 'Follow'
       })
+    },
+    setData (data) {
+      this.tagDetail = data
+      this.tagid = data.id
+      this.tagname = this.tagForm.name = data.tagname
+      this.tagLogo = this.tagForm.logo = data.logo
+      this.tagForm.description = data.descript
+      this.favCount = data.favcount
     },
     toEditTag () {
       let currentUserID = this.$store.getters.currentUserID
@@ -174,7 +174,7 @@ export default {
       this.cancelEditTag()
       done()
     },
-    editTag (formName, form) {
+    onEditTag (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid && checkAuth()) {
           let data = {
@@ -183,13 +183,13 @@ export default {
             logo: form.logo.trim(),
             description: form.description.trim()
           }
-          editTag(this.tagid, data).then((resp) => {
+          editTag(this.tagid, data).then(resp => {
             this.openDialog = false
             unlockTag(this.tagid)
-            this.fetchData(this.tagid)  // can be less consumption?
+            this.setData(resp.data)
             this.$message({
               showClose: true,
-              message: resp.data,
+              message: 'Tag Info Updated, Thanks',
               type: 'success'
             })
           })
