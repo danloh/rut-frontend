@@ -1,23 +1,21 @@
 <template>
   <div class="new-page">
     <div class="title"> <b>Submit New Item</b>&nbsp;</div>
-    <p style="color:green;font-size:0.8em">
-      An Item can be anything: Book, Course, Documentary, Paper, Podcast, Atlas, Place, etc.
+    <p style="color:green;font-size:16px;text-align:center">
+      An Item can be Anything: Book, Course, Documentary, Paper, Podcast, Atlas, Place, etc.
     </p>
     <spinner :show="loading"></spinner>
     <el-button size="small" type="primary">
-      {{ show ? 'Add Item Info Manually' : 'Fetch Item Info via Spider' }}
+      {{ show ? 'Add Item Information Manually' : 'Fetch Item Information via Spider' }}
     </el-button>
     <el-button size="mini" type="text" @click="show = !show">
-      or {{ show ? 'Fetch Item Info via Spider' : 'Add Item Info Manually' }}
+      or {{ show ? 'Fetch Item Information via Spider' : 'Add Item Information Manually' }}
     </el-button>
     <!-- check via url spider or UID -->
-    <el-form class="check-form" 
-             :model="checkForm" 
-             ref="checkForm" 
-             size="mini" 
+    <el-form class="check-form" size="mini" 
+             :model="checkForm" ref="checkForm" 
              v-show="!show">
-      <el-form-item label="URL: e.g. Amazon, Coursera url" prop="url">
+      <el-form-item label="Input URL : e.g. Amazon Url or Coursera Link" prop="url">
         <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
       </el-form-item>
       <el-form-item label="Flag as" prop="flag">
@@ -28,10 +26,10 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="mini" class="blockbtn"
+        <el-button type="success" size="medium" class="blockbtn"
                    @click="onCheck('checkForm', checkForm)"
                    :disabled="!checkForm.url">
-                   Fetch Via Spider
+                   Fetch Information Via Spider
         </el-button>
       </el-form-item>
     </el-form>
@@ -119,17 +117,25 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="mini" class="blockbtn"
+        <el-button type="success" plain size="medium" class="blockbtn"
                    @click="onNewItem('itemForm', itemForm)">
                    Done and Submit
         </el-button>
       </el-form-item>
     </el-form>
+    <div class="submits">
+      <el-button size="mini" @click="getSubmits">
+        Items Submitted By Me
+      </el-button>
+      <p v-for="(item, index) in submits" :key="index" style="font-size:14px">
+        {{item.cate}} <a :href="'/item/' + item.id" target="_blank">{{item.title}}</a>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
-import { newItem } from '@/api/api'
+import { newItem, fetchSubmits } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
 import Spinner from '@/components/Misc/Spinner.vue'
@@ -202,7 +208,8 @@ export default {
         ]
       },
       show: false,
-      loading: false
+      loading: false,
+      submits: []
     }
   },
   methods: {
@@ -281,6 +288,11 @@ export default {
     },
     updateN (data) {
       this.itemForm.details += data
+    },
+    getSubmits () {
+      fetchSubmits().then(resp => {
+        this.submits = resp.data
+      })
     }
   },
   created () {

@@ -270,6 +270,10 @@ const unlockItem = (itemid, params) => {
 const checkItemLocked = (userid, itemid, params) => {
   return request(`${base}/checkifitem/${itemid}/lockedto/${userid}`, params)
 }
+// fetch submitted items
+const fetchSubmits = (params) => {
+  return request(`${base}/getsubmitteditems`, params)
+}
 // add new item directly, not to list
 const newItem = (params) => {
   return request(`${base}/newitem`, params, 'post')
@@ -495,6 +499,7 @@ export {
   lockItem,
   unlockItem,
   checkItemLocked,
+  fetchSubmits,
   newItem,
   editItem,
   addItemTag,

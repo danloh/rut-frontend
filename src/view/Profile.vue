@@ -33,6 +33,9 @@
                {{user.exlink.slice(0,24) + '...'}}
             </a>
         </p>
+        <p class="user-info">
+          - &nbsp;{{user.joinat | toMDY}} Joined
+        </p>
       </div>
       <div class="right-nav">
         <router-link :to="'/profile/' + userid + '/roadmaps/'">

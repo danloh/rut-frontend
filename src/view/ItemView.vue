@@ -3,10 +3,15 @@
     <div class="item-main">
       <item-sum :item="currentItem" :out="true" :key="currentItem.id"></item-sum> <!--key to re-render-->
       <div>
-        <b>More Details</b> &nbsp;&nbsp;&nbsp;
-        <el-button class="editlink" type="text" @click="toEditItem" v-if="canEdit">
-           ...Edit
-        </el-button>
+        <b>More Details</b>
+        <span style="float:right">
+          <a :href="currentItem.submitor.id ? '/profile/' + currentItem.submitor.id : '#'">
+            <small style="color:#999;font-size:10px">Sumited by {{currentItem.submitor.name}}</small>
+          </a>
+          <el-button class="editlink" type="text" @click="toEditItem" v-if="canEdit">
+           &nbsp;&nbsp;...Edit &nbsp;
+          </el-button>
+        </span>
       </div>
       <div class="item-detail">
         <div v-html="itemDetail || '...'"></div>
@@ -49,7 +54,7 @@
     <div class="item-side">
       <div class="tags">
         <b>Tags</b>
-        <el-button class="editlink" type="text" 
+        <el-button class="editlink" type="text" style="float:right"
                    @click="showAdd=!showAdd" v-if="canEdit">
                    {{ showAdd ? '..Cancel': '...Add' }}
         </el-button>
@@ -205,9 +210,10 @@ export default {
     position absolute
     top 10px
     right 0
-    width 250px
+    width 245px
     .tags
       background-color lighten(#e5ebe4, 50%)
+      margin-bottom 10px
       .tag
         background-color #eee
         padding 2px
