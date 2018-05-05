@@ -1,11 +1,11 @@
 <template>
   <div class="rut-page">
     <div class="rut-view">
-      <h2>{{ rutDetail.title }}</h2>
+      <h2 style="font-size:1.8em">{{ rutDetail.title }}</h2>
       <div v-html="md(intro)"></div>
       <br>
       <div v-for="tip in tips" :key="tip.cid">
-        <b>#{{tip.order}}&nbsp;&nbsp;{{tip.item.title}}</b>
+        <b style="font-size:1.1em">#{{tip.order}}&nbsp;&nbsp;{{tip.item.title}}</b>
         <a :href="'https://www.google.com/search?q=' + tip.item.title" target="_blank"
            style="color:#999;font-size:14px">
            ({{tip.item.byline}}&nbsp;#{{tip.item.uid}})
