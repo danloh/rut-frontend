@@ -15,10 +15,8 @@
     <el-form class="check-form" size="mini" 
              :model="checkForm" ref="checkForm" 
              v-show="!show">
-      <el-form-item prop="url">
-        <el-input type="textarea" v-model="checkForm.url" autosize
-                  placeholder="Input URL : e.g. Amazon Url or Coursera Link" >
-        </el-input>
+      <el-form-item label="Input URL : e.g. Amazon Book Url or Coursera Link" prop="url">
+        <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
       </el-form-item>
       <el-form-item label="Flag as" prop="flag">
         <el-radio-group v-model="checkForm.flag">
@@ -28,7 +26,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" plain size="mini" class="blockbtn"
+        <el-button type="primary" size="mini" class="blockbtn"
                    @click="onCheck('checkForm', checkForm)"
                    :disabled="!checkForm.url">
                    Fetch Information Via Spider
@@ -119,7 +117,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" plain size="mini" class="blockbtn"
+        <el-button type="primary" plain size="mini" class="blockbtn"
                    @click="onNewItem('itemForm', itemForm)">
                    Done and Submit
         </el-button>
@@ -261,7 +259,7 @@ export default {
               cover: form.cover.trim(),
               Language: form.language.trim(),
               Publisher: form.publisher.trim(),
-              'Publication Date': form.publishDate.trim(),
+              PublishDate: form.publishDate.trim(),
               Level: form.level.trim(),
               binding: form.binding.trim(),
               page: form.page.trim(),

@@ -190,8 +190,7 @@ export default {
             price: form.price.trim(),
             details: form.details.trim()
           }
-          editItem(this.itemId, data)
-          .then((resp) => {
+          editItem(this.itemId, data).then((resp) => {
             let id = this.itemId
             unlockItem(id)
             this.$router.push(`/item/${id}`)
