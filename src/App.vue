@@ -66,7 +66,7 @@
     <footer class="footer">
       <div class="bottom">
         ©Readup.Tips - since 2018
-        | <a href="/newitem" target="_blank">submit</a>
+        | <a href="/newitem">submit</a>
         | <a href="/about">About</a>
         | <a href="/about">Terms</a>
         <!--google site search -->&nbsp;&nbsp;&nbsp;

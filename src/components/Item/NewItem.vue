@@ -15,8 +15,10 @@
     <el-form class="check-form" size="mini" 
              :model="checkForm" ref="checkForm" 
              v-show="!show">
-      <el-form-item label="Input URL : e.g. Amazon Url or Coursera Link" prop="url">
-        <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
+      <el-form-item prop="url">
+        <el-input type="textarea" v-model="checkForm.url" autosize
+                  placeholder="Input URL : e.g. Amazon Url or Coursera Link" >
+        </el-input>
       </el-form-item>
       <el-form-item label="Flag as" prop="flag">
         <el-radio-group v-model="checkForm.flag">
@@ -26,7 +28,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" size="medium" class="blockbtn"
+        <el-button type="success" plain size="mini" class="blockbtn"
                    @click="onCheck('checkForm', checkForm)"
                    :disabled="!checkForm.url">
                    Fetch Information Via Spider
@@ -117,7 +119,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" plain size="medium" class="blockbtn"
+        <el-button type="success" plain size="mini" class="blockbtn"
                    @click="onNewItem('itemForm', itemForm)">
                    Done and Submit
         </el-button>
@@ -231,7 +233,8 @@ export default {
           newItem(data).then(resp => {
             this.loading = false
             let id = resp.data
-            this.$router.push(`/item/${id}`)
+            let nexturl = id ? `/item/${id}` : '/'
+            this.$router.push(nexturl)
           })
         }
       })
