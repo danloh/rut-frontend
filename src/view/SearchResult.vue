@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <b>{{ searchItems.length | pluralise('Result') }} for Keyword: {{ itemKeyword }}</b>
+  <div class="search-result">
+    <b>{{ searchItems.length | pluralise('Result') }} for Keyword: 
+      <span style="color:#337ab7">{{ itemKeyword }}</span>
+    </b>
     <div class="result-list" v-if="type==='item'">
       <div class="result" v-for="item in searchItems" :key="item.id" :item="item" >
         <b>{{ item.cate }}</b> 
@@ -30,6 +32,7 @@ import { checkAuth } from '@/util/auth'
 
 export default {
   name: 'search-result',
+  title: 'Search Items',
   props: {
     type: String // to be: item or rut
   },
@@ -66,10 +69,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.search-result
+  margin-top 10px
 .result-list
   width 80%
   margin-top 5px
   .result
     padding 8px 0
-    border-bottom 2px solid #eee
+    border-bottom 2px dashed #ddd
 </style>

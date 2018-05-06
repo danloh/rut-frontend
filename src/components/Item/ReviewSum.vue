@@ -22,7 +22,7 @@
                    v-if="canEdit">
                    ...Edit |
       </router-link> <!--if not show edit in list, && !less-->
-      <el-button type="text" @click="upReview">Helpful</el-button>&nbsp;{{ vote }}
+      <el-button type="text" size="mini" @click="upReview">{{ vote }}&nbsp;Helpful</el-button>
     </div>
   </div>
 </template>
@@ -85,8 +85,8 @@ export default {
 <style lang="stylus" scoped>
 .review-main
   background-color lighten(#f4f7f3, 50%)
-  padding 5px
-  border-bottom 1px solid #eee
+  padding 10px 15px
+  border-bottom 1px dashed #ddd
   position relative
   .title
     font-weight 700
@@ -94,12 +94,9 @@ export default {
       &:hover
         color #ff6600
   .meta
-    font-size 0.75em
+    font-size 12px
     color #999
   .bar
-    font-size 0.7em
+    font-size 12px
     text-align right
-  .review-body
-    padding 0 5px
-    font-size 1.05em
 </style>

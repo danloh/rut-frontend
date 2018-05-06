@@ -70,12 +70,12 @@
         | <a href="/about">About</a>
         | <a href="/about">Terms</a>
         <!--google site search -->&nbsp;&nbsp;&nbsp;
-        <!-- <el-input size="mini" style="width:16em"
+        <el-input size="mini" style="width:16em"
                   v-model="searchWord"
-                  @keyup.enter.native="siteSearch" 
+                  @keyup.enter.native="searchItem" 
                   placeholder="Search Readup.Tips">
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
-        </el-input> -->
+        </el-input>
       </div>
     </footer>
   </div>
@@ -84,6 +84,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import LoginForm from '@/components/Auth/LoginForm.vue'
+import { searchItems } from '@/api/api'
+import { checkAuth } from '@/util/auth'
 
 export default {
   name: 'app',
@@ -112,6 +114,15 @@ export default {
         return false
       } else {
         return false
+      }
+    },
+    searchItem () {
+      if (checkAuth() && this.searchWord.trim()) {
+        let param = {'uid_or_title': this.searchWord.trim()}
+        searchItems(0, param).then(resp => {
+          this.$store.commit('SET_SEARCH_ITEMS', resp.data)
+          this.$router.push('/searchresult/item')
+        })
       }
     }
   }

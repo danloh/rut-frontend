@@ -21,28 +21,27 @@
       </div>
       <div class="review-clip" v-if="canEdit">
         <div class="clip-row">
-          <b>Quotes</b>
+          <b>{{currentItem.clipcount | pluralise(' Quote')}}</b>
           <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
         </div>
         <clip-list :param="cliplistParam"></clip-list>
         <div class="review-row">
-          <b>Reviews</b>
+          <b>{{currentItem.reviewcount | pluralise(' Review')}}</b>
           <router-link class="editlink" :to="'/review/item/' + currentItem.id" style="float:right">
             ...Post Review
           </router-link>
         </div>
         <review-list :param="reviewsParam"></review-list>
       </div>
+      <div class="inrut-row">
+        <b>{{currentItem.rutcount | pluralise(' ReadList')}}</b>
+      </div>
       <div class="include" v-if="currentItem.rutcount > 0">
-        <div class="inrut-row">
-          <b>In {{currentItem.rutcount | pluralise('List')}}</b>
-        </div>
-        <div v-for="(rut, index) in inRuts" :key="index" :rut="rut"
-             :class="[index % 2 == 0 ? 'odd-in-rut' : '', 'in-rut']">
-          {{ index +1 }}. 
+        <div v-for="(rut, index) in inRuts" :key="index" :rut="rut" class="in-rut">
           <router-link :to="'/readlist/' + rut.id" :title="rut.title">
-            {{ rut.title.slice(0, 120) }} ...
+            {{ rut.title.slice(0, 82) }} ...
           </router-link>
+          <tip-sum class="tip" :tip="rut.itemtip" :less="true" :key="index"></tip-sum>
         </div>
         <div v-if="hasMoreRut && canEdit" style="text-align:right">
           <el-button type="text" @click="loadmoreRuts" :disabled="!hasMoreRut">
@@ -80,6 +79,7 @@
 import ItemSum from '@/components/Item/ItemSum.vue'
 import ReviewList from '@/components/Item/ReviewList.vue'
 import ClipList from '@/components/Challenge/ClipList.vue'
+import TipSum from '@/components/Rut/TipSum.vue'
 import { fetchInRuts, checkItemLocked, lockItem, addItemTag } from '@/api/api'
 import marked from '@/util/marked'
 import { checkAuth } from '@/util/auth'
@@ -90,7 +90,7 @@ export default {
   title () {
     return this.currentItem.title
   },
-  components: { ItemSum, ClipList, ReviewList },
+  components: { ItemSum, ClipList, ReviewList, TipSum },
   data () {
     return {
       canEdit: checkAuth(), // if load reviews / clips
@@ -188,15 +188,17 @@ export default {
       background-color lighten(#f0f3f0, 45%)
       padding 5px
     .include
-      padding 5px
+      padding 10px
       background-color lighten(#f0f3f0, 45%)
       .in-rut
-        padding 5px
+        border-bottom 1px dashed #ddd
         a
           &:hover
             color #ff6600
-      .odd-in-rut
-        background-color lighten(#e0e6da, 60%)
+      .tip
+        background-color lighten(#e0e6da, 70%)
+        padding 5px
+        font-size 16px
     .inrut-row, .review-row, .clip-row
       color green
       margin 5px 0

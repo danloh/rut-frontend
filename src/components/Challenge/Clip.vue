@@ -16,7 +16,7 @@
         {{ creator.name.slice(0, 15) }}
       </router-link>
       | {{ clip.timestamp | toMDY }}
-      | {{ vote }}&nbsp;<el-button type="text" @click="upClip">Like</el-button>
+      | <el-button type="text" @click="upClip">{{ vote }}&nbsp;Like</el-button>
     </div>
   </div>
 </template>
