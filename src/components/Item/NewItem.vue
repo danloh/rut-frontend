@@ -5,7 +5,7 @@
       An Item can be Anything: Book, Course, Documentary, Paper, Podcast, Atlas, Place, etc.
     </p>
     <spinner :show="loading"></spinner>
-    <el-button size="small" type="primary">
+    <el-button size="Medium" type="primary">
       {{ show ? 'Add Item Information Manually' : 'Fetch Item Information via Spider' }}
     </el-button>
     <el-button size="mini" type="text" @click="show = !show">
@@ -26,7 +26,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="mini" class="blockbtn"
+        <el-button type="primary" plain size="mini" style="float:right" 
                    @click="onCheck('checkForm', checkForm)"
                    :disabled="!checkForm.url">
                    Fetch Information Via Spider
@@ -117,7 +117,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" plain size="mini" class="blockbtn"
+        <el-button type="primary" plain size="mini" 
                    @click="onNewItem('itemForm', itemForm)">
                    Done and Submit
         </el-button>
