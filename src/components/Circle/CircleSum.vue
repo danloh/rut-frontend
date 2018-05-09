@@ -4,6 +4,9 @@
     <el-button type="text" @click="openDialog=true" v-if="canEdit">
       <small style="font-size:0.75em">...Edit</small>
     </el-button>
+    <el-button type="text" size="mini" @click="confirm=true">
+      <small class="dele">Delete?</small>
+    </el-button>
     <!-- <div class="meta">
       <a :href="'/profile/' + circle.facilitator.id">
         <img :src="circle.facilitator.avatar" referrerPolicy="no-referrer" 
@@ -42,7 +45,6 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="text" size="mini" @click="confirm=true">Delete?</el-button>
         <el-button type="success" 
                    @click="onEditCircle('editForm', editForm)">
                    Edit  Done
@@ -52,11 +54,11 @@
     <!-- end edit dialog -->
     <!-- confirm delete dialog -->
     <el-dialog title="Confirm Delete?" :visible.sync="confirm" width="320px">
-      <span>Confirm Delete? Can not recover</span>
+      <span>Confirm Delete? Please Do not delete the unexpired circle, Can not recover</span>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="confirm = false">Cancel</el-button>
         <el-button type="danger" size="mini" 
-                   @click="onDelCircle">
+                   @click="onDisCircle">
                    Confirm Delete
         </el-button>
       </span>
@@ -66,7 +68,7 @@
 </template>
 
 <script>
-import { editCircle, delCircle } from '@/api/api'
+import { editCircle, disCircle } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid, showLess } from '@/util/filters'
 import marked from '@/util/marked'
@@ -145,9 +147,9 @@ export default {
         }
       })
     },
-    onDelCircle () {
+    onDisCircle () {
       let cid = this.circle.id
-      delCircle(cid).then(() => {
+      disCircle(cid).then(() => {
         this.confirm = false
         this.openDialog = false
       })
@@ -166,4 +168,8 @@ export default {
   .info
     font-size 14px
     color green
+  .dele
+    color transparent
+    &:hover
+      color #828282
 </style>

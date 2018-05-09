@@ -394,9 +394,9 @@ const postCircle = params => {
 const editCircle = (cid, params) => {
   return request(`${base}/editcircle/${cid}`, params, 'post')
 }
-// del circle
-const delCircle = (cid, params) => {
-  return request(`${base}/delcircle/${cid}`, params)
+// disable circle
+const disCircle = (cid, params) => {
+  return request(`${base}/disablecircle/${cid}`, params)
 }
 // get headline list
 const fetchHeadlines = (params) => {
@@ -454,7 +454,7 @@ export {
   fetchCircles,
   postCircle,
   editCircle,
-  delCircle,
+  disCircle,
   checkStar,
   starRut,
   checkRutLocked,
