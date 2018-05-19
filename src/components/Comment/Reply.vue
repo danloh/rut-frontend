@@ -47,8 +47,7 @@ export default {
           let data = { comment: form.comment.trim() }
           let re = this.refer.re // demand or rut or review or comment
           let id = this.refer.id // id of above
-          newComment(re, id, data)
-          .then(resp => {
+          newComment(re, id, data).then(resp => {
             this.$emit('newreply', resp.data)
           })
           this.resetForm(formName)

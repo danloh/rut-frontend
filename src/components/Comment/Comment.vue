@@ -11,24 +11,21 @@
       </div>
       <div class="content" v-html="commentContent"></div>
       <el-button type="text" size="mini" @click="upComment" title="like">
-        <i class="el-icon-caret-top" style="color:grey"></i>
+        <small style="color:#aaa">Like</small>
       </el-button>
       <el-button type="text" size="mini" @click="showRe = !showRe">
-        <small style="color:#aaa">{{ showRe ? 'hide' : 'reply' }}</small>
+        <small style="color:#aaa">
+          {{ showRe ? 'Hide' : childComments.length + '&nbsp; Reply' }}
+        </small>
       </el-button>
-      <span class="toggle" :class="{ open }" v-if="hasChild">
-        <a @click="open = !open">
-          {{ open ? '[-] fold' : '[+] ' + childComments.length + ' collapsed' }} 
-        </a>
-      </span>
-      <reply class="reply" 
-            :refer="refer" 
-            :show.sync="showRe" 
-            @newreply="updateNew">
-      </reply> <!--sync, hide input once submit-->
-      <div class="comment-children" v-show="open">
+      <div class="comment-children" v-show="showRe">
         <!--recursively use component-->
         <comment v-for="commt in childComments" :key="commt.id" :comment="commt"></comment>
+        <reply class="reply" style="margin-left:5px"
+              :refer="refer" 
+              :show.sync="showRe" 
+              @newreply="updateNew">
+        </reply> <!--sync, hide input once submit-->
       </div>
     </div>
   </div>
@@ -47,7 +44,6 @@ export default {
   components: { Reply },
   data () {
     return {
-      open: false,
       showRe: false,
       hasChild: this.comment.children.length > 0,
       childComments: this.comment.children,
@@ -72,7 +68,6 @@ export default {
       }
     },
     updateNew (data) {
-      this.open = true
       this.childComments.unshift(data)
     }
   }
@@ -82,7 +77,7 @@ export default {
 <style lang="stylus" scoped>
 .comment-view
   background-color lighten(#f3f3ed, 75%)
-  border-top 1px solid #eee
+  border-top 1px dashed #ddd
   padding 5px 2px 5px 5px
   position relative
   .avatar
@@ -91,10 +86,9 @@ export default {
     left 2px
   .comment
     padding 5px
-    .by, .toggle
+    .by
       font-size 10px
       margin 2px 0
-    .by
       color #bbb
       a
         color #828282
@@ -103,17 +97,7 @@ export default {
       margin 0.2em 0
       a:hover
         color #ff6600
-    .toggle
-      background-color #eef2f5
-      padding 0.1em 0.5em
-      border-radius 4px
-      a
-        color #828282
-        cursor pointer
-      &.open
-        padding 0
-        background-color transparent
-        margin-bottom -0.5em
     .comment-children
       margin-left 0.5em
+      border-left 0.5px solid #eee
 </style>

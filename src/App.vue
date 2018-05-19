@@ -144,7 +144,7 @@ body
   overflow-x scroll
   overflow-wrap break-word
 a
-  color #337ab7
+  color #37a
   text-decoration none
 h2, h3, h4
   margin 8px 0

@@ -246,24 +246,24 @@ export default {
         })
       }
     },
-    flagSchedule (note = '') {
-      let params = {'note': note}
+    flagSchedule (note) {
+      let params = {'note': note || 'todo'}
       flagItem('todo', this.item.id, params)
       .then(() => {
         this.flagAction = 'Scheduled'
         this.flagNote = note
       })
     },
-    flagWorking (note = '') {
-      let params = {'note': note}
+    flagWorking (note) {
+      let params = {'note': note || 'doing'}
       flagItem('doing', this.item.id, params)
       .then(() => {
         this.flagAction = 'Working On'
         this.flagNote = note
       })
     },
-    flagDone (note = '') {
-      let params = {'note': note}
+    flagDone (note) {
+      let params = {'note': note || 'done'}
       flagItem('done', this.item.id, params)
       .then(() => {
         this.flagAction = 'Have Done'
@@ -273,7 +273,7 @@ export default {
     flagAddnote (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (checkAuth()) {
-          let note = form.note
+          let note = form.note.trim()
           let to = this.flagTo
           switch (to) {
             case 'Schedule':
