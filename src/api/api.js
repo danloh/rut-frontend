@@ -218,6 +218,10 @@ const fetchTagDemands = (tagid, params) => {
 const fetchTagItems = (tagid, params) => {
   return request(`${base}/tag/${tagid}/items`, params)
 }
+// fetch comments of a Tag
+const fetchTagComments = (tagid, params) => {
+  return request(`${base}/tag/${tagid}/comments`, params)
+}
 // lock tag
 const lockTag = (tagid, params) => {
   return request(`${base}/locktag/${tagid}`, params)
@@ -484,6 +488,7 @@ export {
   fetchTagRuts,
   fetchTagDemands,
   fetchTagItems,
+  fetchTagComments,
   lockTag,
   unlockTag,
   checkTagLocked,

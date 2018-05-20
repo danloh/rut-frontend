@@ -24,6 +24,7 @@ const TagView = () => import('@/view/TagView')
 const TagRut = () => import('@/components/Tag/TagRuts')
 const TagDemand = () => import('@/components/Tag/TagDemands')
 const TagItem = () => import('@/components/Tag/TagItems')
+const TagComment = () => import('@/components/Tag/TagComments')
 const SearchResult = () => import('@/view/SearchResult')
 const About = () => import('@/components/Misc/About')
 const NotFound = () => import('@/view/NotFound')
@@ -140,7 +141,8 @@ const router = new Router({
         { path: '', name: 'defaultTag', redirect: 'readlist' },
         { path: 'readlist', name: 'TagReadlist', component: TagRut, meta: {auth: true} },
         { path: 'demand', name: 'TagDemand', component: TagDemand, meta: {auth: true} },
-        { path: 'item', name: 'TagItem', component: TagItem, meta: {auth: true} }
+        { path: 'item', name: 'TagItem', component: TagItem, meta: {auth: true} },
+        { path: 'comment', name: 'TagComment', component: TagComment, meta: {auth: true} }
       ]
     },
     { path: '/demands',

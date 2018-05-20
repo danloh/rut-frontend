@@ -6,9 +6,9 @@
         <router-link :to="'/tag/' + tag.tagname">{{tag.tagname}}</router-link>
       </div>
     </div>
-    <div class="tagmeta">
+    <div class="tagmeta" :style="{ 'color': ftcolor, 'background-color': bgcolor }">
       <h4>
-        <b style="font-size:1.5em">{{ tagDetail.tagname }}</b>
+        <b style="font-size:1.6em">{{ tagDetail.tagname }}</b>
         <el-button type="text" @click="toEditTag">
           <small style="font-size:0.65em">...Edit</small>
         </el-button>
@@ -34,12 +34,13 @@
       <router-link :to="'/tag/' + tagname +'/readlist'">ReadList</router-link>
       <router-link :to="'/tag/' + tagname +'/demand'">Request</router-link>
       <router-link :to="'/tag/' + tagname +'/item'">Item</router-link>
+      <router-link :to="'/tag/' + tagname +'/comment'">Discuss</router-link>
     </div>
     <div class="tag-view">
       <router-view></router-view>
     </div>
     <!-- edit tag dialog -->
-    <el-dialog title="Edit Tag Description" width="480px" 
+    <el-dialog title="Edit Tag Description" width="640px" 
                :visible.sync="openDialog" 
                :before-close="cancelOnClose">
       <el-form :model="tagForm" :rules="rules" ref="tagForm" size="mini">
@@ -56,6 +57,12 @@
           <el-input type="textarea" v-model="tagForm.description" 
                     :autosize="{minRows:3}">
           </el-input>
+        </el-form-item>
+        <el-form-item label="Background Color" prop="bgcolor">
+          <el-input v-model="tagForm.bgcolor" placeholder="like: #3e7cae"></el-input>
+        </el-form-item>
+        <el-form-item label="Font Color" prop="ftcolor">
+          <el-input v-model="tagForm.ftcolor" placeholder="like: #ffdf58"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -92,10 +99,14 @@ export default {
       tagid: null,
       tagname: '',
       tagLogo: '',
+      ftcolor: '',
+      bgcolor: '',
       tagForm: {
         name: '',
         parent: '',
         logo: '',
+        ftcolor: '',
+        bgcolor: '',
         description: ''
       },
       rules: {
@@ -108,6 +119,12 @@ export default {
         ],
         logo: [
           { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+        ],
+        ftcolor: [
+          { max: 60, message: 'Max Length should be 60', trigger: 'blur' }
+        ],
+        bgcolor: [
+          { max: 60, message: 'Max Length should be 60', trigger: 'blur' }
         ],
         description: [
           { required: true, validator: trimValid, message: 'Please Descript it', trigger: 'blur' }
@@ -143,6 +160,8 @@ export default {
       this.tagid = data.id
       this.tagname = this.tagForm.name = data.tagname
       this.tagLogo = this.tagForm.logo = data.logo
+      this.ftcolor = this.tagForm.ftcolor = data.ftcolor
+      this.bgcolor = this.tagForm.bgcolor = data.bgcolor
       this.tagForm.description = data.descript
       this.favCount = data.favcount
     },
@@ -181,6 +200,8 @@ export default {
             name: form.name.trim(),
             parent: form.parent.trim(),
             logo: form.logo.trim(),
+            ftcolor: form.ftcolor.trim(),
+            bgcolor: form.bgcolor.trim(),
             description: form.description.trim()
           }
           editTag(this.tagid, data).then(resp => {

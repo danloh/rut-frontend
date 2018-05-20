@@ -26,7 +26,8 @@ export default {
   name: 'reply',
   props: {
     refer: Object,  // for comment, demand, rut..
-    show: {default: false} // sync, hide input once submit
+    tagsuf: { type: String, default: '' },
+    show: { default: false } // sync, hide input once submit
   },
   data () {
     return {
@@ -44,7 +45,7 @@ export default {
     reply (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid && form.comment.trim() && checkAuth()) {
-          let data = { comment: form.comment.trim() }
+          let data = { comment: form.comment.trim() + this.tagsuf }
           let re = this.refer.re // demand or rut or review or comment
           let id = this.refer.id // id of above
           newComment(re, id, data).then(resp => {
