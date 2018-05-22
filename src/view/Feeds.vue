@@ -1,5 +1,13 @@
 <template>
   <div class="feed-page">
+    <b> {{ heatCount | pluralise('Event') }} in The Last Year</b>
+    <div class="heat">
+      <vuejs-heatmap :selector="'eventheat'" 
+                     :color-range="['#eee','#ff6f00']" 
+                     :tooltip-unit="'Event'"
+                     :entries="entries">
+      </vuejs-heatmap>
+    </div>
     <div>
       <b>The Feed shows events from people you follow</b>
       <div class="activity-list" 
@@ -37,14 +45,18 @@
 </template>
 
 <script>
-import { fetchFeeds, fetchFavTags } from '@/api/api'
+import { fetchFeeds, fetchFavTags, fetchHeats } from '@/api/api'
+import VuejsHeatmap from 'vuejs-heatmap'
 
 export default {
   name: 'feeds',
   title: 'Feeds From Readers',
+  components: { VuejsHeatmap },
   data () {
     return {
       activity: [],
+      entries: [],
+      heatCount: 0,
       showTags: []
     }
   },
@@ -59,11 +71,19 @@ export default {
       fetchFavTags(userid).then(resp => {
         this.showTags = resp.data.tags
       })
+    },
+    getHeat () {
+      let userid = this.$store.getters.currentUserID
+      fetchHeats(userid).then(resp => {
+        this.entries = resp.data.heats
+        this.heatCount = resp.data.heatcount
+      })
     }
   },
   created () {
     this.loadFeeds()
     this.loadTags()
+    this.getHeat()
   }
 }
 </script>
@@ -72,7 +92,7 @@ export default {
 .feed-page
   margin-top 5px
   position relative
-  padding 10px 240px 10px 0px
+  padding 10px 210px 10px 0px
   .activity-list
     min-height 60px
     margin-top 5px
@@ -95,7 +115,7 @@ export default {
     position absolute
     top 5px
     right 0
-    width 220px
+    width 200px
     background-color lighten(#e5ebe4, 80%)
     .sidetitle
       background-color #e5ebe4
@@ -105,4 +125,7 @@ export default {
       a
         &:hover
           color #ff6600
+  .heat
+    border 1px solid #ddd
+    background-color #fff
 </style>

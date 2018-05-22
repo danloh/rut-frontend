@@ -66,6 +66,10 @@ const fetchMyActivity = (userid, params) => {
 const fetchFeeds = (params) => {
   return request(`${base}/feeds`, params)
 }
+// get heats
+const fetchHeats = (userid, params) => {
+  return request(`${base}/eventheat/${userid}`, params)
+}
 
 const editProfile = (params) => {
   return request(`${base}/editprofile`, params, 'post')
@@ -445,6 +449,7 @@ export {
   fetchFollows,
   fetchMyActivity,
   fetchFeeds,
+  fetchHeats,
   editProfile,
   checkFollowing,
   followOne,
