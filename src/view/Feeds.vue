@@ -2,11 +2,10 @@
   <div class="feed-page">
     <b> {{ heatCount | pluralise('Event') }} in The Last Year</b>
     <div class="heat">
-      <vuejs-heatmap :selector="'eventheat'" 
-                     :color-range="['#eee','#ff6f00']" 
-                     :tooltip-unit="'Event'"
-                     :entries="entries">
-      </vuejs-heatmap>
+      <heat-map :selector="'eventheatmap'" 
+                :max="10"
+                :entries="entries">
+      </heat-map>
     </div>
     <div>
       <b>The Feed shows events from people you follow</b>
@@ -46,12 +45,12 @@
 
 <script>
 import { fetchFeeds, fetchFavTags, fetchHeats } from '@/api/api'
-import VuejsHeatmap from 'vuejs-heatmap'
+import HeatMap from '@/components/Heat/HeatMap.vue'
 
 export default {
   name: 'feeds',
   title: 'Feeds From Readers',
-  components: { VuejsHeatmap },
+  components: { HeatMap },
   data () {
     return {
       activity: [],
