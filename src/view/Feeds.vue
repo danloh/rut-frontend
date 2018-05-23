@@ -1,6 +1,6 @@
 <template>
   <div class="feed-page">
-    <b> {{ heatCount | pluralise('Event') }} in The Last Year</b>
+    <b> {{ heatCount | pluralise('Spark') }} in The Last Year</b>
     <div class="heat">
       <heat-map :selector="'eventheatmap'" 
                 :max="10"
@@ -69,6 +69,7 @@ export default {
       let userid = this.$store.getters.currentUserID
       fetchFavTags(userid).then(resp => {
         this.showTags = resp.data.tags
+        this.getHeat()
       })
     },
     getHeat () {
@@ -82,7 +83,6 @@ export default {
   created () {
     this.loadFeeds()
     this.loadTags()
-    this.getHeat()
   }
 }
 </script>
