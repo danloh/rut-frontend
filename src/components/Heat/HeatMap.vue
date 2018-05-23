@@ -69,7 +69,7 @@ export default {
 .heatmap .day-cell-tooltip {
   position: absolute;
   z-index: 9999;
-  padding: 5px 9px;
+  padding: 5px;
   color: #bbbbbb;
   font-size: 12px;
   background: rgba(0, 0, 0, 0.85);
