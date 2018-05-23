@@ -19,7 +19,8 @@ const state = {
   authed: Boolean(getID()) && Boolean(getToken()),
   token: getToken(),
   currentUser: {},
-  whoEdit: {}
+  whoEdit: {},
+  heat: {}
 }
 const mutations = {
   SET_USER (state, obj) {
@@ -46,6 +47,9 @@ const mutations = {
   },
   SET_WHOEDIT (state, data) {
     state.whoEdit = data
+  },
+  SET_HEAT (state, data) {
+    state.heat = data
   }
 }
 

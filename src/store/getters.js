@@ -3,6 +3,7 @@ const getters = {
   authed: state => state.authed,
   currentUser: state => state.currentUser,
   whoEdit: state => state.whoEdit,
+  heat: state => state.heat,
   // ruts
   indexRuts: state => state.rut.indexRuts,
   showTags: state => state.rut.showTags,

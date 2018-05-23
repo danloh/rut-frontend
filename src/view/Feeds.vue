@@ -73,11 +73,18 @@ export default {
       })
     },
     getHeat () {
-      let userid = this.$store.getters.currentUserID
-      fetchHeats(userid).then(resp => {
-        this.entries = resp.data.heats
-        this.heatCount = resp.data.heatcount
-      })
+      let loadedHeat = this.$store.getters.heat
+      if (Object.keys(loadedHeat).length !== 0) {
+        this.entries = loadedHeat.heats
+        this.heatCount = loadedHeat.heatcount
+      } else {
+        let userid = this.$store.getters.currentUserID
+        fetchHeats(userid).then(resp => {
+          this.entries = resp.data.heats
+          this.heatCount = resp.data.heatcount
+          this.$store.commit('SET_HEAT', resp.data)
+        })
+      }
     }
   },
   created () {
@@ -127,4 +134,5 @@ export default {
   .heat
     border 1px solid #ddd
     background-color #fff
+    margin 5px 0
 </style>
