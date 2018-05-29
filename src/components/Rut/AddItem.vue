@@ -20,7 +20,7 @@
                      :loading="searching"
                      @keyup.enter.native="searchDoneItems"
                      style="width:100%"
-                     placeholder="input: UID or Title, then Press Enter, will search from your have-dones only">
+                     placeholder="input: UID or Title, then Press Enter to Search">
             <el-option v-for="i in doneItems" 
                        :key="i.id" 
                        :label="i.title" 
@@ -49,14 +49,6 @@
           </el-button>
         </el-form-item>
       </el-form>
-      <div>
-        or if the item you want to add not in your have-dones, Search and track it as done:
-        <el-input size="small" v-model="itemKeyword" 
-                  @keyup.enter.native="searchItem" 
-                  placeholder=" Input keyword then Press Enter">
-                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
-        </el-input>
-      </div>
     </div>
   </div>
 </template>
@@ -86,7 +78,6 @@ export default {
       inputQuery: '', // store the query keyword, then search once enter press
       searching: false,
       doneItems: [], // search result from have-dones
-      itemKeyword: '', // keyword for search any item
       rutId: null,
       rutTitle: null
     }
@@ -105,7 +96,8 @@ export default {
         let l = this.inputQuery.length
         if (l < 6 && l !== 0) return  // least keyword length
         let param = {'uid_or_title': this.inputQuery}
-        searchItems(3, param).then(resp => {
+        // searchItems(3, param).then(resp => {
+        searchItems(0, param).then(resp => {
           let resItems = resp.data.items
           this.doneItems = resItems
           this.$store.commit('ADD_ITEMS', resItems)
@@ -144,15 +136,6 @@ export default {
     },
     updateD (data) {
       this.doneForm.tips += data
-    },
-    searchItem () {
-      if (checkAuth() && this.itemKeyword.trim()) {
-        let param = {'uid_or_title': this.itemKeyword.trim()}
-        searchItems(0, param).then(resp => {
-          this.$store.commit('SET_SEARCH_ITEMS', resp.data)
-          this.$router.push('/searchresult/item')
-        })
-      }
     }
   },
   created () {
