@@ -58,7 +58,7 @@
             <span @click="openToFlag('Schedule')">Schedule</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('Working')">Working On</span>
+            <span @click="openToFlag('Working')">Working</span>
           </el-dropdown-item>
           <el-dropdown-item>
             <span @click="openToFlag('Done')">Have Done</span>
@@ -258,7 +258,7 @@ export default {
       let params = {'note': note || 'doing'}
       flagItem('doing', this.item.id, params)
       .then(() => {
-        this.flagAction = 'Working On'
+        this.flagAction = 'Working'
         this.flagNote = note
       })
     },
