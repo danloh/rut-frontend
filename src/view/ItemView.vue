@@ -34,7 +34,7 @@
         <review-list :param="reviewsParam"></review-list>
       </div>
       <div class="inrut-row">
-        <b>{{currentItem.rutcount | pluralise(' ReadList')}}</b>
+        <b>{{currentItem.rutcount | pluralise(' List')}}</b>
       </div>
       <div class="include" v-if="currentItem.rutcount > 0">
         <div v-for="(rut, index) in inRuts" :key="index" :rut="rut" class="in-rut">

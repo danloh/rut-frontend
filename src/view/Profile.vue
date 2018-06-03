@@ -58,7 +58,7 @@
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/working/'">
-          <b style="color:coral">#</b> Working On
+          <b style="color:coral">#</b> Working
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/havedone/'">

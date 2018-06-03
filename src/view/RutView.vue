@@ -398,6 +398,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
       border-bottom 2px solid #eee
     .itemtip
       background-color $bgcolor
+      border-bottom 2px solid #eee
       .itemsum
         margin 5px
       .tip
