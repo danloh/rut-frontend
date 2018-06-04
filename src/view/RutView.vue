@@ -35,11 +35,12 @@
         <p class="meta">
           <span v-if="!isEveryone">By 
             <router-link :to="'/profile/' + creatorid">
-              {{ creatorname }}
-            </router-link> | 
+              {{ creatorname }} 
+            </router-link> 
           </span> 
-          {{ rutDetail.createat | toMDY }} 
-          | include {{ rutDetail.itemcount | pluralise('item') }} 
+          Created: {{ rutDetail.createat | toMDY }} 
+          <span v-if="rutDetail.renewat"> | Updated: {{ rutDetail.renewat | toMDY }}</span>
+          | including {{ rutDetail.itemcount | pluralise('item') }} 
           | <router-link :to="'/commenton/rut/' + rutid">
               {{ rutDetail.commentcount | pluralise('comment') }}
             </router-link>
