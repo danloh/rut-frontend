@@ -3,7 +3,7 @@
     <header class="header">
       <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-size:1.25em;letter-spacing:0.005em">
+            <b style="color:darkorange;font-size:1.2em;letter-spacing:0.005em">
               RutHub<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </b>
         </router-link>

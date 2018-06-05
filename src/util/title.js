@@ -10,7 +10,7 @@ function getTitle (vm) {
 function exeTitle (vm) {
   const title = getTitle(vm)
   if (title) {
-    document.title = `${title} @ReadupTips`
+    document.title = `${title} - RutHub`
   }
 }
 
