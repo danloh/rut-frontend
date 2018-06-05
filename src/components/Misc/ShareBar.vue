@@ -46,14 +46,14 @@ export default {
   },
   computed: {
     url () {
-      return this.passUrl || `https://readup.tips${this.$route.fullPath}`
+      return this.passUrl || `https://ruthub.com${this.$route.fullPath}`
     }
   },
   methods: {
     title () {
       try {
         if (document) return this.prefix + (this.passTitle || document.title)
-      } catch (err) { return 'Readup.Tips' }
+      } catch (err) { return 'RutHub' }
     },
     shareWindow (url) {
       url = encodeURI(url)

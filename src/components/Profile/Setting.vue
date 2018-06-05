@@ -24,9 +24,9 @@
         <!-- share to invite dialog -->
         <el-dialog title="Share Link To Invite Your Friends" width="420px"
                    :visible.sync="showDialog">
-          <b>Send this Link to Invite Your Friend To Readup.Tips</b>
+          <b>Send this Link to Invite Your Friend To RutHub</b>
           <p style="color: green">{{invitelink}}</p>
-          <share-bar :passTitle="'Invite You To Readup.Tips'" 
+          <share-bar :passTitle="'Invite You To RutHub'" 
                      :passUrl="invitelink">
           </share-bar>
         </el-dialog>
@@ -57,7 +57,7 @@ export default {
       'currentUser'
     ]),
     invitelink () {
-      return 'https://readup.tips/register?refcode=' + this.currentUser.recode
+      return 'https://ruthub.com/register?refcode=' + this.currentUser.recode
     }
   },
   methods: {

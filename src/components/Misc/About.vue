@@ -1,7 +1,8 @@
 <template>
   <div class="about-page">
     <div class="intro">
-      <h2>About Readup.Tips</h2>
+      <h2>About RutHub</h2>
+      <blockquote>Rut = reading up tips</blockquote>
       <p>A Service for Sharing Read List or Learning Roadmaps, to share and grow the knowledge 
       about how to grow knowledge, on the assumption: 
       the best way to grow one's knowledge is reading.<br>
@@ -11,7 +12,7 @@
     <div class="terms">
       <h2>Terms of Service</h2>
       <small>-- March 21, 2018</small>
-      <p>Thank you for using Readup.Tips ('the Service').
+      <p>Thank you for using RutHub ('the Service').
         <br> 
         Your access to and use of the Service is conditioned on your acceptance 
         of and compliance with the Terms of service. 

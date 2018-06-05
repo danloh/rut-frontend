@@ -61,7 +61,7 @@ import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'add-rut',
-  title: 'Add Item to Readup Tips',
+  title: 'Add Item to ReadList',
   components: { Spinner, MdTool },
   data () {
     return {

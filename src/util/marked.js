@@ -17,7 +17,7 @@ const renderer = new marked.Renderer()
 const paragraphParse = text => `<p>\n${text}</p>`
 
 const linkParse = (href, title, text) => {
-  const isSelf = href.includes('readup.tips')
+  const isSelf = href.includes('ruthub.com')
   const textIsImage = text.includes('<img')
   return `<a href="${href}" target="_blank"
              title="${title || (textIsImage ? href : text)}" 
@@ -30,7 +30,7 @@ const imageParse = (src, title, alt) => {
              target="_blank" rel="nofollow noopener noreferrer">
             <img src="${src}" 
                 referrerPolicy="no-referrer" 
-                title="${title || alt || 'readup.tips'}" 
+                title="${title || alt || 'RutHub'}" 
                 style="width:10%; height:15%"
                 alt="${alt || title || src}"/>
           </a>`.replace(/\s+/g, ' ').replace('\n', '')

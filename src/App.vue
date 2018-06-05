@@ -3,8 +3,8 @@
     <header class="header">
       <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-family:serif;font-size:1.2em;letter-spacing:0.0005em">
-              Readup.Tips<sup style="font-size:0.5em;color:grey"> alpha</sup>
+            <b style="color:darkorange;font-size:1.25em;letter-spacing:0.005em">
+              RutHub<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
@@ -65,7 +65,7 @@
     </div>
     <footer class="footer">
       <div class="bottom">
-        ©Readup.Tips - since 2018
+        ©RutHub - since 2018
         | <a href="/newitem">submit</a>
         | <a href="/about">About</a>
         | <a href="/about">Terms</a>
@@ -73,7 +73,7 @@
         <el-input size="mini" style="width:16em"
                   v-model="searchWord"
                   @keyup.enter.native="searchItem" 
-                  placeholder="Search Readup.Tips">
+                  placeholder="Search">
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </div>
@@ -110,7 +110,7 @@ export default {
     siteSearch () {
       let keyword = this.searchWord
       if (keyword !== '') {
-        window.open('https://www.google.com/search?q=site:readup.tips/%20' + keyword, '_blank')
+        window.open('https://www.google.com/search?q=site:ruthub.com/%20' + keyword, '_blank')
         return false
       } else {
         return false
@@ -138,7 +138,6 @@ body
   line-height 1.6em
   background-color lighten(#eceef1, 30%)
   margin 0
-  padding-top 42px
   color #34495e
   overflow-y scroll
   overflow-x scroll
@@ -164,7 +163,6 @@ blockquote
 .header
   background-color #fafafa
   border-bottom 2px solid #eee
-  position fixed
   z-index 999
   height 42px
   top 0
