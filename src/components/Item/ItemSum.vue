@@ -107,7 +107,7 @@
     <!-- redirect dialog -->
     <el-dialog :visible.sync="showRedirect" width="270px">
       <router-link :to="'/readlist/' + intoForm.selectRutID">
-        <b>Go To The ReadList Page?</b>
+        <b>Go To The List Page?</b>
       </router-link>
     </el-dialog>
     <!-- end redirect dialog-->

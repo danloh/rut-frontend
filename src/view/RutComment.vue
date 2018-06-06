@@ -1,7 +1,7 @@
 <template>
   <div class="rut-comment">
     <div class="comment-main">
-      <b style="font-size:1.2em">{{ commentCount | pluralise('Comment') }} on ReadList: &nbsp;</b>
+      <b style="font-size:1.2em">{{ commentCount | pluralise('Comment') }} on List: &nbsp;</b>
       <router-link :to="'/readlist/' + rut.id">
         {{ rut.title }}
       </router-link>

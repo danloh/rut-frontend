@@ -54,7 +54,7 @@ import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'edit-rut',
-  title: 'Edit ReadList',
+  title: 'Edit List',
   components: { MdTool },
   data () {
     return {

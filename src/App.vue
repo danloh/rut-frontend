@@ -39,7 +39,7 @@
                   <router-link :to="'/profile/' + currentUserID">> My Profile</router-link>
                 </el-dropdown-item>
                 <!-- <el-dropdown-item>
-                  <router-link to="/create">+ ReadList</router-link>
+                  <router-link to="/create">+ List</router-link>
                 </el-dropdown-item> -->
                 <el-dropdown-item divided>
                   <el-button type="text" @click="onLogout">Log out</el-button>

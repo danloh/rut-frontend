@@ -46,7 +46,7 @@
       <el-form-item>
         <el-button type="success" plain size="mini" class="blockbtn"
                    @click="onCreate('createForm', createForm)">
-                   Create New ReadList, Then Add Items
+                   Create New List, Then Add Items
         </el-button>
       </el-form-item>
     </el-form>

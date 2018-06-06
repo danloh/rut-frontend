@@ -18,7 +18,7 @@
           <span v-if="canEdit" class="toolbar" style="float:right">
             <el-button v-show="ifDone && !roadObj.converted"
                        type="text" size="mini" @click="convertRoadToRut">
-                       ..Convert To ReadList
+                       ..Convert To List
             </el-button>
             <el-button type="text" size="mini" @click="showEdit=true">
                       ..Edit
@@ -54,7 +54,7 @@
       </el-dialog>
       <!-- end edit intro dialog -->
       <!-- add item dialog -->
-      <el-dialog title="Add Item to  RoadMap" width="520px" 
+      <el-dialog title="Add Item to  RoadMap" width="580px" 
                  :visible.sync="showAdd">
         <el-form :model="addForm" :rules="addRules"  ref="addForm">
           <el-form-item prop="itemID">
@@ -63,7 +63,7 @@
                        :remote-method="storeKey"
                        :loading="searching"
                        @keyup.enter.native="queryItems"
-                       placeholder="input: UID or Title, then Press Enter to Search"
+                       placeholder="Pick Item: input UID or Title or Url, Press Enter to Search"
                        style="width:100%">
               <el-option v-for="i in sItems" 
                         :key="i.id" 
@@ -73,7 +73,9 @@
             </el-select>
           </el-form-item>
           <el-form-item prop="mark">
-            <el-input type="textarea" :autosize="{minRows:5}" v-model="addForm.mark"></el-input>
+            <el-input type="textarea" :autosize="{minRows:5}" v-model="addForm.mark"
+                      placeholder="Compose Note">
+            </el-input>
             <md-tool :pretext="addForm.mark" @insertmd="updateM"></md-tool>
           </el-form-item>
         </el-form>
@@ -82,7 +84,6 @@
             Add
           </el-button>
         </div>
-        <p>If no result, Would you help <a href="/newitem">submit</a> the item?</p>
       </el-dialog>
       <!-- end add item dialog -->
       <div class="itemmark" v-for="mark in marks" :key="mark.gid">
@@ -226,6 +227,7 @@ export default {
     queryItems () {
       if (checkAuth()) {
         this.searching = true
+        this.sItems = []
         if (this.searchKey.length < 6) return  // least keyword length
         let param = {'uid_or_title': this.searchKey}
         searchItems(0, param).then(resp => {
@@ -249,6 +251,7 @@ export default {
           itemToRoad(itemid, this.roadid, data).then(resp => {
             this.marks.push(resp.data)
             this.showAdd = false
+            this.$refs[formName].resetFields()
           })
         }
       })
