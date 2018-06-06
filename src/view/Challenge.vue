@@ -99,7 +99,7 @@ export default {
         if (valid && form.clip.trim() && form.doingItemID !== null) {
           let data = { clip: form.clip.trim(), itemid: form.doingItemID }
           this.$store.dispatch('postClip', data)
-          this.resetForm(formName)
+          this.$refs[formName].resetFields()
         } else {
           this.$message({
             showClose: true,
@@ -128,9 +128,6 @@ export default {
       fetchChallengeItems().then(resp => {
         this.doingItems = resp.data
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   },
   mounted () {

@@ -51,7 +51,7 @@ export default {
           newComment(re, id, data).then(resp => {
             this.$emit('newreply', resp.data)
           })
-          this.resetForm(formName)
+          this.$refs[formName].resetFields()
           this.$emit('update:show', false) // with .sync, to hide input once submit
         } else if (!checkAuth()) {
           this.$message({
@@ -64,9 +64,6 @@ export default {
           })
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

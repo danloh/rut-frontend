@@ -56,7 +56,7 @@ export default {
         if (valid && form.demand.trim() && checkAuth()) {
           let data = { demand: form.demand.trim() }
           this.$store.dispatch('postDemand', data)
-          this.resetForm(formName)
+          this.$refs[formName].resetFields()
         } else if (!checkAuth()) {
           this.$message({
             showClose: true,
@@ -68,9 +68,6 @@ export default {
           })
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

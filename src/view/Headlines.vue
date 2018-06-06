@@ -90,7 +90,7 @@ export default {
               content: content
             }
             this.$store.dispatch('postHeadline', data)
-            this.resetForm(formName)
+            this.$refs[formName].resetFields()
             this.showForm = false
           }
         } else if (!checkAuth()) {
@@ -104,9 +104,6 @@ export default {
           })
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

@@ -4,7 +4,6 @@
     <p style="color:green;font-size:16px;text-align:center">
       An Item can be Anything: Book, Course, Documentary, Paper, Podcast, Atlas, Place, etc.
     </p>
-    <spinner :show="loading"></spinner>
     <el-button size="Medium" type="primary">
       {{ show ? 'Add Item Information Manually' : 'Fetch Item Information via Spider' }}
     </el-button>
@@ -208,18 +207,15 @@ export default {
         ]
       },
       show: false,
-      loading: false,
       submits: []
     }
   },
   methods: {
     // via Spider
     onCheck (formName, form) {
-      this.loading = true
       this.$refs[formName].validate((valid) => {
         if (valid && checkAuth()) {
           if (!form.url.trim()) {
-            this.loading = false
             this.$message('Please Input Url')
             return false
           }
@@ -228,11 +224,10 @@ export default {
             flag: form.flag.trim(),
             how: 'spider'
           }
-          newItem(data).then(resp => {
-            this.loading = false
-            let id = resp.data
-            let nexturl = id ? `/item/${id}` : '/'
-            this.$router.push(nexturl)
+          newItem(data).then(() => {
+            this.$refs[formName].resetFields()
+            this.$router.push('/newitem')
+            this.$message('Thanks for your contribution, The Spider processing background')
           })
         }
       })
@@ -270,6 +265,7 @@ export default {
             newItem(data).then(resp => {
               let id = resp.data
               this.$router.push(`/item/${id}`)
+              this.$message('Thanks for your contribution')
             })
           }
         }
