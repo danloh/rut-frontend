@@ -12,15 +12,15 @@
                :rules="doneRules" 
                ref="doneForm" 
                size="medium">
-        <el-form-item label="Pick one of Your Have-Dones by Searching" 
+        <el-form-item label="Pick one Item by Searching" 
                       prop="doneItem" style="margin-bottom:8px">
           <el-select v-model="doneForm.doneItemID"
                      filterable remote 
                      :remote-method="storeQuery"
                      :loading="searching"
                      @keyup.enter.native="searchDoneItems"
-                     style="width:100%"
-                     placeholder="input: UID or Title, then Press Enter to Search">
+                     style="width:100%"  
+                     placeholder="input UID or Title or Url, Press Enter to Search">
             <el-option v-for="i in doneItems" 
                        :key="i.id" 
                        :label="i.title" 
@@ -61,7 +61,7 @@ import MdTool from '@/components/Misc/MdTool.vue'
 
 export default {
   name: 'add-rut',
-  title: 'Add Item to ReadList',
+  title: 'Add Item to List',
   components: { Spinner, MdTool },
   data () {
     return {
@@ -93,6 +93,7 @@ export default {
     searchDoneItems () {
       if (checkAuth()) {
         this.searching = true
+        this.doneItems = []
         let l = this.inputQuery.length
         if (l < 6 && l !== 0) return  // least keyword length
         let param = {'uid_or_title': this.inputQuery}
