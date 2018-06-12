@@ -7,11 +7,12 @@
       <span class="title">
         {{item.cate}} 
         <template v-if="out"><!--in itemview page, out to resource link-->
-          <a v-if="item.resurl" 
+          <!-- <a v-if="item.resurl" 
              :href="item.resurl" target="_blank" rel="nofollow noopener noreferrer">
              {{ item.title }}
           </a>
-          <b v-else style="color:#337ab7">{{ item.title }}</b>
+          <b v-else style="color:#337ab7">{{ item.title }}</b> -->
+          <b style="color:#337ab7">{{ item.title }}</b>
         </template>
         <template v-else>
           <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
@@ -25,7 +26,7 @@
         {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
         <a :href="item.resurl" v-if="item.resurl" 
            target="_blank" rel="nofollow noopener noreferrer"> 
-           :::
+           -> {{ item.resurl | host }}
         </a>
       </span><br>
       <span><small class="indicator">Listed &nbsp;:</small> {{ item.rutcount }} &nbsp;</span><br>

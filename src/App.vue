@@ -20,7 +20,7 @@
           <b>Circle</b>
         </router-link> -->
         <router-link to="/challenge">
-          <b>Challenge</b>
+          <b>Spark</b>
         </router-link>
         <div class="right-menu">
           <div v-if="authed">
