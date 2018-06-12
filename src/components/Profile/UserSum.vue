@@ -1,7 +1,8 @@
 <template>
   <div class="user-sum">
     <div>
-      <img class="thumb" :src="avatar" alt="Avatar" referrerPolicy="no-referrer">
+      <!-- <img class="thumb" :src="avatar" alt="Avatar" referrerPolicy="no-referrer"> -->
+      <avatar class="thumb" :username="user.name" :src="avatar"></avatar>
     </div>
     <div class="info">
       <span class="name">
@@ -20,9 +21,11 @@
 <script>
 import { checkFollowing, followOne } from '@/api/api'
 import { checkAuth } from '@/util/auth'
+import Avatar from '@/components/Profile/Avatar.vue'
 
 export default {
   name: 'user-sum',
+  components: { Avatar },
   props: ['user'],
   data () {
     return {

@@ -14,10 +14,11 @@
            :key="index" 
            v-if="act.event.type">
         <router-link :to="'/profile/' + act.actor.id">
-          <img class="avatar" 
+          <!-- <img class="avatar" 
                :src="act.actor.avatar" referrerPolicy="no-referrer" 
                style="width:40px;height:40px;border-radius:50%" 
-               alt="Avatar">
+               alt="Avatar"> -->
+          <avatar class="avatar" :username="act.actor.name" :src="act.actor.avatar"></avatar>
           <b>{{ act.actor.name }}</b>
         </router-link>
         <span class="act-line">{{act.action}}&nbsp;{{act.event.type}}</span>
@@ -46,11 +47,12 @@
 <script>
 import { fetchFeeds, fetchFavTags, fetchHeats } from '@/api/api'
 import HeatMap from '@/components/Heat/HeatMap.vue'
+import Avatar from '@/components/Profile/Avatar.vue'
 
 export default {
   name: 'feeds',
   title: 'Feeds From Readers',
-  components: { HeatMap },
+  components: { HeatMap, Avatar },
   data () {
     return {
       activity: [],

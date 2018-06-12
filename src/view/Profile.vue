@@ -2,7 +2,7 @@
   <div class="profile-page">
     <div class="profile-head">
       <router-link :to="'/profile/' + userid">
-        <b style="font-size:1.6em">{{ user.name }}</b>
+        <b style="font-size:1.6em">{{ username }}</b>
       </router-link>
       <b style="font-size:0.75em" v-if="showSetting">&nbsp;@{{ user.username }}</b>
       <p class="aboutme">{{user.about || '...'}}</p>
@@ -24,7 +24,8 @@
     </div>
     <div class="profile-side">
       <div class="right-avatar">
-        <img class="avatar" :src="user.avatar" alt="Avatar" referrerPolicy="no-referrer">
+        <!-- <img class="avatar" :src="user.avatar" alt="Avatar" referrerPolicy="no-referrer"> -->
+        <avatar :username="username" :size="210" :rounded="false" :src="user.avatar"></avatar>
         <p class="user-info" v-if="user.location">
           <i class="el-icon-location"></i> {{user.location}}
         </p>
@@ -88,15 +89,18 @@
 <script>
 import { fetchUser, checkFollowing, followOne } from '@/api/api'
 import { checkAuth } from '@/util/auth'
+import Avatar from '@/components/Profile/Avatar.vue'
 
 export default {
   name: 'profile',
   title () {
-    return this.user.name
+    return this.username
   },
+  components: { Avatar },
   data () {
     return {
       user: {},
+      username: '',
       userid: this.$route.params.id,
       showSetting: false,
       action: 'Follow',
@@ -109,6 +113,7 @@ export default {
       fetchUser(userid).then(resp => {
         let data = resp.data
         this.user = data
+        this.username = data.name
         this.userid = data.id
         this.followedCount = data.followedcount
         this.action = this.checkFollow()
