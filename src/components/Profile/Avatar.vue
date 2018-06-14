@@ -60,7 +60,7 @@ export default {
       }
       const initialBackgroundAndFontStyle = {
         backgroundColor: this.background,
-        font: Math.floor(this.size / 2) + 'px/100px Helvetica, Arial, sans-serif',
+        font: Math.floor(this.size / 2.4) + 'px/100px Helvetica, Arial, sans-serif',
         fontWeight: 'bold',
         lineHeight: `${(this.size + Math.floor(this.size / 20))}px`,
         display: this.inline ? 'inline-flex' : 'flex',
@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     initial (username) {
-      let parts = username.split(/[ -]/)
+      let parts = username.split(/[ _-]/)
       let initials = ''
       for (var i = 0; i < parts.length; i++) {
         initials += parts[i].charAt(0)
