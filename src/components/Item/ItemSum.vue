@@ -18,19 +18,21 @@
           <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
         </template>
       </span><br>
-      <span><small class="indicator">Byline &nbsp;:</small> {{ item.byline }} </span><br>
-      <span><small class="indicator">Publish:</small> 
+      <span><small class="indicator">Byline&nbsp; &nbsp;:</small> {{ item.byline }} </span><br>
+      <span><small class="indicator">Publish&nbsp;:</small> 
         {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
       </span><br>
-      <span><small class="indicator">UID &nbsp;&nbsp; &nbsp;:</small>
-        {{ item.uid }} - {{ item.binding }} - {{ item.page }} &nbsp;
+      <span><small class="indicator">UID&nbsp; &nbsp; &nbsp; &nbsp;:</small>
+        {{ item.uid }} - {{ item.binding }} - {{ item.page }} 
+      </span><br>
+      <span>
+        <small class="indicator">Listed&nbsp; &nbsp;&nbsp;:</small> {{ item.rutcount }} 
         <a :href="item.resurl" v-if="item.resurl" 
            target="_blank" rel="nofollow noopener noreferrer"> 
-           -> {{ item.resurl | host }}
+           &nbsp; &nbsp; &nbsp; {{ item.resurl | host }}
         </a>
       </span><br>
-      <span><small class="indicator">Listed &nbsp;:</small> {{ item.rutcount }} &nbsp;</span><br>
-      <span v-if="flagNote || flagTime"><small class="indicator">Note &nbsp; &nbsp;:</small> 
+      <span v-if="flagNote || flagTime"><small class="indicator">Note&nbsp; &nbsp; &nbsp;&nbsp;:</small> 
         <span class="flag-note" v-if="flagNote">
           <b>'</b>{{ flagNote }}
         </span>&nbsp;

@@ -3,7 +3,7 @@
     <div class="rut-view">
       <div class="tagbar">
         <span class="tag" v-for="(tag, index) in tags" :key="index">
-          <router-link :to="'/tag/' + tag.tagname">{{tag.tagname}}</router-link>
+          <router-link :to="'/tag/' + tag.tagname"><b>{{tag.tagname}}</b></router-link>
         </span>
         <el-button class="indicator" type="text" @click="toEdit('tag')" v-show="canTag">
           ..Edit
@@ -411,12 +411,14 @@ $bgcolor = lighten(#f6f6f1, 50%)
     .tagbar
       display inline-blcok
       .tag
-        padding-left 10px
+        padding 2px 5px
+        background-color #eef4fa
         a
           color green
-          background-color #eef4fa
           font-size 0.85em
-          font-weight 700
+          &:hover
+            background-color #ddd
+            padding 2px
     .toolbar
       display flex
       justify-content flex-end
