@@ -42,6 +42,9 @@
         <router-link :to="'/profile/' + userid + '/roadmaps/'">
           <b style="color:orange">*</b> Road Map
         </router-link>
+        <router-link to="/newroad">
+          <small style="color:orange"> +New</small>
+        </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/star/'">
           <b style="color:royalblue">*</b> Starred
@@ -51,7 +54,7 @@
           <b style="color:royalblue">*</b> Read List
         </router-link>
         <router-link to="/create">
-          <small style="color:orange"> +New</small>
+          <small style="color:orange"> +Share</small>
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/scheduled/'">

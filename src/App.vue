@@ -8,19 +8,19 @@
             </b>
         </router-link>
         <router-link to="/feeds" v-if="authed">
-          <b>Feed</b>
+          Feed
         </router-link>
         <router-link to="/headlines">
-          <b>Headline</b>
+          Headline
         </router-link>
         <router-link to="/demands">
-          <b>Request</b>
+          Request
         </router-link>
         <!-- <router-link to="/circles">
-          <b>Circle</b>
+          Circle
         </router-link> -->
         <router-link to="/challenge">
-          <b>Spark</b>
+          Spark
         </router-link>
         <div class="right-menu">
           <div v-if="authed">
@@ -49,7 +49,7 @@
           </div>
           <div v-else>
             <el-button type="text" @click="toLogin=true">
-              <b>Log in</b>
+              Log in
             </el-button>
           </div>
         </div>
@@ -161,7 +161,7 @@ blockquote
 .el-input__inner, .el-textarea__inner
   font-size 14px
 .header
-  background-color #fafafa
+  background-color #f5f5f5
   border-bottom 2px solid #eee
   z-index 999
   height 42px
@@ -181,7 +181,6 @@ blockquote
     line-height 24px
     display inline-block
     vertical-align middle
-    font-weight 800
     letter-spacing .075em
     margin-right 0.85em
     &:hover
@@ -204,6 +203,7 @@ blockquote
 .footer
   border-top 2px dotted #cfc0cf
   margin-top 3em
+  background-color #f5f5f5
   .bottom
     max-width 960px
     margin 5px auto
