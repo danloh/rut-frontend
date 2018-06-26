@@ -69,7 +69,7 @@
         </span>&nbsp;&nbsp;
       </div>
       <router-link :to="'/myrc/item/' + currentItem.id">
-        <b>My Reviews or Excerpts</b>
+        <b>My Track</b>
       </router-link>
     </div>
   </div>

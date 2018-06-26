@@ -6,7 +6,7 @@
     <div class="info">
       <span class="title">
         {{item.cate}} 
-        <template v-if="out"><!--in itemview page, out to resource link-->
+        <template v-if="out"><!--in itemview page, no out to resource link-->
           <!-- <a v-if="item.resurl" 
              :href="item.resurl" target="_blank" rel="nofollow noopener noreferrer">
              {{ item.title }}
@@ -17,8 +17,41 @@
         <template v-else>
           <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
         </template>
-      </span><br>
-      <span><small class="indicator">Byline&nbsp; &nbsp;:</small> {{ item.byline }} </span><br>
+      </span>
+      <table style="border-spacing:0px;">
+        <tr>
+          <td><small class="indicator">Byline</small></td>
+          <td>{{ item.byline }}</td>
+        </tr>
+        <tr>
+          <td><small class="indicator">Publish&nbsp;</small></td>
+          <td>{{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</td>
+        </tr>
+        <tr>
+          <td><small class="indicator">Edition</small></td>
+          <td>{{ item.uid }} - {{ item.binding }} - {{ item.page }} </td>
+        </tr>
+        <tr>
+          <td><small class="indicator">Listed</small></td>
+          <td>
+            {{ item.rutcount }} 
+            <a :href="item.resurl" v-if="item.resurl" 
+              target="_blank" rel="nofollow noopener noreferrer"> 
+              &nbsp; &nbsp; &nbsp; --> {{ item.resurl | host }}
+            </a> 
+          </td>
+        </tr>
+        <tr v-if="flagNote || flagTime">
+          <!-- <td><small class="indicator">Note</small></td> -->
+          <td colspan="2">
+            <span class="flag-note">
+              <b>"</b>{{ flagNote ? flagNote : 'at' }}
+            </span>&nbsp;
+            <span class="flag-note" v-if="flagTime">    {{ flagTime | toMDY }}</span>
+          </td>
+        </tr>
+      </table>
+      <!-- <span><small class="indicator">Byline&nbsp; &nbsp;:</small> {{ item.byline }} </span><br>
       <span><small class="indicator">Publish&nbsp;:</small> 
         {{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}
       </span><br>
@@ -37,7 +70,7 @@
           <b>'</b>{{ flagNote }}
         </span>&nbsp;
         <span class="flag-note" v-if="flagTime"> - {{ flagTime | toMDY }}</span>
-      </span>
+      </span> -->
     </div>
     <div class="operate">
       <el-dropdown>
