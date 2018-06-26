@@ -124,45 +124,45 @@ export default {
       },
       rules: {
         title: [
-          { required: true, validator: trimValid, message: 'Please give a title', trigger: 'blur' },
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 500, message: 'Max Length should be 500', trigger: 'change' }
         ],
         uid: [
-          { required: true, validator: trimValid, message: 'Need an uid', trigger: 'blur' },
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 128, message: 'Max Length should be 128', trigger: 'change' }
         ],
         resUrl: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { max: 500, message: 'Max Length should be 500', trigger: 'change' }
         ],
         byline: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { max: 500, message: 'Max Length should be 500', trigger: 'change' }
         ],
         cover: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { max: 500, message: 'Max Length should be 500', trigger: 'change' }
         ],
         tags: [
-          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
+          { max: 120, message: 'Max Length should be 120', trigger: 'change' }
         ],
         language: [
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
+          { max: 128, message: 'Max Length should be 128', trigger: 'change' }
         ],
         publishDate: [
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
+          { max: 128, message: 'Max Length should be 128', trigger: 'change' }
         ],
         publisher: [
-          { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
+          { max: 255, message: 'Max Length should be 255', trigger: 'change' }
         ],
         page: [
-          { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
+          { max: 64, message: 'Max Length should be 64', trigger: 'change' }
         ],
         level: [
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
+          { max: 128, message: 'Max Length should be 128', trigger: 'change' }
         ],
         binding: [
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
+          { max: 128, message: 'Max Length should be 128', trigger: 'change' }
         ],
         price: [
-          { max: 128, message: 'Max Length should be 128', trigger: 'blur' }
+          { max: 128, message: 'Max Length should be 128', trigger: 'change' }
         ]
       },
       itemId: null,

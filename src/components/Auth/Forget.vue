@@ -35,10 +35,10 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: 'Please enter username', trigger: 'blur' }
+          { required: true, message: 'Please enter username', trigger: 'change' }
         ],
         email: [
-          { required: true, message: 'Please enter email', trigger: 'blur' }
+          { required: true, message: 'Please enter email', trigger: 'change' }
         ]
       }
     }

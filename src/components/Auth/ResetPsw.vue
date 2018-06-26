@@ -57,10 +57,10 @@ export default {
       },
       rules: {
         password: [
-          { required: true, validator: validatePass, trigger: 'blur' }
+          { required: true, validator: validatePass, trigger: 'change' }
         ],
         repassword: [
-          { required: true, validator: validaterePass, trigger: 'blur' }
+          { required: true, validator: validaterePass, trigger: 'change' }
         ]
       },
       pwdType: 'password',

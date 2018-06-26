@@ -232,7 +232,7 @@ export default {
       },
       noteRules: {
         note: [
-          { max: 42, message: 'Max Length should be 42', trigger: 'blur' }
+          { max: 42, message: 'Max Length should be 42', trigger: 'change' }
         ]
       },
       searchKey: '', // store the keyword, then search once enter press

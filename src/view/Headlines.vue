@@ -65,7 +65,7 @@ export default {
       },
       rules: {
         title: [
-          { min: 1, max: 255, message: 'Required, Max 255 Characters', trigger: 'blur' }
+          { min: 1, max: 255, message: 'Required, Max 255 Characters', trigger: 'change' }
         ]
       },
       showForm: false

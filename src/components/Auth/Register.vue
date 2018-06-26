@@ -98,16 +98,16 @@ export default {
       },
       rules: {
         username: [
-          { required: true, validator: validateName, trigger: 'blur' }
+          { required: true, validator: validateName, trigger: 'change' }
         ],
         email: [
-          { required: true, validator: validateEmail, trigger: 'blur' }
+          { required: true, validator: validateEmail, trigger: 'change' }
         ],
         password: [
-          { required: true, validator: validatePass, trigger: 'blur' }
+          { required: true, validator: validatePass, trigger: 'change' }
         ],
         repassword: [
-          { required: true, validator: validaterePass, trigger: 'blur' }
+          { required: true, validator: validaterePass, trigger: 'change' }
         ]
       },
       pwdType: 'password'

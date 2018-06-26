@@ -74,10 +74,10 @@ export default {
       },
       rules: {
         order: [
-          { required: true, message: 'Required', trigger: 'blur' }
+          { required: true, message: 'Required', trigger: 'change' }
         ],
         tips: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' }
         ]
       },
       showDialog: false,

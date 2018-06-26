@@ -56,13 +56,13 @@ export default {
       },
       rules: {
         location: [
-          { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
+          { max: 64, message: 'Max Length should be 64', trigger: 'change' }
         ],
         avatarUrl: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { max: 500, message: 'Max Length should be 500', trigger: 'change' }
         ],
         url: [
-          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
+          { max: 120, message: 'Max Length should be 120', trigger: 'change' }
         ]
       },
       userid: null,

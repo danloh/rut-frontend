@@ -111,23 +111,23 @@ export default {
       },
       rules: {
         name: [
-          { required: true, validator: trimValid, message: 'Need a Tag Name', trigger: 'blur' },
-          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 120, message: 'Max Length should be 120', trigger: 'change' }
         ],
         parent: [
-          { max: 120, message: 'Max Length should be 120', trigger: 'blur' }
+          { max: 120, message: 'Max Length should be 120', trigger: 'change' }
         ],
         logo: [
-          { max: 500, message: 'Max Length should be 500', trigger: 'blur' }
+          { max: 500, message: 'Max Length should be 500', trigger: 'change' }
         ],
         ftcolor: [
-          { max: 60, message: 'Max Length should be 60', trigger: 'blur' }
+          { max: 60, message: 'Max Length should be 60', trigger: 'change' }
         ],
         bgcolor: [
-          { max: 60, message: 'Max Length should be 60', trigger: 'blur' }
+          { max: 60, message: 'Max Length should be 60', trigger: 'change' }
         ],
         description: [
-          { required: true, validator: trimValid, message: 'Please Descript it', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' }
         ]
       },
       relatedTags: []

@@ -81,7 +81,7 @@ export default {
       },
       rules: {
         clip: [
-          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'blur' }
+          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'change' }
         ],
         doingItemID: [
           { required: true, message: 'Required', trigger: 'change' }

@@ -43,8 +43,8 @@ export default {
         password: ''
       },
       rules: {
-        username: [{ required: true, message: 'Please enter username', trigger: 'blur' }],
-        password: [{ required: true, message: 'Please enter password', trigger: 'blur' }]
+        username: [{ required: true, message: 'Please enter username', trigger: 'change' }],
+        password: [{ required: true, message: 'Please enter password', trigger: 'change' }]
       },
       pwdType: 'password'
     }

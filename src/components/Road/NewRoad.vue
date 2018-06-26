@@ -51,14 +51,14 @@ export default {
       },
       rules: {
         title: [
-          { required: true, validator: trimValid, message: 'Please Name it', trigger: 'blur' },
-          { max: 255, message: 'Max Length should be 255', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 255, message: 'Max Length should be 255', trigger: 'change' }
         ],
         intro: [
-          { required: true, validator: trimValid, message: 'Need an introduction', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' }
         ],
         deadline: [
-          { required: true, message: 'Required', trigger: 'blur' }
+          { required: true, message: 'Required', trigger: 'change' }
         ]
       }
     }

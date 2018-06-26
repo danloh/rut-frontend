@@ -36,7 +36,7 @@ export default {
       },
       rules: {
         comment: [
-          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'blur' }
+          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'change' }
         ]
       }
     }

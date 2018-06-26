@@ -81,19 +81,19 @@ export default {
       },
       rules: {
         name: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
-          { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 64, message: 'Max Length should be 64', trigger: 'change' }
         ],
         address: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
-          { max: 200, message: 'Max Length should be 200', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 200, message: 'Max Length should be 200', trigger: 'change' }
         ],
         time: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' },
-          { max: 64, message: 'Max Length should be 64', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' },
+          { max: 64, message: 'Max Length should be 64', trigger: 'change' }
         ],
         note: [
-          { required: true, validator: trimValid, message: 'Required', trigger: 'blur' }
+          { required: true, validator: trimValid, message: 'Required', trigger: 'change' }
         ]
       }
     }
