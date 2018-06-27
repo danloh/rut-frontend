@@ -96,15 +96,16 @@ export default {
     onCreate (formName, form) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          let demandid = this.$route.params.id || ''
           let data = {
+            demandid: demandid,
             title: form.title.trim(),
             intro: form.intro.trim(),
             rating: form.rating,
             credential: form.credential.trim(),
             editable: 'Creator' // form.editable
           }
-          let demandid = this.$route.params.id || ''
-          newRut(data, demandid).then(resp => {
+          newRut(data).then(resp => {
             let id = resp.data.id
             this.$router.push(`/readlist/${id}`)
             this.$message({
