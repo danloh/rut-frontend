@@ -10,7 +10,7 @@
 
 <script>
 import UserSum from './UserSum.vue'
-import { fetchFollows } from '@/api/api'
+import { fetchFolloweds } from '@/api/api'
 
 export default {
   name: 'followed-list',
@@ -24,7 +24,7 @@ export default {
   methods: {
     loadUsers () {
       let userid = this.$route.params.id
-      fetchFollows(userid, 'followed').then(resp => {
+      fetchFolloweds(userid).then(resp => {
         let data = resp.data
         this.users = data
       })

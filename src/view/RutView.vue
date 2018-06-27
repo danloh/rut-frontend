@@ -240,7 +240,7 @@ export default {
     checkStar () {
       if (checkAuth()) {
         let rutid = this.$route.params.id // ?? liftcycle timing
-        checkStar(rutid, 'star').then(resp => {
+        checkStar(rutid).then(resp => {
           this.starAction = resp.data
         })
       } else {

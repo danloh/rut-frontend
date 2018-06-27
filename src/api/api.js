@@ -55,8 +55,8 @@ const fetchUser = (id, params) => {
   return request(`${base}/users/${id}`, params)
 }
 // get follows
-const fetchFollows = (userid, follow, params) => {
-  return request(`${base}/users/${userid}/${follow}`, params)
+const fetchFolloweds = (userid, params) => {
+  return request(`${base}/users/${userid}/followeds`, params)
 }
 // get a user's activity
 const fetchMyActivity = (userid, params) => {
@@ -76,11 +76,12 @@ const editProfile = (params) => {
 }
 // check if follow someone
 const checkFollowing = (userid, params) => {
-  return request(`${base}/checkfollow/${userid}`, params)
+  return request(`${base}/users/${userid}/iffollow`, params)
 }
 // fo / unfo someone
 const followOne = (action, userid, params) => {
-  return request(`${base}/${action}/user/${userid}`, params)
+  let mtd = action === 'follow' ? 'patch' : 'delete'
+  return request(`${base}/users/${userid}/follows`, params, mtd)
 }
 // create new rut
 const newRut = params => {
@@ -107,12 +108,13 @@ const fetchRut = (rutid, params) => { // !!
   return request(`${base}/ruts/${rutid}`, params)
 }
 // check if user star  a rut
-const checkStar = (rutid, action, params) => {
-  return request(`${base}/ruts/${rutid}/check${action}`, params)
+const checkStar = (rutid, params) => {
+  return request(`${base}/ruts/${rutid}/star`, params, 'get')
 }
 // tag star  a rut
 const starRut = (action, rutid, params) => {
-  return request(`${base}/${action}/rut/${rutid}`, params)
+  let mtd = action === 'star' ? 'patch' : 'delete'
+  return request(`${base}/ruts/${rutid}/stars`, params, mtd)
 }
 // check rut if locked, when edit rut's tag
 const checkRutLocked = (userid, rutid, params) => {
@@ -136,55 +138,55 @@ const editRut = (rutid, params) => {
 }
 // edit rut credential or epilog
 const editRutce = (rutid, params) => {
-  return request(`${base}/ruts/${rutid}/ce`, params, 'put')
+  return request(`${base}/ruts/${rutid}/ce`, params, 'patch')
 }
 // edit rut's tags
 const editTags = (rutid, params) => {
-  return request(`${base}/ruts/${rutid}/tags`, params, 'put')
+  return request(`${base}/ruts/${rutid}/tags`, params, 'patch')
 }
 // add existing item to rut
 const itemToRut = (itemid, rutid, params) => {
-  return request(`${base}/ruts/${rutid}/collects/${itemid}`, params, 'post')
+  return request(`${base}/ruts/${rutid}/items/${itemid}`, params, 'post')
 }
 // edit tips
 const editTips = (cid, params) => {
-  return request(`${base}/collects/${cid}`, params, 'put')
+  return request(`${base}/tips/${cid}`, params, 'put')
 }
 // delete Tips
 const deleteTips = (cid, params) => {
-  return request(`${base}/collects/${cid}`, params, 'delete')
+  return request(`${base}/tips/${cid}`, params, 'delete')
 }
 // create new road
 const newRoad = params => {
-  return request(`${base}/newroad`, params, 'post')
+  return request(`${base}/roads`, params, 'post')
 }
 // edit road
 const editRoad = (roadid, params) => {
-  return request(`${base}/editroad/${roadid}`, params, 'post')
+  return request(`${base}/roads/${roadid}`, params, 'put')
 }
 // edit deadline
 const editDeadline = (roadid, params) => {
-  return request(`${base}/resetdeadline/${roadid}`, params)
+  return request(`${base}/roads/${roadid}/deadline`, params, 'patch')
 }
 // edit mark in road
 const editMark = (gid, params) => {
-  return request(`${base}/editmark/${gid}`, params, 'post')
+  return request(`${base}/marks/${gid}`, params, 'put')
 }
 // delete mark
 const deleteMark = (gid, params) => {
-  return request(`${base}/delmark/${gid}`, params)
+  return request(`${base}/marks/${gid}`, params, 'delete')
 }
 // add item to road
 const itemToRoad = (itemid, roadid, params) => {
-  return request(`${base}/item/${itemid}/toroad/${roadid}`, params, 'post')
+  return request(`${base}/roads/${roadid}/items/${itemid}`, params, 'post')
 }
 // convert road to rut
 const roadToRut = (roadid, params) => {
-  return request(`${base}/convertroad/${roadid}/torut`, params)
+  return request(`${base}/road/${roadid}/torut`, params, 'patch')
 }
 // get a road
 const fetchRoad = (roadid, params) => {
-  return request(`${base}/road/${roadid}`, params)
+  return request(`${base}/roads/${roadid}`, params)
 }
 // get roads
 const fetchRoads = (userid, params) => {
@@ -196,7 +198,7 @@ const fetchOnRoad = params => {
 }
 // mark road as done
 const markRoadDone = (roadid, params) => {
-  return request(`${base}/markasdone/${roadid}`, params)
+  return request(`${base}/roads/${roadid}/done`, params, 'patch')
 }
 // get all roads
 const fetchAllRoads = (userid, params) => {
@@ -207,24 +209,24 @@ const fetchFavTags = (userid, params) => { // !!
   return request(`${base}/users/${userid}/favtags`, params)
 }
 // get tag
-const fetchTag = (tagid, params) => { // !!
-  return request(`${base}/tag/${tagid}`, params)
+const fetchTag = (tagname, params) => { // !!
+  return request(`${base}/tags/${tagname}`, params)
 }
 // fetch ruts of a Tag
-const fetchTagRuts = (tagid, params) => {
-  return request(`${base}/tag/${tagid}/ruts`, params)
+const fetchTagRuts = (tagname, params) => {
+  return request(`${base}/tags/${tagname}/ruts`, params)
 }
 // fetch demands of a Tag
-const fetchTagDemands = (tagid, params) => {
-  return request(`${base}/tag/${tagid}/demands`, params)
+const fetchTagDemands = (tagname, params) => {
+  return request(`${base}/tags/${tagname}/demands`, params)
 }
 // fetch items of a Tag
-const fetchTagItems = (tagid, params) => {
-  return request(`${base}/tag/${tagid}/items`, params)
+const fetchTagItems = (tagname, params) => {
+  return request(`${base}/tags/${tagname}/items`, params)
 }
 // fetch comments of a Tag
-const fetchTagComments = (tagid, params) => {
-  return request(`${base}/tag/${tagid}/comments`, params)
+const fetchTagComments = (tagname, params) => {
+  return request(`${base}/tags/${tagname}/comments`, params)
 }
 // lock tag
 const lockTag = (tagid, params) => {
@@ -236,35 +238,36 @@ const unlockTag = (tagid, params) => {
 }
 // check tag if locked, when edit tag
 const checkTagLocked = (userid, tagid, params) => {
-  return request(`${base}/checkiftag/${tagid}/lockedto/${userid}`, params)
+  return request(`${base}/tags/${tagid}/iflockedto/${userid}`, params)
 }
 // edit tag
 const editTag = (tagid, params) => {
-  return request(`${base}/edittag/${tagid}`, params, 'post')
+  return request(`${base}/tags/${tagid}`, params, 'put')
 }
 // check faving tag
 const checkFav = (tagid, params) => {
-  return request(`${base}/checkfavtag/${tagid}`, params)
+  return request(`${base}/tags/${tagid}/faver`, params)
 }
 // fav unfav tag
 const favTag = (action, tagid, params) => {
-  return request(`${base}/${action}/tag/${tagid}`, params)
+  let mtd = action === 'fav' ? 'patch' : 'delete'
+  return request(`${base}/tags/${tagid}/favers`, params, mtd)
 }
 // get Item
 const fetchItem = (itemid, params) => {
-  return request(`${base}/item/${itemid}`, params)
+  return request(`${base}/items/${itemid}`, params)
 }
 // fetch reviews of the item
 const fetchItemReviews = (itemid, params) => {
-  return request(`${base}/item/${itemid}/reviews`, params)
+  return request(`${base}/items/${itemid}/reviews`, params)
 }
 // fetch inruts of the item
 const fetchInRuts = (itemid, params) => {
-  return request(`${base}/item/${itemid}/inruts`, params)
+  return request(`${base}/items/${itemid}/inruts`, params)
 }
 // search items
 const searchItems = (label, params) => {
-  return request(`${base}/search/${label}/items`, params)
+  return request(`${base}/items/search/${label}`, params)
 }
 // lock tag
 const lockItem = (itemid, params) => {
@@ -276,23 +279,23 @@ const unlockItem = (itemid, params) => {
 }
 // check item if locked, when edit item
 const checkItemLocked = (userid, itemid, params) => {
-  return request(`${base}/checkifitem/${itemid}/lockedto/${userid}`, params)
+  return request(`${base}/items/${itemid}/lockedto/${userid}`, params)
 }
 // fetch submitted items
 const fetchSubmits = (params) => {
-  return request(`${base}/getsubmitteditems`, params)
+  return request(`${base}/items/submitted`, params)
 }
 // add new item directly, not to list
 const newItem = (params) => {
-  return request(`${base}/newitem`, params, 'post')
+  return request(`${base}/items`, params, 'post')
 }
 // edit item
 const editItem = (itemid, params) => {
-  return request(`${base}/edititem/${itemid}`, params, 'post')
+  return request(`${base}/items/${itemid}`, params, 'put')
 }
 // add item's tag
 const addItemTag = (itemid, params) => {
-  return request(`${base}/additemtag/${itemid}`, params, 'post')
+  return request(`${base}/items/${itemid}/tags`, params, 'post')
 }
 // fetch to-dos, doings, dones
 const fetchProfileItems = (flag, userid, params) => {
@@ -300,11 +303,11 @@ const fetchProfileItems = (flag, userid, params) => {
 }
 
 const checkFlag = (itemid, params) => {
-  return request(`${base}/checkflag/item/${itemid}`, params)
+  return request(`${base}/items/${itemid}/flag`, params)
 }
 
 const flagItem = (flag, itemid, params) => {
-  return request(`${base}/flag${flag}/item/${itemid}`, params)
+  return request(`${base}/items/${itemid}/flag${flag}`, params, 'patch')
 }
 
 const fetchClips = params => {
@@ -312,31 +315,31 @@ const fetchClips = params => {
 }
 
 const newClip = params => {
-  return request(`${base}/newclip`, params, 'post')
+  return request(`${base}/clips`, params, 'post')
 }
 // upvote clip
 const upvoteClip = (clipid, params) => {
-  return request(`${base}/upvoteclip/${clipid}`, params)
+  return request(`${base}/clips/${clipid}/voters`, params, 'patch')
 }
 // create review
 const newReview = (itemid, params) => {
-  return request(`${base}/newreview/${itemid}`, params, 'post')
+  return request(`${base}/items/${itemid}/reviews`, params, 'post')
 }
 // fetch review
 const fetchReview = (reviewid, params) => {
-  return request(`${base}/review/${reviewid}`, params)
+  return request(`${base}/reviews/${reviewid}`, params)
 }
 // fetch review's comments
 const fetchReviewComments = (reviewid, params) => {
-  return request(`${base}/review/${reviewid}/comments`, params)
+  return request(`${base}/reviews/${reviewid}/comments`, params)
 }
 // edit review
 const editReview = (reviewid, params) => {
-  return request(`${base}/editreview/${reviewid}`, params, 'post')
+  return request(`${base}/reviews/${reviewid}`, params, 'put')
 }
 // upvote review
 const upvoteReview = (reviewid, params) => {
-  return request(`${base}/upvotereview/${reviewid}`, params)
+  return request(`${base}/reviews/${reviewid}/voters`, params, 'patch')
 }
 // fetch user's review
 const fetchProfileReviews = (userid, params) => {
@@ -352,31 +355,31 @@ const fetchDemands = (params) => {
 }
 // get a demand only
 const fetchOnlyDemand = (demandid, params) => {
-  return request(`${base}/onlydemand/${demandid}`, params)
+  return request(`${base}/demand/${demandid}`, params)
 }
 // get specific demand
 const fetchDemand = (demandid, params) => {
-  return request(`${base}/demand/${demandid}`, params)
+  return request(`${base}/demands/${demandid}`, params)
 }
 // get comments of specific demand
 const fetchDemandComments = (demandid, params) => {
-  return request(`${base}/demand/${demandid}/comments`, params)
+  return request(`${base}/demands/${demandid}/comments`, params)
 }
 // get answers of specific demand
 const fetchDemandAnswers = (demandid, params) => {
-  return request(`${base}/demand/${demandid}/answers`, params)
+  return request(`${base}/demands/${demandid}/answers`, params)
 }
 // submit new demand
 const newDemand = params => {
-  return request(`${base}/newdemand`, params, 'post')
+  return request(`${base}/demands`, params, 'post')
 }
 // upvote demand
 const upvoteDemand = (demandid, params) => {
-  return request(`${base}/upvotedemand/${demandid}`, params)
+  return request(`${base}/demands/${demandid}/voters`, params, 'patch')
 }
 // link a rut to demand as Answer
 const rutAsAnswer = (rutid, demandid, params) => {
-  return request(`${base}/rut/${rutid}/answerdemand/${demandid}`, params)
+  return request(`${base}/demands/${demandid}/ruts/${rutid}`, params, 'patch')
 }
 // post new comment
 const newComment = (ref, id, params) => {
@@ -384,7 +387,7 @@ const newComment = (ref, id, params) => {
 }
 // upvote comment
 const upvoteComment = (commentid, params) => {
-  return request(`${base}/upvotecomment/${commentid}`, params)
+  return request(`${base}/comments/${commentid}/voters`, params, 'patch')
 }
 // get comments for a rut
 const fetchRutComments = (rutid, params) => {
@@ -396,15 +399,15 @@ const fetchCircles = params => {
 }
 // post new circle
 const postCircle = params => {
-  return request(`${base}/newcircle`, params, 'post')
+  return request(`${base}/circles`, params, 'post')
 }
 // edit circle
 const editCircle = (cid, params) => {
-  return request(`${base}/editcircle/${cid}`, params, 'post')
+  return request(`${base}/circles/${cid}`, params, 'put')
 }
 // disable circle
 const disCircle = (cid, params) => {
-  return request(`${base}/disablecircle/${cid}`, params)
+  return request(`${base}/circles/${cid}/disabled`, params, 'patch')
 }
 // get headline list
 const fetchHeadlines = (params) => {
@@ -412,19 +415,19 @@ const fetchHeadlines = (params) => {
 }
 // get headline
 const fetchHeadline = (headlineid, params) => {
-  return request(`${base}/headline/${headlineid}`, params)
+  return request(`${base}/headlines/${headlineid}`, params)
 }
 // get comments of a headline
 const fetchHlComments = (headlineid, params) => {
-  return request(`${base}/headline/${headlineid}/comments`, params)
+  return request(`${base}/headlines/${headlineid}/comments`, params)
 }
 // post new headline
 const newHeadline = params => {
-  return request(`${base}/newheadline`, params, 'post')
+  return request(`${base}/headlines`, params, 'post')
 }
 // upvote headline
 const upvoteHeadline = (headlineid, params) => {
-  return request(`${base}/upvoteheadline/${headlineid}`, params)
+  return request(`${base}/headlines/${headlineid}/voters`, params, 'patch')
 }
 // just for error test
 const testError = (params) => {
@@ -446,7 +449,7 @@ export {
   reConfirmEmail,
   fetchCurrentUser,
   fetchUser,
-  fetchFollows,
+  fetchFolloweds,
   fetchMyActivity,
   fetchFeeds,
   fetchHeats,
