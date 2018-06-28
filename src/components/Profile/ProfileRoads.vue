@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { fetchAllRoads } from '@/api/api'
+import { fetchRoads } from '@/api/api'
 import { showLess } from '@/util/filters'
 import marked from '@/util/marked'
 
@@ -53,9 +53,9 @@ export default {
   methods: {
     loadmoreRoads () {
       let userid = this.$route.params.id
-      let param = {'page': this.currentPage}
+      let param = {'page': this.currentPage, 'rf': 'my', 'userid': userid}
       // let params = {'action': action, 'userid': userid, 'param': param}
-      fetchAllRoads(userid, param).then(resp => {
+      fetchRoads(param).then(resp => {
         this.currentRoads.push(...resp.data.roads)
         this.currentPage += 1
       })
@@ -67,7 +67,8 @@ export default {
   },
   created () {
     let userid = this.$route.params.id
-    fetchAllRoads(userid).then(resp => {
+    let param = {'rf': 'my', 'userid': userid}
+    fetchRoads(param).then(resp => {
       this.currentRoads = resp.data.roads
       this.totalRoads = resp.data.total
       this.currentPage = 1

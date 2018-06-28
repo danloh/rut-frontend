@@ -118,19 +118,19 @@ const starRut = (action, rutid, params) => {
 }
 // check rut if locked, when edit rut's tag
 const checkRutLocked = (userid, rutid, params) => {
-  return request(`${base}/ruts/${rutid}/lockedto/${userid}`, params)
+  return request(`${base}/ruts/${rutid}/locked/${userid}`, params)
 }
 // check rut if editable i.e. unlocked and permitted
 const checkEditable = (userid, rutid, params) => {
-  return request(`${base}/checkif/${userid}/caneditrut/${rutid}`, params)
+  return request(`${base}/ruts/${rutid}/editable/${userid}`, params)
 }
 // unlock rut
 const lockRut = (rutid, params) => {
-  return request(`${base}/lockrut/${rutid}`, params)
+  return request(`${base}/ruts/${rutid}/lock`, params)
 }
 // lock rut
 const unlockRut = (rutid, params) => {
-  return request(`${base}/unlockrut/${rutid}`, params)
+  return request(`${base}/ruts/${rutid}/unlock`, params)
 }
 // edit rut
 const editRut = (rutid, params) => {
@@ -189,8 +189,8 @@ const fetchRoad = (roadid, params) => {
   return request(`${base}/roads/${roadid}`, params)
 }
 // get roads
-const fetchRoads = (userid, params) => {
-  return request(`${base}/${userid}/roads`, params)
+const fetchRoads = params => {
+  return request(`${base}/roads`, params)
 }
 // get challenging road
 const fetchOnRoad = params => {
@@ -199,10 +199,6 @@ const fetchOnRoad = params => {
 // mark road as done
 const markRoadDone = (roadid, params) => {
   return request(`${base}/roads/${roadid}/done`, params, 'patch')
-}
-// get all roads
-const fetchAllRoads = (userid, params) => {
-  return request(`${base}/${userid}/allroads`, params)
 }
 // get favored tags
 const fetchFavTags = (userid, params) => { // !!
@@ -230,15 +226,15 @@ const fetchTagComments = (tagname, params) => {
 }
 // lock tag
 const lockTag = (tagid, params) => {
-  return request(`${base}/locktag/${tagid}`, params)
+  return request(`${base}/tags/${tagid}/lock`, params)
 }
 // unlock tag
 const unlockTag = (tagid, params) => {
-  return request(`${base}/unlocktag/${tagid}`, params)
+  return request(`${base}/tags/${tagid}/unlock`, params)
 }
 // check tag if locked, when edit tag
 const checkTagLocked = (userid, tagid, params) => {
-  return request(`${base}/tags/${tagid}/iflockedto/${userid}`, params)
+  return request(`${base}/tags/${tagid}/locked/${userid}`, params)
 }
 // edit tag
 const editTag = (tagid, params) => {
@@ -271,15 +267,15 @@ const searchItems = (label, params) => {
 }
 // lock tag
 const lockItem = (itemid, params) => {
-  return request(`${base}/lockitem/${itemid}`, params)
+  return request(`${base}/items/${itemid}/lock`, params)
 }
 // unlock item
 const unlockItem = (itemid, params) => {
-  return request(`${base}/unlockitem/${itemid}`, params)
+  return request(`${base}/items/${itemid}/unlock`, params)
 }
 // check item if locked, when edit item
 const checkItemLocked = (userid, itemid, params) => {
-  return request(`${base}/items/${itemid}/lockedto/${userid}`, params)
+  return request(`${base}/items/${itemid}/locked/${userid}`, params)
 }
 // fetch submitted items
 const fetchSubmits = (params) => {
@@ -487,7 +483,6 @@ export {
   itemToRoad,
   fetchRoad,
   fetchRoads,
-  fetchAllRoads,
   fetchOnRoad,
   markRoadDone,
   roadToRut,

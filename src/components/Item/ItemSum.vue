@@ -419,7 +419,8 @@ export default {
         let preRoads = this.$store.getters.onRoads
         if (preRoads.length === 0) {
           let userid = this.$store.getters.currentUserID
-          fetchRoads(userid).then(resp => {
+          let param = {'rf': 'on', 'userid': userid}
+          fetchRoads(param).then(resp => {
             this.roads = resp.data.roads
             this.$store.commit('SET_ROADS', resp.data.roads)
           })

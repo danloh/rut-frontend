@@ -96,8 +96,7 @@ export default {
             spoiler: form.spoiler
           }
           let cid = this.$route.params.id
-          editTips(cid, data)
-          .then(() => {
+          editTips(cid, data).then(() => {
             let id = this.rutId
             unlockRut(id)
             this.$router.push(`/readlist/${id}`)
