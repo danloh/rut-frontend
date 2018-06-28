@@ -1,10 +1,8 @@
 <template>
   <div class="demand-main" v-if="requestor"> <!--render after requestor get data-->
-    <div class="demand-body">
-      <router-link :to="'/demand/' + demand.id">
-        <b>{{ demand.body }}</b>
-      </router-link>
-    </div>
+    <router-link :to="'/demand/' + demand.id">
+      {{ demand.body }}
+    </router-link>
     <div class="demand-bar">
       <router-link :to="'/tag/' + demand.tag.tagname" v-if="demand.tag.tagname">
         #{{ demand.tag.tagname }}
@@ -60,10 +58,6 @@ export default {
   padding 10px
   background-color lighten(#f1f3f5, 50%)
   border-bottom 1px dashed #ddd
-  .demand-body
-    a
-      &:hover
-        color #409eff
   .demand-bar
     font-size 12px
 </style>

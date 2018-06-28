@@ -8,13 +8,13 @@
         <template v-if="headline.url">
           <a :href="headline.url" 
              target="_blank" rel="nofollow noopener noreferrer">
-             <b>{{ headline.title }}</b>
+             {{ headline.title }}
           </a>
           <span class="host"> ({{ headline.url | host }})</span>
         </template>
         <template v-else>
           <router-link :to="'/headline/' + headline.id">
-            <h4>{{ headline.title }}</h4>
+            {{ headline.title }}
           </router-link>
         </template>
       </div>
@@ -85,9 +85,6 @@ export default {
     padding 5px
     .headline-title
       padding 0 5px
-      a
-        &:hover
-          color #409eff
     .content
       padding auto
     .headline-bar, .host

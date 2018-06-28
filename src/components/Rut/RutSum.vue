@@ -53,11 +53,7 @@ export default {
     left 5px
   .title
     font-size 20px
-    font-weight 700
     padding-top 10px
-    a
-      &:hover
-        color #ff6600
   .intro
     color #828282
     font-size: 16px

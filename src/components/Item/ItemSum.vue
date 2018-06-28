@@ -501,10 +501,6 @@ export default {
     line-height 1.6em
     .title
       font-size 18px
-      font-weight 700
-      a
-        &:hover
-          color red
     .indicator
       font-size 14px
       color: #777

@@ -192,9 +192,6 @@ export default {
       background-color lighten(#f0f3f0, 45%)
       .in-rut
         border-bottom 1px dashed #ddd
-        a
-          &:hover
-            color #ff6600
       .tip
         background-color lighten(#e0e6da, 70%)
         padding 5px
@@ -206,7 +203,6 @@ export default {
       border-bottom 1px solid #eee
   .editlink
     font-size 12px
-    font-weight 600
     color #409eff
   .item-side
     position absolute

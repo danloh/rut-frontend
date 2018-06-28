@@ -1,8 +1,8 @@
 <template>
   <div class="review-main" v-if="creator">
-    <h3 class="title">
-      <router-link :to="'/review/' + review.id">{{ review.heading }}</router-link>
-    </h3>
+    <router-link :to="'/review/' + review.id">
+      {{ review.heading }}
+    </router-link>
     <p class="meta">
       By <router-link :to="'/profile/' + creator.id">{{ creator.name }}</router-link>
       | {{ review.timestamp | toMDY }}
@@ -89,11 +89,6 @@ export default {
   padding 10px 15px
   border-bottom 1px dashed #ddd
   position relative
-  .title
-    font-weight 700
-    a
-      &:hover
-        color #ff6600
   .meta
     font-size 12px
     color #999

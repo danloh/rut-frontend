@@ -50,5 +50,5 @@ export default {
     border-bottom 1px solid #eee
 .editlink
   font-size 12px
-  font-weight 600
+  color #409eff
 </style>

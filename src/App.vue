@@ -3,9 +3,9 @@
     <header class="header">
       <nav class="nav-menu">
         <router-link to="/">
-            <b style="color:darkorange;font-size:1.2em;letter-spacing:0.005em">
+            <small style="color:darkorange;font-size:1.2em;letter-spacing:0.005em">
               RutHub<sup style="font-size:0.5em;color:grey"> alpha</sup>
-            </b>
+            </small>
         </router-link>
         <router-link to="/feeds" v-if="authed">
           Feed
@@ -187,7 +187,6 @@ blockquote
       color orange
     &.router-link-active
       color green
-      font-weight 800
 .blockbtn
   display block
   margin 5px 0

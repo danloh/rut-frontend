@@ -92,10 +92,6 @@ export default {
     font-size 0.9em
     .name
       font-size 1.2em
-      font-weight 700
-      a
-        &:hover
-          color red
     .location
       font-size 0.95em
       color #9cce83
