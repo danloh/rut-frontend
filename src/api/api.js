@@ -322,8 +322,8 @@ const upvoteClip = (clipid, params) => {
   return request(`${base}/clips/${clipid}/voters`, params, 'patch')
 }
 // create review
-const newReview = (itemid, params) => {
-  return request(`${base}/items/${itemid}/reviews`, params, 'post')
+const newReview = params => {
+  return request(`${base}/reviews`, params, 'post')
 }
 // fetch review
 const fetchReview = (reviewid, params) => {

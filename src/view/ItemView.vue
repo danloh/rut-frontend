@@ -27,7 +27,7 @@
         <clip-list :param="cliplistParam"></clip-list>
         <div class="review-row">
           <b>{{currentItem.reviewcount | pluralise(' Review')}}</b>
-          <router-link class="editlink" :to="'/review/item/' + currentItem.id" style="float:right">
+          <router-link class="editlink" :to="'/newarticle/' + currentItem.id" style="float:right">
             ...Post Review
           </router-link>
         </div>

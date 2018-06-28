@@ -6,10 +6,11 @@
     <p class="meta">
       By <router-link :to="'/profile/' + creator.id">{{ creator.name }}</router-link>
       | {{ review.timestamp | toMDY }}
-      | on 
+      <span v-if="review.item.id"> | on 
         <router-link :to="'/item/' + review.item.id" :title="review.item.title">
           {{ review.item.title.slice(0, 42) }} ...
         </router-link>
+      </span>
     </p>
     <div class="review-body">
       <div v-html="reviewContent"></div>

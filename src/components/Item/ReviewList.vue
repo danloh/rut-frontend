@@ -42,8 +42,7 @@ export default {
       let itemid = this.param.itemid
       let page = { 'page': this.currentPage }
       let params = Object.assign(page, this.param)
-      fetchItemReviews(itemid, params)
-      .then(resp => {
+      fetchItemReviews(itemid, params).then(resp => {
         this.reviews.push(...resp.data.reviews)
         this.currentPage += 1
       })
@@ -51,8 +50,7 @@ export default {
     loadReviews () {
       let itemid = this.param.itemid
       let params = this.param
-      fetchItemReviews(itemid, params)
-      .then(resp => {
+      fetchItemReviews(itemid, params).then(resp => {
         this.reviews = resp.data.reviews
         this.reviewCount = resp.data.reviewcount
       })

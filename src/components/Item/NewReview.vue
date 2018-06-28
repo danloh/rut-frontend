@@ -1,11 +1,13 @@
 <template>
   <div class="review-page">
-    <b class="title"> Post New Review:</b>&nbsp;&nbsp;
-    <router-link :to="'/item/' + itemId" target="_blank"
-                 rel="noopener noreferrer" style="font-size:14px"
-                 :title="currentItem.title || ''">
-                 {{ (currentItem.title || ':::').slice(0, 72) }}
-    </router-link>
+    <b class="title"> Post New Article:</b>&nbsp;&nbsp;
+    <span v-if="itemId"><small>As Review on: &nbsp;</small>
+      <router-link :to="'/item/' + itemId" target="_blank"
+                  rel="noopener noreferrer" style="font-size:14px"
+                  :title="currentItem.title || ''">
+                  {{ (currentItem.title || ':::').slice(0, 64) }}
+      </router-link>
+    </span>
     <el-form class="review-form" size="mini" 
              :model="reviewForm" :rules="rules" ref="reviewForm">
       <el-form-item prop="title">
@@ -18,7 +20,7 @@
         </el-input>
         <md-tool :pretext="reviewForm.review" @insertmd="updateM"></md-tool>
       </el-form-item>
-      <el-form-item prop="spoiler">
+      <el-form-item prop="spoiler" v-if="itemId">
         <el-radio-group v-model="reviewForm.spoiler">
           <el-radio-button label="No Spoiler"></el-radio-button>
           <el-radio-button label="Spoiler Ahead"></el-radio-button>
@@ -68,14 +70,14 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let data = {
+            itemid: this.$route.params.id || '',
             title: form.title.trim(),
             review: form.review.trim(),
             spoiler: form.spoiler
           }
-          let itemid = this.$route.params.id
-          newReview(itemid, data)
-          .then(() => {
-            this.$router.push(`/item/${itemid}`)
+          newReview(data).then(resp => {
+            let reviewid = resp.data.id
+            this.$router.push(`/review/${reviewid}`)
           })
         } else {
           this.$message({

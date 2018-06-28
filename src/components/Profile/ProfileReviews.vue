@@ -1,6 +1,6 @@
 <template>
   <div class="review-list">
-    <b>NOTES / REVIEWS {{reviewCount}}</b>
+    <b>ARTICLES / REVIEWS {{reviewCount}}</b>
     <review-sum v-for="review in reviews" 
                 :key="review.id" 
                 :review="review" 

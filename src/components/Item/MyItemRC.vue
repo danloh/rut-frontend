@@ -6,7 +6,7 @@
     </router-link>
     <div class="submenu">
       <b style="color: orange">Reviews</b>
-      <router-link class="editlink" :to="'/review/item/' + itemid" style="float:right">
+      <router-link class="editlink" :to="'/newarticle/' + itemid" style="float:right">
         ...Post Review
       </router-link>
     </div>
