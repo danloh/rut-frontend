@@ -31,7 +31,7 @@
             ...Post Review
           </router-link>
         </div>
-        <review-list :param="reviewsParam"></review-list>
+        <headline-list :param="reviewsParam"></headline-list>
       </div>
       <div class="inrut-row">
         <b>{{currentItem.rutcount | pluralise(' List')}}</b>
@@ -77,7 +77,7 @@
 
 <script>
 import ItemSum from '@/components/Item/ItemSum.vue'
-import ReviewList from '@/components/Item/ReviewList.vue'
+import HeadlineList from '@/components/Headline/HeadlineList.vue'
 import ClipList from '@/components/Challenge/ClipList.vue'
 import TipSum from '@/components/Rut/TipSum.vue'
 import { fetchInRuts, checkItemLocked, lockItem, addItemTag } from '@/api/api'
@@ -90,7 +90,7 @@ export default {
   title () {
     return this.currentItem.title
   },
-  components: { ItemSum, ClipList, ReviewList, TipSum },
+  components: { ItemSum, ClipList, HeadlineList, TipSum },
   data () {
     return {
       canEdit: checkAuth(), // if load reviews / clips
@@ -125,7 +125,7 @@ export default {
     loadItemData () {
       let itemid = this.$route.params.id
       this.cliplistParam = {'itemid': itemid}
-      this.reviewsParam = {'itemid': itemid, 'ref': 'hot'}
+      this.reviewsParam = {'itemid': itemid, 'ref': 'top'}
       this.$store.dispatch('getItem', itemid).then(resp => {
         let data = resp.data
         this.currentItem = data

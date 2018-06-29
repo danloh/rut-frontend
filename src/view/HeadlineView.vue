@@ -1,7 +1,9 @@
 <template>
   <div class="headline-comment">
     <headline :headline="headline" :key="headline.id" :showCon="true"></headline>
-    <b>{{ commentCount | pluralise('comment') }}</b>
+    <div class="share">
+      <share-bar></share-bar>
+    </div>
     <div v-for="comment in comments" :key="comment.id">
       <comment :comment="comment"></comment>
     </div>
@@ -19,17 +21,18 @@
 </template>
 
 <script>
-import { fetchHlComments } from '@/api/api'
+import { fetchHeadline, fetchHlComments } from '@/api/api'
 import Comment from '@/components/Comment/Comment.vue'
 import Reply from '@/components/Comment/Reply.vue'
 import Headline from '@/components/Headline/Headline.vue'
+import ShareBar from '@/components/Misc/ShareBar.vue'
 
 export default {
   name: 'headline-comment',
   title () {
     return 'Discuss: ' + this.headline.title
   },
-  components: { Headline, Comment, Reply },
+  components: { Headline, Comment, Reply, ShareBar },
   data () {
     return {
       headline: {},
@@ -48,12 +51,14 @@ export default {
     }
   },
   methods: {
-    loadCommentData () {
+    loadData () {
       let headlineid = this.$route.params.id
-      fetchHlComments(headlineid)
-      .then(resp => {
+      fetchHeadline(headlineid).then(resp => {
+        this.headline = resp.data  // can optiz
+      })
+      fetchHlComments(headlineid).then(resp => {
         let data = resp.data
-        this.headline = data
+        // this.headline = data
         this.comments = data.comments
         this.commentCount = data.commentcount
       })
@@ -61,8 +66,7 @@ export default {
     loadmoreComment () {
       let headlineid = this.$route.params.id
       let params = {'page': this.currentPage}
-      fetchHlComments(headlineid, params)
-      .then(resp => {
+      fetchHlComments(headlineid, params).then(resp => {
         this.comments.push(...resp.data.comments)
         this.currentPage += 1
       })
@@ -73,7 +77,7 @@ export default {
     }
   },
   created () {
-    this.loadCommentData()
+    this.loadData()
   }
 }
 </script>

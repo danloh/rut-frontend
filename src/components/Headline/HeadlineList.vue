@@ -21,7 +21,7 @@ import Headline from '@/components/Headline/Headline.vue'
 
 export default {
   name: 'headline-list',
-  props: { type: String },
+  props: { param: Object },
   components: { Headline },
   computed: {
     ...mapGetters([
@@ -35,11 +35,11 @@ export default {
   },
   methods: {
     loadData () {
-      let param = {'ref': this.type}
-      this.$store.dispatch('getHeadlines', param)
+      let params = this.param
+      this.$store.dispatch('getHeadlines', params)
     },
     loadmoreHeadline () {
-      let params = {'ref': this.type, 'page': this.currentH}
+      let params = Object.assign({'page': this.currentH}, this.param)
       this.$store.dispatch('moreHeadlines', params)
     }
   },

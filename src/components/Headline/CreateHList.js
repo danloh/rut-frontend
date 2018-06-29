@@ -5,7 +5,7 @@ export default function createHList (type = 'top') {
   return {
     name: `${type}-headline`,
     render (h) {
-      return h(HeadlineList, { props: { type } })
+      return h(HeadlineList, { props: { param: {'ref': type} } })
     }
   }
 }

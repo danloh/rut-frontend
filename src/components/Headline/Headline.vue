@@ -6,11 +6,15 @@
     <div class="headline-main">
       <div class="headline-title">
         <template v-if="headline.url">
-          <a :href="headline.url" 
-             target="_blank" rel="nofollow noopener noreferrer">
-             {{ headline.title }}
-          </a>
-          <span class="host"> ({{ headline.url | host }})</span>
+          {{ headline.title }}
+          <span class="host">
+            <a :href="headline.url" target="_blank" rel="nofollow noopener noreferrer">
+              ({{ headline.url | host }})
+            </a>
+          </span>
+        </template>
+        <template v-else-if="showCon">
+          {{ headline.title }}
         </template>
         <template v-else>
           <router-link :to="'/headline/' + headline.id">
@@ -18,7 +22,6 @@
           </router-link>
         </template>
       </div>
-      <div class="content" v-if="showCon" v-html="headlineContent"></div>
       <div class="headline-bar">
         By
         <router-link :to="'/profile/' + submitor.id">
@@ -30,6 +33,19 @@
         | <router-link :to="'/headline/' + headline.id">
             {{headline.commentcount | pluralise('Comment')}}&nbsp;
           </router-link>
+      </div>
+      <div class="content" v-if="showCon" >
+        <div v-if="!spoiler" v-html="headlineContent"></div>
+        <el-button type="text" size="mini" @click="spoiler=!spoiler" v-if="spoiler">
+          Spoilers Ahead! Continue?
+        </el-button>
+        <br>
+        <span style="color:grey;font-size:10px" v-if="headline.item.id"> 
+          This is a review on item: 
+          <router-link :to="'/item/' + headline.item.id" :title="headline.item.title">
+            {{ headline.item.title.slice(0, 42) }} ...
+          </router-link>
+        </span>
       </div>
     </div>
   </div>
@@ -45,7 +61,8 @@ export default {
   props: ['headline', 'showCon'],
   data () {
     return {
-      vote: this.headline.vote
+      vote: this.headline.vote,
+      spoiler: this.headline.spoiler
     }
   },
   computed: {
@@ -85,6 +102,7 @@ export default {
     padding 5px
     .headline-title
       padding 0 5px
+      font-size 1.1em
     .content
       padding auto
     .headline-bar, .host

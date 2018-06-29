@@ -21,8 +21,11 @@ const actions = {
     })
   },
   postHeadline: ({commit}, params) => {
-    newHeadline(params).then(resp => {
-      commit('ADD_HEADLINE', resp.data)
+    return new Promise((resolve, reject) => {
+      newHeadline(params).then(resp => {
+        commit('ADD_HEADLINE', resp.data)
+        resolve(resp)
+      }).catch(err => { reject(err) })
     })
   },
   moreHeadlines: ({commit}, params) => {

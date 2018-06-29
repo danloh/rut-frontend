@@ -13,13 +13,10 @@ const state = {
 const actions = {
   getRut: ({commit}, rutid) => {
     return new Promise((resolve, reject) => {
-      fetchRut(rutid)
-      .then(resp => {
+      fetchRut(rutid).then(resp => {
         commit('SET_RUT', resp.data)
         resolve(resp)
-      }).catch(error => {
-        reject(error)
-      })
+      }).catch(error => { reject(error) })
     })
   }
 }

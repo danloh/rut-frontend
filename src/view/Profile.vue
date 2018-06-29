@@ -72,9 +72,6 @@
         <router-link :to="'/profile/' + userid + '/reviews/'">
           <b style="color:teal">></b> Articles
         </router-link>
-        <router-link to="/newarticle">
-          <small style="color:orange"> +New</small>
-        </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/demands/'">
           <b style="color:teal">></b> Requests

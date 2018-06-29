@@ -41,7 +41,8 @@ const AddItem = () => import('@/components/Rut/AddItem')
 const EditTips = () => import('@/components/Rut/EditTips')
 const NewItem = () => import('@/components/Item/NewItem')
 const EditItem = () => import('@/components/Item/EditItem')
-const NewReview = () => import('@/components/Item/NewReview')
+// const NewReview = () => import('@/components/Item/NewReview')
+const NewArticle = () => import('@/components/Headline/NewArticle')
 const EditReview = () => import('@/components/Item/EditReview')
 const MyItemRC = () => import('@/components/Item/MyItemRC')
 const createClipList = params => () => import('@/components/Challenge/CreateClipList').then(m => m.default(params))
@@ -132,7 +133,7 @@ const router = new Router({
     { path: '/item/:id', component: ItemView, name: 'Item' },
     { path: '/myrc/item/:itemid', component: MyItemRC, name: 'MyRc', props: true, meta: {auth: true} },
     { path: '/edit/item/:id', component: EditItem, name: 'EditItem', meta: {auth: true} },
-    { path: '/newarticle/:id(\\d+)?', component: NewReview, name: 'NewReview', meta: {auth: true} },
+    { path: '/newarticle/:id(\\d+)?', component: NewArticle, name: 'NewArticle', meta: {auth: true} },
     { path: '/editreview/:id', component: EditReview, name: 'EditReview', meta: {auth: true} },
     { path: '/review/:id', component: ReviewView, name: 'ReviewView' },
     { path: '/tag/:name',

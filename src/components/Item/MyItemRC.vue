@@ -10,7 +10,7 @@
         ...Post Review
       </router-link>
     </div>
-    <review-list :param="listParam"></review-list>
+    <headline-list :param="listParam"></headline-list>
     <div class="submenu">
       <b style="color: orange">Quotes</b>
       <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
@@ -20,14 +20,14 @@
 </template>
 
 <script>
-import ReviewList from '@/components/Item/ReviewList.vue'
+import HeadlineList from '@/components/Headline/HeadlineList.vue'
 import ClipList from '@/components/Challenge/ClipList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'my-item-view',
   title: 'My Reviews and Quotes',
-  components: { ClipList, ReviewList },
+  components: { ClipList, HeadlineList },
   props: ['itemid'],
   computed: {
     ...mapGetters([
