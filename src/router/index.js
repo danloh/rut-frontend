@@ -44,7 +44,7 @@ const EditItem = () => import('@/components/Item/EditItem')
 const NewArticle = () => import('@/components/Headline/NewArticle')
 const MyItemRC = () => import('@/components/Item/MyItemRC')
 const createClipList = params => () => import('@/components/Challenge/CreateClipList').then(m => m.default(params))
-const createDemandList = param => () => import('@/components/Demand/CreateDemandList').then(m => m.default(param))
+const createDemandList = params => () => import('@/components/Demand/CreateDemandList').then(m => m.default(params))
 const createHList = param => () => import('@/components/Headline/CreateHList').then(m => m.default(param))
 const createProfileRuts = param => () => import('@/components/Profile/CreateProfileRuts').then(m => m.default(param))
 const createProfileItems = param => () => import('@/components/Profile/CreateProfileItems').then(m => m.default(param))
@@ -147,8 +147,8 @@ const router = new Router({
       component: Demands,
       children: [
         { path: '', name: 'defaultdemand', redirect: 'popular' },
-        { path: 'popular', name: 'Populardemand', component: createDemandList('popular'), meta: {auth: true} },
-        { path: 'new', name: 'Newdemand', component: createDemandList('new'), meta: {auth: true} }
+        { path: 'popular', name: 'Hotdemand', component: createDemandList({ref: 'hot'}), meta: {auth: true} },
+        { path: 'new', name: 'Newdemand', component: createDemandList({ref: 'new'}), meta: {auth: true} }
       ]
     },
     { path: '/demand/:id', name: 'demand', component: DemandView, meta: {auth: true} },

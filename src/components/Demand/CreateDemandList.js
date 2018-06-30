@@ -1,11 +1,12 @@
 import DemandList from './DemandList.vue'
 
 // higher order components wrapping
-export default function createDemandList (type = 'popular', userid = '') {
+export default function createDemandList (param = {}) {
+  let prefix = param.ref || 'somedemands'
   return {
-    name: `${type}-demand`,
+    name: `${prefix}-demand`,
     render (h) {
-      return h(DemandList, {props: { type, userid }})
+      return h(DemandList, {props: { param }})
     }
   }
 }

@@ -342,7 +342,7 @@ const fetchProfileDemands = (userid, params) => {
   return request(`${base}/users/${userid}/demands`, params)
 }
 // get demand list
-const fetchDemands = (params) => {
+const fetchDemands = params => {
   return request(`${base}/demands`, params)
 }
 // get a demand only

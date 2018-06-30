@@ -1,56 +1,27 @@
 <template>
   <div class="demand-list">
-    <b>REQUESTS {{ demandCount }}</b>
-    <demand v-for="demand in demands" :key="demand.id" :demand="demand"></demand>
-    <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" 
-                 @click="loadmoreDemand" 
-                 :disabled="!hasMore">
-                 Show More
-      </el-button>
-    </div>
+    <b>REQUESTS {{ totalDemands }}</b>
+    <demand-list :param="listParam"></demand-list>
   </div>
 </template>
 
 <script>
-import Demand from '@/components/Demand/Demand.vue'
-import { fetchProfileDemands } from '@/api/api'
+import DemandList from '@/components/Demand/DemandList.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'profile-demand',
-  components: { Demand },
+  components: { DemandList },
   data () {
     return {
-      demands: [],
-      currentPage: 1,
-      demandCount: 0
+      listParam: {}
     }
   },
   computed: {
-    hasMore () {
-      return this.demands.length < this.demandCount
-    }
+    ...mapGetters(['totalDemands'])
   },
   created () {
-    this.loadDemands()
-  },
-  methods: {
-    loadmoreDemand () {
-      let userid = this.$route.params.id
-      let params = {'page': this.currentPage}
-      fetchProfileDemands(userid, params).then(resp => {
-        this.demands.push(...resp.data.demands)
-        this.currentPage += 1
-      })
-    },
-    loadDemands () {
-      let userid = this.$route.params.id
-      fetchProfileDemands(userid).then(resp => {
-        let data = resp.data
-        this.demands = data.demands
-        this.demandCount = data.demandcount
-      })
-    }
+    this.listParam = {userid: this.$store.getters.currentUserID}
   }
 }
 </script>

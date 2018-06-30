@@ -21,11 +21,7 @@ import Demand from './Demand.vue'
 export default {
   name: 'demand-list',
   components: { Demand },
-  props: {
-    type: String,
-    userid: null,
-    tag: String
-  },
+  props: { param: Object }, // keys: ref, userid, tag
   computed: {
     ...mapGetters([
       'currentDemands',
@@ -38,16 +34,11 @@ export default {
   },
   methods: {
     initData () {
-      let params = {'type': this.type, 'userid': this.userid, 'tag': this.tag}
+      let params = this.param
       this.$store.dispatch('getDemands', params)
     },
     loadmoreDemand () {
-      let params = {
-        'type': this.type,
-        'userid': this.userid,
-        'tag': this.tag,
-        'page': this.currentD
-      }
+      let params = Object.assign({'page': this.currentD}, this.param)
       this.$store.dispatch('moreDemands', params)
     }
   },
