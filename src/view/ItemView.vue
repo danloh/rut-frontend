@@ -19,13 +19,13 @@
           ...More
         </el-button>
       </div>
-      <div class="review-clip" v-if="canEdit">
+      <div class="article-clip" v-if="canEdit">
         <div class="clip-row">
           <b>{{currentItem.clipcount | pluralise(' Quote')}}</b>
           <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
         </div>
         <clip-list :param="cliplistParam"></clip-list>
-        <div class="review-row">
+        <div class="article-row">
           <b>{{currentItem.reviewcount | pluralise(' Review')}}</b>
           <router-link class="editlink" :to="'/newarticle/' + currentItem.id" style="float:right">
             ...Post Review
@@ -196,7 +196,7 @@ export default {
         background-color lighten(#e0e6da, 70%)
         padding 5px
         font-size 16px
-    .inrut-row, .review-row, .clip-row
+    .inrut-row, .article-row, .clip-row
       color green
       margin 5px 0
       padding 5px

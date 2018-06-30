@@ -19,9 +19,8 @@ const getters = {
   maxD: state => state.demand.maxD,
   currentDemands: state => state.demand.currentDemands,
   demandDetail: state => state.demand.demandDetail,
-  // item & reviews
+  // item
   currentItem: state => state.item.currentItem,
-  reviewDetail: state => state.item.reviewDetail,
   searchItems: state => state.item.searchItems,
   itemKeyword: state => state.item.itemKeyword,
   // preload

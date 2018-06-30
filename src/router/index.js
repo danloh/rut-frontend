@@ -20,7 +20,6 @@ const NewRoad = () => import('@/components/Road/NewRoad')
 const RutView = () => import('@/view/RutView')
 const RutComment = () => import('@/view/RutComment')
 const ItemView = () => import('@/view/ItemView')
-const ReviewView = () => import('@/view/ReviewView')
 const TagView = () => import('@/view/TagView')
 const TagRut = () => import('@/components/Tag/TagRuts')
 const TagDemand = () => import('@/components/Tag/TagDemands')
@@ -42,9 +41,7 @@ const AddItem = () => import('@/components/Rut/AddItem')
 const EditTips = () => import('@/components/Rut/EditTips')
 const NewItem = () => import('@/components/Item/NewItem')
 const EditItem = () => import('@/components/Item/EditItem')
-// const NewReview = () => import('@/components/Item/NewReview')
 const NewArticle = () => import('@/components/Headline/NewArticle')
-const EditReview = () => import('@/components/Item/EditReview')
 const MyItemRC = () => import('@/components/Item/MyItemRC')
 const createClipList = params => () => import('@/components/Challenge/CreateClipList').then(m => m.default(params))
 const createDemandList = param => () => import('@/components/Demand/CreateDemandList').then(m => m.default(param))
@@ -52,7 +49,7 @@ const createHList = param => () => import('@/components/Headline/CreateHList').t
 const createProfileRuts = param => () => import('@/components/Profile/CreateProfileRuts').then(m => m.default(param))
 const createProfileItems = param => () => import('@/components/Profile/CreateProfileItems').then(m => m.default(param))
 const ProfileRoads = () => import('@/components/Profile/ProfileRoads')
-const ProfileReviews = () => import('@/components/Profile/ProfileReviews')
+const ProfileArticles = () => import('@/components/Profile/ProfileArticles')
 const ProfileDemands = () => import('@/components/Profile/ProfileDemands')
 const ProfileClips = () => import('@/components/Profile/ProfileClips')
 const ProfileActivity = () => import('@/components/Profile/ProfileActivity')
@@ -136,8 +133,6 @@ const router = new Router({
     { path: '/edit/item/:id', component: EditItem, name: 'EditItem', meta: {auth: true} },
     { path: '/newarticle/:id(\\d+)?', component: NewArticle, name: 'NewArticle', meta: {auth: true} },
     { path: '/editarticle/:id', component: EditArticle, name: 'EditArticle', meta: {auth: true} },
-    { path: '/editreview/:id', component: EditReview, name: 'EditReview', meta: {auth: true} },
-    { path: '/review/:id', component: ReviewView, name: 'ReviewView' },
     { path: '/tag/:name',
       component: TagView,
       children: [
@@ -187,7 +182,7 @@ const router = new Router({
         { path: 'working', name: 'WorkingItems', component: createProfileItems('doing'), meta: {auth: true} },
         { path: 'scheduled', name: 'ScheduledItems', component: createProfileItems('todo'), meta: {auth: true} },
         { path: 'havedone', name: 'DoneItems', component: createProfileItems('done'), meta: {auth: true} },
-        { path: 'reviews', name: 'Reviews', component: ProfileReviews, meta: {auth: true} },
+        { path: 'articles', name: 'Articles', component: ProfileArticles, meta: {auth: true} },
         { path: 'demands', name: 'Demands', component: ProfileDemands, meta: {auth: true} },
         { path: 'clips', name: 'Clips', component: ProfileClips, meta: {auth: true} },
         { path: 'followeds', name: 'Followeds', component: FollowedList, meta: {auth: true} }

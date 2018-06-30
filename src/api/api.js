@@ -337,10 +337,6 @@ const editReview = (reviewid, params) => {
 const upvoteReview = (reviewid, params) => {
   return request(`${base}/reviews/${reviewid}/voters`, params, 'patch')
 }
-// fetch user's review
-const fetchProfileReviews = (userid, params) => {
-  return request(`${base}/users/${userid}/reviews`, params)
-}
 // fetch user's demands
 const fetchProfileDemands = (userid, params) => {
   return request(`${base}/users/${userid}/demands`, params)
@@ -522,7 +518,6 @@ export {
   fetchReviewComments,
   editReview,
   upvoteReview,
-  fetchProfileReviews,
   fetchProfileDemands,
   fetchDemands,
   fetchOnlyDemand,

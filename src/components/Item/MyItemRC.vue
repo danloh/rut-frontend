@@ -25,8 +25,8 @@ import ClipList from '@/components/Challenge/ClipList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'my-item-view',
-  title: 'My Reviews and Quotes',
+  name: 'my-track',
+  title: 'My Track',
   components: { ClipList, HeadlineList },
   props: ['itemid'],
   computed: {

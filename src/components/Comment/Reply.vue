@@ -46,7 +46,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid && form.comment.trim() && checkAuth()) {
           let data = { comment: form.comment.trim() + this.tagsuf }
-          let re = this.refer.re // demand or rut or review or comment
+          let re = this.refer.re // demand or rut or comment
           let id = this.refer.id // id of above
           newComment(re, id, data).then(resp => {
             this.$emit('newreply', resp.data)

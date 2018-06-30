@@ -1,5 +1,5 @@
 <template>
-  <div class="review-page">
+  <div class="article-page">
     <b class="title"> Post New Article:</b>&nbsp;&nbsp;
     <span v-if="itemId"><small>As Review on: &nbsp;</small>
       <router-link :to="'/item/' + itemId" target="_blank"
@@ -9,7 +9,7 @@
       </router-link>
     </span>
     <div>
-      <headline-form class="review-form" :itemid="Number(itemId)"></headline-form>
+      <headline-form class="article-form" :itemid="Number(itemId)"></headline-form>
     </div>
   </div>
 </template>
@@ -31,10 +31,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.review-page
+.article-page
   padding 10px 120px
   position relative
-  .review-form
+  .article-form
     padding 20px
     border 1px dotted #689f38
   .title

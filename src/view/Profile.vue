@@ -69,7 +69,7 @@
           <b style="color:coral">#</b> Have Done
         </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/reviews/'">
+        <router-link :to="'/profile/' + userid + '/articles/'">
           <b style="color:teal">></b> Articles
         </router-link>
         <br>

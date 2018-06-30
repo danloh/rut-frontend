@@ -1,24 +1,24 @@
 <template>
-  <div class="clip-list">
-    <b>SPARKS {{ totalClips }}</b>
-    <clip-list :param="listParam"></clip-list>
+  <div class="article-list">
+    <b>ARTICLES / REVIEWS {{ totalHeadlines }}</b>
+    <headline-list :param="listParam"></headline-list>
   </div>
 </template>
 
 <script>
-import ClipList from '@/components/Challenge/ClipList.vue'
+import HeadlineList from '@/components/Headline/HeadlineList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'profile-clip',
-  components: { ClipList },
+  name: 'profile-article',
+  components: { HeadlineList },
   data () {
     return {
       listParam: {}
     }
   },
   computed: {
-    ...mapGetters(['totalClips'])
+    ...mapGetters(['totalHeadlines'])
   },
   created () {
     this.listParam = {userid: this.$store.getters.currentUserID}
@@ -27,6 +27,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.clip-list
+.article-list
   padding auto
 </style>
