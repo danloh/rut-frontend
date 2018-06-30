@@ -8,7 +8,7 @@ import rut from './modules/rut'
 import item from './modules/item'
 import clip from './modules/clip'
 import demand from './modules/demand'
-import headline from './modules/headline'
+import article from './modules/article'
 import preload from './modules/preload'
 
 Vue.use(Vuex)
@@ -102,7 +102,7 @@ const store = new Vuex.Store({
     item,
     clip,
     demand,
-    headline,
+    article,
     preload
   }
 })

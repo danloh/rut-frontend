@@ -10,9 +10,9 @@ const Feeds = () => import('@/view/Feeds')
 const Challenge = () => import('@/view/Challenge')
 const Demands = () => import('@/view/Demands')
 const DemandView = () => import('@/view/DemandView')
-const Headlines = () => import('@/view/Headlines')
-const HeadlineView = () => import('@/view/HeadlineView')
-const EditArticle = () => import('@/components/Headline/EditArticle')
+const Articles = () => import('@/view/Articles')
+const ArticleView = () => import('@/view/ArticleView')
+const EditArticle = () => import('@/components/Article/EditArticle')
 const Circles = () => import('@/view/Circles')
 const Profile = () => import('@/view/Profile')
 const RoadView = () => import('@/view/RoadView')
@@ -41,11 +41,11 @@ const AddItem = () => import('@/components/Rut/AddItem')
 const EditTips = () => import('@/components/Rut/EditTips')
 const NewItem = () => import('@/components/Item/NewItem')
 const EditItem = () => import('@/components/Item/EditItem')
-const NewArticle = () => import('@/components/Headline/NewArticle')
+const NewArticle = () => import('@/components/Article/NewArticle')
 const MyItemRC = () => import('@/components/Item/MyItemRC')
 const createClipList = params => () => import('@/components/Challenge/CreateClipList').then(m => m.default(params))
 const createDemandList = params => () => import('@/components/Demand/CreateDemandList').then(m => m.default(params))
-const createHList = param => () => import('@/components/Headline/CreateHList').then(m => m.default(param))
+const createHList = param => () => import('@/components/Article/CreateHList').then(m => m.default(param))
 const createProfileRuts = param => () => import('@/components/Profile/CreateProfileRuts').then(m => m.default(param))
 const createProfileItems = param => () => import('@/components/Profile/CreateProfileItems').then(m => m.default(param))
 const ProfileRoads = () => import('@/components/Profile/ProfileRoads')
@@ -161,13 +161,13 @@ const router = new Router({
         { path: 'allclip', name: 'Allclip', component: createClipList({ref: 'All'}), meta: {auth: true} }
       ]
     },
-    { path: '/headline/:id', name: 'Headline', component: HeadlineView, meta: {auth: true} },
-    { path: '/headlines',
-      component: Headlines,
+    { path: '/article/:id', name: 'Article', component: ArticleView, meta: {auth: true} },
+    { path: '/articles',
+      component: Articles,
       children: [
-        { path: '', name: 'defaultheadline', redirect: 'top' },
-        { path: 'top', name: 'TopHeadline', component: createHList('top') },
-        { path: 'new', name: 'NewHeadline', component: createHList('new') }
+        { path: '', name: 'defaultarticle', redirect: 'top' },
+        { path: 'top', name: 'TopArticle', component: createHList('top') },
+        { path: 'new', name: 'LateArticle', component: createHList('new') }
       ]
     },
     { path: '/circles', name: 'Circles', component: Circles, meta: {auth: true} },

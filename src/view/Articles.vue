@@ -1,23 +1,23 @@
 <template>
-  <div class="headline-page">
-    <div class="headline-main">
+  <div class="article-page">
+    <div class="article-main">
       <div class="submenu">
         <b>News For Readers&nbsp;&nbsp;</b>
-        <router-link to="/headlines/top">Top</router-link>
-        <router-link to="/headlines/new">New</router-link>
+        <router-link to="/articles/top">Top</router-link>
+        <router-link to="/articles/new">New</router-link>
         <el-button type="text" style="float:right" v-if="canSub"
                    @click="showForm=!showForm">
                    Submit
         </el-button>
       </div>
       <div v-show="showForm">
-        <headline-form :show.sync="showForm"></headline-form>
+        <article-form :show.sync="showForm"></article-form>
       </div>
-      <div class="headline-view">
+      <div class="article-view">
         <router-view></router-view>
       </div>
     </div>
-    <div class="headline-side">
+    <div class="article-side">
       <p class="right-item">
         On-Topic: Anything About Reading/Learning
       </p>
@@ -27,12 +27,12 @@
 
 <script>
 import { checkAuth } from '@/util/auth'
-import HeadlineForm from '@/components/Headline/HeadlineForm.vue'
+import ArticleForm from '@/components/Article/ArticleForm.vue'
 
 export default {
-  name: 'headlines',
+  name: 'articles',
   title: 'News For Readers',
-  components: { HeadlineForm },
+  components: { ArticleForm },
   data () {
     return {
       canSub: checkAuth(),
@@ -43,10 +43,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.headline-page
+.article-page
   padding 10px 200px 10px 0px
   position relative
-  .headline-main
+  .article-main
     .submenu
       margin-bottom 5px
       a
@@ -57,7 +57,7 @@ export default {
         &.router-link-active
           color orange
           font-weight 800
-  .headline-side
+  .article-side
     position absolute
     top 10px
     right 0

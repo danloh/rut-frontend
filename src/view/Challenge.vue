@@ -55,7 +55,7 @@
         including items:
       </div>
       <div v-else>
-        <a href="/newroad"> Create New RoadMap</a> To Challenge
+        <a href="/newroad"> Create New RoadMap</a>
       </div>
       <p class="right-item" v-for="(item, index) in items" :key="index" :item="item">
         <b>{{ item.cate }}</b> 

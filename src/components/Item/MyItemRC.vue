@@ -10,7 +10,7 @@
         ...Post Review
       </router-link>
     </div>
-    <headline-list :param="listParam"></headline-list>
+    <article-list :param="listParam"></article-list>
     <div class="submenu">
       <b style="color: orange">Quotes</b>
       <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
@@ -20,14 +20,14 @@
 </template>
 
 <script>
-import HeadlineList from '@/components/Headline/HeadlineList.vue'
+import ArticleList from '@/components/Article/ArticleList.vue'
 import ClipList from '@/components/Challenge/ClipList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'my-track',
   title: 'My Track',
-  components: { ClipList, HeadlineList },
+  components: { ClipList, ArticleList },
   props: ['itemid'],
   computed: {
     ...mapGetters([

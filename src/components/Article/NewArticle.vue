@@ -9,18 +9,18 @@
       </router-link>
     </span>
     <div>
-      <headline-form class="article-form" :itemid="Number(itemId)"></headline-form>
+      <article-form class="article-form" :itemid="Number(itemId)"></article-form>
     </div>
   </div>
 </template>
 
 <script>
-import HeadlineForm from '@/components/Headline/HeadlineForm.vue'
+import ArticleForm from '@/components/Article/ArticleForm.vue'
 
 export default {
   name: 'new-article',
   title: 'Post New Article',
-  components: { HeadlineForm },
+  components: { ArticleForm },
   data () {
     return {
       currentItem: this.$store.getters.currentItem,

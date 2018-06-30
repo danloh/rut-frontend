@@ -10,7 +10,7 @@
         <router-link to="/feeds" v-if="authed">
           Feed
         </router-link>
-        <router-link to="/headlines">
+        <router-link to="/articles">
           Headline
         </router-link>
         <router-link to="/demands">

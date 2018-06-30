@@ -27,12 +27,12 @@ const getters = {
   createdRuts: state => state.preload.createdRuts,
   onRoads: state => state.preload.onRoads,
   seItems: state => state.preload.seItems,
-  // headline
-  totalHeadlines: state => state.headline.totalHeadlines,
-  currentH: state => state.headline.currentH,
-  maxH: state => state.headline.maxH,
-  currentHeadline: state => state.headline.currentHeadline,
-  currentHeadlines: state => state.headline.currentHeadlines
+  // article
+  totalArticles: state => state.article.totalArticles,
+  currentH: state => state.article.currentH,
+  maxH: state => state.article.maxH,
+  currentArticle: state => state.article.currentArticle,
+  currentArticles: state => state.article.currentArticles
 }
 
 export default getters

@@ -401,29 +401,29 @@ const editCircle = (cid, params) => {
 const disCircle = (cid, params) => {
   return request(`${base}/circles/${cid}/disabled`, params, 'patch')
 }
-// get headline list
-const fetchHeadlines = (params) => {
-  return request(`${base}/headlines`, params)
+// get article list
+const fetchArticles = (params) => {
+  return request(`${base}/articles`, params)
 }
-// get headline
-const fetchHeadline = (headlineid, params) => {
-  return request(`${base}/headlines/${headlineid}`, params)
+// get article
+const fetchArticle = (articleid, params) => {
+  return request(`${base}/articles/${articleid}`, params)
 }
-// get comments of a headline
-const fetchHlComments = (headlineid, params) => {
-  return request(`${base}/headlines/${headlineid}/comments`, params)
+// get comments of a article
+const fetchHlComments = (articleid, params) => {
+  return request(`${base}/articles/${articleid}/comments`, params)
 }
-// post new headline
-const newHeadline = params => {
-  return request(`${base}/headlines`, params, 'post')
+// post new article
+const newArticle = params => {
+  return request(`${base}/articles`, params, 'post')
 }
-// edit headline
+// edit article
 const editArticle = (articleid, params) => {
-  return request(`${base}/headlines/${articleid}`, params, 'put')
+  return request(`${base}/articles/${articleid}`, params, 'put')
 }
-// upvote headline
-const upvoteHeadline = (headlineid, params) => {
-  return request(`${base}/headlines/${headlineid}/voters`, params, 'patch')
+// upvote article
+const upvoteArticle = (articleid, params) => {
+  return request(`${base}/articles/${articleid}/voters`, params, 'patch')
 }
 // just for error test
 const testError = (params) => {
@@ -531,10 +531,10 @@ export {
   rutAsAnswer,
   newComment,
   upvoteComment,
-  fetchHeadlines,
-  fetchHeadline,
+  fetchArticles,
+  fetchArticle,
   fetchHlComments,
-  newHeadline,
+  newArticle,
   editArticle,
-  upvoteHeadline
+  upvoteArticle
 }

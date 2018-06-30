@@ -1,6 +1,6 @@
 <template>
-  <div class="headline-comment">
-    <headline :headline="headline" :key="headline.id" :showCon="true"></headline>
+  <div class="article-comment">
+    <article-sum :article="article" :key="article.id" :showCon="true"></article-sum>
     <div class="share">
       <share-bar></share-bar>
     </div>
@@ -21,25 +21,25 @@
 </template>
 
 <script>
-import { fetchHeadline, fetchHlComments } from '@/api/api'
+import { fetchArticle, fetchHlComments } from '@/api/api'
 import Comment from '@/components/Comment/Comment.vue'
 import Reply from '@/components/Comment/Reply.vue'
-import Headline from '@/components/Headline/Headline.vue'
+import ArticleSum from '@/components/Article/ArticleSum.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 
 export default {
-  name: 'headline-comment',
+  name: 'article-comment',
   title () {
-    return 'Discuss: ' + this.headline.title
+    return 'Discuss: ' + this.article.title
   },
-  components: { Headline, Comment, Reply, ShareBar },
+  components: { ArticleSum, Comment, Reply, ShareBar },
   data () {
     return {
-      headline: {},
+      article: {},
       comments: [],
       commentCount: 0,
       currentPage: 1,
-      refer: { re: 'headline', id: this.$route.params.id }
+      refer: { re: 'article', id: this.$route.params.id }
     }
   },
   computed: {
@@ -47,32 +47,32 @@ export default {
       return this.comments.length < this.commentCount
     },
     submitor () {
-      return this.headline.submitor
+      return this.article.submitor
     }
   },
   methods: {
     loadData () {
-      let headlineid = this.$route.params.id
-      let headlineG = this.$store.getters.currentHeadline
-      if (headlineG.id === Number(headlineid)) {
-        this.headline = headlineG
+      let articleid = this.$route.params.id
+      let articleG = this.$store.getters.currentArticle
+      if (articleG.id === Number(articleid)) {
+        this.article = articleG
       } else {
-        fetchHeadline(headlineid).then(resp => {
-          this.headline = resp.data
-          this.$store.commit('SET_HEADLINE', resp.data)
+        fetchArticle(articleid).then(resp => {
+          this.article = resp.data
+          this.$store.commit('SET_ARTICLE', resp.data)
         })
       }
-      fetchHlComments(headlineid).then(resp => {
+      fetchHlComments(articleid).then(resp => {
         let data = resp.data
-        // this.headline = data
+        // this.article = data
         this.comments = data.comments
         this.commentCount = data.commentcount
       })
     },
     loadmoreComment () {
-      let headlineid = this.$route.params.id
+      let articleid = this.$route.params.id
       let params = {'page': this.currentPage}
-      fetchHlComments(headlineid, params).then(resp => {
+      fetchHlComments(articleid, params).then(resp => {
         this.comments.push(...resp.data.comments)
         this.currentPage += 1
       })
@@ -89,10 +89,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.headline-comment
+.article-comment
   padding 5px 200px 10px 0px
   position relative
-  .headline-main
+  .article-main
     padding 5px
     .meta 
       color #828282

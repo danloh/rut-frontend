@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { editArticle, fetchHeadline } from '@/api/api'
+import { editArticle, fetchArticle } from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import { trimValid } from '@/util/filters'
 import MdTool from '@/components/Misc/MdTool.vue'
@@ -84,8 +84,8 @@ export default {
           }
           let articleid = this.$route.params.id
           editArticle(articleid, data).then(resp => {
-            this.$store.commit('SET_HEADLINE', resp.data)
-            this.$router.push(`/headline/${articleid}`)
+            this.$store.commit('SET_ARTICLE', resp.data)
+            this.$router.push(`/article/${articleid}`)
           })
         } else if (!checkAuth()) {
           this.$message({
@@ -117,11 +117,11 @@ export default {
     },
     loadArticleData () {
       let articleid = this.$route.params.id
-      let articleG = this.$store.getters.currentHeadline
+      let articleG = this.$store.getters.currentArticle
       if (articleG.id === Number(articleid)) {
         this.setFormData(articleG)
       } else {
-        fetchHeadline(articleid).then(resp => {
+        fetchArticle(articleid).then(resp => {
           this.setFormData(resp.data)
         })
       }

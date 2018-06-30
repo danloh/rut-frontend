@@ -1,13 +1,13 @@
 <template>
-  <div class="headline-list">
-    <headline v-for="headline in currentHeadlines" 
-              :key="headline.id" 
-              :headline="headline" 
-              :showCon="false">
-    </headline>
+  <div class="article-list">
+    <article-sum v-for="art in currentArticles" 
+             :key="art.id" 
+             :article="art" 
+             :showCon="false">
+    </article-sum>
     <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
-                 @click="loadmoreHeadline" 
+                 @click="loadmoreArticle" 
                  :disabled="!hasMore">
                  Show More
       </el-button>
@@ -17,15 +17,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Headline from '@/components/Headline/Headline.vue'
+import ArticleSum from '@/components/Article/ArticleSum.vue'
 
 export default {
-  name: 'headline-list',
+  name: 'article-list',
   props: { param: Object },
-  components: { Headline },
+  components: { ArticleSum },
   computed: {
     ...mapGetters([
-      'currentHeadlines',
+      'currentArticles',
       'currentH',
       'maxH'
     ]),
@@ -36,11 +36,11 @@ export default {
   methods: {
     loadData () {
       let params = this.param
-      this.$store.dispatch('getHeadlines', params)
+      this.$store.dispatch('getArticles', params)
     },
-    loadmoreHeadline () {
+    loadmoreArticle () {
       let params = Object.assign({'page': this.currentH}, this.param)
-      this.$store.dispatch('moreHeadlines', params)
+      this.$store.dispatch('moreArticles', params)
     }
   },
   created () {
@@ -50,6 +50,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.headline-list
+.article-list
   padding auto
 </style>
