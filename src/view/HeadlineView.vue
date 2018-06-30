@@ -53,9 +53,15 @@ export default {
   methods: {
     loadData () {
       let headlineid = this.$route.params.id
-      fetchHeadline(headlineid).then(resp => {
-        this.headline = resp.data  // can optiz
-      })
+      let headlineG = this.$store.getters.currentHeadline
+      if (headlineG.id === Number(headlineid)) {
+        this.headline = headlineG
+      } else {
+        fetchHeadline(headlineid).then(resp => {
+          this.headline = resp.data
+          this.$store.commit('SET_HEADLINE', resp.data)
+        })
+      }
       fetchHlComments(headlineid).then(resp => {
         let data = resp.data
         // this.headline = data

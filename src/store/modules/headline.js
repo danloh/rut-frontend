@@ -9,6 +9,7 @@ const perPage = 20
 const state = {
   totalHeadlines: 0,
   currentHeadlines: [],
+  currentHeadline: {},
   currentH: 0,
   maxH: 0
 }
@@ -23,6 +24,7 @@ const actions = {
   postHeadline: ({commit}, params) => {
     return new Promise((resolve, reject) => {
       newHeadline(params).then(resp => {
+        commit('SET_HEADLINE', resp.data)
         commit('ADD_HEADLINE', resp.data)
         resolve(resp)
       }).catch(err => { reject(err) })
@@ -37,6 +39,9 @@ const actions = {
 
 // mutations
 const mutations = {
+  SET_HEADLINE (state, data) {
+    state.currentHeadline = data
+  },
   SET_HEADLINES (state, data) {
     state.totalHeadlines = data.total
     state.currentH = 1

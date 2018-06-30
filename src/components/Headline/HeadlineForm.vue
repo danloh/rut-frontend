@@ -62,28 +62,24 @@ export default {
           let url = form.url.trim()
           let content = form.content.trim()
           if (!url && !content) {
-            this.$message({
-              showClose: true,
-              message: 'Either of URL and Text Content is requied'
-            })
-            return false
-          } else {
-            let data = {
-              itemid: this.itemid,
-              title: form.title.trim(),
-              url: url,
-              content: content,
-              spoiler: form.spoiler
-            }
-            this.$store.dispatch('postHeadline', data).then(resp => {
-              if (this.itemid) {
-                let headlineid = resp.data.id
-                this.$router.push(`/headline/${headlineid}`)
-              }
-              this.$refs[formName].resetFields()
-              this.$emit('update:show', false)
-            })
+            this.$message('Either of URL and Text Content is requied')
+            return
           }
+          let data = {
+            itemid: this.itemid,
+            title: form.title.trim(),
+            url: url,
+            content: content,
+            spoiler: form.spoiler
+          }
+          this.$store.dispatch('postHeadline', data).then(resp => {
+            if (this.itemid) {
+              let headlineid = resp.data.id
+              this.$router.push(`/headline/${headlineid}`)
+            }
+            this.$refs[formName].resetFields()
+            this.$emit('update:show', false)
+          })
         } else if (!checkAuth()) {
           this.$message({
             showClose: true,

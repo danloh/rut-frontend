@@ -32,6 +32,7 @@ const getters = {
   totalHeadlines: state => state.headline.totalHeadlines,
   currentH: state => state.headline.currentH,
   maxH: state => state.headline.maxH,
+  currentHeadline: state => state.headline.currentHeadline,
   currentHeadlines: state => state.headline.currentHeadlines
 }
 

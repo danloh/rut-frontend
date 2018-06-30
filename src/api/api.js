@@ -421,6 +421,10 @@ const fetchHlComments = (headlineid, params) => {
 const newHeadline = params => {
   return request(`${base}/headlines`, params, 'post')
 }
+// edit headline
+const editArticle = (articleid, params) => {
+  return request(`${base}/headlines/${articleid}`, params, 'put')
+}
 // upvote headline
 const upvoteHeadline = (headlineid, params) => {
   return request(`${base}/headlines/${headlineid}/voters`, params, 'patch')
@@ -536,5 +540,6 @@ export {
   fetchHeadline,
   fetchHlComments,
   newHeadline,
+  editArticle,
   upvoteHeadline
 }

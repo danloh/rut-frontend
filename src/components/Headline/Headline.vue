@@ -46,6 +46,10 @@
             {{ headline.item.title.slice(0, 42) }} ...
           </router-link>
         </span>
+        <router-link :to="'/editarticle/' + headline.id" v-if="canEdit"
+                     style="color:green;font-size:10px">
+                     ...Edit
+        </router-link>
       </div>
     </div>
   </div>
@@ -72,6 +76,9 @@ export default {
     headlineContent () {
       let content = this.headline.content
       return content ? marked(content) : ''
+    },
+    canEdit () {
+      return Number(this.headline.submitor.id) === Number(this.$store.getters.currentUserID)
     }
   },
   methods: {

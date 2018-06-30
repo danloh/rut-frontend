@@ -12,6 +12,7 @@ const Demands = () => import('@/view/Demands')
 const DemandView = () => import('@/view/DemandView')
 const Headlines = () => import('@/view/Headlines')
 const HeadlineView = () => import('@/view/HeadlineView')
+const EditArticle = () => import('@/components/Headline/EditArticle')
 const Circles = () => import('@/view/Circles')
 const Profile = () => import('@/view/Profile')
 const RoadView = () => import('@/view/RoadView')
@@ -134,6 +135,7 @@ const router = new Router({
     { path: '/myrc/item/:itemid', component: MyItemRC, name: 'MyRc', props: true, meta: {auth: true} },
     { path: '/edit/item/:id', component: EditItem, name: 'EditItem', meta: {auth: true} },
     { path: '/newarticle/:id(\\d+)?', component: NewArticle, name: 'NewArticle', meta: {auth: true} },
+    { path: '/editarticle/:id', component: EditArticle, name: 'EditArticle', meta: {auth: true} },
     { path: '/editreview/:id', component: EditReview, name: 'EditReview', meta: {auth: true} },
     { path: '/review/:id', component: ReviewView, name: 'ReviewView' },
     { path: '/tag/:name',
