@@ -14,7 +14,7 @@
           </span>
         </template>
         <template v-else-if="showCon">
-          {{ article.title }}
+          <b>{{ article.title }}</b>
         </template>
         <template v-else>
           <router-link :to="'/article/' + article.id">
@@ -30,11 +30,12 @@
         {{ article.timestamp | timeAgo }}
         | {{ vote }}
         <el-button type="text" @click="uparticle">vote</el-button>
-        | <router-link :to="'/article/' + article.id">
-            {{article.commentcount | pluralise('Comment')}}&nbsp;
+        | <span v-if="showCon">{{article.commentcount | pluralise('Comment')}}</span>
+          <router-link v-else :to="'/article/' + article.id">
+            {{article.commentcount | pluralise('Comment')}}
           </router-link>
       </div>
-      <div class="content" v-if="showCon" >
+      <div class="content" v-if="showCon">
         <div v-if="!spoiler" v-html="articleContent"></div>
         <el-button type="text" size="mini" @click="spoiler=!spoiler" v-if="spoiler">
           Spoilers Ahead! Continue?

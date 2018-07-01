@@ -1,15 +1,14 @@
 <template>
   <div class="demand-page">
     <div class="demand-main">
-      <demand :demand="demandDetail" :key="demandDetail.id"></demand>
+      <demand :out="true" :demand="demandDetail" :key="demandDetail.id"></demand>
       <div class="answer">
         <b style="font-size:12px">Answers to This Demand:</b>
         <el-button size="mini" type="text" 
                    @click="loadCreatedThenAsAnswer">
                    ...Link To Answer
         </el-button>
-        <div class="title" 
-             v-for="(rut, index) in answers" :key="index" :rut="rut"> - 
+        <div v-for="(rut, index) in answers" :key="index" :rut="rut"> - 
              <router-link :to="'/readlist/' + rut.id" :title="rut.title">
                {{ rut.title.slice(0, 142) }} ...
              </router-link>
@@ -209,10 +208,6 @@ export default {
       background-color lighten(#f1f3f5, 45%)
       padding 5px 10px
       margin-bottom 5px
-      .title
-        a
-          &:hover
-            color #ff6600
   .demand-side
     position absolute
     top 10px

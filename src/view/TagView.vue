@@ -284,9 +284,6 @@ export default {
       padding 5px 10px
     .sidebody
       padding 5px 10px
-      a
-        &:hover
-          color #ff6600
   .tagmeta
     background-color white
     min-height: 120px
@@ -298,15 +295,4 @@ export default {
       top 15px
       right 5px
       text-align right
-  .submenu
-    margin-bottom 10px
-    border-bottom 1px solid #eee
-    a
-      color grey
-      margin-right 0.85em
-      &:hover
-        color darkgreen
-      &.router-link-active
-        color orange
-        font-weight 800
 </style>

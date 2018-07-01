@@ -211,8 +211,6 @@ export default {
         color grey
         line-height 28px
         font-weight 400
-        &:hover
-          color darkgreen
         &.router-link-active
           color green
           font-weight 800

@@ -1,6 +1,7 @@
 <template>
   <div class="demand-main" v-if="requestor"> <!--render after requestor get data-->
-    <router-link :to="'/demand/' + demand.id">
+    <span v-if="out"><b>{{ demand.body }}</b></span>
+    <router-link v-else :to="'/demand/' + demand.id">
       {{ demand.body }}
     </router-link>
     <div class="demand-bar">
@@ -15,7 +16,8 @@
       | <router-link :to="'/create/' + demand.id">
           {{ answercount | pluralise('Answer') }}
         </router-link>
-      - <router-link :to="'/demand/' + demand.id">
+      - <span v-if="out">{{demand.commentcount | pluralise('Comment')}}</span>
+        <router-link v-else :to="'/demand/' + demand.id">
           {{demand.commentcount | pluralise('Comment')}}
         </router-link>
     </div>
@@ -28,7 +30,7 @@ import { checkAuth } from '@/util/auth'
 
 export default {
   name: 'demand',
-  props: ['demand'],
+  props: ['demand', 'out'],
   data () {
     return {
       vote: this.demand.vote,

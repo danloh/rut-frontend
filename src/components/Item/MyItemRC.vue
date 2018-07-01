@@ -4,14 +4,14 @@
     <router-link :to="'/item/' + itemid" style="font-size:14px">
       {{ (currentItem.title || ':::').slice(0, 64) }}
     </router-link>
-    <div class="submenu">
+    <div class="subtab">
       <b style="color: orange">Reviews</b>
       <router-link class="editlink" :to="'/newarticle/' + itemid" style="float:right">
         ...Post Review
       </router-link>
     </div>
     <article-list :param="listParam"></article-list>
-    <div class="submenu">
+    <div class="subtab">
       <b style="color: orange">Quotes</b>
       <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
     </div>
@@ -44,7 +44,7 @@ export default {
 <style lang="stylus" scoped>
 .view-main
   padding 10px 255px 10px 0px
-  .submenu
+  .subtab
     margin 5px 0
     padding 5px
     border-bottom 1px solid #eee

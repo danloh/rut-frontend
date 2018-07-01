@@ -47,16 +47,7 @@ export default {
   padding 10px 200px 10px 0px
   position relative
   .article-main
-    .submenu
-      margin-bottom 5px
-      a
-        color grey
-        margin-right 0.85em
-        &:hover
-          color darkgreen
-        &.router-link-active
-          color orange
-          font-weight 800
+    padding auto
   .article-side
     position absolute
     top 10px

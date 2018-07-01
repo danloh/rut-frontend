@@ -145,6 +145,8 @@ body
 a
   color #37a
   text-decoration none
+  &:hover
+    color green
 h2, h3, h4
   margin 8px 0
   line-height 1.2em
@@ -199,6 +201,17 @@ blockquote
   width 100%
   margin 0 auto
   position relative
+.submenu
+  margin-bottom 5px
+  border-bottom 1px solid #eee
+  a
+    color grey
+    margin-right 0.85em
+    &:hover
+      color darkgreen
+    &.router-link-active
+      color orange
+      font-weight 800
 .footer
   border-top 2px dotted #cfc0cf
   margin-top 3em

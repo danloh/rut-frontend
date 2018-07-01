@@ -49,7 +49,7 @@
           To Complete: 
         </el-button><br>
         <router-link :to="'/roadmap/' + onRoad.id" :title="onRoad.title">
-           <b style="font-size:1.1em">{{ onRoad.title.slice(0, 95) }}...</b>
+           <span style="font-size:1.1em">{{ onRoad.title.slice(0, 95) }}...</span>
         </router-link>
         <br>
         including items:
@@ -145,17 +145,6 @@ export default {
     padding auto
     .selectItem
       width 100%
-    .submenu
-      border-bottom 1px solid #eee
-      margin-bottom 5px
-      a
-        color grey
-        margin-right 0.85em
-        &:hover
-          color darkgreen
-        &.router-link-active
-          color orange
-          font-weight 800
   .challenge-side
     position absolute
     top 10px

@@ -79,16 +79,6 @@ export default {
   position relative
   .demand-main
     padding auto
-    .submenu
-      margin-bottom 5px
-      a
-        color grey
-        margin-right 0.85em
-        &:hover
-          color darkgreen
-        &.router-link-active
-          color orange
-          font-weight 800
   .demand-side
     position absolute
     top 10px

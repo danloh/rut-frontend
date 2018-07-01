@@ -67,9 +67,6 @@ export default {
   .meta
     font-size 12px
     text-align right
-    a
-      &:hover
-        color red
   .clipbody
     padding 0px 10px
     color #2b2117

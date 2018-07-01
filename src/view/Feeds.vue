@@ -130,9 +130,6 @@ export default {
       padding 5px 10px
     .sidebody
       padding 5px 10px
-      a
-        &:hover
-          color #ff6600
   .heat
     border 1px solid #ddd
     background-color #fff

@@ -450,7 +450,4 @@ $bgcolor = lighten(#f6f6f1, 50%)
       margin-bottom 5px
       .demand-title
         font-size 0.85em
-        a
-          &:hover
-            color #ff6600
 </style>
