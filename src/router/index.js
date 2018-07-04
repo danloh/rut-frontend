@@ -137,21 +137,21 @@ const router = new Router({
       component: TagView,
       children: [
         { path: '', name: 'defaultTag', redirect: 'readlist' },
-        { path: 'readlist', name: 'TagReadlist', component: TagRut, meta: {auth: true} },
-        { path: 'demand', name: 'TagDemand', component: TagDemand, meta: {auth: true} },
-        { path: 'item', name: 'TagItem', component: TagItem, meta: {auth: true} },
-        { path: 'comment', name: 'TagComment', component: TagComment, meta: {auth: true} }
+        { path: 'readlist', name: 'TagReadlist', component: TagRut },
+        { path: 'demand', name: 'TagDemand', component: TagDemand },
+        { path: 'item', name: 'TagItem', component: TagItem },
+        { path: 'comment', name: 'TagComment', component: TagComment }
       ]
     },
     { path: '/demands',
       component: Demands,
       children: [
         { path: '', name: 'defaultdemand', redirect: 'popular' },
-        { path: 'popular', name: 'Hotdemand', component: createDemandList({ref: 'hot'}), meta: {auth: true} },
-        { path: 'new', name: 'Newdemand', component: createDemandList({ref: 'new'}), meta: {auth: true} }
+        { path: 'popular', name: 'Hotdemand', component: createDemandList({ref: 'hot'}) },
+        { path: 'new', name: 'Newdemand', component: createDemandList({ref: 'new'}) }
       ]
     },
-    { path: '/demand/:id', name: 'demand', component: DemandView, meta: {auth: true} },
+    { path: '/demand/:id', name: 'demand', component: DemandView },
     { path: '/challenge',
       component: Challenge,
       children: [
@@ -161,7 +161,7 @@ const router = new Router({
         { path: 'allclip', name: 'Allclip', component: createClipList({ref: 'All'}), meta: {auth: true} }
       ]
     },
-    { path: '/article/:id', name: 'Article', component: ArticleView, meta: {auth: true} },
+    { path: '/article/:id', name: 'Article', component: ArticleView },
     { path: '/articles',
       component: Articles,
       children: [

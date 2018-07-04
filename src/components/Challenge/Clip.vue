@@ -8,7 +8,7 @@
       {{ clip.chapnum && clip.sectnum && clip.pagenum 
           ? 'Ch' + clip.chapnum + ':' + clip.sectnum + 'P' + clip.pagenum 
           : '' }}
-      <router-link :to="'/item/' + fromitem.id" :title="fromitem.title">
+      <router-link v-if="ShowI" :to="'/item/' + fromitem.id" :title="fromitem.title">
         {{ fromitem.title.slice(0, 42) }}...
       </router-link>
       via 
@@ -28,7 +28,7 @@ import marked from '@/util/marked'
 
 export default {
   name: 'clip',
-  props: ['clip'],
+  props: ['clip', 'ShowI'],
   data () {
     return {
       vote: this.clip.vote

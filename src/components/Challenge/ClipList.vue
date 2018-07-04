@@ -3,7 +3,7 @@
     <div class="clip-list">
       <!--Here if :key=index,will run into problem when render, 
       reuse component, also in DemandList-->
-      <clip v-for="clip in currentClips" :key="clip.id" :clip="clip"></clip>
+      <clip v-for="clip in currentClips" :key="clip.id" :clip="clip" :ShowI="ShowI"></clip>
     </div>
     <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
@@ -22,7 +22,8 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'clip-list',
   props: {
-    param: Object
+    param: Object,
+    ShowI: {type: Boolean, default: true}
   },
   components: { Clip },
   computed: {

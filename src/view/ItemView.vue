@@ -19,20 +19,18 @@
           ...More
         </el-button>
       </div>
-      <div class="article-clip" v-if="canEdit">
-        <div class="clip-row">
-          <b>{{currentItem.clipcount | pluralise(' Quote')}}</b>
-          <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
-        </div>
-        <clip-list :param="cliplistParam"></clip-list>
-        <div class="article-row">
-          <b>{{currentItem.reviewcount | pluralise(' Review')}}</b>
-          <router-link class="editlink" :to="'/newarticle/' + currentItem.id" style="float:right">
-            ...Post Review
-          </router-link>
-        </div>
-        <article-list :param="reviewsParam"></article-list>
+      <div class="clip-row">
+        <b>{{currentItem.clipcount | pluralise(' Quote')}}</b>
+        <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
       </div>
+      <clip-list :param="cliplistParam" :ShowI="false"></clip-list>
+      <div class="article-row">
+        <b>{{currentItem.reviewcount | pluralise(' Review')}}</b>
+        <router-link class="editlink" :to="'/newarticle/' + currentItem.id" style="float:right">
+          ...Post Review
+        </router-link>
+      </div>
+      <article-list :param="reviewsParam"></article-list>
       <div class="inrut-row">
         <b>{{currentItem.rutcount | pluralise(' List')}}</b>
       </div>
