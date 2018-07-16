@@ -19,21 +19,18 @@
           ...More
         </el-button>
       </div>
-      <div class="clip-row">
+      <br>
+      <!-- <div class="clip-row" v-if="currentItem.clipcount > 0">
         <b>{{currentItem.clipcount | pluralise(' Quote')}}</b>
-        <router-link class="editlink" to="/challenge" style="float:right">...Excerpt Quote</router-link>
-      </div>
+      </div> -->
       <clip-list :param="cliplistParam" :ShowI="false"></clip-list>
-      <div class="article-row">
+      <!-- <div class="article-row" v-if="currentItem.reviewcount > 0">
         <b>{{currentItem.reviewcount | pluralise(' Review')}}</b>
-        <router-link class="editlink" :to="'/newarticle/' + currentItem.id" style="float:right">
-          ...Post Review
-        </router-link>
-      </div>
+      </div> -->
       <article-list :param="reviewsParam"></article-list>
-      <div class="inrut-row">
+      <!-- <div class="inrut-row" v-if="currentItem.rutcount > 0">
         <b>{{currentItem.rutcount | pluralise(' List')}}</b>
-      </div>
+      </div> -->
       <div class="include" v-if="currentItem.rutcount > 0">
         <div v-for="(rut, index) in inRuts" :key="index" :rut="rut" class="in-rut">
           <router-link :to="'/readlist/' + rut.id" :title="rut.title">
@@ -68,6 +65,10 @@
       </div>
       <router-link :to="'/myrc/item/' + currentItem.id">
         <b>My Track</b>
+      </router-link><br>
+      <router-link class="editlink" to="/challenge">...Excerpt Quote</router-link><br>
+      <router-link class="editlink" :to="'/newarticle/' + currentItem.id">
+        ...Post Review
       </router-link>
     </div>
   </div>

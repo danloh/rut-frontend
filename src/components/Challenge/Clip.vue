@@ -66,7 +66,6 @@ export default {
   position relative
   .meta
     font-size 12px
-    text-align right
   .clipbody
     padding 0px 10px
     color #2b2117
