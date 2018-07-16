@@ -16,6 +16,10 @@
                 placeholder="or Text Content">
       </el-input>
     </el-form-item>
+    <el-form-item prop="author" style="margin-bottom:10px">
+      <el-input v-model="articleForm.author" placeholder="Author">
+      </el-input>
+    </el-form-item>
     <el-form-item prop="spoiler" v-if="itemid && articleForm.content.trim()">
       <el-radio-group v-model="articleForm.spoiler" size="mini">
         <el-radio-button label="No Spoiler"></el-radio-button>
@@ -45,6 +49,7 @@ export default {
       articleForm: {
         title: '',
         url: '',
+        author: '',
         content: '',
         spoiler: 'No Spoiler'
       },
@@ -69,6 +74,7 @@ export default {
             itemid: this.itemid,
             title: form.title.trim(),
             url: url,
+            author: form.author.trim(),
             content: content,
             spoiler: form.spoiler
           }

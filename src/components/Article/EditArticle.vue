@@ -15,6 +15,10 @@
         </el-input>
         <md-tool :pretext="articleForm.article" @insertmd="updateM"></md-tool>
       </el-form-item>
+      <el-form-item prop="author" style="margin-bottom:10px">
+        <el-input v-model="articleForm.author" placeholder="Author">
+        </el-input>
+      </el-form-item>
       <el-form-item prop="spoiler" v-if="showSpoiler">
         <el-radio-group v-model="articleForm.spoiler">
           <el-radio-button label="No Spoiler"></el-radio-button>
@@ -47,6 +51,7 @@ export default {
         title: '',
         url: '',
         content: '',
+        author: '',
         spoiler: 'No Spoiler'
       },
       rules: {
@@ -80,6 +85,7 @@ export default {
             title: form.title.trim(),
             url: url,
             content: content,
+            author: form.author.trim(),
             spoiler: form.spoiler
           }
           let articleid = this.$route.params.id
@@ -109,6 +115,7 @@ export default {
       this.articleForm.title = article.title
       this.articleForm.url = article.url
       this.articleForm.content = article.content
+      this.articleForm.author = article.author
       this.articleForm.spoiler = article.spoiler ? 'Spoiler Ahead' : 'No Spoiler'
       let submitorID = article.submitor.id
       let currentUserID = this.$store.getters.currentUserID

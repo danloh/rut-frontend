@@ -24,9 +24,16 @@
       </div>
       <div class="article-bar">
         By
-        <router-link :to="'/profile/' + submitor.id">
-          {{ submitor.name }}
-        </router-link>
+        <template v-if="article.author">
+          <a :href="article.url" target="_blank" rel="nofollow noopener noreferrer">
+            {{ article.author }}
+          </a>
+        </template>
+        <template v-else>
+          <router-link :to="'/profile/' + submitor.id">
+            {{ submitor.name }}
+          </router-link>
+        </template>
         {{ article.timestamp | timeAgo }}
         | {{ vote }}
         <el-button type="text" @click="uparticle">vote</el-button>

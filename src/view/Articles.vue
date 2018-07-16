@@ -2,16 +2,16 @@
   <div class="article-page">
     <div class="article-main">
       <div class="submenu">
+        <div v-show="showForm">
+          <article-form :show.sync="showForm"></article-form>
+        </div>
         <b>News For Readers&nbsp;&nbsp;</b>
         <router-link to="/articles/top">Top</router-link>
         <router-link to="/articles/new">New</router-link>
         <el-button type="text" style="float:right" v-if="canSub"
                    @click="showForm=!showForm">
-                   Submit
+                   {{ showForm ? 'Cancel' : 'Submit' }}
         </el-button>
-      </div>
-      <div v-show="showForm">
-        <article-form :show.sync="showForm"></article-form>
       </div>
       <div class="article-view">
         <router-view></router-view>
