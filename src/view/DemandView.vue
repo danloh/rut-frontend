@@ -69,7 +69,7 @@ import Comment from '@/components/Comment/Comment.vue'
 import Reply from '@/components/Comment/Reply.vue'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 import {
-  fetchProfileRuts, rutAsAnswer,
+  fetchProfileRuts, rutAsAnswer, fetchDemand,
   fetchDemandComments, fetchDemandAnswers
 } from '@/api/api'
 import { checkAuth } from '@/util/auth'
@@ -108,14 +108,16 @@ export default {
   methods: {
     loadDemandData () {
       let demandid = this.$route.params.id
-      this.$store.dispatch('getDemand', demandid)
-      .then(resp => {
-        let data = resp.data
-        this.demandDetail = data
-        this.answers = data.answers
-        this.answerCount = data.answercount
-        this.comments = data.comments
-        this.commentCount = data.commentcount
+      fetchDemand(demandid).then(resp => {
+        this.demandDetail = resp.data
+        this.answerCount = resp.data.answercount
+        this.commentCount = resp.data.commentcount
+      })
+      fetchDemandAnswers(demandid).then(resp => {
+        this.answers = resp.data
+      })
+      fetchDemandComments(demandid).then(resp => {
+        this.comments = resp.data
       })
     },
     updateNew (data) {

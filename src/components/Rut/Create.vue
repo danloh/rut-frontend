@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { newRut, fetchOnlyDemand } from '@/api/api'
+import { newRut, fetchDemand } from '@/api/api'
 import { trimValid } from '@/util/filters'
 import MdTool from '@/components/Misc/MdTool.vue'
 
@@ -134,7 +134,7 @@ export default {
         if (demandG.id === Number(demandid)) {
           this.demandBody = demandG.body.slice(0, 142)
         } else {
-          fetchOnlyDemand(demandid).then(resp => {
+          fetchDemand(demandid).then(resp => {
             this.demandBody = resp.data.body.slice(0, 142)
           })
         }
