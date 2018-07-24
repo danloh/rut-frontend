@@ -14,7 +14,7 @@
           Headline
         </router-link>
         <router-link to="/demands">
-          Request
+          Ask
         </router-link>
         <!-- <router-link to="/circles">
           Circle

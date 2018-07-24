@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="Flag as" prop="flag">
         <el-radio-group v-model="checkForm.flag">
-          <el-radio-button label="Have Done"></el-radio-button>
+          <el-radio-button label="Done"></el-radio-button>
           <el-radio-button label="Schedule"></el-radio-button>
           <el-radio-button label="Working"></el-radio-button>
         </el-radio-group>
@@ -110,7 +110,7 @@
       </el-form-item>
       <el-form-item label="Flag as" prop="flag">
         <el-radio-group v-model="itemForm.flag">
-          <el-radio-button label="Have Done"></el-radio-button>
+          <el-radio-button label="Done"></el-radio-button>
           <el-radio-button label="Schedule"></el-radio-button>
           <el-radio-button label="Working"></el-radio-button>
         </el-radio-group>

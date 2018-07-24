@@ -78,13 +78,13 @@
           {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-if="flagAction!=='Have Done'">
+          <el-dropdown-item v-if="flagAction!=='Done'">
             <el-button @click="showAndloadRoads" 
                        type="text" style="color:orange">
                        Add to Map
             </el-button>
           </el-dropdown-item>
-          <el-dropdown-item v-if="flagAction=='Have Done'">
+          <el-dropdown-item v-if="flagAction=='Done'">
             <el-button @click="showAndloadRuts" 
                        type="text" style="color:green">
                        Add to List
@@ -97,7 +97,7 @@
             <span @click="openToFlag('Working')">Working</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('Done')">Have Done</span>
+            <span @click="openToFlag('Done')">Done</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -215,7 +215,7 @@ export default {
   components: { MdTool },
   data () {
     return {
-      flagAction: 'Flag It',
+      flagAction: 'Flag',
       flagNote: '',
       flagTime: '',
       showAddtoRut: false,
@@ -263,7 +263,7 @@ export default {
           this.noteForm.note = resp.data.note
         })
       } else {
-        this.flagAction = 'Flag It'
+        this.flagAction = 'Flag'
         this.flagNote = ''
       }
     },
@@ -302,7 +302,7 @@ export default {
       let params = {'note': note || 'done'}
       flagItem('done', this.item.id, params)
       .then(() => {
-        this.flagAction = 'Have Done'
+        this.flagAction = 'Done'
         this.flagNote = note
       })
     },
@@ -356,7 +356,7 @@ export default {
     },
     // pre-load created ruts before add item to one of
     showAndloadRuts () {
-      if (checkAuth() && this.flagAction === 'Have Done') {
+      if (checkAuth() && this.flagAction === 'Done') {
         // Check store first, reduce api call
         let preRuts = this.$store.getters.createdRuts
         if (preRuts.length === 0) {
@@ -414,7 +414,7 @@ export default {
     },
     // get roadmap before add item to one of
     showAndloadRoads () {
-      if (checkAuth() && this.flagAction !== 'Have Done') {
+      if (checkAuth() && this.flagAction !== 'Done') {
         // Check store first, reduce api call
         let preRoads = this.$store.getters.onRoads
         if (preRoads.length === 0) {

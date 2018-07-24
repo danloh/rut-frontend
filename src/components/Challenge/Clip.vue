@@ -74,5 +74,5 @@ export default {
       position absolute
       top 0px
       left 0px
-      color grey
+      color #ff6600
 </style>
