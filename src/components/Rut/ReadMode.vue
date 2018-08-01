@@ -3,13 +3,11 @@
     <div class="rut-view">
       <h2 style="font-size:1.8em">{{ rutDetail.title }}</h2>
       <div v-html="md(intro)"></div>
-      <br>
       <div v-for="tip in tips" :key="tip.cid">
         <div class="title" style="margin-top:10px">
-          <b style="font-size:1.1em;color:grey">#{{tip.order}}&nbsp;&nbsp;{{tip.item.title}}</b>
-          <a :href="'https://www.google.com/search?q=' + tip.item.title" target="_blank"
-            style="color:#999;font-size:14px">
-            ({{tip.item.byline}}&nbsp;#{{tip.item.uid}})
+          <b style="font-size:1.05em">{{tip.order}}.&nbsp;{{tip.item.title}}</b>
+          <a :href="'/item/' + tip.item.id" target="_blank" style="color:#aaa;font-size:14px">
+            {{tip.item.byline}}&nbsp;#{{tip.item.uid}}
           </a>
         </div>
         <div v-html="md(tip.tip)"></div>
