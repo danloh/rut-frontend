@@ -22,8 +22,7 @@
       Notice: Will use email address for account confirmation and password resetting only, 
       will never send you any spams;
       Will Use Cookies to keep you logged in for a limited period, 
-      Never collect any Private Information. 
-      The service may not function properly if disable cookies.
+      Never collect any Private Information.
     </p>
     <el-form-item>
       <el-button class="blockbtn" type="primary" 

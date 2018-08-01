@@ -32,7 +32,7 @@
     </div>
     <div class="submenu">
       <router-link :to="'/tag/' + tagname +'/readlist'">List</router-link>
-      <router-link :to="'/tag/' + tagname +'/demand'">Request</router-link>
+      <router-link :to="'/tag/' + tagname +'/demand'">Ask</router-link>
       <router-link :to="'/tag/' + tagname +'/item'">Item</router-link>
       <router-link :to="'/tag/' + tagname +'/comment'">Discuss</router-link>
     </div>

@@ -19,6 +19,14 @@
         </el-button>
       </div>
     </div>
+    <!-- <div class="on-road" v-if="onRoad.title">
+      <b>Current Challenge: </b>
+      <small>Due: {{ dueDate | toMDY(rep=false) }} - {{ dueDate | timeGap(rep=false) }}</small>
+      <br>
+      <router-link :to="'/roadmap/' + onRoad.id" :title="onRoad.title">
+          <span style="font-size:1.1em">{{ onRoad.title.slice(0, 72) }}...</span>
+      </router-link>
+    </div> -->
     <div class="profile-view">
       <router-view></router-view>
     </div>
@@ -90,7 +98,10 @@
 </template>
 
 <script>
-import { fetchUser, checkFollowing, followOne } from '@/api/api'
+import {
+  fetchUser, checkFollowing, followOne
+  // , fetchOnRoad
+} from '@/api/api'
 import { checkAuth } from '@/util/auth'
 import Avatar from '@/components/Profile/Avatar.vue'
 
@@ -107,7 +118,9 @@ export default {
       userid: this.$route.params.id,
       showSetting: false,
       action: 'Follow',
-      followedCount: 0 // this user following other
+      followedCount: 0, // this user following other
+      onRoad: {},
+      dueDate: ''
     }
   },
   methods: {
@@ -128,6 +141,11 @@ export default {
           this.showSetting = false
         }
       })
+      // fetchOnRoad({'userid': userid, 'noitem': true})
+      // .then(resp => {
+      //   this.onRoad = resp.data
+      //   this.dueDate = resp.data.deadline
+      // })
     },
     checkFollow () {
       if (checkAuth()) {
@@ -181,13 +199,17 @@ export default {
     border-bottom 1px dashed orange
     min-height 60px
     padding 5px 215px 5px 10px
-    margin-bottom 10px
+    margin-bottom 5px
     position relative
     .fobar
       position absolute
       top 10px
       right 0
       width 210px
+  .on-road
+    padding 5px
+    background-color #e5ebe4
+    margin-bottom 10px
   .profile-view
     padding auto
     min-height 400px
