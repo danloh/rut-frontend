@@ -91,7 +91,7 @@ const newRut = params => {
 const fetchIndexRuts = params => {
   return request(`${base}/ruts/index`, params)
 }
-// get some working items to challenge page
+// get some in-progress items to challenge page
 const fetchChallengeItems = params => {
   return request(`${base}/users/challengeitems`, params)
 }

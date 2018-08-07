@@ -17,11 +17,11 @@
       <el-form-item label="Input URL : e.g. Amazon Book Url or Coursera Link" prop="url">
         <el-input type="textarea" v-model="checkForm.url" autosize></el-input>
       </el-form-item>
-      <el-form-item label="Flag as" prop="flag">
+      <el-form-item label="Track" prop="flag">
         <el-radio-group v-model="checkForm.flag">
           <el-radio-button label="Done"></el-radio-button>
-          <el-radio-button label="Schedule"></el-radio-button>
-          <el-radio-button label="Working"></el-radio-button>
+          <el-radio-button label="Todo"></el-radio-button>
+          <el-radio-button label="Doing"></el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -108,11 +108,11 @@
         </el-input>
         <md-tool :pretext="itemForm.details" @insertmd="updateN"></md-tool>
       </el-form-item>
-      <el-form-item label="Flag as" prop="flag">
+      <el-form-item label="Track" prop="flag">
         <el-radio-group v-model="itemForm.flag">
           <el-radio-button label="Done"></el-radio-button>
-          <el-radio-button label="Schedule"></el-radio-button>
-          <el-radio-button label="Working"></el-radio-button>
+          <el-radio-button label="Todo"></el-radio-button>
+          <el-radio-button label="Doing"></el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item>

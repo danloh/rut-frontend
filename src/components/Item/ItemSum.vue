@@ -91,10 +91,10 @@
             </el-button>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('Schedule')">Schedule</span>
+            <span @click="openToFlag('Todo')">Todo</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="openToFlag('Working')">Working</span>
+            <span @click="openToFlag('Doing')">Doing</span>
           </el-dropdown-item>
           <el-dropdown-item>
             <span @click="openToFlag('Done')">Done</span>
@@ -148,7 +148,7 @@
     </el-dialog>
     <!-- end redirect dialog-->
     <!-- addnote dialog -->
-    <el-dialog :title="'Add Note and Flag As ' + flagTo"  width="450px" 
+    <el-dialog :title="'Track and Note ' + flagTo"  width="450px" 
                :visible.sync="showNoteDialog">
       <el-form :model="noteForm" :rules="noteRules" ref="noteForm">
         <el-form-item prop="note">
@@ -215,7 +215,7 @@ export default {
   components: { MdTool },
   data () {
     return {
-      flagAction: 'Flag',
+      flagAction: 'Options',
       flagNote: '',
       flagTime: '',
       showAddtoRut: false,
@@ -263,7 +263,7 @@ export default {
           this.noteForm.note = resp.data.note
         })
       } else {
-        this.flagAction = 'Flag'
+        this.flagAction = 'Options'
         this.flagNote = ''
       }
     },
@@ -282,19 +282,19 @@ export default {
         })
       }
     },
-    flagSchedule (note) {
+    flagTodo (note) {
       let params = {'note': note || 'todo'}
       flagItem('todo', this.item.id, params)
       .then(() => {
-        this.flagAction = 'Scheduled'
+        this.flagAction = 'Todo'
         this.flagNote = note
       })
     },
-    flagWorking (note) {
+    flagDoing (note) {
       let params = {'note': note || 'doing'}
       flagItem('doing', this.item.id, params)
       .then(() => {
-        this.flagAction = 'Working'
+        this.flagAction = 'Doing'
         this.flagNote = note
       })
     },
@@ -312,11 +312,11 @@ export default {
           let note = form.note.trim()
           let to = this.flagTo
           switch (to) {
-            case 'Schedule':
-              this.flagSchedule(note)
+            case 'Todo':
+              this.flagTodo(note)
               break
-            case 'Working':
-              this.flagWorking(note)
+            case 'Doing':
+              this.flagDoing(note)
               break
             case 'Done':
               this.flagDone(note)

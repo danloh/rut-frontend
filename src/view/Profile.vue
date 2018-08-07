@@ -65,16 +65,16 @@
           <small style="color:orange"> +Share</small>
         </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/scheduled/'">
-          <b style="color:coral">#</b> Scheduled
+        <router-link :to="'/profile/' + userid + '/todo/'">
+          <b style="color:coral">#</b> Todo
         </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/working/'">
-          <b style="color:coral">#</b> Working
+        <router-link :to="'/profile/' + userid + '/doing/'">
+          <b style="color:coral">#</b> Doing
         </router-link>
         <br>
-        <router-link :to="'/profile/' + userid + '/havedone/'">
-          <b style="color:coral">#</b> Have Done
+        <router-link :to="'/profile/' + userid + '/done/'">
+          <b style="color:coral">#</b> Done
         </router-link>
         <br>
         <router-link :to="'/profile/' + userid + '/articles/'">

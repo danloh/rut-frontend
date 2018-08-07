@@ -12,7 +12,7 @@
           <el-form-item prop="doing" style="margin-bottom:8px" 
                         v-show="clipForm.clip.trim()">
             <el-select class="selectItem" v-model="clipForm.doingItemID" 
-                       placeholder="Pick an item which you are working">
+                       placeholder="Pick an item which is in progress">
               <el-option v-for="i in doingItems" 
                          :key="i.id" 
                          :label="i.title" 
