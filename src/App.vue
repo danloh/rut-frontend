@@ -19,7 +19,7 @@
         <!-- <router-link to="/circles">
           Circle
         </router-link> -->
-        <router-link to="/challenge">
+        <router-link to="/challenge" v-if="authed">
           Spark
         </router-link>
         <div class="right-menu">

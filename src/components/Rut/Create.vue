@@ -27,22 +27,20 @@
                   placeholder="Help readers understand your experience">
         </el-input>
       </el-form-item>
-      <!-- <el-form-item label="Suitable for" prop="rating">
-        <el-select v-model="createForm.rating">
-          <el-option v-for="r in ratings" 
-                     :key="r.value" 
-                     :label="r.label" 
-                     :value="r.value">
+      <el-form-item label="Who Can Edit?" prop="editable">
+        <el-select v-model="createForm.editable" filterable allow-create>
+          <el-option v-for="w in whos" 
+                     :key="w.value" :label="w.label" :value="w.value">
           </el-option>
         </el-select>
-      </el-form-item> -->
-      <el-form-item label="Who Can Edit?" prop="editable">
+      </el-form-item>
+      <!-- <el-form-item label="Who Can Edit?" prop="editable">
         <el-radio-group v-model="createForm.editable">
           <el-radio-button label="Creator"></el-radio-button>
-          <!-- <el-radio-button label="Contributors"></el-radio-button> -->
+          <el-radio-button label="Contributors"></el-radio-button>
           <el-radio-button label="Everyone"></el-radio-button>
         </el-radio-group>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="success" plain size="mini" class="blockbtn"
                    @click="onCreate('createForm', createForm)">
@@ -83,6 +81,9 @@ export default {
           { max: 255, message: 'Max Length should be 255', trigger: 'change' }
         ]
       },
+      whos: [
+        {value: 'Creator', label: 'Creator'}, {value: 'Everyone', label: 'Everyone'}
+      ],
       // ratings: [
       //   {value: 'All', label: 'All'}, {value: 'Secondary', label: 'Secondary'},
       //   {value: 'College', label: 'College'}, {value: 'Elementary', label: 'Elementary'},
@@ -103,7 +104,7 @@ export default {
             intro: form.intro.trim(),
             rating: form.rating,
             credential: form.credential.trim(),
-            editable: 'Creator' // form.editable
+            editable: form.editable
           }
           newRut(data).then(resp => {
             let id = resp.data.id
@@ -157,4 +158,6 @@ export default {
   .title
     text-align center
     margin-bottom 20px
+.el-select
+  width 80%
 </style>

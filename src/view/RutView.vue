@@ -33,11 +33,6 @@
       <div class="title">
         <h2>{{ rutDetail.title }}</h2>
         <p class="meta">
-          <span v-if="!isEveryone">By 
-            <router-link :to="'/profile/' + creatorid">
-              {{ creatorname }} 
-            </router-link> 
-          </span> 
           Created: {{ rutDetail.createat | toMDY }} 
           <span v-if="rutDetail.renewat"> | Updated: {{ rutDetail.renewat | toMDY }}</span>
           | including {{ rutDetail.itemcount | pluralise('item') }} 
@@ -119,6 +114,9 @@
       <div class="credential">
         <p class="credential-title">Creator's Credential</p>
         <div class="credential-body">
+          <span> 
+            <a :href="crediturl">{{ creditto }}</a> 
+          </span>
           <div v-html="md(creForm.credential || aboutcreator || '...')"></div>
           <el-button class="indicator" type="text" @click="toEdit('cre')" v-show="canEdit">
             ..Edit
@@ -180,7 +178,8 @@ export default {
       tips: [],
       demands: [],
       creatorid: null,
-      creatorname: '',
+      creditto: '',
+      crediturl: '',
       aboutcreator: '',
       convertfrom: {},
       isEveryone: false,
@@ -219,7 +218,8 @@ export default {
         this.tags = data.tags
         this.starCount = data.starcount
         this.creatorid = data.creator.id
-        this.creatorname = data.creator.name
+        this.creditto = data.credit_to
+        this.crediturl = data.credit_url
         this.convertfrom = data.convertfrom
         this.aboutcreator = data.creator.about
         this.isEveryone = data.editable === 'Everyone'

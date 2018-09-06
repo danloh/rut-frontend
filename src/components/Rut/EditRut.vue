@@ -20,22 +20,20 @@
         </el-input>
         <md-tool :pretext="editForm.intro" @insertmd="updateP"></md-tool>
       </el-form-item>
-      <el-form-item label="Who Can Edit?" prop="editable">
+      <!-- <el-form-item label="Who Can Edit?" prop="editable">
         <el-radio-group v-model="editForm.editable">
           <el-radio-button label="Creator"></el-radio-button>
-          <!-- <el-radio-button label="Contributors"></el-radio-button> -->
+          <el-radio-button label="Contributors"></el-radio-button>
           <el-radio-button label="Everyone"></el-radio-button>
         </el-radio-group>
-      </el-form-item>
-      <!-- <el-form-item label="Suitable for" prop="rating">
-        <el-select v-model="editForm.rating">
-          <el-option v-for="r in ratings" 
-                     :key="r.value" 
-                     :label="r.label" 
-                     :value="r.value">
+      </el-form-item> -->
+      <el-form-item label="Who Can Edit?" prop="editable">
+        <el-select v-model="editForm.editable" filterable allow-create>
+          <el-option v-for="w in whos" 
+                     :key="w.value" :label="w.label" :value="w.value">
           </el-option>
         </el-select>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item>
         <el-button type="success" size="mini" class="blockbtn"
                    @click="onEdit('editForm', editForm)">
@@ -76,6 +74,9 @@ export default {
           { max: 255, message: 'Max Length should be 255', trigger: 'change' }
         ]
       },
+      whos: [
+        {value: 'Creator', label: 'Creator'}, {value: 'Everyone', label: 'Everyone'}
+      ],
       // ratings: [
       //   {value: 'All', label: 'All'}, {value: 'Secondary', label: 'Secondary'},
       //   {value: 'College', label: 'College'}, {value: 'Elementary', label: 'Elementary'},
@@ -145,4 +146,6 @@ export default {
     border 1px dotted #689f38
   .title
     margin-bottom 20px
+.el-select
+  width 80%
 </style>

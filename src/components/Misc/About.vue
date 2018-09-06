@@ -38,7 +38,7 @@
       <a href="mailto:readup.tips@gmail.com?subject=Feedback...">Here</a>,
       Any feedback is appreciated.</p>
       <p>Also, You can follow us on Twitter 
-      <a href="https://twitter.com/ReadupTips" target="_blank" rel="nofollow noopener noreferrer">@ReadupTips</a></p>
+      <a href="https://twitter.com/ReadupHub" target="_blank" rel="nofollow noopener noreferrer">@ReadupHub</a></p>
     </div>
     <div class="about-side">
       <a href="/register">Sign up now</a>
