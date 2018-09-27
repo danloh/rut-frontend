@@ -15,19 +15,19 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.3.7",
-    "es6-promise": "^4.2.4",
+    "element-ui": "^2.4.7",
+    "es6-promise": "^4.2.5",
     "js-cookie": "^2.2.0",
-    "marked": "^0.4.0",
-    "vue": "^2.5.16",
+    "marked": "^0.5.1",
+    "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "d3": "3.5.17",
-    "lodash": "^4.17.10",
-    "moment": "^2.22.1"
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2"
   },
   "devDependencies": {
-    "autoprefixer": "^8.5.0",
+    "autoprefixer": "^9.1.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.4",
