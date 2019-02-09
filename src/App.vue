@@ -7,125 +7,17 @@
               RutHub<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </small>
         </router-link>
-        <router-link to="/feeds" v-if="authed">
-          Feed
-        </router-link>
-        <router-link to="/articles">
-          Headline
-        </router-link>
-        <router-link to="/demands">
-          Ask
-        </router-link>
-        <!-- <router-link to="/circles">
-          Circle
-        </router-link> -->
-        <router-link to="/challenge" v-if="authed">
-          Spark
-        </router-link>
-        <div class="right-menu">
-          <div v-if="authed">
-            <el-dropdown>
-              <el-button type="success" size="small">
-                <i class="el-icon-menu"></i>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <router-link to="/newroad">
-                    <b style="color:orange">+ RoadMap</b>
-                  </router-link>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <router-link :to="'/profile/' + currentUserID">> My Profile</router-link>
-                </el-dropdown-item>
-                <!-- <el-dropdown-item>
-                  <router-link to="/create">+ List</router-link>
-                </el-dropdown-item> -->
-                <el-dropdown-item divided>
-                  <el-button type="text" @click="onLogout">Log out</el-button>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-          <div v-else>
-            <el-button type="text" @click="toLogin=true">
-              Log in
-            </el-button>
-          </div>
-        </div>
       </nav>
     </header>
     <div class="view">
       <router-view></router-view>
-      <!-- login dialog -->
-      <el-dialog :visible.sync="toLogin" width="450px" class="loginDialog">
-        <login-form :next="'current'" @close="toLogin=false"></login-form>
-      </el-dialog>
-      <!-- end login dialog -->
     </div>
-    <footer class="footer">
-      <div class="bottom">
-        ©RutHub - since 2018
-        | <a href="/newitem">submit</a>
-        | <a href="/about">About</a>
-        | <a href="/about">Terms</a>
-        <!--google site search -->&nbsp;&nbsp;&nbsp;
-        <el-input size="mini" style="width:16em"
-                  v-model="searchWord"
-                  @keyup.enter.native="searchItem" 
-                  placeholder="Search">
-                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
-        </el-input>
-      </div>
-    </footer>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import LoginForm from '@/components/Auth/LoginForm.vue'
-import { searchItems } from '@/api/api'
-import { checkAuth } from '@/util/auth'
-
 export default {
   name: 'app',
-  components: { LoginForm },
-  data () {
-    return {
-      searchWord: '',
-      toLogin: false
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'currentUserID',
-      'authed'
-    ])
-  },
-  methods: {
-    onLogout () {
-      this.$store.commit('DEL_TOKEN')
-      this.$router.push('/')
-    },
-    siteSearch () {
-      let keyword = this.searchWord
-      if (keyword !== '') {
-        window.open('https://www.google.com/search?q=site:ruthub.com/%20' + keyword, '_blank')
-        return false
-      } else {
-        return false
-      }
-    },
-    searchItem () {
-      if (checkAuth() && this.searchWord.trim()) {
-        let param = {'uid_or_title': this.searchWord.trim()}
-        searchItems(0, param).then(resp => {
-          this.$store.commit('SET_SEARCH_ITEMS', resp.data)
-          this.$router.push('/searchresult/item')
-        })
-      }
-    }
-  }
 }
 </script>
 
@@ -160,8 +52,6 @@ blockquote
   border-left: 3px solid lighten(orange, 80%)
   margin: 5px
   padding-left: 12px
-.el-input__inner, .el-textarea__inner
-  font-size 14px
 .header
   background-color #f5f5f5
   border-bottom 2px solid #eee
@@ -212,12 +102,4 @@ blockquote
     &.router-link-active
       color orange
       font-weight 800
-.footer
-  border-top 2px dotted #cfc0cf
-  margin-top 3em
-  background-color #f5f5f5
-  .bottom
-    max-width 960px
-    margin 5px auto
-    font-size 0.75em
 </style>
