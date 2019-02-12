@@ -5,7 +5,7 @@
         <img class="cover" :src="cover" referrerPolicy="no-referrer" alt="Cover">
       </span>
       <span class="title">
-        <router-link :to="'/readlist/' + rut.id"> {{ rut.title }}</router-link>
+        <router-link :to="'/r/' + rut.id"> {{ rut.title }}</router-link>
       </span>
       <div class="intro" v-html="intro"></div>
     </router-link>
