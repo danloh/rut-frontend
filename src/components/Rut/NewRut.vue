@@ -1,10 +1,10 @@
 <template>
   <div class="create-page">
-    <!-- <h3 class="title">Create</h3>
-    <p style="color:green;font-size:0.8em;text-align:center">
-      collection of books, courses, etc. 
-    </p> -->
-    <form>
+    <div class="title">
+      <span>Create: </span>
+      <small style="color:green;font-size:0.8em;">collection of books, courses, etc.</small> 
+    </div>
+    <form class="create-form">
       <v-text-field
         v-model="title"
         label="Title"
@@ -48,17 +48,14 @@ export default {
     onCreate () {
       let data = {
         title: this.title.trim(),
-        intro: this.content.trim(),
+        content: this.content.trim(),
         url: this.url.trim(),
-        editable: this.editable
+        user_id: '1fa',
+        user_intro: 'hello'
       }
       newRut(data).then(resp => {
-        let id = resp.data.id
+        let id = resp.data.rut.id
         this.$router.push(`/r/${id}`)
-        this.$message({
-          showClose: true,
-          message: 'New List Created, Now Add item to it'
-        })
       })
     }
   }
@@ -69,12 +66,9 @@ export default {
 .create-page
   padding 10px 160px 10px 120px
   position relative
-  .create-form
-    padding 10px 20px
-    border 1px dotted #689f38
   .title
-    text-align center
-    margin-bottom 20px
-.el-select
-  width 80%
+    padding-bottom 10px
+    border-bottom  1px dotted
+  .create-form
+    padding 10px
 </style>

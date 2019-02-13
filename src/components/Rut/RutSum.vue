@@ -7,11 +7,11 @@
       <span class="title">
         <router-link :to="'/r/' + rut.id"> {{ rut.title }}</router-link>
       </span>
-      <div class="intro" v-html="intro"></div>
+      <div class="content" v-html="content"></div>
     </router-link>
     <span class="meta">
-      <span>  including {{ rut.itemcount | pluralise('item') }}  
-              | <router-link :to="'/readlist/' + rut.id">...See Detail</router-link>
+      <span>  including {{ rut.item_count | pluralise('item') }}  
+              | <router-link :to="'/r/' + rut.id">...See Detail</router-link>
       </span>
     </span>
   </div>
@@ -28,9 +28,9 @@ export default {
     cover () {
       return this.rut.cover
     },
-    intro () {
-      let content = marked(this.rut.intro)
-      return showLess(content)
+    content () {
+      let c = marked(this.rut.content)
+      return showLess(c)
     }
   }
 }
@@ -54,7 +54,7 @@ export default {
   .title
     font-size 20px
     padding-top 10px
-  .intro
+  .content
     color #828282
     font-size: 16px
   .meta

@@ -1,17 +1,17 @@
 <template>
-  <div class="rut-page">
+  <div class="rut-page" v-if="rut">
     <div class="rut-view">
       <div class="title">
-        <h2>{{ rut.title }}</h2>
+        <h2>{{ rutTitle }}</h2>
         <p class="meta">
-          <span v-if="rut.credit_to">{{ rut.credit_to }}</span>
-          | Created: {{ rut.createat | toMDY }} 
-          <span v-if="rut.renewat"> | Updated: {{ rut.renewat | toMDY }}</span>
-          | including {{ rut.itemcount | pluralise('item') }} 
+          <!-- <span v-if="rut.url">{{ rut.url }}</span> -->
+          | Created: {{ rut.create_at | toMDY }} 
+          <!-- <span v-if="rut.renewat"> | Updated: {{ rut.renewat | toMDY }}</span> -->
+          | including {{ rut.item_count | pluralise('item') }} 
         </p>
       </div>
-      <div class="intro">
-        <div v-html="md(rut.intro)"></div>
+      <div class="content">
+        <div v-html="md(rut.content)"></div>
       </div>
     </div>
     <div class="rut-side"></div>
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { fetchRut } from '../api'
 import marked from '../util/marked'
 
 export default {
@@ -27,22 +26,23 @@ export default {
   components: { },
   data () {
     return {
-      rut: {},
+      rutTitle: '',
       rutid: ''
     }
   },
   computed: {
+    rut () {
+      return this.$store.state.rut.ruts[this.$route.params.id]
+    }
   },
   title () {
-    return this.rut.title
+    return this.rutTitle
   },
   methods: {
     loadRut () {
       let rid = this.$route.params.id
-      fetchRut(rid).then(resp => {
-        let data = resp.data
-        this.rut = data
-        this.rutid = data.id
+      this.$store.dispatch('getRut', rid).then(resp => {
+        this.rutTitle = resp.title
       })
     },
     md (content) {
@@ -71,7 +71,7 @@ $bgcolor = lighten(#f6f6f1, 50%)
       .meta 
         color #828282
         font-size 12px
-    .intro
+    .content
       background-color $bgcolor
       padding 5px 10px
       border-bottom 2px solid #eee

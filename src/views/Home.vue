@@ -11,7 +11,6 @@
 
 <script>
 import RutSum from '../components/Rut/RutSum.vue'
-import { fetchIndexRuts } from '../api'
 
 export default {
   name: 'home',
@@ -24,9 +23,8 @@ export default {
   },
   methods: {
     loadIndex () {
-      fetchIndexRuts().then(resp => {
-        this.$store.commit('SET_INDEX', resp.data)
-        this.indexRuts = resp.data.ruts
+      this.$store.dispatch('getIndexRuts').then(resp => {
+        this.indexRuts = resp
       })
     }
   },
