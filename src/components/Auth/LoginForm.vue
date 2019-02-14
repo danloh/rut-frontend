@@ -1,20 +1,20 @@
 <template>
   <div>
     <h3 class="title">Please Log in</h3>
-    <form class="login-form">
+    <v-form ref="form" class="login-form">
       <v-text-field
         v-model="username"
         label="Username"
-        required
+        :rules="inRule"
       ></v-text-field>
       <v-text-field
         v-model="password"
         label="Password"
         :type="'password'"
-        required
+        :rules="inRule"
       ></v-text-field>
       <v-btn @click="onLogin">Login</v-btn>
-    </form>
+    </v-form>
     <v-btn flat small @click="toNext('/register')">
       No Account? Sign Up
     </v-btn>
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'login-form',
@@ -30,17 +29,13 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      inRule: [ v => !!v || 'required' ]
     }
-  },
-  validations: {
-    username: { required },
-    password: { required }
   },
   methods: {
     onLogin() {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
+      if (!this.$refs.form.validate()) {
         console.log("Error")
         return
       }

@@ -1,25 +1,27 @@
 <template>
 <div class="sign-page">
   <h3 class="title">Welcome to Join</h3>
-  <form class="sign-form">
+  <v-form ref="form" class="sign-form">
     <v-text-field
       v-model="username"
       label="Username"
       counter
-      required
+      :rules="nameRule"
     ></v-text-field>
     <v-text-field
       v-model="password"
       label="Password"
       :type="'password'"
+      :rules="pswRule"
     ></v-text-field>
     <v-text-field
       v-model="repassword"
       label="Confirm Password"
       :type="'password'"
+      :rules="repswRule"
     ></v-text-field>
     <v-btn @click="onReg">Register</v-btn>
-  </form>
+  </v-form>
   <router-link :to="'/login'">Have an Account? Login</router-link>
 </div>
 </template>
@@ -27,7 +29,6 @@
 <script>
 import { checkName, checkEmail } from '../../api'
 import { regName, regEmail, regPsw } from '../../util/constant'
-import { required, email, maxLength, between, sameAs} from 'vuelidate/lib/validators'
 
 export default {
   name: 'register',
@@ -35,19 +36,23 @@ export default {
   data () {
     return {
       username: '',
+      nameRule: [
+        v => !!v || 'required',
+        v => v.length <= 16 || 'Must be less than 16 characters'
+      ],
       password: '',
-      repassword: ''
+      pswRule: [
+        v => v.length >= 8 || 'Must be more than 8 characters'
+      ],
+      repassword: '',
+      repswRule: [
+        v => (!!v && v) === this.password || 'Not Match'
+      ]
     }
-  },
-  validations: {
-    username: { required, maxLength: maxLength(12) }
-    // password: { between: between(7, 16) },
-    // repassword: { sameAsPassword: sameAs('password') }
   },
   methods: {
     onReg() {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
+      if (!this.$refs.form.validate()) {
         console.log("Invalid")
         return
       }

@@ -4,26 +4,27 @@
       <span>Create: </span>
       <small style="color:green;font-size:0.8em;">collection of books, courses, etc.</small> 
     </div>
-    <form class="create-form">
+    <v-form ref="form" class="create-form">
       <v-text-field
         v-model="title"
         label="Title"
         :counter = "120"
-        required
+        :rules="titleRule"
       ></v-text-field>
       <v-text-field
         v-model="url"
         label="URL"
         :counter = "120"
+        :rules="lenRule"
       ></v-text-field>
       <v-textarea
         v-model="content"
         label="Content"
         counter
         auto-grow
-        required
+        :rules="mustRule"
       ></v-textarea>
-    </form>
+    </v-form>
     <v-btn @click="onCreate">Create</v-btn>
   </div>
 </template>
@@ -31,7 +32,6 @@
 <script>
 import { newRut } from '../../api'
 import { trimValid } from '../../util/filters'
-import { required, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'new-rut',
@@ -42,18 +42,19 @@ export default {
       title: '',
       url: '',
       content: '',
-      editable: 'Creator'
+      editable: 'Creator',
+      mustRule: [ v => !!v || 'required' ],
+      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ]
     }
   },
-  validations: {
-    title: { required, maxLength: maxLength(120) },
-    title: { maxLength: maxLength(120) },
-    content: { required }
+  computed: {
+    titleRule () { 
+      return this.mustRule.concat(this.lenRule)
+    }
   },
   methods: {
     onCreate () {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
+      if (!this.$refs.form.validate()) {
         console.log("Invalid")
         return
       }

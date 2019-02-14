@@ -6,12 +6,10 @@ import axios from 'axios'
 import './registerServiceWorker'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import Vuelidate from 'vuelidate'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
 
 Vue.use(Vuetify)
-Vue.use(Vuelidate)
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
