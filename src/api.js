@@ -11,11 +11,11 @@ const request = (url, options = {}, method = 'get') => {
 
 // regsiter
 const signup = data => {
-  return request(`${base}/users`, data, 'post')
+  return request(`${base}/signup`, data, 'post')
 }
 // login
-const signin = params => {
-  return request(`${base}/signin`, params)
+const signin = data => {
+  return request(`${base}/signin`, data, 'post')
 }
 
 // create new rut

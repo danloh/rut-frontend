@@ -39,18 +39,18 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         signup(data).then(resp => {
           let d = resp.data
-          commit('SET_TOKEN', d) // as login
+          // commit('SET_TOKEN', d) // as login
           resolve(resp)
         }).catch(error => {
           reject(error)
         })
       })
     },
-    login: ({ commit }, params) => {
+    login: ({ commit }, data) => {
       return new Promise((resolve, reject) => {
-        signin(params).then(resp => {
+        signin(data).then(resp => {
           let d = resp.data
-          commit('SET_TOKEN', d)
+          // commit('SET_TOKEN', d)
           resolve(resp)
         }).catch(error => {
           reject(error)

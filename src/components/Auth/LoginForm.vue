@@ -45,10 +45,14 @@ export default {
         return
       }
       this.$axios.defaults.auth = {
-        username: this.username,
+        uname: this.username,
         password: this.password
       }
-      this.$store.dispatch('login').then(() => {
+      let data = {
+        uname: this.username,
+        password: this.password
+      }
+      this.$store.dispatch('login', data).then(() => {
         let currentPath = this.$route.path
         let nextUrl = this.next === 'current' && currentPath !== '/login'
                       ? this.$route.fullPath

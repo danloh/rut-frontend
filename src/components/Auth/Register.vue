@@ -12,13 +12,11 @@
       v-model="password"
       label="Password"
       :type="'password'"
-      between
     ></v-text-field>
     <v-text-field
       v-model="repassword"
       label="Confirm Password"
       :type="'password'"
-      sameAsPassword
     ></v-text-field>
     <v-btn @click="onReg">Register</v-btn>
   </form>
@@ -42,9 +40,9 @@ export default {
     }
   },
   validations: {
-    username: { required, maxLength: maxLength(12) },
-    password: { between: between(8, 16) },
-    repassword: { sameAsPassword: sameAs('password') }
+    username: { required, maxLength: maxLength(12) }
+    // password: { between: between(7, 16) },
+    // repassword: { sameAsPassword: sameAs('password') }
   },
   methods: {
     onReg() {
@@ -53,8 +51,13 @@ export default {
         console.log("Invalid")
         return
       }
+      let data = {
+        uname: this.username,
+        password: this.password,
+        confirm_password: this.repassword
+      }
       this.$store.dispatch('register', data)
-      .then(() => { this.$router.push('/challenge')})
+      .then(() => { this.$router.push('/')})
     },
   }
 }
