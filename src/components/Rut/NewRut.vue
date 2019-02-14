@@ -8,20 +8,20 @@
       <v-text-field
         v-model="title"
         label="Title"
-        counter
-        maxlength="120"
+        :counter = "120"
+        required
       ></v-text-field>
       <v-text-field
         v-model="url"
         label="URL"
-        counter
-        maxlength="120"
+        :counter = "120"
       ></v-text-field>
       <v-textarea
         v-model="content"
         label="Content"
         counter
         auto-grow
+        required
       ></v-textarea>
     </form>
     <v-btn @click="onCreate">Create</v-btn>
@@ -31,6 +31,7 @@
 <script>
 import { newRut } from '../../api'
 import { trimValid } from '../../util/filters'
+import { required, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'new-rut',
@@ -44,8 +45,18 @@ export default {
       editable: 'Creator'
     }
   },
+  validations: {
+    title: { required, maxLength: maxLength(120) },
+    title: { maxLength: maxLength(120) },
+    content: { required }
+  },
   methods: {
     onCreate () {
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        console.log("Invalid")
+        return
+      }
       let data = {
         title: this.title.trim(),
         content: this.content.trim(),

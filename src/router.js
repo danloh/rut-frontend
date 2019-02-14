@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 // import components, lazy loading, code splitting
 const Home = () => import('./views/Home')
+const Register = () => import('./components/Auth/Register.vue')
+const Login = () => import('./components/Auth/Login.vue')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
 
@@ -14,6 +16,8 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/', name: 'Home', component: Home },
+    { path: '/register', component: Register, name: 'Register' },
+    { path: '/login', component: Login, name: 'Login' },
     { path: '/r/:id', name: 'Rutview', component: RutView },
     { path: '/new', name: 'NewRut', component: NewRut }
   ]

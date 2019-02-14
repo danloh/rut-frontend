@@ -22,8 +22,8 @@ export default {
 </script>
 
 <style lang="stylus">
-$tfonts = Lato, Roboto, Open Sans, serif
-$bfonts = Lato, Roboto, Open Sans, sans-serif
+$tfonts = Pontano Sans, Lato, Roboto, Open Sans, serif
+$bfonts = Pontano Sans, Lato, Roboto, Open Sans, sans-serif
 body
   font-family $bfonts
   font-size 18px

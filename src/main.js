@@ -1,15 +1,17 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './registerServiceWorker'
-import 'vuetify/dist/vuetify.min.css'
 import axios from 'axios'
+import './registerServiceWorker'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import Vuelidate from 'vuelidate'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
 
 Vue.use(Vuetify)
+Vue.use(Vuelidate)
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {

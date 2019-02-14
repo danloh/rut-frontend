@@ -9,6 +9,15 @@ const request = (url, options = {}, method = 'get') => {
   .then(res => res)
 }
 
+// regsiter
+const signup = data => {
+  return request(`${base}/users`, data, 'post')
+}
+// login
+const signin = params => {
+  return request(`${base}/signin`, params)
+}
+
 // create new rut
 const newRut = params => {
   return request(`${base}/ruts`, params, 'post')
@@ -25,6 +34,8 @@ const fetchRut = (rutid, params) => {
 
 export {
   axios,
+  signup,
+  signin,
   newRut,
   fetchIndexRuts,
   fetchRut
