@@ -21,7 +21,7 @@ export default new Vuex.Store({
       let token = obj.token
       let userid = obj.userid
       state.token = token
-      state,actID = userid
+      state.actID = userid
       state.authed = Boolean(userid)
       setToken(token, obj.exp)
       setID(userid, obj.exp)
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         signup(data).then(resp => {
           let d = resp.data
-          // commit('SET_TOKEN', d) // as login
+          commit('SET_TOKEN', d) // as login
           resolve(resp)
         }).catch(error => {
           reject(error)
@@ -50,7 +50,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         signin(data).then(resp => {
           let d = resp.data
-          // commit('SET_TOKEN', d)
+          commit('SET_TOKEN', d)
           resolve(resp)
         }).catch(error => {
           reject(error)

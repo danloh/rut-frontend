@@ -68,14 +68,17 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.sign-page
-  padding 10px 210px 10px 210px
-  position relative
-  .sign-form
-    padding 20px
-    border 1px dotted #689f38
-  .title
-    text-align center
-    margin-bottom 20px
+<style scoped>
+.sign-page {
+  padding: 10px 210px 10px 210px;
+  position: relative;
+} 
+.sign-form {
+  padding: 20px;
+  border: 1px dotted #689f38;
+}
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
 </style>

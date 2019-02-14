@@ -58,33 +58,32 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-$bgcolor = lighten(#f6f6f1, 50%)
-.rut-page
-  padding 10px 250px 10px 0px
-  position relative
-  .rut-view
-    background-color lighten(#eceef1, 50%)
-    padding auto
-    .title
-      padding 0 10px
-      .meta 
-        color #828282
-        font-size 12px
-    .content
-      background-color $bgcolor
-      padding 5px 10px
-      border-bottom 2px solid #eee
-    .toolbar
-      display flex
-      justify-content flex-end
-    .sharebar
-      font-size 0.85em
-      padding 5px
-      text-align right
-  .rut-side
-    position absolute
-    right 0
-    top 10px
-    width 240px
+<style scoped>
+.rut-page {
+  padding: 10px 250px 10px 0px;
+  position: relative;
+}
+.rut-page .rut-view {
+  background-color: #f5f7f8;
+  padding: auto;
+}
+.rut-view .title {
+    padding: 0 10px;
+}
+.rut-view .title .meta {
+  color: #828282;
+  font-size: 12px;
+}
+.rut-view .content, 
+.rut-view .itemtip {
+  background-color: #fbfbf8;
+  padding: 5px 10px;
+  border-bottom: 2px solid #eee;
+}
+.rut-page .rut-side {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  width: 240px;
+}
 </style>

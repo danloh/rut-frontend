@@ -14,8 +14,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.login-page
-  padding 10px 250px 10px 250px
-  position relative
+<style scoped>
+.login-page {
+  padding: 10px 250px 10px 250px;
+  position: relative;
+}
 </style>

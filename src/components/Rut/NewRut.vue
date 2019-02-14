@@ -74,13 +74,16 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.create-page
-  padding 10px 160px 10px 120px
-  position relative
-  .title
-    padding-bottom 10px
-    border-bottom  1px dotted
-  .create-form
-    padding 10px
+<style scoped>
+.create-page {
+  padding: 10px 160px 10px 120px;
+  position: relative;
+}
+.title {
+  padding-bottom: 10px;
+  border-bottom: 1px dotted;
+}
+.create-form {
+  padding: 10px;
+}
 </style>

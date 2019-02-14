@@ -64,11 +64,13 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.login-form
-  padding 20px
-  border 1px dotted #689f38
-.title
-  text-align center
-  margin-bottom 20px
+<style scoped>
+.login-form {
+  padding: 20px;
+  border: 1px dotted #689f38;
+}
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
 </style>

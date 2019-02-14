@@ -36,28 +36,34 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.rut-sum
-  background-color lighten(#e5ebe4, 90%)
-  min-height 120px
-  padding 10px 30px 10px 100px
-  border-bottom 1px dashed #ddd
-  position relative
-  &:hover
-    background-color lighten(#f3f3ed, 60%)
-  .cover
-    position absolute
-    max-width 80px
-    max-height 100px
-    top 10px
-    left 5px
-  .title
-    font-size 20px
-    padding-top 10px
-  .content
-    color #828282
-    font-size: 16px
-  .meta
-    font-size 14px
-    color #337ab7
+<style scoped>
+.rut-sum {
+  background-color:#f7f7f7;
+  min-height: 120px;
+  padding: 10px 30px 10px 100px;
+  border-bottom: 1px dashed #ddd;
+  position: relative;
+}
+div.rut-sum:hover {
+  background-color:  #fcfdfc;
+}
+.cover {
+  position: absolute;
+  max-width: 80px;
+  max-height: 100px;
+  top: 10px;
+  left: 5px;
+}
+.title {
+  font-size: 20px;
+  padding-top: 10px;
+}
+.content {
+  color: #828282;
+  font-size: 16px;
+}
+.meta {
+  font-size: 14px;
+  color: #337ab7;
+}
 </style>
