@@ -1,5 +1,6 @@
 <template>
   <div class="login-page">
+    <h3 class="title">Please Log in</h3>
     <login-form></login-form>
   </div>
 </template>
@@ -16,7 +17,11 @@ export default {
 
 <style scoped>
 .login-page {
-  padding: 10px 250px 10px 250px;
+  padding: 10px 200px 10px 200px;
   position: relative;
+}
+.title {
+  text-align: center;
+  margin-bottom: 10px;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h3 class="title">Please Log in</h3>
+  <div class="login-view">
     <v-form ref="form" class="login-form">
       <v-text-field
         v-model="username"
@@ -22,10 +21,9 @@
 </template>
 
 <script>
-
 export default {
   name: 'login-form',
-  props: ['next'],
+  props: ['next', 'show'],
   data () {
     return {
       username: '',
@@ -49,16 +47,17 @@ export default {
       }
       this.$store.dispatch('login', data).then(() => {
         let currentPath = this.$route.path
+        // config redirect once logged in
         let nextUrl = this.next === 'current' && currentPath !== '/login'
                       ? this.$route.fullPath
                       : this.$route.query.redirect || '/'
         this.$router.push(nextUrl)
-        this.$emit('close')
+        this.$emit('update:show', false) // emit value to parent component
       })
     },
     toNext (next) {
       this.$router.push(next)
-      this.$emit('close')
+      this.$emit('update:show', false)
     }
   }
 }
@@ -68,9 +67,5 @@ export default {
 .login-form {
   padding: 20px;
   border: 1px dotted #689f38;
-}
-.title {
-  text-align: center;
-  margin-bottom: 20px;
 }
 </style>

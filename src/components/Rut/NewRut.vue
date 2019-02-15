@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .create-page {
-  padding: 10px 160px 10px 120px;
+  padding: 20px 120px 20px 120px;
   position: relative;
 }
 .title {

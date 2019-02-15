@@ -7,6 +7,24 @@
               RutHub<sup style="font-size:0.5em;color:grey"> alpha</sup>
             </small>
         </router-link>
+        <div class="right-menu">
+          <div v-if="authed">
+            <router-link to="/new">New</router-link>
+            <router-link to="/profile">:::</router-link>
+            <v-btn small flat @click="onLogout"><small>Log Out</small></v-btn>
+          </div>
+          <div v-else>
+            <v-btn small flat @click="toLogin=true">Log in</v-btn>
+            <!-- login dialog -->
+            <v-dialog v-model="toLogin" width="450px">
+              <v-card>
+                <!-- .sync: parent sync value from child component -->
+                <login-form :next="'current'" :show.sync="toLogin"></login-form>
+              </v-card>
+            </v-dialog> <!--warn: Unable to locate target [data-app], why?-->
+            <!-- end login dialog -->
+          </div>
+        </div>
       </nav>
     </header>
     <div class="view">
@@ -16,8 +34,30 @@
 </template>
 
 <script>
+import LoginForm from '@/components/Auth/LoginForm.vue'
+
 export default {
   name: 'app',
+  components: { LoginForm },
+  data () {
+    return {
+      toLogin: false
+    }
+  },
+  computed: {
+    authed () { 
+      return this.$store.state.authed
+    },
+    currID () { 
+      return this.$store.state.actID
+    }
+  },
+  methods: {
+    onLogout () {
+      this.$store.commit('DEL_TOKEN')
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 

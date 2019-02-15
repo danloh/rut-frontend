@@ -3,12 +3,32 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+
 import titleMixin from './util/title'
 import * as filters from './util/filters'
 
-Vue.use(Vuetify)
+// import/use UI component
+import Vuetify, {
+  VApp, // required
+  VForm,
+  VTextField,
+  VTextarea,
+  VDialog,
+  VCard,
+  VBtn
+} from 'vuetify/lib'
+import 'vuetify/dist/vuetify.min.css'
+Vue.use(Vuetify, {
+  components: {
+    VApp,
+    VForm,
+    VTextField,
+    VTextarea,
+    VDialog,
+    VCard,
+    VBtn
+  }
+})
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
