@@ -7,15 +7,13 @@ import './registerServiceWorker'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
 
-// import/use UI component
+// import/use UI component, mix element + vuetify
+// vuetify
 import Vuetify, {
   VApp, // required
   VForm,
   VTextField,
-  VTextarea,
-  VDialog,
-  VCard,
-  VBtn
+  VTextarea
 } from 'vuetify/lib'
 import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuetify, {
@@ -23,12 +21,33 @@ Vue.use(Vuetify, {
     VApp,
     VForm,
     VTextField,
-    VTextarea,
-    VDialog,
-    VCard,
-    VBtn
+    VTextarea
   }
 })
+// element
+import 'element-ui/lib/theme-chalk/index.css'
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+
+locale.use(lang)
+import {
+  Dialog,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+  ButtonGroup,
+  Message
+} from 'element-ui'
+
+Vue.use(Dialog)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Button)
+Vue.use(ButtonGroup)
+
+Vue.prototype.$message = Message
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {

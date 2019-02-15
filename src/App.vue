@@ -9,21 +9,36 @@
         </router-link>
         <div class="right-menu">
           <div v-if="authed">
-            <router-link to="/new">New</router-link>
-            <router-link to="/profile">:::</router-link>
-            <v-btn small flat @click="onLogout"><small>Log Out</small></v-btn>
+            <el-dropdown>
+              <el-button type="success" size="small">
+                <i class="el-icon-menu"></i>
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <router-link to="/new">
+                    <b style="color:orange">New</b>
+                  </router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <router-link :to="'/p/' + currID">Profile</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item divided>
+                  <el-button type="text" @click="onLogout">Log out</el-button>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </div>
           <div v-else>
-            <v-btn small flat @click="toLogin=true">Log in</v-btn>
-            <!-- login dialog -->
-            <v-dialog v-model="toLogin" width="450px">
-              <v-card>
-                <!-- .sync: parent sync value from child component -->
-                <login-form :next="'current'" :show.sync="toLogin"></login-form>
-              </v-card>
-            </v-dialog> <!--warn: Unable to locate target [data-app], why?-->
-            <!-- end login dialog -->
+            <el-button type="text" @click="toLogin=true">
+              Log in
+            </el-button>
           </div>
+          <!-- login dialog -->
+          <el-dialog :visible.sync="toLogin" width="450px" class="loginDialog">
+            <login-form :next="'current'" @close="toLogin=false"></login-form>
+          </el-dialog>
+          <!-- end login dialog -->
         </div>
       </nav>
     </header>

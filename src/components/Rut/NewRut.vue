@@ -25,7 +25,9 @@
         :rules="mustRule"
       ></v-textarea>
     </v-form>
-    <v-btn @click="onCreate">Create</v-btn>
+    <el-button class="blockbtn" type="primary" size="small"
+               @click="onCreate">Create New
+    </el-button>
   </div>
 </template>
 
@@ -81,9 +83,9 @@ export default {
 }
 .title {
   padding-bottom: 10px;
-  border-bottom: 1px dotted;
 }
 .create-form {
-  padding: 10px;
+  padding: 20px;
+  border: 1px dotted #689f38;
 }
 </style>

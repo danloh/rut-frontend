@@ -20,7 +20,9 @@
       :type="'password'"
       :rules="repswRule"
     ></v-text-field>
-    <v-btn @click="onReg">Register</v-btn>
+    <el-button class="blockbtn" type="primary" size="small"
+               @click="onReg">Register
+    </el-button>
   </v-form>
   <router-link :to="'/login'">Have an Account? Login</router-link>
 </div>

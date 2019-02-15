@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .login-page {
-  padding: 10px 200px 10px 200px;
+  padding: 10px 280px 10px 200px;
   position: relative;
 }
 .title {
