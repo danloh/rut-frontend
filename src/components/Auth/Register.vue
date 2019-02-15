@@ -62,6 +62,7 @@ export default {
         confirm_password: this.repassword
       }
       signup(data).then(resp => {
+        // console.log(resp.data)
         if (resp.data.status == 200) {
           this.$router.push('/login')
         } else if (resp.data.status == 409) {

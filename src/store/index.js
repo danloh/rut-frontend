@@ -39,6 +39,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         signin(data).then(resp => {
           let res = resp.data
+          // console.log(res)
           if (res.status !== 200) return // ??
           let d = Object.assign(res, { userid: res.user.id } )
           commit('SET_TOKEN', d)

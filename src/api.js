@@ -1,7 +1,68 @@
 // api
+import Vue from 'vue'
+import axios from 'axios'
+import { getToken } from './util/auth'
+import router from './router'
+import store from './store'
 
-import axios from '@/main'
+// Axios config
+// Request interceptor
+axios.interceptors.request.use(
+  config => {
+    let token = getToken()
+    if (token) {
+      config.headers.Authorization = token
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+// Response interceptor
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
+  error => {
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          store.commit('DEL_TOKEN')
+          if (router.currentRoute.path !== '/login') {
+            router.push({
+              path: '/login',
+              query: {redirect: router.currentRoute.fullPath}
+            })
+            alert('Access Denied, Need To Log in')
+          }
+          break
+        case 403:
+          alert('Forbidden')
+          break
+        case 404:
+          alert('Not Found')
+          router.replace({ path: '/404' })
+          break
+        case 418:
+          alert('Eureka! 42')
+          break
+        case 500:
+          alert('InternalError')
+          router.replace({ path: '/' })
+          break
+        default:
+          alert('Something Failed: ' + error.response.statusText)
+      }
+    }
+    // console.log(error.response.data)
+    return Promise.reject(error)
+  }
+)
+// register axios as default http client
+Vue.prototype.$http = axios
 
+// request factory
 let base = 'http://127.0.0.1:8083/api'
 const request = (url, options = {}, method = 'get') => {
   let key = ~['delete', 'get', 'head'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)

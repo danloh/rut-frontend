@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from 'axios'
 import './registerServiceWorker'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -17,9 +16,6 @@ Object.keys(filters).forEach(key => {
 })
 // mixin title handler
 Vue.mixin(titleMixin)
-
-Vue.prototype.$axios = axios
-export default axios
 
 Vue.config.productionTip = false
 

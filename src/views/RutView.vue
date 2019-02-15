@@ -14,16 +14,20 @@
         <div v-html="md(rut.content)"></div>
       </div>
     </div>
+    <div class="sharebar">
+      <share-bar></share-bar>
+    </div>
     <div class="rut-side"></div>
   </div>
 </template>
 
 <script>
 import marked from '../util/marked'
+import ShareBar from '@/components/Misc/ShareBar.vue'
 
 export default {
   name: 'rut-view',
-  components: { },
+  components: { ShareBar },
   data () {
     return {
       rutTitle: '',
@@ -79,6 +83,11 @@ export default {
   background-color: #fbfbf8;
   padding: 5px 10px;
   border-bottom: 2px solid #eee;
+}
+.rut-view .sharebar {
+  font-size: .85em;
+  padding: 5px;
+  text-align: right;
 }
 .rut-page .rut-side {
   position: absolute;
