@@ -13,6 +13,10 @@ const request = (url, options = {}, method = 'get') => {
 const signup = data => {
   return request(`${base}/signup`, data, 'post')
 }
+// check if uname signed-up
+const checkUser = (uname, params) => {
+  return request(`${base}/checkuser/${uname}`, params)
+}
 // login
 const signin = data => {
   return request(`${base}/signin`, data, 'post')
@@ -35,6 +39,7 @@ const fetchRut = (rutid, params) => {
 export {
   axios,
   signup,
+  checkUser,
   signin,
   newRut,
   fetchIndexRuts,

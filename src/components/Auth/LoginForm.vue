@@ -39,10 +39,10 @@ export default {
         console.log("Error")
         return
       }
-      this.$axios.defaults.auth = {
-        uname: this.username,
-        password: this.password
-      }
+      // this.$axios.defaults.auth = {
+      //   uname: this.username,
+      //   password: this.password
+      // }
       let data = {
         uname: this.username,
         password: this.password

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { checkName, checkEmail } from '../../api'
+import { signup } from '../../api'
 import { regName, regEmail, regPsw } from '../../util/constant'
 
 export default {
@@ -61,8 +61,15 @@ export default {
         password: this.password,
         confirm_password: this.repassword
       }
-      this.$store.dispatch('register', data)
-      .then(() => { this.$router.push('/')})
+      signup(data).then(resp => {
+        if (resp.data.status == 200) {
+          this.$router.push('/login')
+        } else if (resp.data.status == 409) {
+          alert("duplicated user")
+        } else {
+          this.$router.push('/register')
+        }
+      })
     },
   }
 }

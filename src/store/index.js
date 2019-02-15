@@ -4,7 +4,7 @@ import rut from './modules/rut'
 
 Vue.use(Vuex)
 
-import { signup, signin } from '../api'
+import { signin } from '../api'
 import {
   getToken, setToken, removeToken, getID, setID, removeID, checkAuth
 } from '../util/auth'
@@ -35,21 +35,12 @@ export default new Vuex.Store({
   },
 
   actions: {
-    register: ({ commit }, data) => {
-      return new Promise((resolve, reject) => {
-        signup(data).then(resp => {
-          let d = resp.data
-          commit('SET_TOKEN', d) // as login
-          resolve(resp)
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
     login: ({ commit }, data) => {
       return new Promise((resolve, reject) => {
         signin(data).then(resp => {
-          let d = resp.data
+          let res = resp.data
+          if (res.status !== 200) return // ??
+          let d = Object.assign(res, { userid: res.user.id } )
           commit('SET_TOKEN', d)
           resolve(resp)
         }).catch(error => {
