@@ -95,6 +95,14 @@ const fetchIndexRuts = params => {
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
 }
+// submit an item
+const newItem = params => {
+  return request(`${base}/items`, params, 'post')
+}
+// get an item
+const fetchItem = (itemid, params) => {
+  return request(`${base}/items/${itemid}`, params)
+}
 
 
 export {
@@ -104,5 +112,7 @@ export {
   signin,
   newRut,
   fetchIndexRuts,
-  fetchRut
+  fetchRut,
+  newItem,
+  fetchItem
 }

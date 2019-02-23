@@ -5,22 +5,31 @@
       <small style="color:green;font-size:0.8em;">collection of books, courses, etc.</small> 
     </div>
     <v-form ref="form" class="create-form">
-      <v-text-field
+      <v-textarea
         v-model="title"
         label="Title"
         :counter = "120"
         :rules="titleRule"
-      ></v-text-field>
-      <v-text-field
+        :rows= "1"
+        auto-grow
+      ></v-textarea>
+      <v-textarea
         v-model="url"
         label="URL"
         :counter = "120"
         :rules="lenRule"
+        :rows= "1"
+        auto-grow
+      ></v-textarea>
+      <v-text-field
+        v-model= "author"
+        label= "Origin Author"
       ></v-text-field>
       <v-textarea
         v-model="content"
         label="Content"
         counter
+        :rows= "10"
         auto-grow
         :rules="mustRule"
       ></v-textarea>
@@ -44,6 +53,7 @@ export default {
       title: '',
       url: '',
       content: '',
+      author: '',
       editable: 'Creator',
       mustRule: [ v => !!v || 'required' ],
       lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ]
@@ -64,8 +74,9 @@ export default {
         title: this.title.trim(),
         content: this.content.trim(),
         url: this.url.trim(),
-        user_id: '1fa',
-        user_intro: 'hello'
+        user_id: '...',  // should get from cookie
+        author_id: this.author.trim(),
+        credential: '...'
       }
       newRut(data).then(resp => {
         let id = resp.data.rut.id

@@ -8,6 +8,8 @@ const Register = () => import('./components/Auth/Register.vue')
 const Login = () => import('./components/Auth/Login.vue')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
+const NewItem = () => import('./components/Item/NewItem')
+const ItemView = () => import('./views/ItemView')
 
 Vue.use(Router)
 
@@ -20,7 +22,9 @@ const router = new Router({
     { path: '/register', component: Register, name: 'Register' },
     { path: '/login', component: Login, name: 'Login' },
     { path: '/r/:id', name: 'Rutview', component: RutView },
-    { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} }
+    { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} },
+    { path: '/submit', name: 'NewItem', component: NewItem, meta: {auth: true} },
+    { path: '/item/:id', name: 'Itemview', component: ItemView }
   ]
 })
 

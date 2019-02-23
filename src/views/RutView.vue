@@ -4,7 +4,7 @@
       <div class="title">
         <h2>{{ rutTitle }}</h2>
         <p class="meta">
-          <!-- <span v-if="rut.url">{{ rut.url }}</span> -->
+          <span v-if="rut.author_id">{{ rut.author_id }}</span>
           | Created: {{ rut.create_at | toMDY }} 
           <!-- <span v-if="rut.renewat"> | Updated: {{ rut.renewat | toMDY }}</span> -->
           | including {{ rut.item_count | pluralise('item') }} 
