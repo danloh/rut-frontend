@@ -17,7 +17,9 @@
     <div class="sharebar">
       <share-bar></share-bar>
     </div>
-    <div class="rut-side"></div>
+    <div class="rut-side">
+      <router-link :to="'/update/r/' + rutid">Edit...</router-link>
+    </div>
   </div>
 </template>
 
@@ -44,7 +46,7 @@ export default {
   },
   methods: {
     loadRut () {
-      let rid = this.$route.params.id
+      let rid = this.rutid =  this.$route.params.id
       this.$store.dispatch('getRut', rid).then(resp => {
         this.rutTitle = resp.title
       })

@@ -8,6 +8,7 @@ const Register = () => import('./components/Auth/Register.vue')
 const Login = () => import('./components/Auth/Login.vue')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
+const UpdateRut = () => import('./components/Rut/UpdateRut')
 const NewItem = () => import('./components/Item/NewItem')
 const ItemView = () => import('./views/ItemView')
 
@@ -23,6 +24,7 @@ const router = new Router({
     { path: '/login', component: Login, name: 'Login' },
     { path: '/r/:id', name: 'Rutview', component: RutView },
     { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} },
+    { path: '/update/r/:id', name: 'UpdateRut', component: UpdateRut, meta: {auth: true} },
     { path: '/submit', name: 'NewItem', component: NewItem, meta: {auth: true} },
     { path: '/item/:id', name: 'Itemview', component: ItemView }
   ]

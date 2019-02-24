@@ -87,6 +87,10 @@ const signin = data => {
 const newRut = params => {
   return request(`${base}/ruts`, params, 'post')
 }
+// update rut
+const updateRut = (rutid, params) => {
+  return request(`${base}/ruts/${rutid}`, params, 'post')
+}
 // get ruts for index page
 const fetchIndexRuts = params => {
   return request(`${base}/ruts/2/index`, params)
@@ -111,6 +115,7 @@ export {
   checkUser,
   signin,
   newRut,
+  updateRut,
   fetchIndexRuts,
   fetchRut,
   newItem,
