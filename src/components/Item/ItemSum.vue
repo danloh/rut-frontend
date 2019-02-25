@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td><small class="indicator">Edition</small></td>
-          <td>{{ item.uiid }} - {{ item.binding }} - {{ item.page }} </td>
+          <td>{{ item.uiid }} - {{ item.edition }}</td>
         </tr>
         <tr>
           <td><small class="indicator">Listed</small></td>

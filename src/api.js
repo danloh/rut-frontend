@@ -107,7 +107,10 @@ const newItem = params => {
 const fetchItem = (itemid, params) => {
   return request(`${base}/items/${itemid}`, params)
 }
-
+// update an item
+const updateItem = (itemid, params) => {
+  return request(`${base}/items/${itemid}`, params, 'post')
+}
 
 export {
   axios,
@@ -119,5 +122,6 @@ export {
   fetchIndexRuts,
   fetchRut,
   newItem,
-  fetchItem
+  fetchItem,
+  updateItem
 }

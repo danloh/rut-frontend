@@ -4,6 +4,9 @@
       <item-sum :item="item" :out="true" :key="item.id"></item-sum> <!--key to re-render-->
       <div>
         <b>More Details</b>
+        <span style="float:right">
+          <router-link :to="'/update/item/' + itemid"><small>Edit..</small></router-link>
+        </span>
       </div>
       <div class="item-detail">
         <div v-html="showDetail || '...'"></div>
@@ -30,6 +33,7 @@ export default {
   components: { ItemSum },
   data () {
     return {
+      itemid: '',
       itemTitle: '',
       itemDetail: '',
       showShort: true, // show less detail
@@ -57,6 +61,7 @@ export default {
       this.$store.dispatch('getItem', itemid).then(resp => {
         this.itemDetail = resp.detail
         this.itemTitle = resp.title
+        this.itemid = resp.id
       })
     }
   },
