@@ -5,7 +5,7 @@
     <v-text-field
       v-model="username"
       label="Username"
-      counter
+      :counter= "16"
       :rules="nameRule"
     ></v-text-field>
     <v-text-field

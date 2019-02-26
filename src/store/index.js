@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
 import rut from './modules/rut'
 import item from './modules/item'
 
@@ -14,9 +15,10 @@ export default new Vuex.Store({
   state: {
     token: getToken(),
     authed: checkAuth(),
-    actID: getID()
+    actID: getID(),
+    actUser: {}
   },
-
+  
   mutations: {
     SET_TOKEN (state, obj) {
       let token = obj.token
@@ -33,6 +35,9 @@ export default new Vuex.Store({
       removeToken()
       removeID()
     },
+    SET_INFO (state, userobj) {
+      state.actUser = userobj
+    },
   },
 
   actions: {
@@ -41,7 +46,10 @@ export default new Vuex.Store({
         signin(data).then(resp => {
           let res = resp.data
           // console.log(res)
-          if (res.status !== 200) return // ??
+          if (res.status !== 200) {
+            alert("Failed to log in")
+            return
+          }
           let d = Object.assign(res, { userid: res.user.id } )
           commit('SET_TOKEN', d)
           resolve(resp)
@@ -51,7 +59,8 @@ export default new Vuex.Store({
       })
     }
   },
-
+  
+  getters,
   modules: {
     rut, item
   }

@@ -6,6 +6,8 @@ const Home = () => import('./views/Home')
 // const ProgressBar = () => import('./components/Misc/ProgressBar')
 const Register = () => import('./components/Auth/Register.vue')
 const Login = () => import('./components/Auth/Login.vue')
+const Profile = () => import('./views/Profile')
+const UpdateUser = () => import('./components/User/UpdateUser')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
 const UpdateRut = () => import('./components/Rut/UpdateRut')
@@ -23,6 +25,8 @@ const router = new Router({
     { path: '/', name: 'Home', component: Home },
     { path: '/register', component: Register, name: 'Register' },
     { path: '/login', component: Login, name: 'Login' },
+    { path: '/p/:id', component: Profile, name: 'Profile', meta: {auth: true} },
+    { path: '/updateuser/:id', name: 'UpdateUser', component: UpdateUser, meta: {auth: true} },
     { path: '/r/:id', name: 'Rutview', component: RutView },
     { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} },
     { path: '/update/r/:id', name: 'UpdateRut', component: UpdateRut, meta: {auth: true} },

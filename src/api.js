@@ -82,7 +82,14 @@ const checkUser = (uname, params) => {
 const signin = data => {
   return request(`${base}/signin`, data, 'post')
 }
-
+// get user info
+const fetchUser = (userid, params) => {
+  return request(`${base}/users/${userid}`, params)
+}
+// get user info
+const updateUser = (userid, params) => {
+  return request(`${base}/users/${userid}`, params, 'post')
+}
 // create new rut
 const newRut = params => {
   return request(`${base}/ruts`, params, 'post')
@@ -117,6 +124,8 @@ export {
   signup,
   checkUser,
   signin,
+  fetchUser,
+  updateUser,
   newRut,
   updateRut,
   fetchIndexRuts,
