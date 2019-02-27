@@ -3,10 +3,10 @@ import Router from 'vue-router'
 
 // import components, lazy loading, code splitting
 const Home = () => import('./views/Home')
-// const ProgressBar = () => import('./components/Misc/ProgressBar')
 const Register = () => import('./components/Auth/Register.vue')
 const Login = () => import('./components/Auth/Login.vue')
 const Profile = () => import('./views/Profile')
+const createRutList = param => () => import('./components/User/CreateRutList').then(m => m.default(param))
 const UpdateUser = () => import('./components/User/UpdateUser')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
@@ -26,7 +26,13 @@ const router = new Router({
     { path: '/', name: 'Home', component: Home },
     { path: '/register', component: Register, name: 'Register' },
     { path: '/login', component: Login, name: 'Login' },
-    { path: '/p/:id', component: Profile, name: 'Profile', meta: {auth: true} },
+    { path: '/p/:id', component: Profile, name: 'Profile', meta: {auth: true},
+      children: [
+        { path: '', name: 'defaultProfile', redirect: 'created' },
+        { path: 'star', name: 'StarRuts', component: createRutList('star'), meta: {auth: true} },
+        { path: 'created', name: 'CreatedRuts', component: createRutList('create'), meta: {auth: true} },
+      ] 
+    },
     { path: '/updateuser/:id', name: 'UpdateUser', component: UpdateUser, meta: {auth: true} },
     { path: '/r/:id', name: 'Rutview', component: RutView },
     { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} },

@@ -98,14 +98,16 @@ const newRut = params => {
 const updateRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params, 'post')
 }
-// get ruts for index page
-const fetchIndexRuts = params => {
-  return request(`${base}/ruts/2/index`, params)
-}
 // get a rut
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
 }
+// get rut list per user, tag, flag should be create, star
+const fetchRuts = (per, tid, flag=0, params={}) => {
+  return request(`${base}/ruts/${per}/${tid}/${flag}`, params)
+}
+// get ruts for index page
+const fetchIndexRuts = () => fetchRuts('index','index')
 // update an item
 const collectItem = (rutid, params) => {
   return request(`${base}/ruts/${rutid}/collect`, params, 'post')
@@ -118,12 +120,8 @@ const newItem = params => {
 const fetchItem = (itemid, params) => {
   return request(`${base}/items/${itemid}`, params)
 }
-// get item list per id, uiid, url
-const fetchItems = (per, itemid, params) => {
-  return request(`${base}/items/${per}/${itemid}`, params)
-}
-// get item list per rut tag
-const fetchPerItems = (per, id, flag=0, params={}) => {
+// get item list per rut,tag,user; id,uiid,url,title
+const fetchItems = (per, id, flag=0, params={}) => {
   return request(`${base}/items/${per}/${id}/${flag}`, params)
 }
 // get collect
@@ -146,10 +144,10 @@ export {
   updateRut,
   fetchIndexRuts,
   fetchRut,
+  fetchRuts,
   collectItem,
   newItem,
   fetchItem,
-  fetchPerItems,
   fetchCollect,
   fetchItems,
   updateItem

@@ -14,7 +14,7 @@
         <div v-html="md(rut.content)"></div>
       </div>
     </div>
-    <div class="item" v-for="i in collects" :key="i.id">
+    <div class="item" v-for="i in order_collects" :key="i.id">
       <div>
         <b class="indicator">#{{i.item_order}}&nbsp;</b> 
         <router-link :to="'/item/' + i.id">{{ i.title }}</router-link>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { fetchPerItems, fetchCollect } from '../api'
+import { fetchItems, fetchCollect } from '../api'
 import marked from '../util/marked'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 
@@ -50,6 +50,9 @@ export default {
   computed: {
     rut () {
       return this.$store.state.rut.ruts[this.$route.params.id]
+    },
+    order_collects () {
+      return this.collects.sort((a,b) => a.item_order - b.item_order)
     }
   },
   title () {
@@ -64,7 +67,7 @@ export default {
       })
     },
     loadItems (rutid) { // can be async??
-      fetchPerItems('rut', rutid).then(resp => {
+      fetchItems('rut', rutid).then(resp => {
         let item_data = resp.data.items
         this.items = item_data
         for (let i of item_data) {

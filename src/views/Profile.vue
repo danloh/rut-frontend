@@ -25,7 +25,7 @@
         <router-link :to="'/p/' + userid + '/created/'">
           <b style="color:royalblue">*</b> Created
         </router-link>
-        <router-link to="/create">
+        <router-link to="/new">
           <small style="color:orange"> +New</small>
         </router-link>
         <br>
