@@ -58,6 +58,9 @@ const mutations = {
     let rutdata = Object.assign({ lastUpdate: Date.now() }, rut)
     Vue.set(state.ruts, rutid, rutdata) // as cache, need to update after edit? 
     // state.rutDetail = rut  // for edit view
+  },
+  RENEW_RUT (state, data) {
+    state.ruts[data.rutid][data.ref] = data[data.ref]
   }
 }
 

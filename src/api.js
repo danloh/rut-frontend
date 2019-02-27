@@ -106,6 +106,10 @@ const fetchIndexRuts = params => {
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
 }
+// update an item
+const collectItem = (rutid, params) => {
+  return request(`${base}/ruts/${rutid}/collect`, params, 'post')
+}
 // submit an item
 const newItem = params => {
   return request(`${base}/items`, params, 'post')
@@ -113,6 +117,18 @@ const newItem = params => {
 // get an item
 const fetchItem = (itemid, params) => {
   return request(`${base}/items/${itemid}`, params)
+}
+// get item list per id, uiid, url
+const fetchItems = (per, itemid, params) => {
+  return request(`${base}/items/${per}/${itemid}`, params)
+}
+// get item list per rut tag
+const fetchPerItems = (per, id, flag=0, params={}) => {
+  return request(`${base}/items/${per}/${id}/${flag}`, params)
+}
+// get collect
+const fetchCollect = (rutid, itemid, params) => {
+  return request(`${base}/${rutid}/collects/${itemid}`, params)
 }
 // update an item
 const updateItem = (itemid, params) => {
@@ -130,7 +146,11 @@ export {
   updateRut,
   fetchIndexRuts,
   fetchRut,
+  collectItem,
   newItem,
   fetchItem,
+  fetchPerItems,
+  fetchCollect,
+  fetchItems,
   updateItem
 }

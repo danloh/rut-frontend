@@ -37,6 +37,8 @@ import {
   DropdownItem,
   Button,
   ButtonGroup,
+  Select,
+  Option,
   Message
 } from 'element-ui'
 
@@ -46,6 +48,8 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Button)
 Vue.use(ButtonGroup)
+Vue.use(Select)
+Vue.use(Option)
 
 Vue.prototype.$message = Message
 

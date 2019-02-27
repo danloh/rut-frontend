@@ -11,6 +11,7 @@ const UpdateUser = () => import('./components/User/UpdateUser')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
 const UpdateRut = () => import('./components/Rut/UpdateRut')
+const AddItem = () => import('./components/Rut/AddItem')
 const NewItem = () => import('./components/Item/NewItem')
 const UpdateItem = () => import('./components/Item/UpdateItem')
 const ItemView = () => import('./views/ItemView')
@@ -30,6 +31,7 @@ const router = new Router({
     { path: '/r/:id', name: 'Rutview', component: RutView },
     { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} },
     { path: '/update/r/:id', name: 'UpdateRut', component: UpdateRut, meta: {auth: true} },
+    { path: '/collect/:id', name: 'AddItem', component: AddItem, meta: {auth: true} },
     { path: '/submit', name: 'NewItem', component: NewItem, meta: {auth: true} },
     { path: '/item/:id', name: 'Itemview', component: ItemView },
     { path: '/update/item/:id', name: 'UpdateItem', component: UpdateItem, meta: {auth: true} }

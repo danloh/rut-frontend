@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import ItemSum from '@/components/Item/ItemSum.vue'
+import ItemSum from '../components/Item/ItemSum.vue'
 import marked from '../util/marked'
-import { showLess } from '@/util/filters'
+import { showLess } from '../util/filters'
 
 export default {
   name: 'item-view',

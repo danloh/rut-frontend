@@ -14,16 +14,25 @@
         <div v-html="md(rut.content)"></div>
       </div>
     </div>
+    <div class="item" v-for="i in collects" :key="i.id">
+      <div>
+        <b class="indicator">#{{i.item_order}}&nbsp;</b> 
+        <router-link :to="'/item/' + i.id">{{ i.title }}</router-link>
+      </div>
+      <div v-html="md(i.content)"></div>
+    </div>
     <div class="sharebar">
       <share-bar></share-bar>
     </div>
     <div class="rut-side">
       <router-link :to="'/update/r/' + rutid">Edit...</router-link>
+      <router-link :to="'/collect/' + rutid">Add...</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { fetchPerItems, fetchCollect } from '../api'
 import marked from '../util/marked'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 
@@ -33,7 +42,9 @@ export default {
   data () {
     return {
       rutTitle: '',
-      rutid: ''
+      rutid: '',
+      items: [],
+      collects: []
     }
   },
   computed: {
@@ -49,6 +60,26 @@ export default {
       let rid = this.rutid =  this.$route.params.id
       this.$store.dispatch('getRut', rid).then(resp => {
         this.rutTitle = resp.title
+        this.loadItems(rid)
+      })
+    },
+    loadItems (rutid) { // can be async??
+      fetchPerItems('rut', rutid).then(resp => {
+        let item_data = resp.data.items
+        this.items = item_data
+        for (let i of item_data) {
+          let itemid = i.id
+          fetchCollect(rutid, itemid).then(resp => {
+            let data = resp.data.collects[0]
+            let clct = {
+              rutid: data.rut_id,
+              item_order: data.item_order,
+              content: data.content,
+            }
+            Object.assign(clct, i)
+            this.collects.push(clct)
+          })
+        }
       })
     },
     md (content) {
