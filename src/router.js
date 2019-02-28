@@ -26,7 +26,7 @@ const router = new Router({
     { path: '/', name: 'Home', component: Home },
     { path: '/register', component: Register, name: 'Register' },
     { path: '/login', component: Login, name: 'Login' },
-    { path: '/p/:id', component: Profile, name: 'Profile', meta: {auth: true},
+    { path: '/p/:id', component: Profile, meta: {auth: true},
       children: [
         { path: '', name: 'defaultProfile', redirect: 'created' },
         { path: 'star', name: 'StarRuts', component: createRutList('star'), meta: {auth: true} },

@@ -86,7 +86,7 @@ export default {
       let rid = this.rutid = this.$route.params.id
       this.$store.dispatch('getRut', rid).then(resp => {
         this.title = resp.title
-        this.url = resp.title
+        this.url = resp.url
         this.author = resp.author_id
         this.content = resp.content
       })

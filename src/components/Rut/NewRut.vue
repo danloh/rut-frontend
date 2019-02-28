@@ -75,6 +75,7 @@ export default {
         content: this.content.trim(),
         url: this.url.trim(),
         user_id: '...',  // should get from cookie
+        user_name: '...',
         author_id: this.author.trim(),
         credential: '...'
       }

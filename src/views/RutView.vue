@@ -4,7 +4,14 @@
       <div class="title">
         <h2>{{ rutTitle }}</h2>
         <p class="meta">
-          <span v-if="rut.author_id">{{ rut.author_id }}</span>
+          <template>
+            <span v-if="rut.author_id">
+              <a :href="rut.url" v-if="rut.url">{{ rut.author_id }}</a>
+            </span>
+            <span v-else>
+              <router-link :to="'/p/' + rut.user_id">{{ rut.user_name }}</router-link>
+            </span>
+          </template>
           | Created: {{ rut.create_at | toMDY }} 
           <!-- <span v-if="rut.renewat"> | Updated: {{ rut.renewat | toMDY }}</span> -->
           | including {{ rut.item_count | pluralise('item') }} 

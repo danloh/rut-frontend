@@ -4,12 +4,12 @@
     <div class="rut-list">
       <rut-sum v-for="rut in ruts" :key="rut.id" :rut="rut"></rut-sum>
     </div>
-    <div v-if="hasMore">
+    <!-- <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
                  @click="loadmoreRuts" :disabled="!hasMore">
                  Show More
       </el-button>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -91,7 +91,7 @@ export default {
         item_id: this.itemID,
         item_order: this.item_count + 1,
         content: this.content,
-        creator_id: '', // can get from cookie
+        user_id: '', // can get from cookie
       }
       collectItem(this.rutID, data).then(() => {
         // unlockRut(id)
