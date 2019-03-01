@@ -1,6 +1,33 @@
 <template>
   <div class="rut-page" v-if="rut">
     <div class="rut-view">
+      <div class="tagbar">
+        <span class="tag" v-for="(tag, index) in tags" :key="index">
+          <router-link :to="'/tag/' + tag"><b>{{tag}}</b></router-link>
+        </span>
+        <el-button type="text" @click="toAddTag">..Tag</el-button>
+      </div>
+      <!-- edit tag dialog -->
+      <el-dialog title="Add Tag" width="350px" 
+                 :visible.sync="show" 
+                 :before-close="cancelOnClose">
+        <el-input size="mini" v-model="newTag" 
+                  @keyup.enter.native="addNewTag" 
+                  placeholder="Input a Tag, Press Enter to Add">
+        </el-input>
+        <div v-for="(tag, index) in newTags" :key="index">
+          <p><el-button type="text" size="mini" 
+                        @click="newTags.splice(index, 1)">
+                        &times;
+              </el-button>&nbsp;&nbsp; 
+              {{ tag }} 
+          </p>
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="success" size="mini" @click="onAddTags">Done</el-button>
+        </div>
+      </el-dialog>
+      <!-- end edit tag dialog -->
       <div class="title">
         <h2>{{ rutTitle }}</h2>
         <p class="meta">
@@ -39,7 +66,8 @@
 </template>
 
 <script>
-import { fetchItems, fetchCollect } from '../api'
+import { fetchItems, fetchCollect, fetchTags, tagRut } from '../api'
+import { checkAuth } from '../util/auth'
 import marked from '../util/marked'
 import ShareBar from '@/components/Misc/ShareBar.vue'
 
@@ -51,7 +79,12 @@ export default {
       rutTitle: '',
       rutid: '',
       items: [],
-      collects: []
+      collects: [],
+      tags: [],
+      show: false,
+      newTag: '',
+      newTags: [],
+      delTags: []  // ?? how to del
     }
   },
   computed: {
@@ -71,6 +104,7 @@ export default {
       this.$store.dispatch('getRut', rid).then(resp => {
         this.rutTitle = resp.title
         this.loadItems(rid)
+        this.loadTags(rid)
       })
     },
     loadItems (rutid) { // can be async??
@@ -92,9 +126,53 @@ export default {
         }
       })
     },
-    md (content) {
-      return marked(content)
-    }
+    loadTags (rutid) {
+      fetchTags('rut', rutid).then(resp => {
+        this.tags = resp.data.tags
+        // this.newTags = this.tags
+      })
+    },
+    toAddTag () {
+      this.show = true
+    },
+    addNewTag () {
+      let newT = this.newTag.trim()
+      if (newT && newT.length < 64) {
+        this.newTags.push(newT)
+        this.newTag = ''
+      } else {
+        this.$message({
+          showClose: true,
+          message: 'Invalid Input'
+        })
+      }
+    },
+    onAddTags () {
+      if (checkAuth()) { 
+        if (this.newTags.length <= 0) return
+        let newTs = Array.from(new Set(this.newTags))
+        let add_data = {
+          tname: newTs,
+          rut_id: this.rutid,
+          action: '1'
+        }
+        tagRut(1, this.rutid, add_data)
+        //tagRut(0, this.rutid, del_data)
+        this.show = false
+        this.tags = this.tags.concat(newTs)
+      } else {
+        this.$message({
+          showClose: true,
+          message: 'Should Log in to Continue'
+        })
+        this.$router.push({
+          path: '/login',
+          query: {redirect: this.$route.fullPath}
+        })
+      }
+    },
+    cancelOnClose (done) { done() },
+    md (content) { return marked(content) }
   },
   watch: {
     '$route': 'loadRut' // render re-used component for addtorut
@@ -114,6 +192,21 @@ export default {
   background-color: #f5f7f8;
   padding: auto;
 }
+.rut-view .tagbar {
+  display:inline-blcok;
+}
+.tagbar .tag {
+  padding: 2px 5px;
+  background-color: #eef4fa;
+}
+.tag a {
+  color: green;
+  font-size: 0.85em;
+}
+.tag a:hover {
+  background-color: #ddd;
+  padding: 2px;
+}
 .rut-view .title {
     padding: 0 10px;
 }
@@ -122,7 +215,7 @@ export default {
   font-size: 12px;
 }
 .rut-view .content, 
-.rut-view .itemtip {
+.rut-view .item {
   background-color: #fbfbf8;
   padding: 5px 10px;
   border-bottom: 2px solid #eee;

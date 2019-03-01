@@ -98,6 +98,10 @@ const newRut = params => {
 const updateRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params, 'post')
 }
+// tag rut
+const tagRut = (act, rutid, params) => { // action: 0-untag,1-tag
+  return request(`${base}/tag/${act}/${rutid}`, params, 'post')
+}
 // get a rut
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
@@ -132,6 +136,14 @@ const fetchCollect = (rutid, itemid, params) => {
 const updateItem = (itemid, params) => {
   return request(`${base}/items/${itemid}`, params, 'post')
 }
+// get tag 
+const fetchTag = (tname, params) => {
+  return request(`${base}/tags/${tname}`, params)
+}
+// get tag list per rut,tag,user,item
+const fetchTags = (per, id, params) => {
+  return request(`${base}/tags/${per}/${id}`, params)
+}
 
 export {
   axios,
@@ -142,6 +154,7 @@ export {
   updateUser,
   newRut,
   updateRut,
+  tagRut,
   fetchIndexRuts,
   fetchRut,
   fetchRuts,
@@ -150,5 +163,7 @@ export {
   fetchItem,
   fetchCollect,
   fetchItems,
-  updateItem
+  updateItem,
+  fetchTag,
+  fetchTags
 }

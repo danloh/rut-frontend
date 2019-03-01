@@ -39,6 +39,7 @@ import {
   ButtonGroup,
   Select,
   Option,
+  Input,
   Message
 } from 'element-ui'
 
@@ -50,6 +51,7 @@ Vue.use(Button)
 Vue.use(ButtonGroup)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Input)
 
 Vue.prototype.$message = Message
 
