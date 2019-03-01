@@ -15,6 +15,8 @@ const AddItem = () => import('./components/Rut/AddItem')
 const NewItem = () => import('./components/Item/NewItem')
 const UpdateItem = () => import('./components/Item/UpdateItem')
 const ItemView = () => import('./views/ItemView')
+const TagView = () => import('./views/TagView')
+const TagRuts = () => import('./components/Tag/TagRuts')
 
 Vue.use(Router)
 
@@ -40,7 +42,13 @@ const router = new Router({
     { path: '/collect/:id', name: 'AddItem', component: AddItem, meta: {auth: true} },
     { path: '/submit', name: 'NewItem', component: NewItem, meta: {auth: true} },
     { path: '/item/:id', name: 'Itemview', component: ItemView },
-    { path: '/update/item/:id', name: 'UpdateItem', component: UpdateItem, meta: {auth: true} }
+    { path: '/update/item/:id', name: 'UpdateItem', component: UpdateItem, meta: {auth: true} },
+    { path: '/tag/:tname', component: TagView,
+      children: [
+        { path: '', name: 'defaultTagView', redirect: 'r' },
+        { path: 'r', name: 'TagRuts', component: TagRuts },
+      ] 
+    },
   ]
 })
 

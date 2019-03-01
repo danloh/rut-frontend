@@ -133,6 +133,8 @@ export default {
       })
     },
     toAddTag () {
+      let currID = this.$store.getters.actID
+      if (!currentUserID || !checkAuth()) return
       this.show = true
     },
     addNewTag () {

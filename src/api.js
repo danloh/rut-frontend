@@ -106,7 +106,7 @@ const tagRut = (act, rutid, params) => { // action: 0-untag,1-tag
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
 }
-// get rut list per user, tag, flag should be create, star
+// get rut list per user, tag, item, flag should be create, star
 const fetchRuts = (per, tid, flag=0, params={}) => {
   return request(`${base}/ruts/${per}/${tid}/${flag}`, params)
 }
@@ -144,6 +144,10 @@ const fetchTag = (tname, params) => {
 const fetchTags = (per, id, params) => {
   return request(`${base}/tags/${per}/${id}`, params)
 }
+// update tag 
+const updateTag = (tname, params) => {
+  return request(`${base}/tags/${tname}`, params, 'put')
+}
 
 export {
   axios,
@@ -165,5 +169,6 @@ export {
   fetchItems,
   updateItem,
   fetchTag,
-  fetchTags
+  fetchTags,
+  updateTag
 }
