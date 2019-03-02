@@ -47,7 +47,7 @@ export default new Vuex.Store({
           let res = resp.data
           // console.log(res)
           if (res.status !== 200) {
-            alert("Failed to log in")
+            this.$message("Something Failed")
             return
           }
           let d = Object.assign(res, { userid: res.user.id } )

@@ -59,8 +59,12 @@
       <share-bar></share-bar>
     </div>
     <div class="rut-side">
-      <router-link :to="'/update/r/' + rutid">Edit...</router-link>
-      <router-link :to="'/collect/' + rutid">Add...</router-link>
+      <router-link :to="'/update/r/' + rutid" v-if="canEdit">
+        <small>Edit...</small>
+      </router-link>
+      <router-link :to="'/collect/' + rutid" v-if="canEdit">
+        <small>Add...</small>
+      </router-link>
     </div>
   </div>
 </template>
@@ -81,7 +85,8 @@ export default {
       items: [],
       collects: [],
       tags: [],
-      show: false,
+      show: false,  // show dialog
+      rut_userid: '',
       newTag: '',
       newTags: [],
       delTags: []  // ?? how to del
@@ -93,6 +98,9 @@ export default {
     },
     order_collects () {
       return this.collects.sort((a,b) => a.item_order - b.item_order)
+    },
+    canEdit () {
+      return this.rut_userid === this.$store.getters.actID && checkAuth()
     }
   },
   title () {
@@ -105,6 +113,7 @@ export default {
         this.rutTitle = resp.title
         this.loadItems(rid)
         this.loadTags(rid)
+        this.rut_userid = resp.user_id
       })
     },
     loadItems (rutid) { // can be async??
@@ -133,19 +142,21 @@ export default {
       })
     },
     toAddTag () {
-      let currID = this.$store.getters.actID
-      if (!currentUserID || !checkAuth()) return
+      if (!checkAuth()) {
+        this.$message("Need to Log in")
+        return
+      }
       this.show = true
     },
     addNewTag () {
       let newT = this.newTag.trim()
-      if (newT && newT.length < 64) {
+      if (newT && newT.length < 16 && !newT.includes(" ")) {
         this.newTags.push(newT)
         this.newTag = ''
       } else {
         this.$message({
           showClose: true,
-          message: 'Invalid Input'
+          message: 'Must be 16 less and no whitespace'
         })
       }
     },

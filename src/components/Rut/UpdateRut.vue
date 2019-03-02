@@ -53,6 +53,7 @@ export default {
       url: '',
       content: '',
       author: '',
+      rut_userid:'', // for check auth
       rutid: '',
       mustRule: [ v => !!v || 'required' ],
       lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ]
@@ -65,8 +66,9 @@ export default {
   },
   methods: {
     onUpdate () {
-      if (!this.$refs.form.validate()) {
-        console.log("Invalid")
+      let currID = this.$store.getters.actID
+      if (!this.$refs.form.validate() || !checkAuth() || currID !== this.rut_userid) {
+        this.$message("Invalid Input or Auth Failed")
         return
       }
       let data = {
@@ -89,6 +91,7 @@ export default {
         this.url = resp.url
         this.author = resp.author_id
         this.content = resp.content
+        this.rut_userid = resp.user_id
       })
     }
   },

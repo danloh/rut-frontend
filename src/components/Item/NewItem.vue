@@ -74,6 +74,7 @@
 
 <script>
 import { newItem } from '../../api'
+import { checkAuth } from '../../util/auth'
 
 export default {
   name: 'new-item',
@@ -102,8 +103,8 @@ export default {
   },
   methods: {
     onSubmit () {
-      if (!this.$refs.form.validate()) {
-        console.log("Invalid")
+      if (!this.$refs.form.validate() || !checkAuth()) {
+        this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = {

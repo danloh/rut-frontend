@@ -74,6 +74,7 @@
 
 <script>
 import { updateItem } from '../../api'
+import { checkAuth } from '../../util/auth'
 
 export default {
   name: 'update-item',
@@ -103,8 +104,8 @@ export default {
   },
   methods: {
     onUpdate () {
-      if (!this.$refs.form.validate()) {
-        console.log("Invalid")
+      if (!this.$refs.form.validate() || !checkAuth()) {
+        this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = {

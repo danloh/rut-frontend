@@ -52,7 +52,8 @@ export default {
       items: [], // search result from have-dones
       rutID: null,
       rutTitle: null,
-      item_count: null,
+      rut_userid: '',
+      item_count: null, // to yield order
       mustRule: [ v => !!v || 'required' ]
     }
   },
@@ -63,27 +64,33 @@ export default {
       }
       //this.items = this.$store.getters.seItems  // show options when focus
     },
+    // check if same user_id and loged in
+    checkAuthed () {
+      return this.rut_userid === this.$store.getters.actID && checkAuth()
+    },
     // make the search controllable
     searchItems () {
-      if (checkAuth()) {
-        this.searching = true
-        this.items = []
-        let l = this.inputQuery.length
-        if (l < 6 && l !== 0) return  // least keyword length
-        let param = {'per': 'id', itemid: this.inputQuery}
-        // to do : per uiid, title, url??
-        fetchItems('uiid', this.inputQuery).then(resp => {
-          let resItems = resp.data.items
-          this.items = resItems
-          // this.$store.commit('ADD_ITEMS', resItems)
-          this.searching = false
-        })
+      if (!this.checkAuthed()) {
+        this.$message("Auth Failed")
+        return
       }
+      this.searching = true
+      this.items = []
+      let l = this.inputQuery.length
+      if (l < 6 && l !== 0) return  // least keyword length
+      let param = {'per': 'id', itemid: this.inputQuery}
+      // to do : per uiid, title, url??
+      fetchItems('uiid', this.inputQuery).then(resp => {
+        let resItems = resp.data.items
+        this.items = resItems
+        // this.$store.commit('ADD_ITEMS', resItems)
+        this.searching = false
+      })
     },
     // add item
     addItem () {
-      if (!this.$refs.form.validate()) {
-        console.log("Invalid")
+      if (!this.$refs.form.validate() || !this.checkAuthed()) {
+        this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = { 
@@ -104,10 +111,11 @@ export default {
     loadRut () {
       let rutid = this.$route.params.id
       let rut = this.$store.getters.ruts[rutid]
-      if (rut.id) {
+      if (rut && rut.id) {
         this.rutID = rut.id
         this.rutTitle = rut.title
         this.item_count = rut.item_count
+        this.rut_userid = rut.user_id
         // lockRut(rut.id)
       } else {
         this.$router.push(`/r/${rutid}`)

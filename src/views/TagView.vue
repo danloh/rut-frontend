@@ -132,8 +132,10 @@ export default {
       this.starCount = data.satr_count
     },
     toEditTag () {
-      //let currID = this.$store.getters.actID
-      //if (!currID || !checkAuth()) return
+      if (!checkAuth()) {
+        this.$message("Need to Log in")
+        return
+      }
       this.show = true
     },
     cancelOnClose (done) {

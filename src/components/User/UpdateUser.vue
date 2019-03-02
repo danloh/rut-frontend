@@ -39,6 +39,7 @@
 <script>
 import { updateUser, fetchUser } from '../../api'
 import { regName, regEmail, regPsw } from '../../util/constant'
+import { checkAuth } from '../../util/auth'
 
 export default {
   name: 'update-profile',
@@ -64,8 +65,9 @@ export default {
   },
   methods: {
     onUpdate() {
-      if (!this.$refs.form.validate()) {
-        console.log("Invalid")
+      let currID = this.$store.getters.actID
+      if (!this.$refs.form.validate() || !checkAuth() || this.userid !== currID) {
+        this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = {

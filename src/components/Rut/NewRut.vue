@@ -24,6 +24,8 @@
       <v-text-field
         v-model= "author"
         label= "Origin Author"
+        :counter = "20"
+        :rules="lenRule"
       ></v-text-field>
       <v-textarea
         v-model="content"
@@ -42,7 +44,7 @@
 
 <script>
 import { newRut } from '../../api'
-import { trimValid } from '../../util/filters'
+import { checkAuth } from '../../util/auth'
 
 export default {
   name: 'new-rut',
@@ -66,15 +68,15 @@ export default {
   },
   methods: {
     onCreate () {
-      if (!this.$refs.form.validate()) {
-        console.log("Invalid")
+      if (!this.$refs.form.validate() || !checkAuth()) {
+        this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = {
         title: this.title.trim(),
         content: this.content.trim(),
         url: this.url.trim(),
-        user_id: '...',  // should get from cookie
+        user_id: this.$store.getters.actID,  // get from cookie
         user_name: '...',
         author_id: this.author.trim(),
         credential: '...'

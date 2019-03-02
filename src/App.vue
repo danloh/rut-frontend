@@ -70,7 +70,6 @@ export default {
   methods: {
     onLogout () {
       this.$store.commit('DEL_TOKEN')
-      this.$router.push('/')
     }
   }
 }
