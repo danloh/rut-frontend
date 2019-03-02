@@ -30,7 +30,9 @@ const mutations = {
   SET_ITEM: (state, { item }) => {
     let itemdata = Object.assign({ lastUpdate: Date.now() }, item)
     Vue.set(state.items, itemdata.id, itemdata)
-    state.inRuts = item.inruts
+  },
+  RENEW_ITEMS (state, data) {
+    state.items[data.itemid][data.ref] = data[data.ref]
   }
 }
 

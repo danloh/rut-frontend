@@ -173,7 +173,7 @@ export default {
     '$route.params.name': 'loadTag' // watch to render re-used component
   },
   created () {
-    this.loadTag()
+    this.loadTag()  // tag data and ruts can be cache?? 
   }
 }
 </script>

@@ -123,7 +123,9 @@ export default {
       }
       updateItem(this.itemid, data).then(resp => {
         let id = resp.data.item.id
-        this.$router.push(`/item/${id}`)  // reload store?? 
+        let updateTime = {'itemid':id, 'lastUpdate':0, 'ref':'lastUpdate'}
+        this.$store.commit('RENEW_ITEMS', updateTime)
+        this.$router.push(`/item/${id}`)
       })
     },
     loadItem () {

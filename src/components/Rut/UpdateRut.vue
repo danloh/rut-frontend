@@ -81,7 +81,9 @@ export default {
       }
       updateRut(this.ritid, data).then(resp => {
         let id = resp.data.rut.id
-        this.$router.push(`/r/${id}`)  // reload store??, issue
+        let updateTime = {'rutid':id, 'lastUpdate':0, 'ref':'lastUpdate'}
+        this.$store.commit('RENEW_RUT', updateTime)
+        this.$router.push(`/r/${id}`)
       })
     },
     loadRut () {
