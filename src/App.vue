@@ -81,6 +81,7 @@ body {
   font-size: 18px;
   line-height: 1.6em;
   color: #34495e;
+  background-color: #f2f3f5;
   overflow-wrap: break-word;
 }
 .header {
@@ -161,7 +162,7 @@ pre {
   padding: 5px;
 }
 blockquote {
-  border-left: 3px solid lighten(orange, 80%);
+  border-left: 3px solid orange;
   margin: 5px;
   padding-left: 12px;
 }

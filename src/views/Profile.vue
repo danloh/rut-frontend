@@ -111,7 +111,7 @@ export default {
   top: 10px;
   right: 0;
   width: 220px;
-  background-color: lighten(#e5ebe4, 75%);
+  background-color: #f8faf8;
 }
 .right-avatar {
   background-color: #e5ebe4;

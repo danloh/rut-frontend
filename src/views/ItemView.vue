@@ -28,7 +28,7 @@ import { showLess } from '../util/filters'
 export default {
   name: 'item-view',
   title () {
-    return this.itemDetail
+    return this.itemTitle
   },
   components: { ItemSum },
   data () {
@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .item-page {
   padding: 10px 255px 10px 0px;
   position: relative;
@@ -80,7 +80,7 @@ export default {
   margin-top: 5px;
 }
 .item-detail {
-  background-color: lighten(#f0f3f0, 45%);
+  background-color: #fcfcfa;
   padding: 5px;
 }
 .item-side {

@@ -187,7 +187,7 @@ export default {
   position: absolute;
   right: 0;
   width: 220px;
-  background-color: lighten(#e5ebe4, 80%);
+  background-color: #fafbfa;
 }
 .tagmeta {
   background-color: white;

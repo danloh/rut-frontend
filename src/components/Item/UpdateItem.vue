@@ -85,8 +85,8 @@ export default {
       itemid: '',
       title: '',
       uiid: '',
-      pubDate: '',
       authors: '',
+      pubDate: '',
       publisher: '',
       category: 'Book',
       url: '',
@@ -112,8 +112,8 @@ export default {
         id: this.itemid.trim(),
         title: this.title.trim(),
         uiid: this.uiid.trim(),
-        pub_at: this.pubDate.trim(),
         authors: this.authors.trim(),
+        pub_at: this.pubDate.trim(),
         publisher: this.publisher.trim(),
         category: this.category.trim(),
         url: this.url.trim(),
@@ -133,8 +133,8 @@ export default {
       this.$store.dispatch('getItem', itemid).then(resp => {
         this.title = resp.title
         this.uiid = resp.uiid
-        this.pubDate = resp.pub_at
         this.authors = resp.authors
+        this.pubDate = resp.pub_at
         this.publisher = resp.publisher
         this.category = resp.category
         this.url = resp.url

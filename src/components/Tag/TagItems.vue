@@ -56,8 +56,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.item-list
-  width 100%
-  margin-top 5px
+<style scoped>
+.item-list {
+  width: 100%;
+  margin-top: 5px;
+}
 </style>

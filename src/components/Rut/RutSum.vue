@@ -1,11 +1,11 @@
 <template>
   <div class="rut-sum">
     <router-link :to="'/r/' + rut.id">
-      <span>
-        <img class="cover" :src="cover" referrerPolicy="no-referrer" alt="Cover">
-      </span>
       <span class="title">
         <router-link :to="'/r/' + rut.id"> {{ rut.title }}</router-link>
+      </span>
+      <span>
+        <img class="cover" :src="cover" referrerPolicy="no-referrer">
       </span>
       <div class="content" v-html="content"></div>
     </router-link>
@@ -39,8 +39,8 @@ export default {
 <style scoped>
 .rut-sum {
   background-color:#f7f7f7;
-  min-height: 120px;
-  padding: 10px 30px 10px 100px;
+  min-height: 100px;
+  padding: 10px 100px 10px 15px;
   border-bottom: 1px dashed #ddd;
   position: relative;
 }
@@ -52,7 +52,7 @@ div.rut-sum:hover {
   max-width: 80px;
   max-height: 100px;
   top: 10px;
-  left: 5px;
+  right: 10px;
 }
 .title {
   font-size: 20px;

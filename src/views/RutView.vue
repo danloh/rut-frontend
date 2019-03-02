@@ -2,10 +2,10 @@
   <div class="rut-page" v-if="rut">
     <div class="rut-view">
       <div class="tagbar">
+        <el-button type="text" @click="toAddTag">..Tag:</el-button>
         <span class="tag" v-for="(tag, index) in tags" :key="index">
           <router-link :to="'/tag/' + tag"><b>{{tag}}</b></router-link>
         </span>
-        <el-button type="text" @click="toAddTag">..Tag</el-button>
       </div>
       <!-- edit tag dialog -->
       <el-dialog title="Add Tag" width="350px" 
@@ -50,8 +50,11 @@
     </div>
     <div class="item" v-for="i in order_collects" :key="i.id">
       <div>
-        <b class="indicator">#{{i.item_order}}&nbsp;</b> 
+        <small class="indicator">#{{i.item_order}}&nbsp;</small> 
         <router-link :to="'/item/' + i.id">{{ i.title }}</router-link>
+        <p style="color:#aaa;font-size:14px">
+          &nbsp; &nbsp; {{i.uiid}}&nbsp;&nbsp;{{i.authors}}
+        </p>
       </div>
       <div v-html="md(i.content)"></div>
     </div>
@@ -227,11 +230,10 @@ export default {
   color: #828282;
   font-size: 12px;
 }
-.rut-view .content, 
-.rut-view .item {
+.rut-view .content, .item {
   background-color: #fbfbf8;
-  padding: 5px 10px;
-  border-bottom: 2px solid #eee;
+  padding: 10px;
+  border-bottom: 1px dashed #eee;
 }
 .rut-view .sharebar {
   font-size: .85em;

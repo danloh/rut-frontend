@@ -70,8 +70,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.comment-list
-  width 100%
-  margin-top 5px
+<style scoped>
+.comment-list {
+  width: 100%;
+  margin-top: 5px;
+}
 </style>

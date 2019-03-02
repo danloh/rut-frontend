@@ -84,8 +84,8 @@ export default {
     return {
       title: '',
       uiid: '',
-      pubDate: '',
       authors: '',
+      pubDate: '',
       publisher: '',
       category: 'Book',
       url: '',
@@ -110,8 +110,8 @@ export default {
       let data = {
         title: this.title.trim(),
         uiid: this.uiid.trim(),
-        pub_at: this.pubDate.trim(),
         authors: this.authors.trim(),
+        pub_at: this.pubDate.trim(),
         publisher: this.publisher.trim(),
         category: this.category.trim(),
         url: this.url.trim(),

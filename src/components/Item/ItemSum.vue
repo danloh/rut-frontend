@@ -20,11 +20,11 @@
         </tr>
         <tr>
           <td><small class="indicator">Publish&nbsp;</small></td>
-          <td>{{ item.publisher }} - {{ item.pubdate }} - {{ item.language }}</td>
+          <td>{{ item.publisher }} &nbsp; {{ item.pub_at }}</td>
         </tr>
         <tr>
           <td><small class="indicator">Edition</small></td>
-          <td>{{ item.uiid }} - {{ item.edition }}</td>
+          <td>{{ item.uiid }} &nbsp; {{ item.edition }}</td>
         </tr>
         <tr>
           <td><small class="indicator">Listed</small></td>
@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .item-sum {
-  background-color: lighten(#f6f6f1, 65%);
+  background-color: #fcfcfa;
   min-height: 135px;
   padding: 10px 115px 10px 115px;
   border-bottom: 1px solid #eee;
