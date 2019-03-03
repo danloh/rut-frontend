@@ -65,7 +65,7 @@ Vue.prototype.$http = axios
 // request factory
 let base = 'http://127.0.0.1:8083/api'
 const request = (url, options = {}, method = 'get') => {
-  let key = ~['delete', 'get', 'head'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)
+  let key = ~['get', 'head'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)
   return axios(Object.assign({'url': url, 'method': method}, {[key]: options}))
   .then(res => res)
 }
@@ -129,8 +129,20 @@ const fetchItems = (per, id, flag=0, params={}) => {
   return request(`${base}/items/${per}/${id}/${flag}`, params)
 }
 // get collect
-const fetchCollect = (rutid, itemid, params) => {
-  return request(`${base}/${rutid}/collects/${itemid}`, params)
+const fetchCollect = (cid, params) => {
+  return request(`${base}/collects/${cid}`, params)
+}
+// get collects
+const fetchCollects = (per, id, params) => {
+  return request(`${base}/collects/${per}/${id}`, params)
+}
+// update collect
+const updateCollect = (cid, params) => {
+  return request(`${base}/collects/${cid}`, params, 'put')
+}
+// del collect
+const delCollect = (cid, params) => {
+  return request(`${base}/collects/${cid}`, params, 'delete')
 }
 // update an item
 const updateItem = (itemid, params) => {
@@ -166,6 +178,9 @@ export {
   newItem,
   fetchItem,
   fetchCollect,
+  fetchCollects,
+  updateCollect,
+  delCollect,
   fetchItems,
   updateItem,
   fetchTag,

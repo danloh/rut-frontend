@@ -56,7 +56,8 @@
           &nbsp; &nbsp; {{i.uiid}}&nbsp;&nbsp;{{i.authors}}
         </p>
       </div>
-      <div v-html="md(i.content)"></div>
+      <collect-sum :collect="i" :canEdit="canEdit"></collect-sum>
+      <!-- <div v-html="md(i.content)"></div> -->
     </div>
     <div class="sharebar">
       <share-bar></share-bar>
@@ -73,14 +74,15 @@
 </template>
 
 <script>
-import { fetchItems, fetchCollect, fetchTags, tagRut } from '../api'
+import { fetchItems, fetchCollects, fetchTags, tagRut } from '../api'
 import { checkAuth } from '../util/auth'
 import marked from '../util/marked'
-import ShareBar from '@/components/Misc/ShareBar.vue'
+import CollectSum from '../components/Item/CollectSum.vue'
+import ShareBar from '../components/Misc/ShareBar.vue'
 
 export default {
   name: 'rut-view',
-  components: { ShareBar },
+  components: { CollectSum, ShareBar },
   data () {
     return {
       rutTitle: '',
@@ -123,19 +125,23 @@ export default {
       fetchItems('rut', rutid).then(resp => {
         let item_data = resp.data.items
         this.items = item_data
-        for (let i of item_data) {
-          let itemid = i.id
-          fetchCollect(rutid, itemid).then(resp => {
-            let data = resp.data.collects[0]
-            let clct = {
-              rutid: data.rut_id,
-              item_order: data.item_order,
-              content: data.content,
+        fetchCollects('rut', rutid).then(resp => {
+          for (let c of resp.data.collects) {
+            for (let i of item_data ) {
+              if ( c.item_id === i.id ) {
+                let clct = {
+                  cid: c.id,
+                  rutid: c.rut_id,
+                  userid: c.user_id,
+                  item_order: c.item_order,
+                  content: c.content,
+                }
+                Object.assign(clct, i)
+                this.collects.push(clct)
+              }
             }
-            Object.assign(clct, i)
-            this.collects.push(clct)
-          })
-        }
+          }
+        })
       })
     },
     loadTags (rutid) {
