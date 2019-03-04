@@ -102,6 +102,14 @@ const updateRut = (rutid, params) => {
 const tagRut = (act, rutid, params) => { // action: 0-untag,1-tag
   return request(`${base}/tag/${act}/${rutid}`, params, 'post')
 }
+// check if star or unstar rut
+const checkStarRut = (rutid, params) => { // action: 0-untag,1-tag
+  return request(`${base}/ifstar/ruts/${rutid}`, params)
+}
+// star or unstar rut
+const starRut = (rutid, action=0, note='Love', params={}) => { // action: 0-unstar,1-star
+  return request(`${base}/ruts/${rutid}/${action}/star/${note}`, params)
+}
 // get a rut
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
@@ -171,6 +179,8 @@ export {
   newRut,
   updateRut,
   tagRut,
+  starRut,
+  checkStarRut,
   fetchIndexRuts,
   fetchRut,
   fetchRuts,

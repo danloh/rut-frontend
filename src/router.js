@@ -30,9 +30,9 @@ const router = new Router({
     { path: '/login', component: Login, name: 'Login' },
     { path: '/p/:id', component: Profile, meta: {auth: true},
       children: [
-        { path: '', name: 'defaultProfile', redirect: 'created' },
-        { path: 'star', name: 'StarRuts', component: createRutList('star'), meta: {auth: true} },
+        { path: '', name: 'defaultProfile', redirect: 'created' }, 
         { path: 'created', name: 'CreatedRuts', component: createRutList('create'), meta: {auth: true} },
+        { path: 'star', name: 'StarRuts', component: createRutList('star'), meta: {auth: true} },
       ] 
     },
     { path: '/updateuser/:id', name: 'UpdateUser', component: UpdateUser, meta: {auth: true} },

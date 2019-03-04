@@ -18,10 +18,6 @@
         <p class="user-info"> &nbsp;{{user.join_at | toMDY}} Joined</p>
       </div>
       <div class="right-nav">
-        <router-link :to="'/p/' + userid + '/star/'">
-          <b style="color:royalblue">*</b> Star
-        </router-link>
-        <br>
         <router-link :to="'/p/' + userid + '/created/'">
           <b style="color:royalblue">*</b> Created
         </router-link>
@@ -29,6 +25,10 @@
           <small style="color:orange"> +New</small>
         </router-link>
         <br>
+        <router-link :to="'/p/' + userid + '/star/'">
+          <b style="color:royalblue">*</b> Star
+        </router-link>
+        <br><br>
         <router-link :to="'/setting/' + userid" v-if="showSetting">
           <small class="small-setting">~Setting~</small>
         </router-link>

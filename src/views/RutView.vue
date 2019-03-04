@@ -9,8 +9,7 @@
       </div>
       <!-- edit tag dialog -->
       <el-dialog title="Add Tag" width="350px" 
-                 :visible.sync="show" 
-                 :before-close="cancelOnClose">
+                 :visible.sync="show">
         <el-input size="mini" v-model="newTag" 
                   @keyup.enter.native="addNewTag" 
                   placeholder="Input a Tag, Press Enter to Add">
@@ -69,12 +68,17 @@
       <router-link :to="'/collect/' + rutid" v-if="canEdit">
         <small>Add...</small>
       </router-link>
+      <el-button size="mini" @click="starOrUnstarRut">
+        {{ starStatus === 'unstar' ? 'Star' : 'UnStar' }}
+      </el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchItems, fetchCollects, fetchTags, tagRut } from '../api'
+import { 
+  fetchItems, fetchCollects, fetchTags, tagRut, checkStarRut, starRut 
+} from '../api'
 import { checkAuth } from '../util/auth'
 import marked from '../util/marked'
 import CollectSum from '../components/Item/CollectSum.vue'
@@ -89,6 +93,7 @@ export default {
       rutid: '',
       items: [],
       collects: [],
+      starStatus: '',
       tags: [],
       show: false,  // show dialog
       rut_userid: '',
@@ -193,7 +198,36 @@ export default {
         })
       }
     },
-    cancelOnClose (done) { done() },
+    checkStar () {
+      if (checkAuth()) {
+        // let rutid = this.$route.params.id // ?? liftcycle timing
+        checkStarRut(this.rutid).then(resp => {
+          if (resp.data.status !== 200) return
+          this.starStatus = resp.data.message
+        })
+      } else {
+        this.starStatus = 'unstar'
+      }
+    },
+    starOrUnstarRut () {
+      if (!checkAuth()) {
+        this.$message({ message: 'Please Login'})
+        this.$router.push({
+          path: '/login',
+          query: {redirect: this.$route.fullPath}
+        })
+      }
+      let rutid = this.rutid
+      if (this.starStatus === 'unstar') { // ??, can not act star?? 
+        starRut(rutid, 1).then(resp => {
+          this.starStatus = resp.data.message
+        })
+      } else {
+        starRut(rutid, 0).then(resp => {
+          this.starStatus = resp.data.message
+        })
+      }
+    },
     md (content) { return marked(content) }
   },
   watch: {
@@ -201,6 +235,7 @@ export default {
   },
   created () {
     this.loadRut()
+    this.checkStar()
   }
 }
 </script>
