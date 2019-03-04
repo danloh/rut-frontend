@@ -10,8 +10,8 @@
       </div>
       <div class="item-detail">
         <div v-html="showDetail || '...'"></div>
-        <el-button type="text" size="mini" @click="showShort=false" v-if="showShort">
-          ...More
+        <el-button type="text" size="mini" @click="showShort=!showShort">
+          {{showShort ? '...More' : '..Less'}}
         </el-button>
       </div>
     </div>

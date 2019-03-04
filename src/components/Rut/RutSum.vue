@@ -5,14 +5,12 @@
         <router-link :to="'/r/' + rut.id"> {{ rut.title }}</router-link>
       </span>
       <span>
-        <img class="cover" :src="cover" referrerPolicy="no-referrer">
+        <img class="cover" :src="rut.logo" referrerPolicy="no-referrer">
       </span>
       <div class="content" v-html="content"></div>
     </router-link>
     <span class="meta">
-      <span>  including {{ rut.item_count | pluralise('item') }}  
-              | <router-link :to="'/r/' + rut.id">...See Detail</router-link>
-      </span>
+      including {{ rut.item_count | pluralise('item') }}  
     </span>
   </div>
 </template>
@@ -25,9 +23,6 @@ export default {
   name: 'rut-sum',
   props: ['rut'],
   computed: {
-    cover () {
-      return this.rut.cover
-    },
     content () {
       let c = marked(this.rut.content)
       return showLess(c)

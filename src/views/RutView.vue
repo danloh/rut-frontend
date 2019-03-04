@@ -2,7 +2,7 @@
   <div class="rut-page" v-if="rut">
     <div class="rut-view">
       <div class="tagbar">
-        <el-button type="text" @click="toAddTag">..Tag:</el-button>
+        <el-button type="text" @click="toAddTag">+Tag:</el-button>
         <span class="tag" v-for="(tag, index) in tags" :key="index">
           <router-link :to="'/tag/' + tag"><b>{{tag}}</b></router-link>
         </span>
@@ -15,15 +15,15 @@
                   placeholder="Input a Tag, Press Enter to Add">
         </el-input>
         <div v-for="(tag, index) in newTags" :key="index">
-          <p><el-button type="text" size="mini" 
-                        @click="newTags.splice(index, 1)">
-                        &times;
-              </el-button>&nbsp;&nbsp; 
-              {{ tag }} 
-          </p>
+          <span>
+            <el-button type="text" size="mini" @click="newTags.splice(index, 1)">
+              &times;
+            </el-button>&nbsp;&nbsp; 
+            {{ tag }} 
+          </span>
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button type="success" size="mini" @click="onAddTags">Done</el-button>
+          <el-button type="success" size="mini" @click="onAddTags">Add</el-button>
         </div>
       </el-dialog>
       <!-- end edit tag dialog -->
@@ -48,29 +48,31 @@
       </div>
     </div>
     <div class="item" v-for="i in order_collects" :key="i.id">
-      <div>
-        <small class="indicator">#{{i.item_order}}&nbsp;</small> 
+      <div class="item-info">
+        <b class="indicator">#{{i.item_order}}&nbsp;</b> 
         <router-link :to="'/item/' + i.id">{{ i.title }}</router-link>
-        <p style="color:#aaa;font-size:14px">
-          &nbsp; &nbsp; {{i.uiid}}&nbsp;&nbsp;{{i.authors}}
-        </p>
+        <small style="color:#aaa;font-size:14px">
+          <br> &nbsp; {{i.uiid}}&nbsp;&nbsp;{{i.authors}}
+        </small>
+        <span>
+          <img class="thumb" :src="i.cover" referrerPolicy="no-referrer">
+        </span>
       </div>
       <collect-sum :collect="i" :canEdit="canEdit"></collect-sum>
-      <!-- <div v-html="md(i.content)"></div> -->
     </div>
     <div class="sharebar">
       <share-bar></share-bar>
     </div>
     <div class="rut-side">
+      <el-button size="mini" @click="starOrUnstarRut">
+        {{ starStatus === 'unstar' ? 'Star' : 'Unstar' }}
+      </el-button>
       <router-link :to="'/update/r/' + rutid" v-if="canEdit">
-        <small>Edit...</small>
+        <small> Edit...</small>
       </router-link>
       <router-link :to="'/collect/' + rutid" v-if="canEdit">
-        <small>Add...</small>
+        <small> Add...</small>
       </router-link>
-      <el-button size="mini" @click="starOrUnstarRut">
-        {{ starStatus === 'unstar' ? 'Star' : 'UnStar' }}
-      </el-button>
     </div>
   </div>
 </template>
@@ -286,5 +288,16 @@ export default {
   right: 0;
   top: 10px;
   width: 240px;
+}
+.item-info {
+  padding-right: 40px;
+  position: relative;
+}
+.item-info .thumb {
+  position: absolute;
+  max-width: 40px;
+  max-height: 40px;
+  top: 0px;
+  right: 0px;
 }
 </style>

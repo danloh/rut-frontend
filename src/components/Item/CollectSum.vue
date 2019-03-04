@@ -2,7 +2,7 @@
   <div class="collect-sum">
     <div v-html="md(content)" v-if="showCtn"></div>
     <el-button type="text" size="mini" @click="showCtn=!showCtn" v-if="canEdit">
-      {{ showCtn ? 'Edit' : 'Cancel' }}
+      <small class="hiden" v-if="showCtn">Edit</small><b v-else>Cancel</b>
     </el-button>
     <div v-if="!showCtn">
       <v-form ref="form" class="collect-form">
@@ -93,3 +93,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.hiden {
+  cursor: pointer;
+  color: transparent;
+}
+.hiden:hover {
+  color: orangered;
+  font-size: 15px;
+}
+</style>
