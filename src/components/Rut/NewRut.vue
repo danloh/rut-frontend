@@ -15,7 +15,7 @@
       ></v-textarea>
       <v-textarea
         v-model="url"
-        label="URL"
+        label="Source URL"
         :counter = "120"
         :rules="lenRule"
         :rows= "1"

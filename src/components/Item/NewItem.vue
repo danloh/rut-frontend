@@ -23,6 +23,28 @@
         :counter= "120"
         :rules= "titleRule"
       ></v-text-field>
+      <v-textarea
+        v-model="cover"
+        label = "Cover Image Url"
+        :counter = "120"
+        :rules = "lenRule"
+        :rows = "1"
+        auto-grow
+      ></v-textarea>
+      <v-textarea
+        v-model="url"
+        label = "Resource URL"
+        :counter = "120"
+        :rules = "lenRule"
+        :rows = "1"
+        auto-grow
+      ></v-textarea>
+      <v-text-field
+        v-model="edition"
+        label="Edition"
+        :counter = "120"
+        :rules="lenRule"
+      ></v-text-field>
       <v-text-field
         v-model= "pubDate"
         label= "Publish Date"
@@ -36,28 +58,6 @@
       <v-text-field
         v-model="category"
         label="Category"
-      ></v-text-field>
-      <v-textarea
-        v-model="url"
-        label = "URL"
-        :counter = "120"
-        :rules = "lenRule"
-        :rows = "1"
-        auto-grow
-      ></v-textarea>
-      <v-textarea
-        v-model="cover"
-        label = "Cover"
-        :counter = "120"
-        :rules = "lenRule"
-        :rows = "1"
-        auto-grow
-      ></v-textarea>
-      <v-text-field
-        v-model="edition"
-        label="Edition"
-        :counter = "120"
-        :rules="lenRule"
       ></v-text-field>
       <v-textarea
         v-model="detail"

@@ -4,7 +4,8 @@
       <router-link :to="'/p/' + uname">
         <b style="font-size:1.6em">{{ uname }}</b>
       </router-link>
-      <p class="aboutme">{{user.intro || '...'}}</p>
+      <small class="location"> &nbsp; {{ user.location }}</small>
+      <div class="aboutme">{{user.intro || '...'}}</div>
     </div>
     <div class="profile-view">
       <router-view></router-view>
@@ -12,7 +13,7 @@
     <div class="profile-side">
       <div class="right-avatar">
         <avatar :uname="uname" :size="210" :rounded="false" :src="user.avatar"></avatar>
-        <p class="user-info"> &nbsp;{{user.join_at | toMDY}} Joined</p>
+        <small class="user-info"> &nbsp;{{user.join_at | toMDY}} Joined</small>
       </div>
       <div class="right-nav">
         <router-link :to="'/p/' + uname + '/created/'">
@@ -97,6 +98,10 @@ export default {
   margin-bottom: 5px;
   position: relative;
 }
+.location {
+  color: #828282;
+  font-size: 10px;
+}
 .profile-view {
   padding: auto;
   min-height: 400px;
@@ -113,10 +118,6 @@ export default {
   min-height: 60px;
   padding: 5px;
   position: relative;
-}
-.avatar {
-  width: 210px;
-  height: 210px;
 }
 .right-nav {
   padding: 5px 10px;

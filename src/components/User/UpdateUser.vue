@@ -26,6 +26,11 @@
         :counter= "120"
         :rules="lenRule"
       ></v-text-field> -->
+      <v-text-field
+        v-model="location"
+        label="Location"
+        :rules="lenRule"
+      ></v-text-field>
       <v-textarea
         v-model="intro"
         label="Intro"
@@ -80,6 +85,7 @@ export default {
       uname: '',
       avatar: '',
       email: '',
+      location: '',
       intro: '',
       nameRule: [
         v => !!v || 'required',
@@ -113,9 +119,10 @@ export default {
       }
       let data = {
         uname: this.uname.trim(),
-        email: this.email.trim(),
         avatar: this.avatar.trim(),
+        email: this.email.trim(),
         intro: this.intro.trim(),
+        location: this.location.trim(),
       }
       updateUser(this.uname, data).then(resp => {
         let name = resp.data.user.uname
