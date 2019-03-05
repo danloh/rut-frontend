@@ -86,9 +86,13 @@ const signin = data => {
 const fetchUser = (userid, params) => {
   return request(`${base}/users/${userid}`, params)
 }
-// get user info
+// update user info
 const updateUser = (userid, params) => {
   return request(`${base}/users/${userid}`, params, 'post')
+}
+// change Psw
+const changePsw = (userid, params) => {
+  return request(`${base}/users/${userid}`, params, 'put')
 }
 // create new rut
 const newRut = params => {
@@ -176,6 +180,7 @@ export {
   signin,
   fetchUser,
   updateUser,
+  changePsw,
   newRut,
   updateRut,
   tagRut,

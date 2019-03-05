@@ -34,7 +34,7 @@
       ></v-textarea>
     </v-form>
     <el-button type="success" size="mini" class="blockbtn" @click="onUpdate">
-      Done and Submit
+      Done and Update
     </el-button>
   </div>
 </template>

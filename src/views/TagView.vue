@@ -69,7 +69,7 @@
           auto-grow
         ></v-textarea>
       </v-form>
-      <el-button type="success" @click="onEditTag">Submit</el-button>
+      <el-button type="success" @click="onEditTag">Update</el-button>
     </el-dialog>
     <!-- end edit tag dialog -->
   </div>

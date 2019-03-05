@@ -1,43 +1,74 @@
 <template>
-<div class="update-page">
-  <h3 class="title">Update My Profile</h3>
-  <v-form ref="form" class="update-form">
-    <v-text-field
-      v-model="username"
-      label="Username"
-      :counter= "16"
-      :rules="nameRule"
-    ></v-text-field>
-    <v-textarea
-      v-model="avatar"
-      label="Avatar"
-      :counter = "120"
-      :rules="lenRule"
-      :rows= "1"
-      auto-grow
-    ></v-textarea>
-    <v-text-field
-      v-model="email"
-      label="Email"
-      :counter= "120"
-      :rules="lenRule"
-    ></v-text-field>
-    <v-textarea
-      v-model="intro"
-      label="Intro"
-      counter
-      :rows= "10"
-      auto-grow
-    ></v-textarea>
-  </v-form>
-  <el-button class="blockbtn" type="primary" size="small"
-            @click="onUpdate">Update My Profile
+<div>
+  <el-button size="mini" @click="show=!show">
+    {{ show ? 'Change Password': 'Update Profile' }}
   </el-button>
+  <div class="update-page" v-if="show">
+    <h3 class="title">Update My Profile</h3>
+    <v-form ref="form" class="update-form">
+      <v-text-field
+        v-model="username"
+        label="Username"
+        :counter= "16"
+        :rules="nameRule"
+      ></v-text-field>
+      <v-textarea
+        v-model="avatar"
+        label="Avatar"
+        :counter = "120"
+        :rules="lenRule"
+        :rows= "1"
+        auto-grow
+      ></v-textarea>
+      <!-- <v-text-field
+        v-model="email"
+        label="Email"
+        :counter= "120"
+        :rules="lenRule"
+      ></v-text-field> -->
+      <v-textarea
+        v-model="intro"
+        label="Intro"
+        counter
+        :rows= "6"
+        auto-grow
+      ></v-textarea>
+    </v-form>
+    <el-button class="blockbtn" type="primary" size="small"
+              @click="onUpdate">Update My Profile
+    </el-button>
+  </div>
+  <div class="update-page" v-if="!show">
+    <h3 class="title">Change My Password</h3>
+    <v-form ref="form" class="psw-form">
+      <v-text-field
+        v-model="oldpsw"
+        label="Old Password"
+        :type="'password'"
+        :rules="pswRule"
+      ></v-text-field>
+      <v-text-field
+        v-model="psw"
+        label="New Password"
+        :type="'password'"
+        :rules="pswRule"
+      ></v-text-field>
+      <v-text-field
+        v-model="repsw"
+        label="Confirm Password"
+        :type="'password'"
+        :rules="repswRule"
+      ></v-text-field>
+    </v-form>
+    <el-button class="blockbtn" type="primary" size="small"
+               @click="onChangePsw">Change Password
+    </el-button>
+  </div>
 </div>
 </template>
 
 <script>
-import { updateUser, fetchUser } from '../../api'
+import { updateUser, fetchUser, changePsw } from '../../api'
 import { regName, regEmail, regPsw } from '../../util/constant'
 import { checkAuth } from '../../util/auth'
 
@@ -61,6 +92,17 @@ export default {
       emailRule: [
         v => /.+@.+/.test(v) || 'E-mail must be valid'
       ],
+      show: true,
+      oldpsw: '',
+      psw: '',
+      pswRule: [
+        v => !!v || 'required',
+        v => v.length >= 8 || 'Must be more than 8 characters'
+      ],
+      repsw: '',
+      repswRule: [
+        v => (!!v && v) === this.psw || 'Not Match'
+      ]
     }
   },
   methods: {
@@ -92,7 +134,27 @@ export default {
         this.email = data.email
         this.intro = data.intro
       })
-    }
+    },
+    onChangePsw() {
+      let currID = this.$store.getters.actID
+      if (!this.$refs.form.validate() || !checkAuth() || this.userid !== currID) {
+        console.log("Invalid")
+        return
+      }
+      let data = {
+        old_psw: this.oldpsw.trim(),
+        new_psw: this.psw.trim(),
+        user_id: this.userid
+      }
+      changePsw(this.userid, data).then(resp => {
+        // console.log(resp.data)
+        if (resp.data.status == 200) {
+          this.$router.push('/login')
+        } else {
+          this.$message("Failed")
+        }
+      })
+    },
   },
   created () {
     this.loadUser()

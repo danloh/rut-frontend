@@ -4,9 +4,6 @@
       <router-link :to="'/p/' + userid">
         <b style="font-size:1.6em">{{ username }}</b>
       </router-link>
-      <router-link :to="'/updateuser/' + userid" v-if="showSetting">
-        <small style="font-size:0.75em"> ...</small>
-      </router-link>
       <p class="aboutme">{{user.intro || '...'}}</p>
     </div>
     <div class="profile-view">
@@ -29,8 +26,8 @@
           <b style="color:royalblue">*</b> Star
         </router-link>
         <br><br>
-        <router-link :to="'/setting/' + userid" v-if="showSetting">
-          <small class="small-setting">~Setting~</small>
+        <router-link :to="'/updateuser/' + userid" v-if="showSetting">
+          <small class="setting">Setting</small>
         </router-link>
       </div>
     </div>
@@ -135,7 +132,7 @@ export default {
   color: green;
   font-weight: 800;
 }
-.small-setting {
+.setting {
   outline: dotted 1px;
   background-color: #d5d5be;
 }
