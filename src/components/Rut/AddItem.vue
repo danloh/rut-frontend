@@ -52,7 +52,7 @@ export default {
       items: [], // search result from have-dones
       rutID: null,
       rutTitle: null,
-      rut_userid: '',
+      rut_uname: '',
       item_count: null, // to yield order
       mustRule: [ v => !!v || 'required' ]
     }
@@ -64,9 +64,9 @@ export default {
       }
       //this.items = this.$store.getters.seItems  // show options when focus
     },
-    // check if same user_id and loged in
+    // check if same uname and loged in
     checkAuthed () {
-      return this.rut_userid === this.$store.getters.actID && checkAuth()
+      return this.rut_uname === this.$store.getters.actID && checkAuth()
     },
     // make the search controllable
     searchItems () {
@@ -98,7 +98,7 @@ export default {
         item_id: this.itemID,
         item_order: this.item_count + 1,
         content: this.content,
-        user_id: '', // can get from cookie
+        uname: '', // can get from cookie
       }
       collectItem(this.rutID, data).then(() => {
         // unlockRut(id)
@@ -115,7 +115,7 @@ export default {
         this.rutID = rut.id
         this.rutTitle = rut.title
         this.item_count = rut.item_count
-        this.rut_userid = rut.user_id
+        this.rut_uname = rut.uname
         // lockRut(rut.id)
       } else {
         this.$router.push(`/r/${rutid}`)

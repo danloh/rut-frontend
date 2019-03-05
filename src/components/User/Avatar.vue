@@ -9,7 +9,7 @@
 export default {
   name: 'avatar',
   props: {
-    username: {
+    uname: {
       type: String,
       required: true
     },
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     background () {
-      return this.randomBackgroundColor(this.username.length, this.backgroundColors)
+      return this.randomBackgroundColor(this.uname.length, this.backgroundColors)
     },
     fontColor () {
       return this.color
@@ -75,13 +75,13 @@ export default {
       return style
     },
     userInitial () {
-      const initials = this.initial(this.username)
+      const initials = this.initial(this.uname)
       return initials
     }
   },
   methods: {
-    initial (username) {
-      let parts = username.split(/[ _-]/)
+    initial (uname) {
+      let parts = uname.split(/[ _-]/)
       let initials = ''
       for (var i = 0; i < parts.length; i++) {
         initials += parts[i].charAt(0)

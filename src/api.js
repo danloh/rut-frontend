@@ -83,16 +83,16 @@ const signin = data => {
   return request(`${base}/signin`, data, 'post')
 }
 // get user info
-const fetchUser = (userid, params) => {
-  return request(`${base}/users/${userid}`, params)
+const fetchUser = (uname, params) => {
+  return request(`${base}/users/${uname}`, params)
 }
 // update user info
-const updateUser = (userid, params) => {
-  return request(`${base}/users/${userid}`, params, 'post')
+const updateUser = (uname, params) => {
+  return request(`${base}/users/${uname}`, params, 'post')
 }
 // change Psw
-const changePsw = (userid, params) => {
-  return request(`${base}/users/${userid}`, params, 'put')
+const changePsw = (uname, params) => {
+  return request(`${base}/users/${uname}`, params, 'put')
 }
 // create new rut
 const newRut = params => {
@@ -172,6 +172,14 @@ const fetchTags = (per, id, params) => {
 const updateTag = (tname, params) => {
   return request(`${base}/tags/${tname}`, params, 'put')
 }
+// submit an item
+const newEtc = params => {
+  return request(`${base}/etcs`, params, 'post')
+}
+// get etc list per rut,tag,user,item, petc
+const fetchEtcs = (per, perid, params) => {
+  return request(`${base}/etcs/${per}/${perid}`, params)
+}
 
 export {
   axios,
@@ -200,5 +208,7 @@ export {
   updateItem,
   fetchTag,
   fetchTags,
-  updateTag
+  updateTag,
+  newEtc,
+  fetchEtcs
 }

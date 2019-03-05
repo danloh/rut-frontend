@@ -3,7 +3,7 @@
   <h3 class="title">Welcome to Join</h3>
   <v-form ref="form" class="sign-form">
     <v-text-field
-      v-model="username"
+      v-model="uname"
       label="Username"
       :counter= "16"
       :rules="nameRule"
@@ -37,7 +37,7 @@ export default {
   title: 'Register',
   data () {
     return {
-      username: '',
+      uname: '',
       nameRule: [
         v => !!v || 'required',
         v => v.length <= 16 || 'Must be less than 16 characters'
@@ -59,7 +59,7 @@ export default {
         return
       }
       let data = {
-        uname: this.username,
+        uname: this.uname,
         password: this.password,
         confirm_password: this.repassword
       }

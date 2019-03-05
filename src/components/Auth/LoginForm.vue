@@ -2,7 +2,7 @@
   <div class="login-view">
     <v-form ref="form" class="login-form">
       <v-text-field
-        v-model="username"
+        v-model="uname"
         label="Username"
         :rules="inRule"
       ></v-text-field>
@@ -28,7 +28,7 @@ export default {
   props: ['next'],
   data () {
     return {
-      username: '',
+      uname: '',
       password: '',
       inRule: [ v => !!v || 'required' ]
     }
@@ -40,11 +40,11 @@ export default {
         return
       }
       // this.$axios.defaults.auth = {
-      //   uname: this.username,
+      //   uname: this.uname,
       //   password: this.password
       // }
       let data = {
-        uname: this.username,
+        uname: this.uname,
         password: this.password
       }
       this.$store.dispatch('login', data).then(() => {

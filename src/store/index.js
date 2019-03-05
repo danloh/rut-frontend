@@ -22,12 +22,12 @@ export default new Vuex.Store({
   mutations: {
     SET_TOKEN (state, obj) {
       let token = obj.token
-      let userid = obj.userid
+      let uname = obj.uname
       state.token = token
-      state.actID = userid
-      state.authed = Boolean(userid)
+      state.actID = uname
+      state.authed = Boolean(uname)
       setToken(token, obj.exp)
-      setID(userid, obj.exp)
+      setID(uname, obj.exp)
     },
     DEL_TOKEN (state) {
       state.token = ''
@@ -50,7 +50,7 @@ export default new Vuex.Store({
             this.$message("Something Failed")
             return
           }
-          let d = Object.assign(res, { userid: res.user.id } )
+          let d = Object.assign(res, { uname: res.user.uname } )
           commit('SET_TOKEN', d)
           resolve(resp)
         }).catch(error => {

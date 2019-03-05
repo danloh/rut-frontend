@@ -76,8 +76,7 @@ export default {
         title: this.title.trim(),
         content: this.content.trim(),
         url: this.url.trim(),
-        user_id: this.$store.getters.actID,  // get from cookie
-        user_name: '...',
+        uname: this.$store.getters.actID,  // get from cookie
         author_id: this.author.trim(),
         credential: '...'
       }

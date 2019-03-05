@@ -35,7 +35,7 @@
               <a :href="rut.url" v-if="rut.url">{{ rut.author_id }}</a>
             </span>
             <span v-else>
-              <router-link :to="'/p/' + rut.user_id">{{ rut.user_name }}</router-link>
+              <router-link :to="'/p/' + rut.uname">{{ rut.user_name }}</router-link>
             </span>
           </template>
           | Created: {{ rut.create_at | toMDY }} 
@@ -98,7 +98,7 @@ export default {
       starStatus: '',
       tags: [],
       show: false,  // show dialog
-      rut_userid: '',
+      rut_uname: '',
       newTag: '',
       newTags: [],
       delTags: []  // ?? how to del
@@ -112,7 +112,7 @@ export default {
       return this.collects.sort((a,b) => a.item_order - b.item_order)
     },
     canEdit () {
-      return this.rut_userid === this.$store.getters.actID && checkAuth()
+      return this.rut_uname === this.$store.getters.actID && checkAuth()
     }
   },
   title () {
@@ -125,7 +125,7 @@ export default {
         this.rutTitle = resp.title
         this.loadItems(rid)
         this.loadTags(rid)
-        this.rut_userid = resp.user_id
+        this.rut_uname = resp.uname
       })
     },
     loadItems (rutid) { // can be async??
@@ -139,7 +139,7 @@ export default {
                 let clct = {
                   cid: c.id,
                   rutid: c.rut_id,
-                  userid: c.user_id,
+                  uname: c.uname,
                   item_order: c.item_order,
                   content: c.content,
                 }

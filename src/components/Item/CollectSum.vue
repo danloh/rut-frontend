@@ -55,14 +55,14 @@ export default {
     md (content) { return marked(content) },
     editContent () {
       let currID = this.$store.getters.actID
-      if (!this.$refs.form.validate() || currID !== this.collect.userid || !checkAuth()) {
+      if (!this.$refs.form.validate() || currID !== this.collect.uname || !checkAuth()) {
         this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = {
         id: this.collect.cid,
         content: this.content.trim(),
-        user_id: currID,
+        uname: currID,
       }
       updateCollect(this.collect.cid, data).then(resp => {
         this.content = resp.data.collect.content
@@ -71,7 +71,7 @@ export default {
     },
     delContent() {
       let currID = this.$store.getters.actID
-      if (currID !== this.collect.userid || !checkAuth()) {
+      if (currID !== this.collect.uname || !checkAuth()) {
         this.showCfm = false
         this.$message('No Permission')
         return
@@ -80,7 +80,7 @@ export default {
         collect_id: this.collect.cid,
         rut_id: this.collect.rutid,
         item_id: this.collect.id,
-        user_id: currID,
+        uname: currID,
       }
       delCollect(this.collect.cid, data).then(() => {
         this.showCfm = false

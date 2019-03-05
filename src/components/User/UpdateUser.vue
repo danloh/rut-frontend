@@ -7,7 +7,7 @@
     <h3 class="title">Update My Profile</h3>
     <v-form ref="form" class="update-form">
       <v-text-field
-        v-model="username"
+        v-model="uname"
         label="Username"
         :counter= "16"
         :rules="nameRule"
@@ -77,8 +77,7 @@ export default {
   title: 'Update My Profile',
   data () {
     return {
-      userid: '',
-      username: '',
+      uname: '',
       avatar: '',
       email: '',
       intro: '',
@@ -108,28 +107,26 @@ export default {
   methods: {
     onUpdate() {
       let currID = this.$store.getters.actID
-      if (!this.$refs.form.validate() || !checkAuth() || this.userid !== currID) {
+      if (!this.$refs.form.validate() || !checkAuth() || this.uname !== currID) {
         this.$message("Invalid Input or Need to Log in")
         return
       }
       let data = {
-        id: this.userid,
-        uname: this.username.trim(),
+        uname: this.uname.trim(),
         email: this.email.trim(),
         avatar: this.avatar.trim(),
         intro: this.intro.trim(),
       }
-      updateUser(this.userid, data).then(resp => {
-        let id = resp.data.user.id
-        this.$router.push(`/p/${id}`)  // relaod??
+      updateUser(this.uname, data).then(resp => {
+        let name = resp.data.user.uname
+        this.$router.push(`/p/${name}`)  // relaod??
       })
     },
     loadUser () {
       let pathid = this.$route.params.id
       fetchUser(pathid).then(resp => {
         let data = resp.data.user
-        this.userid = data.id
-        this.username = data.uname
+        this.uname = data.uname
         this.avatar = data.avatar
         this.email = data.email
         this.intro = data.intro
@@ -137,21 +134,21 @@ export default {
     },
     onChangePsw() {
       let currID = this.$store.getters.actID
-      if (!this.$refs.form.validate() || !checkAuth() || this.userid !== currID) {
+      if (!this.$refs.form.validate() || !checkAuth() || this.uname !== currID) {
         console.log("Invalid")
         return
       }
       let data = {
         old_psw: this.oldpsw.trim(),
         new_psw: this.psw.trim(),
-        user_id: this.userid
+        uname: this.uname
       }
-      changePsw(this.userid, data).then(resp => {
+      changePsw(this.uname, data).then(resp => {
         // console.log(resp.data)
         if (resp.data.status == 200) {
           this.$router.push('/login')
         } else {
-          this.$message("Failed")
+          this.$message(resp.data.message)
         }
       })
     },

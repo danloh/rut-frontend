@@ -1,8 +1,8 @@
 <template>
-  <div class="profile-page" v-if="username">
+  <div class="profile-page" v-if="uname">
     <div class="profile-head">
-      <router-link :to="'/p/' + userid">
-        <b style="font-size:1.6em">{{ username }}</b>
+      <router-link :to="'/p/' + uname">
+        <b style="font-size:1.6em">{{ uname }}</b>
       </router-link>
       <p class="aboutme">{{user.intro || '...'}}</p>
     </div>
@@ -11,22 +11,22 @@
     </div>
     <div class="profile-side">
       <div class="right-avatar">
-        <avatar :username="username" :size="210" :rounded="false" :src="user.avatar"></avatar>
+        <avatar :uname="uname" :size="210" :rounded="false" :src="user.avatar"></avatar>
         <p class="user-info"> &nbsp;{{user.join_at | toMDY}} Joined</p>
       </div>
       <div class="right-nav">
-        <router-link :to="'/p/' + userid + '/created/'">
+        <router-link :to="'/p/' + uname + '/created/'">
           <b style="color:royalblue">*</b> Created
         </router-link>
         <router-link to="/new">
           <small style="color:orange"> +New</small>
         </router-link>
         <br>
-        <router-link :to="'/p/' + userid + '/star/'">
+        <router-link :to="'/p/' + uname + '/star/'">
           <b style="color:royalblue">*</b> Star
         </router-link>
         <br><br>
-        <router-link :to="'/updateuser/' + userid" v-if="showSetting">
+        <router-link :to="'/updateuser/' + uname" v-if="showSetting">
           <small class="setting">Setting</small>
         </router-link>
       </div>
@@ -41,14 +41,13 @@ import Avatar from '../components/User/Avatar.vue'
 export default {
   name: 'profile',
   title () {
-    return this.username
+    return this.uname
   },
   components: { Avatar },
   data () {
     return {
       user: {},
-      username: '',
-      userid: this.$route.params.id,
+      uname: this.$route.params.id,
       showSetting: false,
     }
   },
@@ -57,7 +56,7 @@ export default {
       let pathid = this.$route.params.id
       let currID = this.$store.state.actID
       let userdata = this.$store.state.actUser
-      if (pathid === userdata.id) {
+      if (pathid === userdata.uname) {
         this.showSetting = true
         this.setData(userdata)
       } else {
@@ -73,8 +72,7 @@ export default {
     },
     setData (data) {
       this.user = data
-      this.username = data.uname
-      this.userid = data.id
+      this.uname = data.uname
     }
   },
   created () {
