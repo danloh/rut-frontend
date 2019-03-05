@@ -78,7 +78,7 @@
 <script>
 import { fetchTag, updateTag } from '../api'
 import { checkAuth } from '../util/auth'
-import { trimValid, showLess } from '../util/filters'
+import { showLess } from '../util/filters'
 import marked from '../util/marked'
 
 export default {
@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     loadTag () {
-      let tg = this.$route.params.tname
+      let tg = this.$route.params.id
       fetchTag(tg).then(resp => {
         this.setData(resp.data.tag)
       })
@@ -170,7 +170,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.name': 'loadTag' // watch to render re-used component
+    '$route.params.id': 'loadTag' // watch to render re-used component
   },
   created () {
     this.loadTag()  // tag data and ruts can be cache?? 

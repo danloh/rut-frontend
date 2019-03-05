@@ -15,13 +15,18 @@
         </el-button>
       </div>
     </div>
+    <div class="include">
+      <rut-list :per="'item'" :id="itemid"></rut-list>
+    </div>
     <div class="item-side">
     </div>
   </div>
 </template>
 
 <script>
+import { fetchRuts } from '../api'
 import ItemSum from '../components/Item/ItemSum.vue'
+import RutList from '../components/Rut/RutList.vue'
 import marked from '../util/marked'
 import { showLess } from '../util/filters'
 
@@ -30,7 +35,7 @@ export default {
   title () {
     return this.itemTitle
   },
-  components: { ItemSum },
+  components: { ItemSum, RutList },
   data () {
     return {
       itemid: '',
@@ -56,14 +61,14 @@ export default {
     }
   },
   methods: {
-    loadItem () {
+    loadItem() {
       let itemid = this.$route.params.id
       this.$store.dispatch('getItem', itemid).then(resp => {
         this.itemDetail = resp.detail
         this.itemTitle = resp.title
         this.itemid = resp.id
       })
-    }
+    },
   },
   created () {
     this.loadItem()

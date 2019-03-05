@@ -32,7 +32,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       fetchIndexRuts().then(resp => {
         let ruts = resp.data.ruts
-        commit('SET_INDEX', ruts)
+        commit('SET_RUTS', ruts, true)
         resolve(ruts)
       }).catch(error => { reject(error) })
     })
@@ -41,8 +41,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_INDEX (state, data) {
-    state.indexRuts = data
+  SET_RUTS (state, data, index=false) {
+    if (index) { state.indexRuts = data }
     data.forEach(r => {
       const rid = r.id
       const rut = state.ruts[rid]
@@ -56,8 +56,7 @@ const mutations = {
     let rutid = rut.id
     // set a update timestamp
     let rutdata = Object.assign({ lastUpdate: Date.now() }, rut)
-    Vue.set(state.ruts, rutid, rutdata) // as cache, need to update after edit? 
-    // state.rutDetail = rut  // for edit view
+    Vue.set(state.ruts, rutid, rutdata)
   },
   RENEW_RUT (state, data) {
     state.ruts[data.rutid][data.ref] = data[data.ref]

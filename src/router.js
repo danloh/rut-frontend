@@ -6,7 +6,7 @@ const Home = () => import('./views/Home')
 const Register = () => import('./components/Auth/Register.vue')
 const Login = () => import('./components/Auth/Login.vue')
 const Profile = () => import('./views/Profile')
-const createRutList = param => () => import('./components/User/CreateRutList').then(m => m.default(param))
+const createRutList = (p,a,i) => () => import('./components/Rut/CreateRutList').then(m => m.default(p,a,i))
 const UpdateUser = () => import('./components/User/UpdateUser')
 const RutView = () => import('./views/RutView')
 const NewRut = () => import('./components/Rut/NewRut')
@@ -16,7 +16,6 @@ const NewItem = () => import('./components/Item/NewItem')
 const UpdateItem = () => import('./components/Item/UpdateItem')
 const ItemView = () => import('./views/ItemView')
 const TagView = () => import('./views/TagView')
-const TagRuts = () => import('./components/Tag/TagRuts')
 
 Vue.use(Router)
 
@@ -31,8 +30,8 @@ const router = new Router({
     { path: '/p/:id', component: Profile, meta: {auth: true},
       children: [
         { path: '', name: 'defaultProfile', redirect: 'created' }, 
-        { path: 'created', name: 'CreatedRuts', component: createRutList('create'), meta: {auth: true} },
-        { path: 'star', name: 'StarRuts', component: createRutList('star'), meta: {auth: true} },
+        { path: 'created', name: 'CreatedRuts', component: createRutList('user', 'create'), meta: {auth: true} },
+        { path: 'star', name: 'StarRuts', component: createRutList('user', 'star'), meta: {auth: true} },
       ] 
     },
     { path: '/updateuser/:id', name: 'UpdateUser', component: UpdateUser, meta: {auth: true} },
@@ -43,10 +42,10 @@ const router = new Router({
     { path: '/submit', name: 'NewItem', component: NewItem, meta: {auth: true} },
     { path: '/item/:id', name: 'Itemview', component: ItemView },
     { path: '/update/item/:id', name: 'UpdateItem', component: UpdateItem, meta: {auth: true} },
-    { path: '/tag/:tname', component: TagView,
+    { path: '/tag/:id', component: TagView,  // must id as tname, for sub-componenet to extract params.id
       children: [
         { path: '', name: 'defaultTagView', redirect: 'r' },
-        { path: 'r', name: 'TagRuts', component: TagRuts },
+        { path: 'r', name: 'TagRuts', component: createRutList('tag') },
       ] 
     },
   ]

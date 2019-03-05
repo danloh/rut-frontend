@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>{{action.toUpperCase()}}: {{totalRuts}}</b>
+    <b v-if="action !== '0'">{{action.toUpperCase()}}: {{ totalCount }}</b>
     <div class="rut-list">
       <rut-sum v-for="rut in ruts" :key="rut.id" :rut="rut"></rut-sum>
     </div>
@@ -18,35 +18,30 @@ import RutSum from '../Rut/RutSum.vue'
 import { fetchRuts } from '../../api'
 
 export default {
-  name: 'profile-ruts',
-  props: { action: String }, // to be: create, star
+  name: 'rut-list',
+  props: {
+    per: String,   // should be user,item,tag
+    action: {type: String, default: '0'},
+    id: String,
+  },
   components: { RutSum },
   data () {
     return {
-      totalRuts: 0,
+      totalCount: 0,
       ruts: [],
-      //currentPage: 0
+      currentPage: 0
     }
   },
   computed: {},
   methods: {
-    loadmoreRuts () {
-      let action = this.action
-      let userid = this.$route.params.id
-      let param = {'page': this.currentPage}
-      // let params = {'action': action, 'userid': userid, 'param': param}
-      fetchRuts(action, userid, param).then(resp => {
-        this.currentRuts.push(...resp.data.ruts)
-        this.currentPage += 1
-      })
-    }
+    loadmoreRuts () {}
   },
   created () {
-    let action = this.action
-    let userid = this.$route.params.id
-    fetchRuts('user', userid, action).then(resp => {
+    let perid = this.id ? this.id : this.$route.params.id
+    fetchRuts(this.per, perid, this.action).then(resp => {
       this.ruts = resp.data.ruts
-      this.totalRuts = resp.data.count
+      this.$store.commit('SET_RUTS', this.ruts)  // as cache
+      this.totalCount = resp.data.count
       this.currentPage = 1
     })
   }
