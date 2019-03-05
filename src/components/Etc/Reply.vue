@@ -1,20 +1,18 @@
 <template>
   <div class="reply" v-show="show">
-    <el-form :model="etcForm" :rules="rules" ref="etcForm">
-      <el-form-item prop="etc" style="margin-bottom:4px">
-        <el-input type="textarea" autosize 
-                  v-model="etcForm.etc" 
-                  placeholder="Post">
-        </el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button size="mini" 
-                   @click="reply('etcForm', etcForm)" 
-                   :disabled="!etcForm.etc.trim()">
-                   Submit
-        </el-button>
-      </el-form-item>
-    </el-form>
+    <v-form ref="form" class="reply-form">
+      <v-textarea
+        v-model="content"
+        label="Post..."
+        counter
+        :rules="mustRule"
+        :rows= "1"
+        auto-grow
+      ></v-textarea>
+    </v-form>
+    <el-button size="mini" @click="onReply" :disabled="!content.trim()">
+      Post
+    </el-button>
   </div>
 </template>
 
@@ -31,45 +29,35 @@ export default {
   },
   data () {
     return {
-      etcForm: {
-        etc: ''
-      },
-      rules: {
-        etc: [
-          { min: 1, max: 500, message: 'Required, Max 500 Characters', trigger: 'change' }
-        ]
-      }
+      content: '',
+      mustRule: [ v => !!v ],
     }
   },
   methods: {
-    reply (formName, form) {
-      this.$refs[formName].validate((valid) => {
-        if (valid && form.etc.trim() && checkAuth()) {
-          let data = { etc: form.etc.trim() + this.tagsuf }
-          let re = this.refer.re // demand or rut or etc
-          let id = this.refer.id // id of above
-          newEtc(re, id, data).then(resp => {
-            this.$emit('newreply', resp.data)
-          })
-          this.$refs[formName].resetFields()
-          this.$emit('update:show', false) // with .sync, to hide input once submit
-        } else if (!checkAuth()) {
-          this.$message({
-            showClose: true,
-            message: 'Should Log in to post'
-          })
-          this.$router.push({
-            path: '/login',
-            query: {redirect: this.$route.fullPath}
-          })
-        }
+    onReply() {
+      if (!this.$refs.form.validate() || !checkAuth()) {
+        this.$message("Invalid Input or Need to Log in")
+        return
+      }
+      let data = { 
+        content: this.content.trim(), // + this.tagsuf 
+        post_to: this.refer.per,
+        to_id: this.refer.perid,
+        uname: this.$store.getters.actID,
+      }
+      newEtc(data).then(resp => {
+        this.$emit('newreply', resp.data.etc)
+        this.content = ''  // clear input form
       })
+      this.$emit('update:show', true) // with .sync, to hide input once submit
     }
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-.reply
-  padding 5px 0
+<style scoped>
+.reply {
+  padding: 5px 0;
+  margin-left: 5px;
+}
 </style>

@@ -35,12 +35,15 @@
               <a :href="rut.url" v-if="rut.url">{{ rut.author_id }}</a>
             </span>
             <span v-else>
-              <router-link :to="'/p/' + rut.uname">{{ rut.user_name }}</router-link>
+              <router-link :to="'/p/' + rut.uname">{{ rut.uname }}</router-link>
             </span>
           </template>
           | Created: {{ rut.create_at | toMDY }} 
-          <!-- <span v-if="rut.renewat"> | Updated: {{ rut.renewat | toMDY }}</span> -->
+          <span v-if="rut.renew_at"> | Updated: {{ rut.renew_at | toMDY }}</span>
           | including {{ rut.item_count | pluralise('item') }} 
+          | <router-link :to="'/rforum/' + rutid">
+              {{ rut.comment_count | pluralise('Comment') }}
+            </router-link>
         </p>
       </div>
       <div class="content">

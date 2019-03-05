@@ -9,6 +9,7 @@ const Profile = () => import('./views/Profile')
 const createRutList = (p,a,i) => () => import('./components/Rut/CreateRutList').then(m => m.default(p,a,i))
 const UpdateUser = () => import('./components/User/UpdateUser')
 const RutView = () => import('./views/RutView')
+const RutForum = () => import('./views/RutForum')
 const NewRut = () => import('./components/Rut/NewRut')
 const UpdateRut = () => import('./components/Rut/UpdateRut')
 const AddItem = () => import('./components/Rut/AddItem')
@@ -36,6 +37,7 @@ const router = new Router({
     },
     { path: '/updateuser/:id', name: 'UpdateUser', component: UpdateUser, meta: {auth: true} },
     { path: '/r/:id', name: 'Rutview', component: RutView },
+    { path: '/rforum/:id', name: 'RutForum', component: RutForum },
     { path: '/new', name: 'NewRut', component: NewRut, meta: {auth: true} },
     { path: '/update/r/:id', name: 'UpdateRut', component: UpdateRut, meta: {auth: true} },
     { path: '/collect/:id', name: 'AddItem', component: AddItem, meta: {auth: true} },

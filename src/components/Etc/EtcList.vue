@@ -1,14 +1,7 @@
 <template>
-  <div class="etc-list">
-    <div class="etc-main">
-      <b style="font-size:1.2em">{{ etcCount | pluralise('Post') }} on: &nbsp;</b>
-      <router-link :to="'/r/' + rut.id">
-        {{ rut.title }}
-      </router-link>
-    </div>
-    <div v-for="etc in etcs" :key="etc.id">
-      <etc :etc="etc"></etc>
-    </div>
+  <div class="etc-list">  
+    <small style="font-size:0.8em">{{ etcCount | pluralise('Post') }}</small>
+    <etc v-for="etc in etcs" :etc="etc" :key="etc.id" ></etc>
     <!-- <div v-if="hasMore">
       <el-button class="blockbtn" size="mini" 
                  @click="loadmoreEtc" 
@@ -16,31 +9,26 @@
                  Show More
       </el-button>
     </div> -->
-    <div class="etc">
-      <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>
-    </div>
-    <div class="retc-side"></div>
+    <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>
   </div>
 </template>
 
 <script>
-import { newEtc, fetchEtcs } from '../api'
-import Etc from '../components/Etc/Etc.vue'
-import Reply from '../components/Etc/Reply.vue'
+import { newEtc, fetchEtcs } from '../../api'
+import Etc from './Etc.vue'
+import Reply from './Reply.vue'
 
 export default {
   name: 'etc-list',
-  title () {
-    return 'Discuss: ' + this.rut.title
-  },
   components: { Etc, Reply },
+  props: {
+    refer: Object, //{per: String, perid: String,}  // should be user,item,tag
+  },
   data () {
     return {
-      rut: {},
       etcs: [],
       etcCount: 0,
       currentPage: 1,
-      refer: { per: 'rut', perid: this.$route.params.id }
     }
   },
   computed: {
@@ -50,11 +38,7 @@ export default {
   },
   methods: {
     loadEtcs () {
-      let rutid = this.$route.params.id
-      this.$store.dispatch('getRut', rutid).then(resp => {
-        this.rut = resp
-      })
-      fetchEtcs('rut', rutid).then(resp => {
+      fetchEtcs(this.refer.per, this.refer.perid).then(resp => {
         let data = resp.data
         this.etcs = data.etcs
         this.etcCount = data.count
@@ -73,15 +57,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.etc-list
-  padding 5px 180px 10px 0px
-  position relative
-  .etc-main
-    padding 10px
-  .retc-side
-    position absolute
-    top 10px
-    right 0
-    width 300px
+<style scoped>
+.etc-list {
+  position: relative;
+}
 </style>
