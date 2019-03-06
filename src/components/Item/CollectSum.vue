@@ -1,6 +1,16 @@
 <template>
   <div class="collect-sum">
-    <div v-html="md(content)" v-if="showCtn"></div>
+    <div class="item-info">
+      <b class="indicator">#{{collect.item_order}}&nbsp;</b> 
+      <router-link :to="'/item/' + collect.id">{{ collect.title }}</router-link>
+      <small style="color:#aaa;font-size:14px">
+        <br> &nbsp; {{collect.uiid}}&nbsp;&nbsp;{{collect.authors}}
+      </small>
+      <span>
+        <img class="thumb" :src="collect.cover" referrerPolicy="no-referrer">
+      </span>
+    </div>
+    <div class="content" v-html="md(content)" v-if="showCtn"></div>
     <el-button type="text" size="mini" @click="showCtn=!showCtn" v-if="canEdit">
       <small class="hiden" v-if="showCtn">Edit</small><b v-else>Cancel</b>
     </el-button>
@@ -95,6 +105,17 @@ export default {
 </script>
 
 <style scoped>
+.item-info {
+  padding-right: 40px;
+  position: relative;
+}
+.item-info .thumb {
+  position: absolute;
+  max-width: 40px;
+  max-height: 40px;
+  top: 0px;
+  right: 0px;
+}
 .hiden {
   cursor: pointer;
   color: transparent;

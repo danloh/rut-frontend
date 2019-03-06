@@ -50,19 +50,9 @@
         <div v-html="md(rut.content)"></div>
       </div>
     </div>
-    <div class="item" v-for="i in order_collects" :key="i.id">
-      <div class="item-info">
-        <b class="indicator">#{{i.item_order}}&nbsp;</b> 
-        <router-link :to="'/item/' + i.id">{{ i.title }}</router-link>
-        <small style="color:#aaa;font-size:14px">
-          <br> &nbsp; {{i.uiid}}&nbsp;&nbsp;{{i.authors}}
-        </small>
-        <span>
-          <img class="thumb" :src="i.cover" referrerPolicy="no-referrer">
-        </span>
-      </div>
-      <collect-sum :collect="i" :canEdit="canEdit"></collect-sum>
-    </div>
+    <collect-sum class="item" v-for="i in order_collects" :key="i.id" 
+                 :collect="i" :canEdit="canEdit">
+    </collect-sum>
     <div class="sharebar">
       <share-bar></share-bar>
     </div>
@@ -291,16 +281,5 @@ export default {
   right: 0;
   top: 10px;
   width: 240px;
-}
-.item-info {
-  padding-right: 40px;
-  position: relative;
-}
-.item-info .thumb {
-  position: absolute;
-  max-width: 40px;
-  max-height: 40px;
-  top: 0px;
-  right: 0px;
 }
 </style>
