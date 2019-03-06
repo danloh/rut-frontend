@@ -30,10 +30,13 @@ export default {
       totalCount: 0,
       ruts: [],
       paging: 1,
-      hasMore: true,
     }
   },
-  computed: {},
+  computed: {
+    hasMore () {
+      return this.ruts.length < this.totalCount
+    }
+  },
   methods: {
     loadRuts () {
       let pid = this.perid = this.id ? this.id : this.$route.params.id
@@ -47,10 +50,6 @@ export default {
     loadMoreRut () {
       fetchRuts(this.per, this.perid, this.paging+1, this.action).then(resp => {
         let more = resp.data.ruts
-        if (more.length === 0) {
-          this.hasMore = false
-          return
-        }
         this.$store.commit('SET_RUTS', more)  // as cache
         this.ruts.push(...more)
         this.paging += 1

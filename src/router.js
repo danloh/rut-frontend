@@ -17,6 +17,7 @@ const NewItem = () => import('./components/Item/NewItem')
 const UpdateItem = () => import('./components/Item/UpdateItem')
 const ItemView = () => import('./views/ItemView')
 const TagView = () => import('./views/TagView')
+const NotFound = () => import('./views/NotFound.vue')
 
 Vue.use(Router)
 
@@ -50,6 +51,8 @@ const router = new Router({
         { path: 'r', name: 'TagRuts', component: createRutList('tag') },
       ] 
     },
+    { path: '/404', component: NotFound, name: 'NotFound', hidden: true },
+    { path: '*', hidden: true, redirect: { path: '/404' } },
   ]
 })
 
