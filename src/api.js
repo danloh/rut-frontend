@@ -108,19 +108,19 @@ const tagRut = (act, rutid, params) => { // action: 0-untag,1-tag
 }
 // check if star or unstar rut
 const checkStarRut = (rutid, params) => { // action: 0-untag,1-tag
-  return request(`${base}/ifstar/ruts/${rutid}`, params)
+  return request(`${base}/ifstarrut/${rutid}`, params)
 }
 // star or unstar rut
 const starRut = (rutid, action=0, note='Love', params={}) => { // action: 0-unstar,1-star
-  return request(`${base}/ruts/${rutid}/${action}/star/${note}`, params)
+  return request(`${base}/starrut/${rutid}/${action}/${note}`, params)
 }
 // get a rut
 const fetchRut = (rutid, params) => {
   return request(`${base}/ruts/${rutid}`, params)
 }
 // get rut list per user, tag, item, flag should be create, star
-const fetchRuts = (per, tid, flag=0, params={}) => {
-  return request(`${base}/ruts/${per}/${tid}/${flag}`, params)
+const fetchRuts = (per, tid, paging=1, flag=0, params={}) => {
+  return request(`${base}/ruts/${per}/${tid}/${paging}/${flag}`, params)
 }
 // get ruts for index page
 const fetchIndexRuts = () => fetchRuts('index','index')
@@ -177,8 +177,8 @@ const newEtc = params => {
   return request(`${base}/etcs`, params, 'post')
 }
 // get etc list per rut,tag,user,item, petc
-const fetchEtcs = (per, perid, params) => {
-  return request(`${base}/etcs/${per}/${perid}`, params)
+const fetchEtcs = (per, perid, paging=1, params={}) => {
+  return request(`${base}/etcs/${per}/${perid}/${paging}`, params)
 }
 
 export {

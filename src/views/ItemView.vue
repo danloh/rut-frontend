@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { fetchRuts } from '../api'
 import ItemSum from '../components/Item/ItemSum.vue'
 import RutList from '../components/Rut/RutList.vue'
 import marked from '../util/marked'

@@ -1,14 +1,11 @@
 <template>
-  <div class="etc-list">  
-    <small style="font-size:0.8em">{{ etcCount | pluralise('Post') }}</small>
+  <div class="etc-list">
     <etc v-for="etc in etcs" :etc="etc" :key="etc.id" ></etc>
-    <!-- <div v-if="hasMore">
-      <el-button class="blockbtn" size="mini" 
-                 @click="loadmoreEtc" 
-                 :disabled="!hasMore">
-                 Show More
+    <div v-if="hasMore">
+      <el-button size="mini" @click="loadMoreEtc" :disabled="!hasMore">
+        Show More
       </el-button>
-    </div> -->
+    </div>
     <reply class="reply" :refer="refer" :show="true" @newreply="updateNew"></reply>
   </div>
 </template>
@@ -27,28 +24,31 @@ export default {
   data () {
     return {
       etcs: [],
-      etcCount: 0,
-      currentPage: 1,
+      paging: 1,
+      hasMore: true,
     }
   },
-  computed: {
-    // hasMore () {
-    //   return this.etcs.length < this.etcCount
-    // }
-  },
+  computed: {},
   methods: {
     loadEtcs () {
       fetchEtcs(this.refer.per, this.refer.perid).then(resp => {
         let data = resp.data
         this.etcs = data.etcs
-        this.etcCount = data.count
       })
     },
-    loadmoreEtc () {
+    loadMoreEtc () {
+      fetchEtcs(this.refer.per, this.refer.perid, this.paging + 1).then(resp => {
+        let more = resp.data.etcs
+        if (more.length === 0) {
+          this.hasMore = false
+          return
+        }
+        this.etcs.push(...more)
+        this.paging += 1
+      })
     },
     updateNew (data) {
       this.etcs.unshift(data)
-      this.etcCount += 1
     }
   },
   created () {

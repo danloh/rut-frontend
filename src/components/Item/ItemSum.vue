@@ -63,16 +63,16 @@ export default {
 <style scoped>
 .item-sum {
   background-color: #fcfcfa;
-  min-height: 135px;
-  padding: 10px 115px 10px 115px;
+  min-height: 145px;
+  padding: 5px 115px 5px 115px;
   border-bottom: 1px solid #eee;
   position: relative;
 }
 .thumb {
-  max-width: 100px;
-  max-height: 135px;
+  max-width: 110px;
+  max-height: 130px;
   position: absolute;
-  top: 10px;
+  top: 5px;
   left: 2px;
 }
 .info {

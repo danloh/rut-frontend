@@ -1,7 +1,7 @@
 <template>
   <div class="rut-forum" v-if="rutTitle">
     <div class="forum-main">
-      <b style="font-size:1.2em">Forum: </b>
+      <small>Forum {{ rut.comment_count}}: </small>
       <router-link :to="'/r/' + rutID">{{ rutTitle }}</router-link>
     </div>
     <etc-list :refer="refer"></etc-list>
