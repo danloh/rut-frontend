@@ -12,7 +12,7 @@
                   :loading="searching"
                   @keyup.enter.native="searchItems"
                   style="width:100%"  
-                  placeholder="input UID i.e. ISBN, Press Enter to Search">
+                  placeholder="Input,Then Enter to Search: eg. ISBN or %k%, %k, k%">
           <el-option v-for="i in items" 
                       :key="i.id" 
                       :label="i.title" 
@@ -38,6 +38,8 @@
 <script>
 import { collectItem, fetchItems } from '../../api'
 import { checkAuth } from '../../util/auth'
+import { regUrl } from '../../util/constant'
+import { Base64 } from 'js-base64';
 
 export default {
   name: 'add-rut',
@@ -77,10 +79,12 @@ export default {
       this.searching = true
       this.items = []
       let l = this.inputQuery.length
-      if (l < 6 && l !== 0) return  // least keyword length
-      let param = {'per': 'id', itemid: this.inputQuery}
-      // to do : per uiid, title, url??
-      fetchItems('uiid', this.inputQuery).then(resp => {
+      if (l < 6) return  // least keyword length // && l !== 0
+      //// if (l === 0) {/* search dones by user */}
+      // per uiid, title, url
+      let per = regUrl.test(this.inputQuery) ? 'url' : 'uiid'
+      let perid = per === 'url' ? Base64.encode(this.inputQuery) : this.inputQuery
+      fetchItems(per, perid).then(resp => {
         let resItems = resp.data.items
         this.items = resItems
         // this.$store.commit('ADD_ITEMS', resItems)
