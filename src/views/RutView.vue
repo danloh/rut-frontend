@@ -32,7 +32,7 @@
         <p class="meta">
           <template>
             <span v-if="rut.author_id">
-              <a :href="rut.url" v-if="rut.url">{{ rut.author_id }}</a>
+              <a :href="gen_url" target="_blank">{{ rut.author_id }}</a>
             </span>
             <span v-else>
               <router-link :to="'/p/' + rut.uname">{{ rut.uname }}</router-link>
@@ -103,6 +103,12 @@ export default {
     },
     order_collects () {
       return this.collects.sort((a,b) => a.item_order - b.item_order)
+    },
+    gen_url () {
+      let a_url = this.rut.url 
+      return a_url 
+              ? a_url 
+              : 'https://www.google.com/search?q=' + this.rut.author_id
     },
     canEdit () {
       return this.rut_uname === this.$store.getters.actID && checkAuth()

@@ -34,6 +34,7 @@ export default {
       fetchEtcs(this.refer.per, this.refer.perid).then(resp => {
         let data = resp.data
         this.etcs = data.etcs
+        this.hasMore = this.etcs.length >= 20 // maybe not sure has more
       })
     },
     loadMoreEtc () {

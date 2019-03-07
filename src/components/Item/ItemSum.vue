@@ -35,19 +35,105 @@
       </table>
     </div>
     <div class="operate">
+      <el-dropdown>
+        <el-button type="primary" size="mini" plain>
+          {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>
+            <el-button @click="showAndloadRuts" 
+                       type="text" style="color:orange">
+                       Add to List
+            </el-button>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <span @click="toStar('Todo')">Todo</span>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <span @click="toStar('Done')">Done</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
+    <!-- addtolist dialog -->
+    <el-dialog title="Add Item to one of Lists" width="520px" 
+               :visible.sync="showAddtoRut">
+      <v-form ref="form" class="add-form">
+        <el-select v-model="rutID" filterable remote 
+                  :remote-method="storeKey"
+                  :loading="searching"
+                  @keyup.enter.native="searchCreatedRuts"
+                  style="width:100%" 
+                  placeholder="Search and Select a List">
+          <el-option v-for=" r in createdRuts" 
+                      :key="r.id" 
+                      :label="r.title" 
+                      :value="r.id">
+          </el-option>
+        </el-select>
+        <v-textarea
+          v-model="content"
+          label="Content"
+          counter
+          :rule= "mustRule"
+          :rows= "5"
+          auto-grow
+        ></v-textarea>
+      </v-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="mini" type="success" 
+                   @click="addToRut">
+                   Add
+        </el-button>
+      </div>
+    </el-dialog>
+    <!-- end addtolist dialog -->
+    <!-- addnote dialog -->
+    <el-dialog width="450px" 
+               :visible.sync="showStar">
+      <v-form ref="form" class="note-form">
+        <v-text-field
+          v-model= "note"
+          label= "Some Note: Optional, Max 42 words"
+          :counter = "42"
+          :rules = "lenRule"
+        ></v-text-field>
+      </v-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="mini" type="success" 
+                   @click="starAndNote">
+                   {{ 'As ' + starTo }}
+        </el-button>
+      </div>
+    </el-dialog>
+    <!-- end addnote dialog -->
   </div>
 </template>
 
 <script>
-import { } from '../../api'
+import { base, checkStarItem, starItem, fetchRuts, collectItem } from '../../api'
+import { checkAuth } from '../../util/auth'
 
 export default {
   name: 'item-sum',
   props: ['item', 'out'], // out for  link to resource
-  components: {  },
+  components: { },
   data () {
     return {
+      showAddtoRut: false,
+      createdRuts: [],
+      searchKey: '',
+      searching: false,
+      rutID: '', // selected rut to add item to
+      content: '', // collect content
+      flagAction: 'Options',
+      flagNote: '',
+      flagTime: '',
+      note: '',
+      showStar: false,
+      starTo: '',
+      lenRule: [ v => v.length <= 42 || 'Must be less than 42' ],
+      mustRule: [ v => !!v || 'required' ],
     }
   },
   computed: {
@@ -55,8 +141,121 @@ export default {
       return this.item.cover
     }
   },
-  methods: {},
-  created () {}
+  methods: {
+    checkStar () {
+      if (checkAuth()) {
+        let itemid = this.item.id || this.$route.params.id // why?? liftcycle timing??: in list or in view
+        checkStarItem(itemid).then(resp => {
+          this.flagAction = resp.data.message
+          this.flagNote = resp.data.note
+          this.flagTime = resp.data.when
+        })
+      } else {
+        this.flagAction = 'Options'
+        this.flagNote = ''
+      }
+    },
+    toStar (to) {
+      if (checkAuth()) {
+        this.showStar = true
+        this.starTo = to
+      } else {
+        this.$message('Should Log in to Access')
+        this.$router.push({
+          path: '/login',
+          query: {redirect: this.$route.fullPath}
+        })
+      }
+    },
+    starTodo (note) {
+      starItem(this.item.id, 'todo', note || 'todo')
+      .then(resp => {
+        this.flagAction = resp.data.message
+        this.flagNote = resp.data.note
+      })
+    },
+    starDone (note) {
+      starItem(this.item.id, 'done', note || 'done')
+      .then(resp => {
+        this.flagAction = resp.data.message
+        this.flagNote = resp.data.note
+      })
+    },
+    starAndNote () {
+      if (!this.$refs.form.validate() || !checkAuth()) {
+        this.$message("Invalid Input or Need to Log in")
+        return
+      }
+      let note = this.note.trim()
+      let to = this.starTo
+      switch (to) {
+        case 'Todo':
+          this.starTodo(note)
+          break
+        case 'Done':
+          this.starDone(note)
+          break
+      }
+      this.showStar = false
+    },
+    // store keyword to search created rut
+    // :flow: input key then search -> select
+    storeKey (query) {
+      if (query.trim() !== '') {
+        this.searchKey = query.trim()
+      }
+    },
+    searchCreatedRuts () {
+      if (checkAuth()) {
+        this.searching = true
+        let uname = this.$store.getters.actID
+        if (this.searchKey.length < 6) { // least keyword length
+          fetchRuts('user',uname,1,'create').then(resp => {
+            this.createdRuts = resp.data.ruts
+            this.searching = false
+          })
+        } else {
+          this.$http(`${base}/ruts/key/${uname}?keyword=${this.searchKey}&from=user`)
+          .then(resp => {
+            this.createdRuts = resp.data.ruts
+            this.searching = false
+          })
+        }
+      }
+    },
+    showAndloadRuts () {
+      if (checkAuth()) {
+        this.searchCreatedRuts()
+        this.showAddtoRut = true
+      }
+    },
+    addToRut () {
+      if (!this.rutID || !checkAuth()) {
+        this.$message("Invalid Input or Need to Log in")
+        return
+      }
+      // or can pass the itemid to AddItem via store
+      // this.$router.push('/collect/' + this.rutID)
+      //
+      let data = { 
+        rut_id: this.rutID,
+        item_id: this.item.id,
+        item_order: 0,  // just a placehoder, cannot pass the real order
+        content: this.content,
+        uname: '', // can get from cookie
+      }
+      collectItem(this.rutID, data).then(() => {
+        // renew rut
+        let updateTime = {'rutid':this.rutID, 'lastUpdate':0, 'ref':'lastUpdate'}
+        this.$store.commit('RENEW_RUT', updateTime)
+        this.showAddtoRut = false
+        this.$router.push(`/r/${this.rutID}`)
+      })
+    },
+  },
+  created () {
+    this.checkStar()
+  }
 }
 </script>
 

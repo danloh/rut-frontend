@@ -59,7 +59,11 @@ const mutations = {
     Vue.set(state.ruts, rutid, rutdata)
   },
   RENEW_RUT (state, data) {
-    state.ruts[data.rutid][data.ref] = data[data.ref]
+    try {  // if can hit
+      state.ruts[data.rutid][data.ref] = data[data.ref] 
+    } catch {
+      return
+    }
   }
 }
 

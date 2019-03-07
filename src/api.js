@@ -63,7 +63,7 @@ axios.interceptors.response.use(
 Vue.prototype.$http = axios
 
 // request factory
-let base = 'http://127.0.0.1:8083/api'
+const base = 'http://127.0.0.1:8083/api'
 const request = (url, options = {}, method = 'get') => {
   let key = ~['get', 'head'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)
   return axios(Object.assign({'url': url, 'method': method}, {[key]: options}))
@@ -104,7 +104,7 @@ const updateRut = (rutid, params) => {
 }
 // tag rut
 const tagRut = (act, rutid, params) => { // action: 0-untag,1-tag
-  return request(`${base}/tag/${act}/${rutid}`, params, 'post')
+  return request(`${base}/tagr/${act}/${rutid}`, params, 'post')
 }
 // check if star or unstar rut
 const checkStarRut = (rutid, params) => { // action: 0-untag,1-tag
@@ -120,13 +120,13 @@ const fetchRut = (rutid, params) => {
 }
 // get rut list per user, tag, item, flag should be create, star
 const fetchRuts = (per, tid, paging=1, flag=0, params={}) => {
-  return request(`${base}/ruts/${per}/${tid}/${paging}/${flag}`, params)
+  return request(`${base}/ruts/${per}/${tid}?page=${paging}&flag=${flag}`, params)
 }
 // get ruts for index page
 const fetchIndexRuts = () => fetchRuts('index','index')
 // update an item
 const collectItem = (rutid, params) => {
-  return request(`${base}/ruts/${rutid}/collect`, params, 'post')
+  return request(`${base}/collectitem/${rutid}`, params, 'post')
 }
 // submit an item
 const newItem = params => {
@@ -137,8 +137,16 @@ const fetchItem = (itemid, params) => {
   return request(`${base}/items/${itemid}`, params)
 }
 // get item list per rut,tag,user; id,uiid,url,title
-const fetchItems = (per, id, flag=0, params={}) => {
-  return request(`${base}/items/${per}/${id}/${flag}`, params)
+const fetchItems = (per, id, flag='done', page=1, params={}) => {
+  return request(`${base}/items/${per}/${id}?flag=${flag}&page=${page}`, params)
+}
+// check item star flag
+const checkStarItem = (itemid, params) => { // action: 0-untag,1-tag
+  return request(`${base}/itemflag/${itemid}`, params)
+}
+// star item as todo | done
+const starItem = (itemid, flag='todo', note='Love', params={}) => {
+  return request(`${base}/staritem/${itemid}/${flag}/${note}`, params)
 }
 // get collect
 const fetchCollect = (cid, params) => {
@@ -178,10 +186,11 @@ const newEtc = params => {
 }
 // get etc list per rut,tag,user,item, petc
 const fetchEtcs = (per, perid, paging=1, params={}) => {
-  return request(`${base}/etcs/${per}/${perid}/${paging}`, params)
+  return request(`${base}/etcs/${per}/${perid}?page=${paging}`, params)
 }
 
 export {
+  base,
   axios,
   signup,
   checkUser,
@@ -200,6 +209,8 @@ export {
   collectItem,
   newItem,
   fetchItem,
+  starItem,
+  checkStarItem,
   fetchCollect,
   fetchCollects,
   updateCollect,

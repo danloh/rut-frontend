@@ -67,32 +67,10 @@ export function showLess (content, least = 155, less = true) {
   }
 }
 
-// trim input and valid
-export function trimValid (rule, value, callback) {
-  if (value.trim() === '') {
-    callback(new Error('Blank Value'))
-  } else {
-    callback()
-  }
-}
-
 // extract host
 export function host (url) {
   const host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
   const parts = host.split('.').slice(-3)
   if (parts[0] === 'www') parts.shift()
   return parts.join('.')
-}
-
-// uniq
-export function uniq (arr) {
-  let result = {}
-  let final = []
-  for (let i = 0; i < arr.length; i++) {
-    result[arr[i].id] = arr[i]
-  }
-  for (let t in result) {
-    final.push(result[t])
-  }
-  return final
 }

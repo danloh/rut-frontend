@@ -33,7 +33,7 @@
         counter
         :rows= "10"
         auto-grow
-        :rules="mustRule"
+        :rules="optRule"
       ></v-textarea>
     </v-form>
     <el-button class="blockbtn" type="primary" size="small"
@@ -57,15 +57,12 @@ export default {
       content: '',
       author: '',
       editable: 'Creator',
-      mustRule: [ v => !!v || 'required' ],
-      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ]
+      titleRule: [ v => (!!v && v.length <= 120 ) || 'required less than 120' ],
+      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ],
+      optRule: [ v => ( !!v || this.url.length > 0 ) || 'Either url Or Text' ],
     }
   },
-  computed: {
-    titleRule () { 
-      return this.mustRule.concat(this.lenRule)
-    }
-  },
+  computed: {},
   methods: {
     onCreate () {
       if (!this.$refs.form.validate() || !checkAuth()) {

@@ -44,7 +44,7 @@ import { Base64 } from 'js-base64';
 export default {
   name: 'add-rut',
   title: 'Add Item to List',
-  components: { },
+  components: {},
   data () {
     return {
       itemID: null,
