@@ -23,8 +23,8 @@
         </el-button>
       </div>
       <div class="fobtn">
-        <el-button type="success" size="mini" plain 
-                   >{{action}} {{starCount}}
+        <el-button size="mini" @click="starOrUnstarTag">
+          {{ starStatus === 'unstar' ? 'Follow' : 'UnFollow' }}
         </el-button><br>
         <img v-if="logo" style="max-width:65px;max-height:65px;margin-top:10px" 
              :src="logo" alt="Logo" referrerPolicy="no-referrer">
@@ -40,8 +40,7 @@
     </div>
     <!-- edit tag dialog -->
     <el-dialog title="Edit Tag Description" width="640px" 
-               :visible.sync="show" 
-               :before-close="cancelOnClose">
+               :visible.sync="show">
       <v-form ref="form" class="tag-form">
         <v-text-field
           v-model="tname"
@@ -76,7 +75,7 @@
 </template>
 
 <script>
-import { fetchTag, updateTag } from '../api'
+import { fetchTag, updateTag, checkStarTag, starTag } from '../api'
 import { checkAuth } from '../util/auth'
 import { showLess } from '../util/filters'
 import marked from '../util/marked'
@@ -86,7 +85,7 @@ export default {
   title () { return this.tname },
   data () {
     return {
-      action: 'Follow',
+      starStatus: 'unstar',
       starCount: 0,
       show: false,
       short: true, // for btn show more or less
@@ -119,7 +118,7 @@ export default {
   },
   methods: {
     loadTag () {
-      let tg = this.$route.params.id
+      let tg = this.tname= this.$route.params.id
       fetchTag(tg).then(resp => {
         this.setData(resp.data.tag)
       })
@@ -137,9 +136,6 @@ export default {
         return
       }
       this.show = true
-    },
-    cancelOnClose (done) {
-      done()
     },
     onEditTag (formName, form) {
       if (!this.$refs.form.validate()) {
@@ -167,13 +163,42 @@ export default {
           query: {redirect: this.$route.fullPath}
         })
       }
-    }
+    },
+    checkStar () {
+      if (checkAuth()) {
+        checkStarTag(this.tname).then(resp => {
+          if (resp.data.status !== 200) return
+          this.starStatus = resp.data.message
+        })
+      } else {
+        this.starStatus = 'unstar'
+      }
+    },
+    starOrUnstarTag () {
+      if (!checkAuth()) {
+        this.$message({ message: 'Please Login'})
+        this.$router.push({
+          path: '/login',
+          query: {redirect: this.$route.fullPath}
+        })
+      }
+      if (this.starStatus === 'unstar') { // ??, can not act star?? 
+        starTag(this.tname, 1).then(resp => {
+          this.starStatus = resp.data.message
+        })
+      } else {
+        starTag(this.tname, 0).then(resp => {
+          this.starStatus = resp.data.message
+        })
+      }
+    },
   },
   watch: {
     '$route.params.id': 'loadTag' // watch to render re-used component
   },
   created () {
     this.loadTag()  // tag data and ruts can be cache?? 
+    this.checkStar()
   }
 }
 </script>

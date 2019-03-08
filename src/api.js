@@ -180,6 +180,14 @@ const fetchTags = (per, id, params) => {
 const updateTag = (tname, params) => {
   return request(`${base}/tags/${tname}`, params, 'put')
 }
+// check item star flag
+const checkStarTag = (tname, params) => {
+  return request(`${base}/ifstartag/${tname}`, params)
+}
+// star item as todo | done
+const starTag = (tname, action=0, note='Love', params={}) => {
+  return request(`${base}/startag/${tname}/${action}/${note}`, params)
+}
 // submit an item
 const newEtc = params => {
   return request(`${base}/etcs`, params, 'post')
@@ -220,6 +228,8 @@ export {
   fetchTag,
   fetchTags,
   updateTag,
+  checkStarTag,
+  starTag,
   newEtc,
   fetchEtcs
 }
