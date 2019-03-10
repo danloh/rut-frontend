@@ -47,10 +47,13 @@
             </el-button>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="toStar('Todo')">Todo</span>
+            <span @click="toStar('todo')">Todo</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span @click="toStar('Done')">Done</span>
+            <span @click="toStar('doing')">Doing</span>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <span @click="toStar('done')">Done</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -167,20 +170,6 @@ export default {
         })
       }
     },
-    starTodo (note) {
-      starItem(this.item.id, 'todo', note || 'todo')
-      .then(resp => {
-        this.flagAction = resp.data.message
-        this.flagNote = resp.data.note
-      })
-    },
-    starDone (note) {
-      starItem(this.item.id, 'done', note || 'done')
-      .then(resp => {
-        this.flagAction = resp.data.message
-        this.flagNote = resp.data.note
-      })
-    },
     starAndNote () {
       if (!this.$refs.form.validate() || !checkAuth()) {
         this.$message("Invalid Input or Need to Log in")
@@ -188,14 +177,11 @@ export default {
       }
       let note = this.note.trim()
       let to = this.starTo
-      switch (to) {
-        case 'Todo':
-          this.starTodo(note)
-          break
-        case 'Done':
-          this.starDone(note)
-          break
-      }
+      starItem(this.item.id, to, note || to)
+      .then(resp => {
+        this.flagAction = resp.data.message
+        this.flagNote = resp.data.note
+      })
       this.showStar = false
     },
     // store keyword to search created rut
