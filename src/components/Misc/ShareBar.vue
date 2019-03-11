@@ -1,5 +1,5 @@
 <template>
-  <div id="social-share-bar">
+  <span id="social-share-bar">
     <small>Share:</small>
     <a title="Twitter" 
         rel="nofollow noopener noreferrer"
@@ -13,7 +13,7 @@
         @click.prevent="shareWindow(`https://www.facebook.com/sharer/sharer.php?u=${url}`)">
       <small class="icon">Fb</small>
     </a>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -57,6 +57,7 @@ export default {
 
 <style scoped>
 #social-share-bar {
+  padding: 5px;
   text-align: right;
 }
 #social-share-bar > .share-link {

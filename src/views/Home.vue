@@ -4,7 +4,10 @@
       <div class="rut-list">
         <rut-sum v-for="rut in indexRuts" :key="rut.id" :rut="rut"></rut-sum>
       </div>
-      <div class="home-side"></div>
+      <div class="home-side">
+        <small>A Place To Share </small><br>
+        <b>Meta Knowledge</b>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +47,7 @@ export default {
   top: 10px;
   right: 0;
   width: 220px;
+  text-align: center;
   background-color: #fafbfa;
 }
 </style>

@@ -45,6 +45,14 @@
     <div class="view">
       <router-view></router-view>
     </div>
+    <footer class="footer">
+      <div class="bottom">
+        ©RutHub - Since 2018
+        | <router-link to="/submit">Submit</router-link>
+        | <router-link to="/new">Create</router-link>
+        | <router-link to="#">About</router-link>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -171,5 +179,15 @@ blockquote {
   margin: 5px 0;
   width: 100%;
   text-align: center;
+}
+.footer {
+  border-top: 2px dotted #cfc0cf;
+  margin-top: 3em;
+  background-color: #f5f5f5;
+}
+.footer .bottom {
+  max-width: 960px;
+  margin: 5px auto;
+  font-size: 0.75em;
 }
 </style>

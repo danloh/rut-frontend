@@ -29,7 +29,7 @@
       <!-- end edit tag dialog -->
       <div class="title">
         <h2>{{ rutTitle }}</h2>
-        <p class="meta">
+        <div class="meta">
           <template>
             <span v-if="rut.author_id">
               <a :href="gen_url" target="_blank">{{ rut.author_id }}</a>
@@ -44,7 +44,13 @@
           | <router-link :to="'/rforum/' + rutid">
               {{ rut.comment_count | pluralise('Comment') }}
             </router-link>
-        </p>
+          <router-link :to="'/update/r/' + rutid" v-if="canEdit">
+            <b> | Edit...</b>
+          </router-link>
+          <router-link :to="'/collect/' + rutid" v-if="canEdit">
+            <b> | Add...</b>
+          </router-link>
+        </div>
       </div>
       <div class="content">
         <div v-html="md(rut.content)"></div>
@@ -53,20 +59,13 @@
     <collect-sum class="item" v-for="i in order_collects" :key="i.id" 
                  :collect="i" :canEdit="canEdit">
     </collect-sum>
-    <div class="sharebar">
-      <share-bar></share-bar>
-    </div>
-    <div class="rut-side">
-      <el-button size="mini" @click="starOrUnstarRut">
+    <div class="toolbar">
+      <el-button type="text" @click="starOrUnstarRut">
         {{ starStatus === 'unstar' ? 'Star' : 'Unstar' }}
       </el-button>
-      <router-link :to="'/update/r/' + rutid" v-if="canEdit">
-        <small> Edit...</small>
-      </router-link>
-      <router-link :to="'/collect/' + rutid" v-if="canEdit">
-        <small> Add...</small>
-      </router-link>
+      <share-bar></share-bar>
     </div>
+    <div class="rut-side"></div>
   </div>
 </template>
 
@@ -271,16 +270,17 @@ export default {
 .rut-view .title .meta {
   color: #828282;
   font-size: 12px;
+  padding-bottom: 10px;
 }
 .rut-view .content, .item {
   background-color: #fbfbf8;
   padding: 10px;
   border-bottom: 1px dashed #eee;
 }
-.rut-view .sharebar {
-  font-size: .85em;
-  padding: 5px;
-  text-align: right;
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.85em;
 }
 .rut-page .rut-side {
   position: absolute;
