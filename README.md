@@ -2,4 +2,3 @@
 
 www.ruthub.com
 
-WIP: new frontend + ssr
