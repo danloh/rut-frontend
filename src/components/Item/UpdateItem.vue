@@ -75,6 +75,7 @@
 <script>
 import { updateItem } from '../../api'
 import { checkAuth } from '../../util/auth'
+import { regUiid } from '../../util/constant'
 
 export default {
   name: 'update-item',
@@ -108,10 +109,11 @@ export default {
         this.$message("Invalid Input or Need to Log in")
         return
       }
+      let _uiid = this.uiid.replace(regUiid, '')
       let data = {
         id: this.itemid.trim(),
         title: this.title.trim(),
-        uiid: this.uiid.trim(),
+        uiid: _uiid,
         authors: this.authors.trim(),
         pub_at: this.pubDate.trim(),
         publisher: this.publisher.trim(),

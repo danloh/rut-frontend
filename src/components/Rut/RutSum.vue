@@ -20,7 +20,7 @@
         <img class="cover" :src="rut.logo" referrerPolicy="no-referrer">
       </span>
       <div class="content" v-html="content"></div>
-      <span class="meta">
+      <span class="meta" v-if="rut.item_count>0">
         including {{ rut.item_count | pluralise('item') }}  
       </span>
     </router-link>
