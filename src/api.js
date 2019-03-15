@@ -115,12 +115,12 @@ const starRut = (rutid, action=0, note='Love', params={}) => { // action: 0-unst
   return request(`${base}/starrut/${rutid}/${action}/${note}`, params)
 }
 // get a rut
-const fetchRut = (rutid, params) => {
-  return request(`${base}/ruts/${rutid}`, params)
+const fetchRut = (rutid) => {
+  return request(`${base}/ruts/${rutid}`)
 }
 // get rut list per user, tag, item, flag should be create, star
-const fetchRuts = (per, tid, paging=1, flag=0, params={}) => {
-  return request(`${base}/ruts/${per}/${tid}?page=${paging}&flag=${flag}`, params)
+const fetchRuts = (per, tid, paging=1, flag=0) => {
+  return request(`${base}/ruts/${per}/${tid}?page=${paging}&flag=${flag}`)
 }
 // get ruts for index page
 const fetchIndexRuts = () => fetchRuts('index','index')

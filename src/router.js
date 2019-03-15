@@ -65,7 +65,7 @@ document.body.appendChild(bar.$el)
 import { getToken } from './util/auth'
 router.beforeEach((to, from, next) => {
   bar.start()
-  console.log(from.fullPath)
+  //console.log(from.fullPath)
   if (to.meta.auth) {
     let localToken = getToken()
     if (localToken) {

@@ -38,8 +38,7 @@
               <router-link :to="'/p/' + rut.uname">{{ rut.uname }}</router-link>
             </span>
           </template>
-          | Created: {{ rut.create_at | toMDY }} 
-          <span v-if="rut.renew_at"> | Updated: {{ rut.renew_at | toMDY }}</span>
+          | <span> {{ rut.renew_at | toMDY }}</span>
           | including {{ rut.item_count | pluralise('item') }} 
           | <router-link :to="'/rforum/' + rutid">
               {{ rut.comment_count | pluralise('Comment') }}
@@ -163,14 +162,14 @@ export default {
       this.show = true
     },
     addNewTag () {
-      let newT = this.newTag.trim()
-      if (newT && newT.length < 16 && !newT.includes(" ")) {
+      let newT = this.newTag.trim().replace(/[ ]/gi, '-')
+      if (newT && newT.length < 42 ) {
         this.newTags.push(newT)
         this.newTag = ''
       } else {
         this.$message({
           showClose: true,
-          message: 'Must be 16 less and no whitespace'
+          message: 'Must be 42 less and no whitespace'
         })
       }
     },
@@ -200,7 +199,8 @@ export default {
     },
     checkStar () {
       if (checkAuth()) {
-        // let rutid = this.$route.params.id // ?? liftcycle timing
+        // here a issue, login-close-open again, 
+        // can checkAuth but 401, auth state issue
         checkStarRut(this.rutid).then(resp => {
           if (resp.data.status !== 200) return
           this.starStatus = resp.data.message

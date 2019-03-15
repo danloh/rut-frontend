@@ -15,7 +15,7 @@
       <v-textarea
         v-model="avatar"
         label="Avatar"
-        :counter = "120"
+        :counter = "144"
         :rules="lenRule"
         :rows= "1"
         auto-grow
@@ -23,7 +23,7 @@
       <!-- <v-text-field
         v-model="email"
         label="Email"
-        :counter= "120"
+        :counter= "144"
         :rules="lenRule"
       ></v-text-field> -->
       <v-text-field
@@ -92,7 +92,7 @@ export default {
         v => v.length <= 16 || 'Must be less than 16 characters'
       ],
       lenRule: [
-        v => v.length <= 120 || 'Must be less than 120 characters'
+        v => v.length <= 144 || 'Must be less than 144 characters'
       ],
       emailRule: [
         v => /.+@.+/.test(v) || 'E-mail must be valid'

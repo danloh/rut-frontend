@@ -39,12 +39,12 @@ export default {
   },
   methods: {
     loadRuts () {
+      // chinldren route, cannot pass the id
       let pid = this.perid = this.id ? this.id : this.$route.params.id
       fetchRuts(this.per, pid, this.paging, this.action).then(resp => {
         this.ruts = resp.data.ruts
         this.$store.commit('SET_RUTS', this.ruts)  // as cache
         this.totalCount = resp.data.count
-        console.log(resp.data.count)
       })
     },
     loadMoreRut () {

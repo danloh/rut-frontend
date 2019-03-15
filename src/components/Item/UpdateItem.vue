@@ -8,7 +8,7 @@
       <v-textarea
         v-model= "title"
         label= "Title"
-        :counter = "120"
+        :counter = "144"
         :rules= "titleRule"
         :rows= "1"
         auto-grow
@@ -20,13 +20,13 @@
       <v-text-field
         v-model= "authors"
         label= "Author or Instructor"
-        :counter= "120"
+        :counter= "144"
         :rules= "titleRule"
       ></v-text-field>
       <v-textarea
         v-model="cover"
         label = "Cover Image URL"
-        :counter = "120"
+        :counter = "144"
         :rules = "lenRule"
         :rows = "1"
         auto-grow
@@ -34,7 +34,7 @@
       <v-textarea
         v-model="url"
         label = "Resource URL"
-        :counter = "120"
+        :counter = "144"
         :rules = "lenRule"
         :rows = "1"
         auto-grow
@@ -42,7 +42,7 @@
       <v-text-field
         v-model="edition"
         label="Edition"
-        :counter = "120"
+        :counter = "144"
         :rules="lenRule"
       ></v-text-field>
       <v-text-field
@@ -52,7 +52,7 @@
       <v-text-field
         v-model= "publisher"
         label= "Publisher"
-        :counter = "120"
+        :counter = "144"
         :rules= "lenRule"
       ></v-text-field>
       <v-text-field
@@ -95,7 +95,7 @@ export default {
       edition: '',
       detail: '',
       mustRule: [ v => !!v || 'required' ],
-      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ]
+      lenRule: [ v => v.length <= 144 || 'Must be less than 144 characters' ]
     }
   },
   computed: {

@@ -8,7 +8,7 @@
       <v-textarea
         v-model="title"
         label="Title"
-        :counter = "120"
+        :counter = "144"
         :rules="titleRule"
         :rows= "1"
         auto-grow
@@ -16,7 +16,7 @@
       <v-textarea
         v-model="url"
         label="Source URL"
-        :counter = "120"
+        :counter = "144"
         :rules="lenRule"
         :rows= "1"
         auto-grow
@@ -57,8 +57,8 @@ export default {
       content: '',
       author: '',
       editable: 'Creator',
-      titleRule: [ v => (!!v && v.length <= 120 ) || 'required less than 120' ],
-      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ],
+      titleRule: [ v => (!!v && v.length <= 144 ) || 'required less than 144' ],
+      lenRule: [ v => v.length <= 144 || 'Must be less than 144 characters' ],
       optRule: [ v => ( !!v || this.url.length > 0 ) || 'Either url Or Text' ],
     }
   },

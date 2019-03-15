@@ -12,8 +12,8 @@ const actions = {
     const now = Date.now()
     return new Promise((resolve, reject) => {
       if( item && item.id === itemid && now - item.lastUpdate < 1000*60*5 ) {
-        console.log('no need re-fetch item')
-        console.log(now - item.lastUpdate)
+        //console.log('no need re-fetch item')
+        //console.log(now - item.lastUpdate)
         resolve(item)
       } else {
         fetchItem(itemid).then(resp => {

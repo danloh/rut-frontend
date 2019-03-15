@@ -7,7 +7,7 @@
       <v-textarea
         v-model="title"
         label="Title"
-        :counter = "120"
+        :counter = "144"
         :rules="titleRule"
         :rows= "1"
         auto-grow
@@ -15,7 +15,7 @@
       <v-textarea
         v-model="url"
         label="URL"
-        :counter = "120"
+        :counter = "144"
         :rules="lenRule"
         :rows= "1"
         auto-grow
@@ -56,7 +56,7 @@ export default {
       rut_uname:'', // for check auth
       rutid: '',
       mustRule: [ v => !!v || 'required' ],
-      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ]
+      lenRule: [ v => v.length <= 144 || 'Must be less than 144 characters' ]
     }
   },
   computed: {

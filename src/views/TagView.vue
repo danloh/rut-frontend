@@ -51,7 +51,7 @@
         <v-textarea
           v-model="logo"
           label="Logo Image Url"
-          :counter = "120"
+          :counter = "144"
           :rules="lenRule"
           :rows= "1"
           auto-grow
@@ -96,7 +96,7 @@ export default {
       logo: '',
       intro: '',
       relatedTags: [],
-      lenRule: [ v => v.length <= 120 || 'Must be less than 120 characters' ],
+      lenRule: [ v => v.length <= 144 || 'Must be less than 144 characters' ],
       nameRule:[
         v => !!v || 'required',
         v => v.length <= 20 || 'Must be less than 20 characters'
