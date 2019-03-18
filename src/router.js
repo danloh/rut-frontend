@@ -7,6 +7,7 @@ const Register = () => import('./components/Auth/Register.vue')
 const Login = () => import('./components/Auth/Login.vue')
 const Profile = () => import('./views/Profile')
 const createRutList = (p,a,i) => () => import('./components/Rut/CreateRutList').then(m => m.default(p,a,i))
+const createItemList = (p,f,i) => () => import('./components/Item/CreateItemList').then(m => m.default(p,f,i))
 const UpdateUser = () => import('./components/User/UpdateUser')
 const RutView = () => import('./views/RutView')
 const RutForum = () => import('./views/RutForum')
@@ -31,9 +32,12 @@ const router = new Router({
     { path: '/login', component: Login, name: 'Login' },
     { path: '/p/:id', component: Profile, meta: {auth: true},
       children: [
-        { path: '', name: 'defaultProfile', redirect: 'created' }, 
+        { path: '', name: 'defaultProfile', redirect: 'doing' }, 
         { path: 'created', name: 'CreatedRuts', component: createRutList('user', 'create'), meta: {auth: true} },
         { path: 'star', name: 'StarRuts', component: createRutList('user', 'star'), meta: {auth: true} },
+        { path: 'todo', name: 'Todos', component: createItemList('user', 'todo'), meta: {auth: true} },
+        { path: 'doing', name: 'Doings', component: createItemList('user', 'doing'), meta: {auth: true} },
+        { path: 'done', name: 'Dones', component: createItemList('user', 'done'), meta: {auth: true} },
       ] 
     },
     { path: '/updateuser/:id', name: 'UpdateUser', component: UpdateUser, meta: {auth: true} },

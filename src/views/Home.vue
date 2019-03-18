@@ -5,8 +5,7 @@
         <rut-sum v-for="rut in indexRuts" :key="rut.id" :rut="rut"></rut-sum>
       </div>
       <div class="home-side">
-        <small>A Place To Share </small><br>
-        <b>Meta Knowledge</b>
+        <small>Yet Another Collection</small>
       </div>
     </div>
   </div>

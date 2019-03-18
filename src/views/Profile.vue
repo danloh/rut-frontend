@@ -5,6 +5,9 @@
         <b style="font-size:1.6em">{{ uname }}</b>
       </router-link>
       <small class="location"> &nbsp; {{ user.location }}</small>
+      <router-link :to="'/updateuser/' + uname" v-if="showSetting">
+        <small> ...</small>
+      </router-link>
       <div class="aboutme">{{user.intro || '...'}}</div>
     </div>
     <div class="profile-view">
@@ -16,27 +19,40 @@
         <small class="user-info"> &nbsp;{{user.join_at | toMDY}} Joined</small>
       </div>
       <div class="right-nav">
-        <router-link :to="'/p/' + uname + '/created/'">
+        <router-link :to="'/p/' + uname + '/created'">
           <b style="color:royalblue">*</b> Created
         </router-link>
         <router-link to="/new">
           <small style="color:orange"> +New</small>
         </router-link>
         <br>
-        <router-link :to="'/p/' + uname + '/star/'">
+        <router-link :to="'/p/' + uname + '/star'">
           <b style="color:royalblue">*</b> Star
         </router-link>
-        <br><br>
-        <router-link :to="'/updateuser/' + uname" v-if="showSetting">
-          <small class="setting">Setting</small>
+        <br>
+        <router-link :to="'/p/' + uname + '/doing'">
+          <b style="color:coral">~</b> Doing
         </router-link>
+        <br>
+        <router-link :to="'/p/' + uname + '/todo'">
+          <b style="color:coral">~</b> Todo
+        </router-link>
+        <br>
+        <router-link :to="'/p/' + uname + '/done'">
+          <b style="color:coral">~</b> Done
+        </router-link>
+        <br><br>
+        <b># Topic: </b><br>
+        <span v-for="(tag, index) in tags" :key="index">
+          <router-link :to="'/tag/' + tag"><small>{{tag}} &nbsp;</small></router-link>
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchUser } from '../api'
+import { fetchUser, fetchTags } from '../api'
 import Avatar from '../components/User/Avatar.vue'
 
 export default {
@@ -49,6 +65,7 @@ export default {
     return {
       user: {},
       uname: this.$route.params.id,
+      tags: [],
       showSetting: false,
     }
   },
@@ -74,10 +91,16 @@ export default {
     setData (data) {
       this.user = data
       this.uname = data.uname
+    },
+    loadTags () {
+      fetchTags('user', this.uname).then(resp => {
+        this.tags = resp.data.tags
+      })
     }
   },
   created () {
     this.loadUser()
+    this.loadTags()
   },
   watch: {
     '$route.params.id': 'loadUser'
@@ -130,10 +153,6 @@ export default {
 .right-nav a.router-link-active {
   color: green;
   font-weight: 800;
-}
-.setting {
-  outline: dotted 1px;
-  background-color: #d5d5be;
 }
 .aboutme, .user-info, .fobar {
   font-size: 0.85em;
