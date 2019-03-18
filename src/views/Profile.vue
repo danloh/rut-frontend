@@ -2,12 +2,12 @@
   <div class="profile-page" v-if="uname">
     <div class="profile-head">
       <router-link :to="'/p/' + uname">
-        <b style="font-size:1.6em">{{ uname }}</b>
+        <b style="font-size:1.6em">{{ user.nickname }}</b>
+      </router-link>
+      <router-link :to="'/updateuser/' + uname" v-if="showSetting">
+        <small> @{{uname}}</small>
       </router-link>
       <small class="location"> &nbsp; {{ user.location }}</small>
-      <router-link :to="'/updateuser/' + uname" v-if="showSetting">
-        <small> ...</small>
-      </router-link>
       <div class="aboutme">{{user.intro || '...'}}</div>
     </div>
     <div class="profile-view">

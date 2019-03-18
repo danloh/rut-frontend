@@ -7,8 +7,8 @@
     <h3 class="title">Update My Profile</h3>
     <v-form ref="form" class="update-form">
       <v-text-field
-        v-model="uname"
-        label="Username"
+        v-model="nickname"
+        label="Nickname"
         :counter= "16"
         :rules="nameRule"
       ></v-text-field>
@@ -87,8 +87,8 @@ export default {
       email: '',
       location: '',
       intro: '',
+      nickname: '',
       nameRule: [
-        v => !!v || 'required',
         v => v.length <= 16 || 'Must be less than 16 characters'
       ],
       lenRule: [
@@ -123,6 +123,7 @@ export default {
         email: this.email.trim(),
         intro: this.intro.trim(),
         location: this.location.trim(),
+        nickname: this.nickname.trim() || this.uname,
       }
       updateUser(this.uname, data).then(resp => {
         let name = resp.data.user.uname
@@ -137,6 +138,8 @@ export default {
         this.avatar = data.avatar
         this.email = data.email
         this.intro = data.intro
+        this.location = data.location
+        this.nickname = data.nickname
       })
     },
     onChangePsw() {
