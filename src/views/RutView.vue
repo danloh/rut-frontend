@@ -178,7 +178,7 @@ export default {
         if (this.newTags.length <= 0) return
         let newTs = Array.from(new Set(this.newTags))
         let add_data = {
-          tname: newTs,
+          tnames: newTs,
           rut_id: this.rutid,
           action: '1'
         }

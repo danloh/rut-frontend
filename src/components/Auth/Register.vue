@@ -61,7 +61,7 @@ export default {
       let data = {
         uname: this.uname,
         password: this.password,
-        confirm_password: this.repassword
+        confirm: this.repassword
       }
       signup(data).then(resp => {
         // console.log(resp.data)

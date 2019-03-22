@@ -145,8 +145,8 @@ const checkStarItem = (itemid, params) => { // action: 0-untag,1-tag
   return request(`${base}/itemflag/${itemid}`, params)
 }
 // star item as todo | done
-const starItem = (itemid, flag='todo', note='Love', params={}) => {
-  return request(`${base}/staritem/${itemid}/${flag}/${note}`, params)
+const starItem = (itemid, flag='todo', rate=1, note='Love') => {
+  return request(`${base}/staritem/${itemid}/${flag}/${rate}/${note}`)
 }
 // get collect
 const fetchCollect = (cid, params) => {
