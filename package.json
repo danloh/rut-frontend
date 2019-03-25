@@ -16,11 +16,11 @@
     "register-service-worker": "^1.6.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue": "^2.6.8",
+    "vue": "^2.6.10",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0",
-    "vuetify": "^1.5.6",
-    "element-ui": "^2.6.1",
+    "vuetify": "^1.5.7",
+    "element-ui": "^2.6.3",
     "js-base64": "^2.5.1"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@vue/test-utils": "^1.0.0-beta.29",
     "chai": "^4.2.0",
     "css-loader": "^2.1.1",
-    "vue-template-compiler": "^2.6.8"
+    "vue-template-compiler": "^2.6.10"
   },
   "babel": {
     "presets": [

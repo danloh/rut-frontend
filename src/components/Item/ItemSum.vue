@@ -178,7 +178,7 @@ export default {
       let note = this.note.trim()
       let flag = this.starTo
       let rate = 1  // to do
-      starItem(this.item.id, flag, rate, note || to)
+      starItem(this.item.id, flag, rate, note || flag)
       .then(resp => {
         this.flagAction = resp.data.message
         this.flagNote = resp.data.note
