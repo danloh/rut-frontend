@@ -12,7 +12,7 @@
                   :loading="searching"
                   @keyup.enter.native="searchItems"
                   style="width:100%"  
-                  placeholder="Input,Then Enter to Search: eg. ISBN or %k%, %k, k%">
+                  placeholder="Input,Then Enter to Search: ISBN or any other UID">
           <el-option v-for="i in items" 
                       :key="i.id" 
                       :label="i.title" 

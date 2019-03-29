@@ -15,13 +15,16 @@
         </router-link>
       </template>
     </span>
-    <router-link :to="to_url">
+    <router-link :to="'/r/' + rut.id">
       <span>
         <img class="cover" :src="rut.logo" referrerPolicy="no-referrer">
       </span>
       <div class="content" v-html="content"></div>
       <span class="meta" v-if="rut.item_count>0">
         including {{ rut.item_count | pluralise('item') }}  
+      </span>
+      <span class="meta" v-else>
+        <router-link :to="to_url">...view</router-link> 
       </span>
     </router-link>
   </div>

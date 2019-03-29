@@ -39,15 +39,9 @@
       <router-view></router-view>
     </div>
     <!-- edit tag dialog -->
-    <el-dialog title="Edit Tag Description" width="640px" 
+    <el-dialog :title="tname" width="640px" 
                :visible.sync="show">
       <v-form ref="form" class="tag-form">
-        <v-text-field
-          v-model="tname"
-          label="Tag Name"
-          :counter = "20"
-          :rules="nameRule"
-        ></v-text-field>
         <v-textarea
           v-model="logo"
           label="Logo Image Url"
@@ -125,7 +119,6 @@ export default {
     },
     setData (data) {
       this.tag = data
-      this.tname = data.tname
       this.logo = data.logo
       this.intro = data.intro
       this.starCount = data.satr_count
@@ -144,7 +137,7 @@ export default {
       }
       if (checkAuth()) {
         let data = {
-          tname: this.tname.trim(),
+          tname: this.tname,  // cannot change
           intro: this.intro.trim(),
           logo: this.logo.trim(),
           pname: this.parent.trim(),
