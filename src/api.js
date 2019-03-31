@@ -63,9 +63,9 @@ axios.interceptors.response.use(
 Vue.prototype.$http = axios
 
 // request factory
-const base = '/api'
+const base = 'http://127.0.0.1:8083/api'
 const request = (url, options = {}, method = 'get') => {
-  let key = ~['get', 'head'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)
+  let key = ~['get', 'head', 'delete'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)
   return axios(Object.assign({'url': url, 'method': method}, {[key]: options}))
   .then(res => res)
 }

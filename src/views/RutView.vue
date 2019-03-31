@@ -5,6 +5,7 @@
         <el-button type="text" @click="toAddTag">+Tag:</el-button>
         <span class="tag" v-for="(tag, index) in tags" :key="index">
           <router-link :to="'/tag/' + tag"><b>{{tag}}</b></router-link>
+          <sup class="hiden-del-tag" @click="onDelTag(tag, index)">X</sup>
         </span>
       </div>
       <!-- edit tag dialog -->
@@ -64,7 +65,15 @@
       </el-button>
       <share-bar></share-bar>
     </div>
-    <div class="rut-side"></div>
+    <div class="rut-side">
+      <div class="credential">
+        <span class="credential-title">About Creator(s)</span>
+        <div class="credential-body">
+          <span>{{ rut.author_id }}: </span>
+          <span>{{ rut.credential }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -197,6 +206,19 @@ export default {
         })
       }
     },
+    onDelTag(tag, index){
+      if (!checkAuth()) return
+      let cf = confirm('Are You Sure to Delete this Tag?')
+      if (!cf) return
+      let del_data = {
+        tnames: [tag],
+        rut_id: this.rutid,
+        action: '0'
+      }
+      tagRut(0, this.rutid, del_data).then(
+        () => this.tags.splice(index, 1)
+      )
+    },
     checkStar () {
       if (checkAuth()) {
         // here a issue, login-close-open again, 
@@ -218,7 +240,7 @@ export default {
         })
       }
       let rutid = this.rutid
-      if (this.starStatus === 'unstar') { // ??, can not act star?? 
+      if (this.starStatus === 'unstar') {
         starRut(rutid, 1).then(resp => {
           this.starStatus = resp.data.message
         })
@@ -264,6 +286,14 @@ export default {
   background-color: #ddd;
   padding: 2px;
 }
+.hiden-del-tag {
+  cursor: pointer;
+  color: transparent;
+}
+.hiden-del-tag:hover {
+  color: orangered;
+  font-size: 10px;
+}
 .rut-view .title {
     padding: 0 10px;
 }
@@ -287,5 +317,19 @@ export default {
   right: 0;
   top: 10px;
   width: 240px;
+}
+.credential {
+  background-color: #f5f9f5;
+  margin-bottom: 10px;
+}
+.credential-title {
+  padding: 2px 10px;
+  color: #3c763d;
+  font-size: 12px;
+}
+.credential-body {
+  padding: 0 10px;
+  min-height: 45px;
+  font-size: 0.85em;
 }
 </style>

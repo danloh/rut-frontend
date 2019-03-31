@@ -5,7 +5,7 @@
     </div>
     <div class="content" v-html="md(content)" v-if="showCtn"></div>
     <el-button type="text" size="mini" @click="showCtn=!showCtn" v-if="canEdit">
-      <small class="hiden" v-if="showCtn">Edit</small><b v-else>Cancel</b>
+      <small class="hiden" v-if="showCtn">Edit</small><b v-else>Cancel Edit</b>
     </el-button>
     <div v-if="!showCtn">
       <v-form ref="form" class="collect-form">
@@ -16,13 +16,13 @@
           auto-grow
         ></v-textarea>
       </v-form>
-      <el-button type="text" size="mini" @click="editContent">
+      <el-button class="blockbtn" size="mini" @click="editContent">
         Done
       </el-button>
       <!--need to re-oder after del-->
-      <!-- <el-button type="text" size="mini" @click="showCfm=true">
-        Delete
-      </el-button> -->
+      <el-button type="text" size="mini" @click="showCfm=true">
+        <small style="color:red">Delete</small>
+      </el-button>
       <!-- confirm delete dialog -->
       <el-dialog title="Confirm Delete?" width="270px" :visible.sync="showCfm">
         <span>Confirm Delete? Cannot Recover</span>
@@ -81,14 +81,9 @@ export default {
         this.$message('No Permission')
         return
       }
-      let data = {
-        collect_id: this.collect.cid,
-        rut_id: this.collect.rutid,
-        item_id: this.collect.id,
-        uname: currID,
-      }
-      delCollect(this.collect.cid, data).then(() => {
+      delCollect(this.collect.cid).then(() => {
         this.showCfm = false
+        this.showCtn = true
         this.$router.push(`/r/${this.collect.rutid}`)  // how to reload?
       })
     }
