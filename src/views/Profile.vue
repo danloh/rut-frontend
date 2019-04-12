@@ -20,7 +20,7 @@
       </div>
       <div class="right-nav">
         <router-link :to="'/p/' + uname + '/created'">
-          <b style="color:royalblue">*</b> Created
+          <b style="color:royalblue">*</b> Post
         </router-link>
         <router-link to="/new">
           <small style="color:orange"> +New</small>

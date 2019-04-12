@@ -54,6 +54,9 @@
       </div>
       <div class="content">
         <div v-html="md(rut.content)"></div>
+        <a class="org-src" :href="rut.url" target="_blank" v-if="rut.url">
+          Origin Source...
+        </a>
       </div>
     </div>
     <collect-sum class="item" v-for="i in order_collects" :key="i.id" 
@@ -306,6 +309,10 @@ export default {
   background-color: #fbfbf8;
   padding: 10px;
   border-bottom: 1px dashed #eee;
+}
+.org-src {
+  font-size: 14px;
+  color: #828282;
 }
 .toolbar {
   display: flex;

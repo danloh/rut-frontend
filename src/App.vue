@@ -48,9 +48,9 @@
     <footer class="footer">
       <div class="bottom">
         ©RutHub - Since 2018
-        | <router-link to="/submit">Submit</router-link>
-        | <router-link to="/new">Create</router-link>
-        | <router-link to="#">About</router-link>
+        | <router-link title="Submit new Item" to="/submit">Submit</router-link>
+        | <router-link title="Create new Post" to="/new">Post</router-link>
+        | <router-link to="/about">About</router-link>
       </div>
     </footer>
   </div>

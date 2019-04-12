@@ -5,7 +5,12 @@
         <rut-sum v-for="rut in indexRuts" :key="rut.id" :rut="rut"></rut-sum>
       </div>
       <div class="home-side">
-        <small>Yet Another Collection</small>
+        <h4 class="right-title">Yet Another Collection</h4>
+        <div class="right-body" v-for="(tag, index) in indexTags" :key="index">
+          <router-link :to="'/tag/' + tag" :title="tag">
+            {{ tag.slice(0,24) }}
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -13,6 +18,7 @@
 
 <script>
 import RutSum from '../components/Rut/RutSum.vue'
+import { fetchTags } from '../api'
 
 export default {
   name: 'home',
@@ -20,7 +26,8 @@ export default {
   components: { RutSum },
   data () {
     return {
-      indexRuts: []
+      indexRuts: [],
+      indexTags: [],
     }
   },
   methods: {
@@ -28,10 +35,17 @@ export default {
       this.$store.dispatch('getIndexRuts').then(resp => {
         this.indexRuts = resp
       })
+    },
+    loadTags() {
+      fetchTags('index','index').then(res => {
+        this.indexTags = res.data.tags
+        console.log(this.indexTags)
+      })
     }
   },
   created () {
-    this.loadIndex()
+    this.loadIndex(),
+    this.loadTags()
   }
 }
 </script>
@@ -46,7 +60,15 @@ export default {
   top: 10px;
   right: 0;
   width: 220px;
-  text-align: center;
   background-color: #fafbfa;
+}
+.right-title {
+  background-color: #e5ebe4;
+  padding: 10px 15px;
+  font-size: 15px;
+}
+.right-body {
+  padding: 5px 20px;
+  font-size: 14px;
 }
 </style>
