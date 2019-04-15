@@ -3,7 +3,7 @@
     <sup class="indicator" v-if="item.item_order">#{{item.item_order}}&nbsp;</sup> 
     <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
     <small class="meta">
-      <br> {{item.uiid}}&nbsp;&nbsp;{{item.authors}}
+      <br>{{item.category}}&nbsp;{{item.uiid}} &nbsp;{{item.authors}} &nbsp;{{ item.pub_at }}
     </small>
     <span>
       <img class="thumb" :src="item.cover" referrerPolicy="no-referrer">

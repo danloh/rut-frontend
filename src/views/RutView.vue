@@ -314,7 +314,7 @@ export default {
   font-size: 12px;
   text-align: center;
   padding: 2px;
-  background-color: #eef4fa;
+  background-color: #f3f5f8;
 }
 .toolbar {
   display: flex;
