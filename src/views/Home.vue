@@ -69,6 +69,6 @@ export default {
 }
 .right-body {
   padding: 5px 20px;
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

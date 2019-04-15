@@ -1,8 +1,8 @@
 <template>
   <div class="add-page">
     <div class="title"> 
-      <b style="font-size:1.2em">Add Item To List:&nbsp;&nbsp;</b>
-      {{ rutTitle }}&nbsp;&nbsp;
+      <b style="font-size:1.2em">Add Item To Collection:&nbsp;</b>
+      <br><small>{{ rutTitle }}</small>
     </div>
     <!-- to do: add have-Dones -->
     <div>
@@ -12,7 +12,7 @@
                   :loading="searching"
                   @keyup.enter.native="searchItems"
                   style="width:100%"  
-                  placeholder="Input,Then Enter to Search: ISBN or any other UID">
+                  placeholder="Input ISBN or Other UID, Then Enter to Search">
           <el-option v-for="i in items" 
                       :key="i.id" 
                       :label="i.title" 
@@ -21,7 +21,7 @@
         </el-select>
         <v-textarea
           v-model="content"
-          label="Content"
+          label="Compose..., like reading tips, introduction, etc."
           counter
           :rule= "mustRule"
           :rows= "10"
@@ -29,7 +29,7 @@
         ></v-textarea>
       </v-form>
       <el-button size="mini" class="blockbtn" @click="addItem" :disabled="!itemID">
-        ADD to List
+        ADD to Collection
       </el-button>
     </div>
   </div>
@@ -43,7 +43,7 @@ import { Base64 } from 'js-base64';
 
 export default {
   name: 'add-rut',
-  title: 'Add Item to List',
+  title: 'Add Item to Collection',
   components: {},
   data () {
     return {
@@ -144,5 +144,6 @@ export default {
 }
 .title {
   margin-bottom: 10px;
+  text-align: center;
 }
 </style>

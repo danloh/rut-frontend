@@ -4,9 +4,7 @@
       <template v-if="rut.url">
         {{ rut.title }}
         <span class="host">
-          <a :href="rut.url" target="_blank" rel="nofollow noopener noreferrer">
-            ({{ rut.url | host }})
-          </a>
+          <a :href="rut.url" target="_blank">({{ rut.url | host }})</a>
         </span>
       </template>
       <template v-else>
@@ -73,7 +71,7 @@ div.rut-sum:hover {
 }
 .title .host {
   color: #828282;
-  font-size: 12px;
+  font-size: 16px;
 }
 .content {
   color: #828282;

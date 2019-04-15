@@ -54,9 +54,9 @@
       </div>
       <div class="content">
         <div v-html="md(rut.content)"></div>
-        <a class="org-src" :href="rut.url" target="_blank" v-if="rut.url">
-          Origin Source...
-        </a>
+        <div class="org-src" v-if="rut.url">
+          <a :href="rut.url" target="_blank"><b>Origin Source</b></a>
+        </div>
       </div>
     </div>
     <collect-sum class="item" v-for="i in order_collects" :key="i.id" 
@@ -298,7 +298,7 @@ export default {
   font-size: 10px;
 }
 .rut-view .title {
-    padding: 0 10px;
+  padding: 0 10px;
 }
 .rut-view .title .meta {
   color: #828282;
@@ -311,8 +311,10 @@ export default {
   border-bottom: 1px dashed #eee;
 }
 .org-src {
-  font-size: 14px;
-  color: #828282;
+  font-size: 12px;
+  text-align: center;
+  padding: 2px;
+  background-color: #eef4fa;
 }
 .toolbar {
   display: flex;

@@ -48,8 +48,8 @@
     <footer class="footer">
       <div class="bottom">
         ©RutHub - Since 2018
-        | <router-link title="Submit new Item" to="/submit">Submit</router-link>
-        | <router-link title="Create new Post" to="/new">Post</router-link>
+        | <router-link title="Submit New Item" to="/submit">Submit</router-link>
+        | <router-link title="Create New Post" to="/new">Create/Post</router-link>
         | <router-link to="/about">About</router-link>
       </div>
     </footer>
@@ -148,6 +148,10 @@ body {
 .submenu a.router-link-active {
   color: orange;
   font-weight: 800;
+}
+.help-tips {
+  color: green;
+  font-size: 0.8em;
 }
 
 a {

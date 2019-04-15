@@ -7,17 +7,18 @@
     <el-button type="text" size="mini" @click="showCtn=!showCtn" v-if="canEdit">
       <small class="hiden" v-if="showCtn">Edit</small><b v-else>Cancel Edit</b>
     </el-button>
-    <div v-if="!showCtn">
+    <div v-if="!showCtn" class="edit-ctn">
       <v-form ref="form" class="collect-form">
         <v-textarea
           v-model="content"
+          label= "Compose..., like reading tips, introduction, etc."
           counter
           :rules="mustRule"
           auto-grow
         ></v-textarea>
       </v-form>
       <el-button class="blockbtn" size="mini" @click="editContent">
-        Done
+        Done and Update
       </el-button>
       <!--need to re-oder after del-->
       <el-button type="text" size="mini" @click="showCfm=true">
@@ -102,5 +103,9 @@ export default {
 .hiden:hover {
   color: orangered;
   font-size: 15px;
+}
+.edit-ctn {
+  padding: 10px;
+  border: 1px dotted #689f38;
 }
 </style>

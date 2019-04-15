@@ -23,11 +23,10 @@
         </el-button>
       </div>
       <div class="fobtn">
-        <el-button size="mini" @click="starOrUnstarTag">
+        <el-button type="text" @click="starOrUnstarTag">
           {{ starStatus === 'unstar' ? 'Follow' : 'UnFollow' }}
         </el-button><br>
-        <img v-if="logo" style="max-width:65px;max-height:65px;margin-top:10px" 
-             :src="logo" alt="Logo" referrerPolicy="no-referrer">
+        <img v-if="logo" class="tag-logo" :src="logo" alt="Logo" referrerPolicy="no-referrer">
       </div>
     </div>
     <div class="submenu">
@@ -45,7 +44,7 @@
         <v-textarea
           v-model="logo"
           label="Logo Image Url"
-          :counter = "144"
+          :counter = "256"
           :rules="lenRule"
           :rows= "1"
           auto-grow
@@ -90,7 +89,7 @@ export default {
       logo: '',
       intro: '',
       relatedTags: [],
-      lenRule: [ v => v.length <= 144 || 'Must be less than 144 characters' ],
+      lenRule: [ v => v.length <= 256 || 'Must be less than 256 characters' ],
       nameRule:[
         v => !!v || 'required',
         v => v.length <= 20 || 'Must be less than 20 characters'
@@ -210,14 +209,19 @@ export default {
 .tagmeta {
   background-color: white;
   min-height: 120px;
-  padding: 5px 75px 5px 10px;
+  padding: 5px 120px 5px 10px;
   margin-bottom: 5px;
   position: relative;
 }
 .fobtn {
   position: absolute;
-  top: 15px;
+  top: 0px;
   right: 5px;
   text-align: right;
+}
+.tag-logo {
+  max-width: 105px;
+  max-height: 105px;
+  margin-top: 5px;
 }
 </style>

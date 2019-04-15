@@ -43,7 +43,7 @@
           <el-dropdown-item>
             <el-button @click="showAndloadRuts" 
                        type="text" style="color:orange">
-                       Add to List
+                       +Collection
             </el-button>
           </el-dropdown-item>
           <el-dropdown-item>
@@ -59,7 +59,7 @@
       </el-dropdown>
     </div>
     <!-- addtolist dialog -->
-    <el-dialog title="Add Item to one of Lists" width="520px" 
+    <el-dialog title="Add Item to A Collection" width="520px" 
                :visible.sync="showAddtoRut">
       <v-form ref="form" class="add-form">
         <el-select v-model="rutID" filterable remote 
@@ -67,7 +67,7 @@
                   :loading="searching"
                   @keyup.enter.native="searchCreatedRuts"
                   style="width:100%" 
-                  placeholder="Search and Select a List">
+                  placeholder="Search and Select a Collection">
           <el-option v-for=" r in createdRuts" 
                       :key="r.id" 
                       :label="r.title" 
@@ -76,7 +76,7 @@
         </el-select>
         <v-textarea
           v-model="content"
-          label="Content"
+          label="Compose...,like reading tips, introduction, etc."
           counter
           :rule= "mustRule"
           :rows= "5"

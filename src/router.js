@@ -18,8 +18,8 @@ const NewItem = () => import('./components/Item/NewItem')
 const UpdateItem = () => import('./components/Item/UpdateItem')
 const ItemView = () => import('./views/ItemView')
 const TagView = () => import('./views/TagView')
-const NotFound = () => import('./views/NotFound.vue')
-const About = () => import('./components//Misc/About.vue')
+const NotFound = () => import('./components/Misc/NotFound.vue')
+const About = () => import('./components/Misc/About.vue')
 
 Vue.use(Router)
 

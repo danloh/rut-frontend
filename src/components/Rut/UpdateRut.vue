@@ -1,13 +1,13 @@
 <template>
   <div class="update-page">
     <div class="title"> 
-      <b>Update List:&nbsp;&nbsp;</b>
+      <span><b>Updating: </b><small>{{ title }}</small></span>
     </div>
     <v-form ref="form" class="create-form">
       <v-textarea
         v-model="title"
         label="Title"
-        :counter = "144"
+        :counter = "256"
         :rules="titleRule"
         :rows= "1"
         auto-grow
@@ -15,15 +15,11 @@
       <v-textarea
         v-model="url"
         label="URL"
-        :counter = "144"
+        :counter = "256"
         :rules="lenRule"
         :rows= "1"
         auto-grow
       ></v-textarea>
-      <v-text-field
-        v-model= "author"
-        label= "Origin Author"
-      ></v-text-field>
       <v-textarea
         v-model="content"
         label="Content"
@@ -32,6 +28,10 @@
         auto-grow
         :rules="mustRule"
       ></v-textarea>
+      <v-text-field
+        v-model= "author"
+        label= "Origin Author"
+      ></v-text-field>
     </v-form>
     <el-button type="success" size="mini" class="blockbtn" @click="onUpdate">
       Done and Update
@@ -45,7 +45,7 @@ import { checkAuth } from '../../util/auth'
 
 export default {
   name: 'update-rut',
-  title: 'Update List',
+  title: 'Update Collection',
   components: { },
   data () {
     return {
@@ -56,7 +56,7 @@ export default {
       rut_uname:'', // for check auth
       rutid: '',
       mustRule: [ v => !!v || 'required' ],
-      lenRule: [ v => v.length <= 144 || 'Must be less than 144 characters' ]
+      lenRule: [ v => v.length <= 256 || 'Must be less than 256 characters' ]
     }
   },
   computed: {
@@ -105,7 +105,7 @@ export default {
 
 <style scoped>
 .update-page {
-  padding: 10px 160px 10px 120px;
+  padding: 10px 180px 10px 120px;
   position: relative;
 }
 .title {
