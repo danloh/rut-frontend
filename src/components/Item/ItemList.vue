@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b v-if="flag">{{flag.toUpperCase()}}: {{ totalCount }}</b>
+    <b v-if="flag">{{ flag | titleCase }}: {{ totalCount }}</b>
     <br><br>
     <item-min-sum v-for="item in items" :key="item.id" :item="item"></item-min-sum>
     <div v-if="hasMore">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b v-if="action !== '0'">{{action.toUpperCase()}}: {{ totalCount }}</b>
+    <b v-if="action !== '0'">{{ action | titleCase }}: {{ totalCount }}</b>
     <div class="rut-list">
       <rut-sum v-for="rut in ruts" :key="rut.id" :rut="rut"></rut-sum>
     </div>

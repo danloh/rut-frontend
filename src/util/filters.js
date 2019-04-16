@@ -1,9 +1,9 @@
 // pluralise
-export function pluralise (n, unit) {
+export function pluralise(n, unit) {
   return n + ' ' + unit + (n <= 1 ? '' : 's')
 }
 // time ago formating
-export function timeAgo (date, rep = true) {
+export function timeAgo(date, rep = true) {
   // compatibility AND timezone: YYYY-MM-DDTHH:mm:ss.sssZ
   let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
   let realDate = new Date(repDate)
@@ -24,7 +24,7 @@ export function timeAgo (date, rep = true) {
   }
 }
 // time gap
-export function timeGap (date, rep = true) {
+export function timeGap(date, rep = true) {
   let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
   let realDate = new Date(repDate)
   let time = realDate.getTime()
@@ -37,7 +37,7 @@ export function timeGap (date, rep = true) {
   }
 }
 // to local formating
-export function toLocal (date, rep = true) {
+export function toLocal(date, rep = true) {
   let repDate = rep ? date.replace(/\s+/g, 'T').concat('Z') : date
   return date
              ? new Date(repDate).toLocaleString()
@@ -53,7 +53,7 @@ export function toMDY (date, rep = true) {
 }
 
 // showLess
-export function showLess (content, least = 155, less = true) {
+export function showLess(content, least = 155, less = true) {
   if (!content) return ''
   if (content.length > least && less) {
     let lessContent = content.substring(0, least)
@@ -68,9 +68,17 @@ export function showLess (content, least = 155, less = true) {
 }
 
 // extract host
-export function host (url) {
+export function host(url) {
   const host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
   const parts = host.split('.').slice(-3)
   if (parts[0] === 'www') parts.shift()
   return parts.join('.')
+}
+
+// title case 
+export function titleCase(text) {
+  return text.replace( 
+    /\w\S*/g, 
+    txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  )
 }
