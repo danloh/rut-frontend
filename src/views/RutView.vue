@@ -41,9 +41,6 @@
           </template>
           | <span> {{ rut.renew_at | toMDY }}</span>
           | including {{ rut.item_count | pluralise('item') }} 
-          | <router-link :to="'/rforum/' + rutid">
-              {{ rut.comment_count | pluralise('Comment') }}
-            </router-link>
           <router-link :to="'/update/r/' + rutid" v-if="canEdit">
             <b> | Edit...</b>
           </router-link>
@@ -63,10 +60,16 @@
                  :collect="i" :canEdit="canEdit">
     </collect-sum>
     <div class="toolbar">
+      <el-button type="text" @click="showForum=!showForum">
+        {{ showForum ? 'Hide ' : '' }} {{ rut.comment_count | pluralise('Comment')}}
+      </el-button>
       <el-button type="text" @click="starOrUnstarRut">
         {{ starStatus === 'unstar' ? 'Star' : 'Unstar' }}
       </el-button>
       <share-bar></share-bar>
+    </div>
+    <div class="forum" v-if="showForum">
+      <rut-forum :rutid="rutid"></rut-forum>
     </div>
     <div class="rut-side">
       <div class="credential">
@@ -88,10 +91,11 @@ import { checkAuth } from '../util/auth'
 import marked from '../util/marked'
 import CollectSum from '../components/Item/CollectSum.vue'
 import ShareBar from '../components/Misc/ShareBar.vue'
+import RutForum from './RutForum.vue'
 
 export default {
   name: 'rut-view',
-  components: { CollectSum, ShareBar },
+  components: { CollectSum, ShareBar, RutForum },
   data () {
     return {
       rutTitle: '',
@@ -104,7 +108,8 @@ export default {
       rut_uname: '',
       newTag: '',
       newTags: [],
-      delTags: []  // ?? how to del
+      delTags: [],  // ?? how to del
+      showForum: false,
     }
   },
   computed: {

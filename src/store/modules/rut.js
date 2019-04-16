@@ -17,7 +17,7 @@ const actions = {
     const now = Date.now()
     return new Promise((resolve, reject) => {
       if ( rut && rut.id == rutid && now - rut.lastUpdate < 1000*60*5 ) {
-        console.log('no need re-fetch')
+        //console.log('no need re-fetch')
         resolve(rut) 
       } else {
         fetchRut(rutid).then(resp => {

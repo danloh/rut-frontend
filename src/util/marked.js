@@ -53,7 +53,6 @@ renderer.paragraph = paragraphParse
 renderer.heading = headingParse
 
 export default (content) => {
-  // console.log('content', content)
   if (typeof content !== 'string') {
     return ''
   }

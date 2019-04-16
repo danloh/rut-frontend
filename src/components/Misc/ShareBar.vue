@@ -40,7 +40,6 @@ export default {
     },
     shareWindow (url) {
       url = encodeURI(url)
-      console.log(url)
       let winName = 'newWin'
       let awidth = screen.availWidth / 2
       let aheight = screen.availHeight / 5 * 2

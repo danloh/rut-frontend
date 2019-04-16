@@ -45,7 +45,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         signin(data).then(resp => {
           let res = resp.data
-          // console.log(res)
           if (res.status !== 200) {
             this.$message("Something Failed")
             return

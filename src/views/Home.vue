@@ -39,7 +39,6 @@ export default {
     loadTags() {
       fetchTags('index','index').then(res => {
         this.indexTags = res.data.tags
-        console.log(this.indexTags)
       })
     }
   },

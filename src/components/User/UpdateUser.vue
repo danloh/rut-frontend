@@ -154,7 +154,6 @@ export default {
         uname: this.uname
       }
       changePsw(this.uname, data).then(resp => {
-        // console.log(resp.data)
         if (resp.data.status == 200) {
           this.$router.push('/login')
         } else {

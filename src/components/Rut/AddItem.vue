@@ -28,7 +28,7 @@
           auto-grow
         ></v-textarea>
       </v-form>
-      <el-button size="mini" class="blockbtn" @click="addItem" :disabled="!itemID">
+      <el-button type="success" size="mini" class="blockbtn" @click="addItem" :disabled="!itemID">
         ADD to Collection
       </el-button>
     </div>
