@@ -119,8 +119,10 @@ const fetchRut = (rutid) => {
   return request(`${base}/ruts/${rutid}`)
 }
 // get rut list per user, tag, item, flag should be create, star
-const fetchRuts = (per, tid, paging=1, flag=0) => {
-  return request(`${base}/ruts/${per}/${tid}?page=${paging}&flag=${flag}`)
+const fetchRuts = (per, tid, p=1, f=0, k='', fr='') => {
+  return request(
+    `${base}/ruts/${per}/${tid}?page=${p}&flag=${f}&kw=${k}&fr=${fr}`
+  )
 }
 // get ruts for index page
 const fetchIndexRuts = () => fetchRuts('index','index')
@@ -137,8 +139,10 @@ const fetchItem = (itemid, params) => {
   return request(`${base}/items/${itemid}`, params)
 }
 // get item list per rut,tag,user; id,uiid,url,title
-const fetchItems = (per, id, flag='done', page=1, params={}) => {
-  return request(`${base}/items/${per}/${id}?flag=${flag}&page=${page}`, params)
+const fetchItems = (per, id, p=1, f='done', k='', fr='') => {
+  return request(
+    `${base}/items/${per}/${id}?page=${p}&flag=${f}&kw=${k}&fr=${fr}`
+  )
 }
 // check item star flag
 const checkStarItem = (itemid, params) => { // action: 0-untag,1-tag
@@ -153,8 +157,10 @@ const fetchCollect = (cid, params) => {
   return request(`${base}/collects/${cid}`, params)
 }
 // get collects
-const fetchCollects = (per, id, params) => {
-  return request(`${base}/collects/${per}/${id}`, params)
+const fetchCollects = (per, id, p=1, f='done', k='', fr='') => {
+  return request(
+    `${base}/collects/${per}/${id}?page=${p}&flag=${f}&kw=${k}&fr=${fr}`
+  )
 }
 // update collect
 const updateCollect = (cid, params) => {
@@ -173,8 +179,10 @@ const fetchTag = (tname, params) => {
   return request(`${base}/tags/${tname}`, params)
 }
 // get tag list per rut,tag,user,item
-const fetchTags = (per, id, params) => {
-  return request(`${base}/tags/${per}/${id}`, params)
+const fetchTags = (per, id, p=1, f='done', k='', fr='') => {
+  return request(
+    `${base}/tags/${per}/${id}?page=${p}&flag=${f}&kw=${k}&fr=${fr}`
+  )
 }
 // update tag 
 const updateTag = (tname, params) => {
@@ -193,8 +201,10 @@ const newEtc = params => {
   return request(`${base}/etcs`, params, 'post')
 }
 // get etc list per rut,tag,user,item, petc
-const fetchEtcs = (per, perid, paging=1, params={}) => {
-  return request(`${base}/etcs/${per}/${perid}?page=${paging}`, params)
+const fetchEtcs = (per, perid, p=1, f='done', k='', fr='') => {
+  return request(
+    `${base}/etcs/${per}/${perid}?page=${p}&flag=${f}&kw=${k}&fr=${fr}`
+  )
 }
 
 export {

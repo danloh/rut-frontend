@@ -39,13 +39,13 @@ export default {
   methods: {
     loadItems () {
       let pid = this.perid = this.$route.params.id
-      fetchItems(this.per, pid, this.flag, this.paging).then(resp => {
+      fetchItems(this.per, pid, this.paging, this.flag).then(resp => {
         this.items = resp.data.items
         this.totalCount = resp.data.count
       })
     },
     loadMoreItem () {
-      fetchItems(this.per, this.perid, this.flag, this.paging+1).then(resp => {
+      fetchItems(this.per, this.perid, this.paging+1, this.flag).then(resp => {
         let more = resp.data.items
         this.items.push(...more)
         this.paging += 1

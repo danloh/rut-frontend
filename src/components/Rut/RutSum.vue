@@ -2,14 +2,14 @@
   <div class="rut-sum">
     <span class="title">
       <template v-if="rut.url">
-        {{ rut.title }}
+        <b>{{ rut.title }}</b>
         <span class="host">
           <a :href="rut.url" target="_blank">({{ rut.url | host }})</a>
         </span>
       </template>
       <template v-else>
         <router-link :to="'/r/' + rut.id">
-          {{ rut.title }}
+          <b>{{ rut.title }}</b>
         </router-link>
       </template>
     </span>
