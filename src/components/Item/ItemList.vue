@@ -1,7 +1,7 @@
 <template>
   <div>
     <b v-if="flag">{{ flag | titleCase }}: {{ totalCount }}</b>
-    <br><br>
+    <br>
     <item-min-sum v-for="item in items" :key="item.id" :item="item"></item-min-sum>
     <div v-if="hasMore">
       <el-button size="mini" @click="loadMoreItem" :disabled="!hasMore">

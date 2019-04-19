@@ -88,7 +88,7 @@ body {
   font-family: Lato,Roboto,Open Sans,sans-serif;
   font-size: 18px;
   line-height: 1.6em;
-  background-color: #f2f3f5;
+  background-color: #edf0f5;
   overflow-wrap: break-word;
 }
 .header {

@@ -207,7 +207,7 @@ export default {
   background-color: #fafbfa;
 }
 .tagmeta {
-  background-color: white;
+  background-color: #fcfcfa;
   min-height: 120px;
   padding: 5px 120px 5px 10px;
   margin-bottom: 5px;

@@ -287,7 +287,6 @@ export default {
   background-color: #eef4fa;
 }
 .tag a {
-  color: green;
   font-size: 0.85em;
 }
 .tag a:hover {
@@ -311,9 +310,9 @@ export default {
   padding-bottom: 10px;
 }
 .rut-view .content, .item {
-  background-color: #fbfbf8;
+  background-color: #f5f7f8;
   padding: 10px;
-  border-bottom: 1px dashed #eee;
+  border-bottom: 1px solid #eee;
 }
 .org-src {
   font-size: 12px;

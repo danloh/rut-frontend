@@ -28,7 +28,7 @@ export default {
     },
     rounded: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data () {

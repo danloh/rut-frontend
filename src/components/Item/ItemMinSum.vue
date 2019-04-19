@@ -22,7 +22,8 @@ export default {
 .item-info {
   padding-right: 40px;
   position: relative;
-  border-bottom: 0.5px dashed #ddd;
+  background-color: #f5f7f8;
+  border-bottom: 1px dashed #ddd;
 }
 .item-info .indicator {
   font-size: 0.6em;

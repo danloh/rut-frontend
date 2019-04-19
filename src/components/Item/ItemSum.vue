@@ -1,7 +1,10 @@
 <template>
   <div class="item-sum">
     <div>
-      <img class="thumb" :src="cover" alt="Cover" referrerPolicy="no-referrer">
+      <img v-if="cover" class="thumb" :src="cover" alt="Cover" referrerPolicy="no-referrer">
+      <template v-else>
+        <avatar class="thumb" :uname="item.title" :size="100" :src="''"></avatar>
+      </template>
     </div>
     <div class="info">
       <span class="title">
@@ -116,11 +119,12 @@
 <script>
 import { base, checkStarItem, starItem, fetchRuts, collectItem } from '../../api'
 import { checkAuth } from '../../util/auth'
+import Avatar from '../User/Avatar.vue'
 
 export default {
   name: 'item-sum',
   props: ['item', 'out'], // out for  link to resource
-  components: { },
+  components: { Avatar },
   data () {
     return {
       showAddtoRut: false,

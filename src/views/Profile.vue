@@ -15,7 +15,7 @@
     </div>
     <div class="profile-side">
       <div class="right-avatar">
-        <avatar :uname="uname" :size="210" :rounded="false" :src="user.avatar"></avatar>
+        <avatar :uname="uname" :size="210" :src="user.avatar"></avatar>
         <small class="user-info"> &nbsp;{{user.join_at | toMDY}} Joined</small>
       </div>
       <div class="right-nav">
