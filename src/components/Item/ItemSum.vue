@@ -32,7 +32,14 @@
         <tr>
           <td><small class="indicator">Listed</small></td>
           <td>
-            {{ item.rut_count }} 
+            {{ item.rut_count }} &nbsp; 
+            <a :href="item.url" v-if="item.url">...src</a>
+          </td>
+        </tr>
+        <tr v-if="flagNote">
+          <td><small class="indicator">Note</small></td>
+          <td>
+            <small class="flag-not">{{ flagNote }}</small>
           </td>
         </tr>
       </table>
@@ -40,7 +47,7 @@
     <div class="operate">
       <el-dropdown>
         <el-button type="primary" size="mini" plain>
-          {{flagAction}}<i class="el-icon-arrow-down el-icon--right"></i>
+          {{ flagAction | titleCase }}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
@@ -65,16 +72,16 @@
     <el-dialog title="Add Item to A Collection" width="520px" 
                :visible.sync="showAddtoRut">
       <v-form ref="form" class="add-form">
-        <el-select v-model="rutID" filterable remote 
+        <el-select v-model="selectIndex" filterable remote 
                   :remote-method="storeKey"
                   :loading="searching"
                   @keyup.enter.native="searchCreatedRuts"
                   style="width:100%" 
                   placeholder="Search and Select a Collection">
-          <el-option v-for=" r in createdRuts" 
+          <el-option v-for=" (r, index) in createdRuts" 
                       :key="r.id" 
                       :label="r.title" 
-                      :value="r.id">
+                      :value="index">
           </el-option>
         </el-select>
         <v-textarea
@@ -99,7 +106,7 @@
                :visible.sync="showStar">
       <v-form ref="form" class="note-form">
         <v-text-field
-          v-model= "note"
+          v-model= "flagNote"
           label= "Some Note: Optional, Max 42 words"
           :counter = "42"
           :rules = "lenRule"
@@ -108,7 +115,7 @@
       <div slot="footer" class="dialog-footer">
         <el-button size="mini" type="success" 
                    @click="starAndNote">
-                   {{ 'As ' + starTo }}
+                   {{ 'As ' + starAs | titleCase }}
         </el-button>
       </div>
     </el-dialog>
@@ -131,16 +138,19 @@ export default {
       createdRuts: [],
       searchKey: '',
       searching: false,
-      rutID: '', // selected rut to add item to
+      rutID: null, // selected rut to add item to
+      selectIndex: null,  // for to index selected rut in createdruts
+      selectedRut: null,  // need the other info of the selected rut
       content: '', // collect content
       flagAction: 'Options',
       flagNote: '',
       flagTime: '',
-      note: '',
       showStar: false,
-      starTo: '',
+      starAs: '',
       lenRule: [ v => v.length <= 42 || 'Must be less than 42' ],
       mustRule: [ v => !!v || 'required' ],
+      flagMap: {'todo': 1, 'doing': 2, 'done': 3},
+      mapFlag: {'1': 'todo', '2': 'doing', '3': 'done', 'Options': 'Options'},
     }
   },
   computed: {
@@ -153,7 +163,7 @@ export default {
       if (checkAuth()) {
         let itemid = this.item.id || this.$route.params.id // why?? liftcycle timing??: in list or in view
         checkStarItem(itemid).then(resp => {
-          this.flagAction = resp.data.message
+          this.flagAction = this.mapFlag[resp.data.message]
           this.flagNote = resp.data.note
           this.flagTime = resp.data.when
         })
@@ -162,10 +172,10 @@ export default {
         this.flagNote = ''
       }
     },
-    toStar (to) {
+    toStar (as) {
       if (checkAuth()) {
         this.showStar = true
-        this.starTo = to
+        this.starAs = as
       } else {
         this.$message('Should Log in to Access')
         this.$router.push({
@@ -179,12 +189,12 @@ export default {
         this.$message("Invalid Input or Need to Log in")
         return
       }
-      let note = this.note.trim()
-      let flag = this.starTo
-      let rate = 1  // to do
-      starItem(this.item.id, flag, rate, note || flag)
+      let note = this.flagNote.trim()
+      let flag = this.flagMap[this.starAs]
+      let rate = 0  // to do
+      starItem(this.item.id, flag, rate, note || this.starAs)
       .then(resp => {
-        this.flagAction = resp.data.message
+        this.flagAction = this.mapFlag[resp.data.message]
         this.flagNote = resp.data.note
       })
       this.showStar = false
@@ -221,6 +231,8 @@ export default {
       }
     },
     addToRut () {
+      this.selectedRut = this.createdRuts[this.selectIndex]
+      this.rutID = this.selectedRut.id
       if (!this.rutID || !checkAuth()) {
         this.$message("Invalid Input or Need to Log in")
         return
@@ -236,11 +248,11 @@ export default {
         uname: '', // can get from cookie
       }
       collectItem(this.rutID, data).then(() => {
-        // renew rut
-        let updateTime = {'rutid':this.rutID, 'lastUpdate':0, 'ref':'lastUpdate'}
+        // renew rut's cache updatetime, thus will reload when route to rutview
+        let updateTime = {'rutslug':this.selectedRut.slug, 'lastUpdate':0, 'ref':'lastUpdate'}
         this.$store.commit('RENEW_RUT', updateTime)
         this.showAddtoRut = false
-        this.$router.push(`/r/${this.rutID}`)
+        this.$router.push(`/r/${this.selectedRut.slug}`)
       })
     },
   },

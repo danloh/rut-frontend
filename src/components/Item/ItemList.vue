@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b v-if="flag">{{ flag | titleCase }}: {{ totalCount }}</b>
+    <b v-if="flag">{{ mapFlag[flag] | titleCase }}: {{ totalCount }}</b>
     <br>
     <item-min-sum v-for="item in items" :key="item.id" :item="item"></item-min-sum>
     <div v-if="hasMore">
@@ -29,6 +29,7 @@ export default {
       totalCount: 0,
       items: [],
       paging: 1,
+      mapFlag: {'1': 'todo', '2': 'doing', '3': 'done'},
     }
   },
   computed: {

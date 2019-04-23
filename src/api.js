@@ -63,7 +63,8 @@ axios.interceptors.response.use(
 Vue.prototype.$http = axios
 
 // request factory
-const base = 'https://ruthub.com/api'
+const base = 'http://127.0.0.1:8083/api'
+// const base = 'https://ruthub.com/api'
 const request = (url, options = {}, method = 'get') => {
   let key = ~['get', 'head', 'delete'].indexOf(method) ? 'params' : 'data' // bitwise NOT: ~N -> -(N+1)
   return axios(Object.assign({'url': url, 'method': method}, {[key]: options}))
@@ -99,8 +100,8 @@ const newRut = params => {
   return request(`${base}/ruts`, params, 'post')
 }
 // update rut
-const updateRut = (rutid, params) => {
-  return request(`${base}/ruts/${rutid}`, params, 'post')
+const updateRut = params => {
+  return request(`${base}/ruts`, params, 'put')
 }
 // tag rut
 const tagRut = (act, rutid, params) => { // action: 0-untag,1-tag
@@ -148,8 +149,8 @@ const fetchItems = (per, id, p=1, f='done', k='', fr='') => {
 const checkStarItem = (itemid, params) => { // action: 0-untag,1-tag
   return request(`${base}/itemflag/${itemid}`, params)
 }
-// star item as todo | done
-const starItem = (itemid, flag='todo', rate=1, note='Love') => {
+// star item as 1-todo | 2-doing | 3-done
+const starItem = (itemid, flag=1, rate=0, note='Love') => {
   return request(`${base}/staritem/${itemid}/${flag}/${rate}/${note}`)
 }
 // get collect
@@ -171,8 +172,8 @@ const delCollect = (cid, params) => {
   return request(`${base}/collects/${cid}`, params, 'delete')
 }
 // update an item
-const updateItem = (itemid, params) => {
-  return request(`${base}/items/${itemid}`, params, 'post')
+const updateItem = (params) => {
+  return request(`${base}/items`, params, 'put')
 }
 // get tag 
 const fetchTag = (tname, params) => {

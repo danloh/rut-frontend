@@ -122,8 +122,8 @@ export default {
         detail: this.detail.trim()
       }
       newItem(data).then(resp => {
-        let id = resp.data.item.id
-        this.$router.push(`/item/${id}`)
+        let slug = resp.data.item.slug
+        this.$router.push(`/item/${slug}`)
       })
     }
   }

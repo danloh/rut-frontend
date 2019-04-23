@@ -32,8 +32,8 @@
         <h2>{{ rutTitle }}</h2>
         <div class="meta">
           <template>
-            <span v-if="rut.author_id">
-              <a :href="gen_url" target="_blank">{{ rut.author_id }}</a>
+            <span v-if="rut.author">
+              <a :href="gen_url" target="_blank">{{ rut.author }}</a>
             </span>
             <span v-else>
               <router-link :to="'/p/' + rut.uname">{{ rut.uname }}</router-link>
@@ -41,10 +41,10 @@
           </template>
           | <span> {{ rut.renew_at | toMDY }}</span>
           | including {{ rut.item_count | pluralise('item') }} 
-          <router-link :to="'/update/r/' + rutid" v-if="canEdit">
+          <router-link :to="'/update/r/' + rutslug" v-if="canEdit">
             <b> | Edit...</b>
           </router-link>
-          <router-link :to="'/collect/' + rutid" v-if="canEdit">
+          <router-link :to="'/collect/' + rutslug" v-if="canEdit">
             <b> | Add...</b>
           </router-link>
         </div>
@@ -75,7 +75,7 @@
       <div class="credential">
         <span class="credential-title">About Creator(s)</span>
         <div class="credential-body">
-          <span>{{ rut.author_id }}: </span>
+          <span>{{ rut.author }}: </span>
           <span>{{ rut.credential }}</span>
         </div>
       </div>
@@ -100,6 +100,7 @@ export default {
     return {
       rutTitle: '',
       rutid: '',
+      rutslug: '',
       items: [],
       collects: [],
       starStatus: '',
@@ -114,7 +115,7 @@ export default {
   },
   computed: {
     rut () {
-      return this.$store.state.rut.ruts[this.$route.params.id]
+      return this.$store.state.rut.ruts[this.$route.params.slug]
     },
     order_collects () {
       return this.collects.sort((a,b) => a.item_order - b.item_order)
@@ -123,7 +124,7 @@ export default {
       let a_url = this.rut.url 
       return a_url 
               ? a_url 
-              : 'https://www.google.com/search?q=' + this.rut.author_id
+              : 'https://www.google.com/search?q=' + this.rut.author
     },
     canEdit () {
       return this.rut_uname === this.$store.getters.actID && checkAuth()
@@ -134,11 +135,14 @@ export default {
   },
   methods: {
     loadRut () {
-      let rid = this.rutid =  this.$route.params.id
-      this.$store.dispatch('getRut', rid).then(resp => {
+      let rslug = this.$route.params.slug
+      this.$store.dispatch('getRut', rslug).then(resp => {
         this.rutTitle = resp.title
+        let rid = this.rutid = resp.id
+        this.rutslug = resp.slug
         this.loadItems(rid)
         this.loadTags(rid)
+        this.checkStar(rid)
         this.rut_uname = resp.uname
       })
     },
@@ -197,7 +201,7 @@ export default {
         let add_data = {
           tnames: newTs,
           rut_id: this.rutid,
-          action: '1'
+          action: 1
         }
         tagRut(1, this.rutid, add_data)
         //tagRut(0, this.rutid, del_data)
@@ -221,17 +225,17 @@ export default {
       let del_data = {
         tnames: [tag],
         rut_id: this.rutid,
-        action: '0'
+        action: 0
       }
       tagRut(0, this.rutid, del_data).then(
         () => this.tags.splice(index, 1)
       )
     },
-    checkStar () {
+    checkStar(rutid) {
       if (checkAuth()) {
         // here a issue, login-close-open again, 
         // can checkAuth but 401, auth state issue
-        checkStarRut(this.rutid).then(resp => {
+        checkStarRut(rutid).then(resp => {
           if (resp.data.status !== 200) return
           this.starStatus = resp.data.message
         })
@@ -265,7 +269,6 @@ export default {
   },
   created () {
     this.loadRut()
-    this.checkStar()
   }
 }
 </script>

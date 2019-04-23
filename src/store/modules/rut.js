@@ -7,20 +7,20 @@ import { fetchRut, fetchIndexRuts } from '../../api'
 const perPage = 20
 const state = {
   indexRuts: [],
-  ruts: {/* [id]: rut */},
+  ruts: {/* [slug]: rut */},
 }
 
 // actions
 const actions = {
-  getRut: ({ commit, state }, rutid) => {
-    const rut = state.ruts[rutid]
+  getRut: ({ commit, state }, rutslug) => {
+    const rut = state.ruts[rutslug]
     const now = Date.now()
     return new Promise((resolve, reject) => {
-      if ( rut && rut.id == rutid && now - rut.lastUpdate < 1000*60*5 ) {
+      if ( rut && rut.slug == rutslug && now - rut.lastUpdate < 1000*60*5 ) {
         //console.log('no need re-fetch')
         resolve(rut) 
       } else {
-        fetchRut(rutid).then(resp => {
+        fetchRut(rutslug).then(resp => {
           let rut = resp.data.rut
           commit('SET_RUT', { rut })
           resolve(rut)
@@ -44,23 +44,23 @@ const mutations = {
   SET_RUTS (state, data, index=false) {
     if (index) { state.indexRuts = data }
     data.forEach(r => {
-      const rid = r.id
-      const rut = state.ruts[rid]
+      const rslug = r.slug
+      const rut = state.ruts[rslug]
       if (!rut) {
         let rutdata = Object.assign({ lastUpdate: Date.now() }, r)
-        Vue.set(state.ruts, rid, rutdata)
+        Vue.set(state.ruts, rslug, rutdata)
       }
     });
   },
   SET_RUT (state, { rut }) {
-    let rutid = rut.id
+    let rutslug = rut.slug
     // set a update timestamp
     let rutdata = Object.assign({ lastUpdate: Date.now() }, rut)
-    Vue.set(state.ruts, rutid, rutdata)
+    Vue.set(state.ruts, rutslug, rutdata)
   },
   RENEW_RUT (state, data) {
     try {  // if can hit
-      state.ruts[data.rutid][data.ref] = data[data.ref] 
+      state.ruts[data.rutslug][data.ref] = data[data.ref] 
     } catch {
       return
     }

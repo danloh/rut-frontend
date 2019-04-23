@@ -122,16 +122,17 @@ export default {
         edition: this.edition.trim(),
         detail: this.detail.trim()
       }
-      updateItem(this.itemid, data).then(resp => {
-        let id = resp.data.item.id
-        let updateTime = {'itemid':id, 'lastUpdate':0, 'ref':'lastUpdate'}
-        this.$store.commit('RENEW_ITEMS', updateTime)
-        this.$router.push(`/item/${id}`)
+      updateItem(data).then(resp => {
+        let slug = resp.data.item.slug
+        let updateTime = {'itemslug': slug, 'lastUpdate':0, 'ref':'lastUpdate'}
+        this.$store.commit('RENEW_ITEM', updateTime)
+        this.$router.push(`/item/${slug}`)
       })
     },
     loadItem () {
-      let itemid = this.itemid = this.$route.params.id
-      this.$store.dispatch('getItem', itemid).then(resp => {
+      let itemslug = this.$route.params.slug
+      this.$store.dispatch('getItem', itemslug).then(resp => {
+        this.itemid = resp.id
         this.title = resp.title
         this.uiid = resp.uiid
         this.authors = resp.authors

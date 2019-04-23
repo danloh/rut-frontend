@@ -74,12 +74,12 @@ export default {
         content: this.content.trim(),
         url: this.url.trim(),
         uname: this.$store.getters.actID,  // get from cookie
-        author_id: this.author.trim(),
+        author: this.author.trim(),
         credential: '...'
       }
       newRut(data).then(resp => {
-        let id = resp.data.rut.id
-        this.$router.push(`/r/${id}`)
+        let slug = resp.data.rut.slug
+        this.$router.push(`/r/${slug}`)
       })
     }
   }

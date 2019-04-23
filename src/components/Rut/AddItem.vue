@@ -52,7 +52,7 @@ export default {
       inputQuery: '', // store the query keyword, then search once enter press
       searching: false,
       items: [], // search result from have-dones
-      rutID: null,
+      rut: null,
       rutTitle: null,
       rut_uname: '',
       item_count: null, // to yield order
@@ -98,31 +98,31 @@ export default {
         return
       }
       let data = { 
-        rut_id: this.rutID,
+        rut_id: this.rut.id,
         item_id: this.itemID,
         item_order: this.item_count + 1,
         content: this.content,
         uname: '', // can get from cookie
       }
-      collectItem(this.rutID, data).then(() => {
+      collectItem(this.rut.id, data).then(() => {
         // unlockRut(id)
         // reset lastupdate to 0, then can re-fetch after edit
-        let updateTime = {'rutid':this.rutID, 'lastUpdate':0, 'ref':'lastUpdate'}
+        let updateTime = {'rutslug':this.rut.slug, 'lastUpdate':0, 'ref':'lastUpdate'}
         this.$store.commit('RENEW_RUT', updateTime)
-        this.$router.push(`/r/${this.rutID}`) // how to scoll to bottom? once push
+        this.$router.push(`/r/${this.rut.slug}`) // how to scoll to bottom? once push
       })
     },
     loadRut () {
-      let rutid = this.$route.params.id
-      let rut = this.$store.getters.ruts[rutid]
+      let rutslug = this.$route.params.slug
+      let rut = this.$store.getters.ruts[rutslug]
       if (rut && rut.id) {
-        this.rutID = rut.id
+        this.rut = rut
         this.rutTitle = rut.title
         this.item_count = rut.item_count
         this.rut_uname = rut.uname
         // lockRut(rut.id)
       } else {
-        this.$router.push(`/r/${rutid}`)
+        this.$router.push(`/r/${rutslug}`)
       }
     }
   },

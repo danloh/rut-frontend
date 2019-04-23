@@ -76,22 +76,23 @@ export default {
         title: this.title.trim(),
         content: this.content.trim(),
         url: this.url.trim(),
-        author_id: this.author.trim(),
+        author: this.author.trim(),
         credential: '...'
       }
-      updateRut(this.ritid, data).then(resp => {
-        let id = resp.data.rut.id
-        let updateTime = {'rutid':id, 'lastUpdate':0, 'ref':'lastUpdate'}
+      updateRut(data).then(resp => {
+        let rutslug = resp.data.rut.slug
+        let updateTime = {'rutslug': rutslug, 'lastUpdate':0, 'ref':'lastUpdate'}
         this.$store.commit('RENEW_RUT', updateTime)
-        this.$router.push(`/r/${id}`)
+        this.$router.push(`/r/${rutslug}`)
       })
     },
     loadRut () {
-      let rid = this.rutid = this.$route.params.id
-      this.$store.dispatch('getRut', rid).then(resp => {
+      let rslug = this.$route.params.slug
+      this.$store.dispatch('getRut', rslug).then(resp => {
         this.title = resp.title
+        this.rutid = resp.id
         this.url = resp.url
-        this.author = resp.author_id
+        this.author = resp.author
         this.content = resp.content
         this.rut_uname = resp.uname
       })

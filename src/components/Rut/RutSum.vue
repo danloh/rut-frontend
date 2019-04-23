@@ -13,7 +13,7 @@
         </router-link>
       </template>
     </span>
-    <router-link :to="'/r/' + rut.id">
+    <router-link :to="'/r/' + rut.slug">
       <span>
         <img class="cover" :src="rut.logo" referrerPolicy="no-referrer">
       </span>
@@ -41,7 +41,7 @@ export default {
       return showLess(c)
     },
     to_url () {
-      return this.rut.content ? '/r/' + this.rut.id : '/rforum/' + this.rut.id
+      return this.rut.content ? '/r/' + this.rut.slug : '/rforum/' + this.rut.id
     },
   }
 }

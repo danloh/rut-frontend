@@ -5,7 +5,7 @@
       <div>
         <b>More Details</b>
         <span style="float:right">
-          <router-link :to="'/update/item/' + itemid"><small>Edit..</small></router-link>
+          <router-link :to="'/update/item/' + itemslug"><small>Edit..</small></router-link>
         </span>
       </div>
       <div class="item-detail">
@@ -38,6 +38,7 @@ export default {
   data () {
     return {
       itemid: '',
+      itemslug: '',
       itemTitle: '',
       itemDetail: '',
       showShort: true, // show less detail
@@ -45,7 +46,7 @@ export default {
   },
   computed: {
     item () {
-      return this.$store.state.item.items[this.$route.params.id]
+      return this.$store.state.item.items[this.$route.params.slug]
     },
     showDetail () {
       let content = marked(this.itemDetail)
@@ -61,8 +62,9 @@ export default {
   },
   methods: {
     loadItem() {
-      let itemid = this.$route.params.id
-      this.$store.dispatch('getItem', itemid).then(resp => {
+      let itemslug = this.itemslug = this.$route.params.slug
+      this.$store.dispatch('getItem', itemslug).then(resp => {
+        this.itemid = resp.id
         this.itemDetail = resp.detail
         this.itemTitle = resp.title
         this.itemid = resp.id
