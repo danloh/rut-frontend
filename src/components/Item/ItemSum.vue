@@ -39,7 +39,7 @@
         <tr v-if="flagNote">
           <td><small class="indicator">Note</small></td>
           <td>
-            <small class="flag-not">{{ flagNote }}</small>
+            <small class="flag-note">{{ flagNote }}</small>
           </td>
         </tr>
       </table>
@@ -216,12 +216,13 @@ export default {
             this.searching = false
           })
         } else {
-          this.$http(`${base}/ruts/key/${uname}?keyword=${this.searchKey}&from=user`)
+          this.$http(`${base}/ruts/key/${uname}?page=1&flag=0&kw=${this.searchKey}&fr=user`)
           .then(resp => {
             this.createdRuts = resp.data.ruts
             this.searching = false
           })
         }
+        this.searchKey = ''
       }
     },
     showAndloadRuts () {
