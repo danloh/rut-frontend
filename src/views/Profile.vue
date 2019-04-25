@@ -2,7 +2,7 @@
   <div class="profile-page" v-if="uname">
     <div class="profile-head">
       <router-link :to="'/p/' + uname">
-        <b style="font-size:1.6em">{{ user.nickname }}</b>
+        <b style="font-size:1.6em">{{ user.nickname || user.uname }}</b>
       </router-link>
       <router-link :to="'/updateuser/' + uname" v-if="showSetting">
         <small> @{{uname}}</small>

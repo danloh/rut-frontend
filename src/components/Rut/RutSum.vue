@@ -8,7 +8,7 @@
         </span>
       </template>
       <template v-else>
-        <router-link :to="'/r/' + rut.id">
+        <router-link :to="'/r/' + rut.slug">
           <b>{{ rut.title }}</b>
         </router-link>
       </template>
@@ -22,7 +22,7 @@
         including {{ rut.item_count | pluralise('item') }}  
       </span>
       <span class="meta" v-else>
-        <router-link :to="to_url">...view</router-link> 
+        <router-link :to="'/r/' + rut.slug">...view</router-link> 
       </span>
     </router-link>
   </div>
@@ -39,9 +39,6 @@ export default {
     content () {
       let c = marked(this.rut.content)
       return showLess(c)
-    },
-    to_url () {
-      return this.rut.content ? '/r/' + this.rut.slug : '/rforum/' + this.rut.id
     },
   }
 }

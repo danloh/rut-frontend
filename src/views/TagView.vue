@@ -208,7 +208,7 @@ export default {
 }
 .tagmeta {
   background-color: #fcfcfa;
-  min-height: 120px;
+  min-height: 125px;
   padding: 5px 120px 5px 10px;
   margin-bottom: 5px;
   position: relative;
@@ -216,12 +216,11 @@ export default {
 .fobtn {
   position: absolute;
   top: 0px;
-  right: 5px;
+  right: 2px;
   text-align: right;
 }
 .tag-logo {
-  max-width: 105px;
-  max-height: 105px;
-  margin-top: 5px;
+  max-width: 100px;
+  max-height: 100px;
 }
 </style>

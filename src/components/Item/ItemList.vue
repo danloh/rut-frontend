@@ -53,6 +53,9 @@ export default {
       })
     }
   },
+  watch: {
+    '$route.params.id': 'loadItems'
+  },
   created () {
     this.loadItems()
   }

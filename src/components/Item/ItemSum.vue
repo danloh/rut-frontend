@@ -13,7 +13,7 @@
           <b style="color:#337ab7">{{ item.title }}</b>
         </template>
         <template v-else>
-          <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
+          <router-link :to="'/item/' + item.slug">{{ item.title }}</router-link>
         </template>
       </span>
       <table style="border-spacing:0px;">
